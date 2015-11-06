@@ -592,7 +592,7 @@ removerAmbienteDesenvolvimento(){
 # IDE de desenvolvimento PHP #
 instalarPhpStorm(){
   clear
-  sudo echo "    Será instalado a IDE de desenvolvimento PhpStorm-9"
+  sudo echo "    Será instalado a IDE de desenvolvimento PhpStorm-10"
   sudo echo "    Deseja continuar? Sim[s], Não[n]"
   read op
 
@@ -600,8 +600,8 @@ instalarPhpStorm(){
     mostrarMenuOpcoes
   fi
 
-  sudo wget -c http://download.jetbrains.com/webide/PhpStorm-9.0.2.tar.gz
-  sudo tar -zxvf PhpStorm-9.0.2.tar.gz
+  sudo wget -c http://download.jetbrains.com/webide/PhpStorm-10.0.tar.gz
+  sudo tar -zxvf PhpStorm-10.0.tar.gz
   sudo mv PhpStorm-141.2462 /opt/PhpStorm
   sudo chmod +x /opt/PhpStorm2/bin/phpstorm.sh
   sudo chmod -R 777 /opt/PhpStorm2
@@ -628,7 +628,7 @@ instalarPhpStorm(){
   sudo echo "Categories=GNOME;Application;Development;" >> /usr/share/applications/phpstorm.desktop
   sudo echo "StartupNotify=true" >> /usr/share/applications/phpstorm.desktop
 
-  sudo rm -r PhpStorm-9.0.2.tar.gz
+  sudo rm -r PhpStorm-10.0.tar.gz
 
   if [[ $1 == "op" ]]; then
      mostrarMenuOpcoes
@@ -638,7 +638,7 @@ instalarPhpStorm(){
 
 removerPhpStorm(){
 	clear
-	sudo echo "    Será removido a IDE de desenvolvimento PhpStorm-9"
+	sudo echo "    Será removido a IDE de desenvolvimento PhpStorm-10"
 	sudo echo "    Deseja continuar? Sim[s], Não[n]"
 	read op
 
