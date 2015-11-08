@@ -10,36 +10,36 @@
 # Baseadas em Debian
 #-------------------------------------------------------------------------
 	clear
-    sudo echo "    #################################################################################"
-    sudo echo "    #   Scrypt para instalação de ambiente de desenvolvimento PHP-ANDROID-C-JAVA    #"
-    sudo echo "    #                         - TAIRO ROBERTO M. ASSUNÇÃO -                         #"
-    sudo echo "    #                                                                               #"
-    sudo echo "    #################################################################################"
-    sudo echo -e "\n"
+     echo "    #################################################################################"
+     echo "    #   Scrypt para instalação de ambiente de desenvolvimento PHP-ANDROID-C-JAVA    #"
+     echo "    #                         - TAIRO ROBERTO M. ASSUNÇÃO -                         #"
+     echo "    #                                                                               #"
+     echo "    #################################################################################"
+     echo -e "\n"
 
 mostrarMenuOpcoes(){
     clear
-    sudo echo "    #######################################################################################"
-    sudo echo "    #                            Digite a opção desejada                                  #"
-    sudo echo "    #-------------------------------------------------------------------------------------#"
-    sudo echo "    #  1 - Instalar 'Ambiente desenvolvimento'     PHP, Apache, Mysql, Java e etc.        #"
-    sudo echo "    #-------------------------------------------------------------------------------------#"
-    sudo echo "    #  2 - Remover  'Ambiente desenvolvimento'     PHP, Apache, Mysql, Java e etc.        #"
-    sudo echo "    #-------------------------------------------------------------------------------------#"
-    sudo echo "    #  3 - Instalar 'Oracle Instant Client'   Bibliotecas para conexão com banco          #"
-    sudo echo "    #  4 - Remover  'Oracle Instant Client                                                #"
-    sudo echo "    #-------------------------------------------------------------------------------------#"
-    sudo echo "    #  5 - Instalar 'Servidor'        Ambiente Servidor Zanthus Linux Ubuntu/Debian       #"
-    sudo echo "    #  6 - Remover  'Servidor Ubuntu'                                                     #"
-    sudo echo "    #-------------------------------------------------------------------------------------#"
-    sudo echo "    #  7 - Instalar 'Servidor'        Ambiente Servidor Zanthus Linux CentOs              #"
-    sudo echo "    #  8 - Remover  'Servidor CentOs'                                                     #"
-    sudo echo "    #-------------------------------------------------------------------------------------#"
-    sudo echo "    #  0 - Mostra Menu de opções                                                          #"
-    sudo echo "    #-------------------------------------------------------------------------------------#"
-    sudo echo "    #  Obs: Digite a opção --help, para mostar menu de ajuda     ex:  --help              #"
-    sudo echo "    #######################################################################################"
-    sudo echo -e "\n"
+     echo "    #######################################################################################"
+     echo "    #                            Digite a opção desejada                                  #"
+     echo "    #-------------------------------------------------------------------------------------#"
+     echo "    #  1 - Instalar 'Ambiente desenvolvimento'     PHP, Apache, Mysql, Java e etc.        #"
+     echo "    #-------------------------------------------------------------------------------------#"
+     echo "    #  2 - Remover  'Ambiente desenvolvimento'     PHP, Apache, Mysql, Java e etc.        #"
+     echo "    #-------------------------------------------------------------------------------------#"
+     echo "    #  3 - Instalar 'Oracle Instant Client'   Bibliotecas para conexão com banco          #"
+     echo "    #  4 - Remover  'Oracle Instant Client                                                #"
+     echo "    #-------------------------------------------------------------------------------------#"
+     echo "    #  5 - Instalar 'Servidor'        Ambiente Servidor Zanthus Linux Ubuntu/Debian       #"
+     echo "    #  6 - Remover  'Servidor Ubuntu'                                                     #"
+     echo "    #-------------------------------------------------------------------------------------#"
+     echo "    #  7 - Instalar 'Servidor'        Ambiente Servidor Zanthus Linux CentOs              #"
+     echo "    #  8 - Remover  'Servidor CentOs'                                                     #"
+     echo "    #-------------------------------------------------------------------------------------#"
+     echo "    #  0 - Mostra Menu de opções                                                          #"
+     echo "    #-------------------------------------------------------------------------------------#"
+     echo "    #  Obs: Digite a opção --help, para mostar menu de ajuda     ex:  --help              #"
+     echo "    #######################################################################################"
+     echo -e "\n"
     read opcao
 
     if [[ $opcao == "--help" || $opcao == "help" || $opcao == "ajuda" ]]; then
@@ -83,7 +83,7 @@ mostrarMenuOpcoes(){
 #-------------------------------------------------------------------------
 capturaUsuario(){
 	clear
-    sudo echo "    ########################### Insira seu usuario Linux ##################################"
+     echo "    ########################### Insira seu usuario Linux ##################################"
     read usuario
 }
 
@@ -99,73 +99,75 @@ listarDiretorio(){
     fi
 
     clear
-    sudo echo "    ############################  INÍCIO ARQUIVOS E PASTAS  ###############################"
-    sudo echo "$list"
-    sudo echo "    ############################  FIM ARQUIVOS E PASTAS  ##################################"
+     echo "    ############################  INÍCIO ARQUIVOS E PASTAS  ###############################"
+     echo "$list"
+     echo "    ############################  FIM ARQUIVOS E PASTAS  ##################################"
 }
 
 # cria um diretorio
 #Recebe o caminho do diretorio comparametro
 criarDiretorio(){
     if [ ! -d "$1" ]; then
-      sudo echo "Criando diretório $1 ..."
-     sudo mkdir -p $1
+       echo "Criando diretório $1 ..."
+      mkdir -p $1
 
      if [ $? -eq 0 ]; then
-        sudo echo "Diretório criado com sucesso !!!"
+         echo "Diretório criado com sucesso !!!"
      fi
 
     else
-      sudo echo "Diretório $1 já existe!"
+       echo "Diretório $1 já existe!"
     fi
 }
 
 #Mostra o sistema e a plataforma da versão
 versaoLinux(){
     versao=$(uname && uname -i)
-    sudo echo $versao
+     echo $versao
 }
 
 
 # IDE de desenvolvimento Servidor Php, Apache Mysql#
 instalarAmbienteDesenvolvimento(){
 	clear
-    sudo echo "    Será instalado o ambiente Php que contém:"
-    sudo echo "    Php-5.6 com as libs: php5-dev php5-curl php5-json php5-ldap php5-mssql php5-odbc php5-pgsql php5-mcrypt php5-sybase oci8 xdebug  memcache" 
-    sudo echo "    Apache-2.4"
-    sudo echo "    Mysql"
-    sudo echo "    Postgresql"
-    sudo echo "    Subversion"
-    sudo echo "    Skype"
-    sudo echo "    Sublime-text-3"
-    sudo echo "    AcetoneIso programa para rodar isos"
-    sudo echo "    Steam"
-    sudo echo "    Gdebi Instalador de pacotes"
-    sudo echo "    Synaptic Gerenciador de dependencias"
-    sudo echo "    Klavaro treinamento de digitação"
-    sudo echo "    ubuntu-restricted-extras  pacotes extras com flash e codecs mp4"
-    sudo echo "    Rar descompactador"
-    sudo echo "    Filezilla cliente Ftp"
-    sudo echo "    Wine para rodar programas do windows"
-    sudo echo "    Gimp para edição de imagens"
-    sudo echo "    Inkscape para edição de imagens"
-    sudo echo "    Spotify cliente de audio"
-    sudo echo "    java 8"
-    sudo echo "    Android Studio IDE Android"
-    sudo echo "    Curl lib para uso com php"
-    sudo echo "    Playonlinux gerenciamento de plataforma wine"
-    sudo echo "    Git controle de versionamento"
-    sudo echo "    Virtualbox para rodar maquinas virtuais"
-    sudo echo "    Luckybackup gerenciador de backup"
-    sudo echo "    Freetds-commom php para conexão com banco de dados MSSQL"
-    sudo echo "    Composer intalador dependencias Php"
-    sudo echo "    laravel/installer instalador do Laravel 5"
-    sudo echo "    lumen/installer instalador Lumen"
-    sudo echo "    NodeJs"
-    sudo echo "    Para instalar a lib oci8.so certifique-se de que o Oracle Instant Client esteja instalado!"
+     echo "    Será instalado o ambiente Php que contém:"
+     echo "    Php-5.6 com as libs: php5-dev php5-curl php5-json php5-ldap php5-mssql php5-odbc php5-pgsql php5-mcrypt php5-sybase oci8 xdebug  memcache" 
+     echo "    Apache-2.4"
+     echo "    Mysql"
+     echo "    Postgresql"
+     echo "    Subversion"
+     echo "    Skype"
+     echo "    Sublime-text-3"
+     echo "    Dropbox"
+     echo "    Eclipse"
+     echo "    AcetoneIso programa para rodar isos"
+     echo "    Steam"
+     echo "    Gdebi Instalador de pacotes"
+     echo "    Synaptic Gerenciador de dependencias"
+     echo "    Klavaro treinamento de digitação"
+     echo "    ubuntu-restricted-extras  pacotes extras com flash e codecs mp4"
+     echo "    Rar descompactador"
+     echo "    Filezilla cliente Ftp"
+     echo "    Wine para rodar programas do windows"
+     echo "    Gimp para edição de imagens"
+     echo "    Inkscape para edição de imagens"
+     echo "    Spotify cliente de audio"
+     echo "    java 8"
+     echo "    Android Studio IDE Android"
+     echo "    Curl lib para uso com php"
+     echo "    Playonlinux gerenciamento de plataforma wine"
+     echo "    Git controle de versionamento"
+     echo "    Virtualbox para rodar maquinas virtuais"
+     echo "    Luckybackup gerenciador de backup"
+     echo "    Freetds-commom php para conexão com banco de dados MSSQL"
+     echo "    Composer intalador dependencias Php"
+     echo "    laravel/installer instalador do Laravel 5"
+     echo "    lumen/installer instalador Lumen"
+     echo "    NodeJs"
+     echo "    Para instalar a lib oci8.so certifique-se de que o Oracle Instant Client esteja instalado!"
 
-    sudo echo -e "\n"
-    sudo echo "Deseja continuar? Sim[s], Não[n]"
+     echo -e "\n"
+     echo "Deseja continuar? Sim[s], Não[n]"
     read op
 
     if [ ! $op == "s" ]; then
@@ -174,65 +176,65 @@ instalarAmbienteDesenvolvimento(){
 
     capturaUsuario
 
-    cd ~
-    sudo add-apt-repository -y ppa:ondrej/php5-5.6
-    sudo apt-get update    
-    sudo apt-get install -y php5
-    sudo apt-get install -y apache2
-    sudo apt-get install -y mysql-server    
-    sudo apt-get install -y phpmyadmin
-    sudo apt-get install -y postgresql 
-    sudo apt-get install -y subversion   
-    sudo apt-get install -y php5-dev  
-    sudo apt-get install -y php5-curl 
-    sudo apt-get install -y php5-json 
-    sudo apt-get install -y php5-ldap 
-    sudo apt-get install -y php5-mssql 
-    sudo apt-get install -y php5-odbc 
-    sudo apt-get install -y php5-pgsql 
-    sudo apt-get install -y php5-mcrypt 
-    sudo apt-get install -y php5-sybase 
-    sudo apt-get install -y php5-memcached 
-    sudo apt-get install -y php5-openssl
-    sudo apt-get install -y memcached 
-    sudo apt-get install -y sendmail  
+     cd ~
+     add-apt-repository -y ppa:ondrej/php5-5.6
+     apt-get update    
+     apt-get install -y php5
+     apt-get install -y apache2
+     apt-get install -y mysql-server    
+     apt-get install -y phpmyadmin
+     apt-get install -y postgresql 
+     apt-get install -y subversion   
+     apt-get install -y php5-dev  
+     apt-get install -y php5-curl 
+     apt-get install -y php5-json 
+     apt-get install -y php5-ldap 
+     apt-get install -y php5-mssql 
+     apt-get install -y php5-odbc 
+     apt-get install -y php5-pgsql 
+     apt-get install -y php5-mcrypt 
+     apt-get install -y php5-sybase 
+     apt-get install -y php5-memcached 
+     apt-get install -y php5-openssl
+     apt-get install -y memcached 
+     apt-get install -y sendmail
     
     ###################  Instala a .so do oracle ######################
-    sudo pecl install oci8
+     pecl install oci8
     #Verifica se o caminho padrão para a pasta oracle existe
     pathInstantClient = /usr/lib/php5/20131226/oci8.so 
     if [ -e $pathInstantClient ]; then
-      sudo echo "extension=/usr/lib/php5/20131226/oci8.so" >> /etc/php5/apache2/php.ini
-      sudo echo -e "\n" >> /etc/php5/apache2/php.ini
-      sudo echo "extension=/usr/lib/php5/20131226/oci8.so" >> /etc/php5/cli/php.ini
-      sudo echo -e "\n" >> /etc/php5/cli/php.ini
+       echo "extension=/usr/lib/php5/20131226/oci8.so" >> /etc/php5/apache2/php.ini
+       echo -e "\n" >> /etc/php5/apache2/php.ini
+       echo "extension=/usr/lib/php5/20131226/oci8.so" >> /etc/php5/cli/php.ini
+       echo -e "\n" >> /etc/php5/cli/php.ini
     fi    
 
     ################### Instala a .so do Xdebug ########################
-    sudo pecl install xdebug
-    sudo echo -e "Digite o caminho para a xdebug.so \n"
+     pecl install xdebug
+     echo -e "Digite o caminho para a xdebug.so \n"
     read pathxdebug
 
     if [ -e $pathxdebug ]; then
-        sudo echo "[XDebug]" >> /etc/php5/apache2/php.ini
-        sudo echo "zend_extension=$pathxdebug" >> /etc/php5/apache2/php.ini
-        sudo echo "xdebug.default_enable = 1" >> /etc/php5/apache2/php.ini
-        sudo echo "xdebug.show_exception_trace = 1" >> /etc/php5/apache2/php.ini
-        sudo echo "xdebug.show_local_vars = 1" >> /etc/php5/apache2/php.ini
-        sudo echo "xdebug.remote_enable = 1" >> /etc/php5/apache2/php.ini
-        sudo echo "xdebug.var_display_max_data   = 50000" >> /etc/php5/apache2/php.ini
-        sudo echo "xdebug.max_nesting_level = 250" >> /etc/php5/apache2/php.ini
-        sudo echo -e "\n" >> /etc/php5/apache2/php.ini
+         echo "[XDebug]" >> /etc/php5/apache2/php.ini
+         echo "zend_extension=$pathxdebug" >> /etc/php5/apache2/php.ini
+         echo "xdebug.default_enable = 1" >> /etc/php5/apache2/php.ini
+         echo "xdebug.show_exception_trace = 1" >> /etc/php5/apache2/php.ini
+         echo "xdebug.show_local_vars = 1" >> /etc/php5/apache2/php.ini
+         echo "xdebug.remote_enable = 1" >> /etc/php5/apache2/php.ini
+         echo "xdebug.var_display_max_data   = 50000" >> /etc/php5/apache2/php.ini
+         echo "xdebug.max_nesting_level = 250" >> /etc/php5/apache2/php.ini
+         echo -e "\n" >> /etc/php5/apache2/php.ini
 
-        sudo echo "[XDebug]" >> /etc/php5/cli/php.ini
-        sudo echo "zend_extension=$pathxdebug" >> /etc/php5/cli/php.ini
-        sudo echo "xdebug.default_enable = 1" >> /etc/php5/cli/php.ini
-        sudo echo "xdebug.show_exception_trace = 1" >> /etc/php5/cli/php.ini
-        sudo echo "xdebug.show_local_vars = 1" >> /etc/php5/cli/php.ini
-        sudo echo "xdebug.remote_enable = 1" >> /etc/php5/cli/php.ini
-        sudo echo "xdebug.var_display_max_data   = 50000" >> /etc/php5/cli/php.ini
-        sudo echo "xdebug.max_nesting_level = 250" >> /etc/php5/cli/php.ini
-        sudo echo -e "\n" >> /etc/php5/cli/php.ini
+         echo "[XDebug]" >> /etc/php5/cli/php.ini
+         echo "zend_extension=$pathxdebug" >> /etc/php5/cli/php.ini
+         echo "xdebug.default_enable = 1" >> /etc/php5/cli/php.ini
+         echo "xdebug.show_exception_trace = 1" >> /etc/php5/cli/php.ini
+         echo "xdebug.show_local_vars = 1" >> /etc/php5/cli/php.ini
+         echo "xdebug.remote_enable = 1" >> /etc/php5/cli/php.ini
+         echo "xdebug.var_display_max_data   = 50000" >> /etc/php5/cli/php.ini
+         echo "xdebug.max_nesting_level = 250" >> /etc/php5/cli/php.ini
+         echo -e "\n" >> /etc/php5/cli/php.ini
     fi
 
 
@@ -240,139 +242,149 @@ instalarAmbienteDesenvolvimento(){
     cd /usr/src
 
     if [ ! -d /usr/src/libs_zanthus  ]; then
-      sudo echo "Criando e baixando bibliotecas para a pasta libs_zanthus..."
+       echo "Criando e baixando bibliotecas para a pasta libs_zanthus..."
       criarDiretorio "/usr/src/libs_zanthus" 
       cd libs_zanthus
-      sudo wget ftp://ftp.zanthus.com.br/pub/Zeus_Frente_de_Loja/_Complementares/so/* .
-      sudo wget ftp://ftp.zanthus.com.br/pub/Zeus_Frente_de_Loja/_Complementares/so_r64/* .
-      sudo wget ftp://ftp.zanthus.com.br/pub/Zeus_Frente_de_Loja/_Complementares/KernD/v2_1/*.so . 
+       wget ftp://ftp.zanthus.com.br/pub/Zeus_Frente_de_Loja/_Complementares/so/* .
+       wget ftp://ftp.zanthus.com.br/pub/Zeus_Frente_de_Loja/_Complementares/so_r64/* .
+       wget ftp://ftp.zanthus.com.br/pub/Zeus_Frente_de_Loja/_Complementares/KernD/v2_1/*.so . 
     
       #Adiciona ao carregamento de libs do sistema
-      sudo echo "/usr/src/libs_zanthus" >> /etc/ld.so.conf
-      sudo ldconfig
+       echo "/usr/src/libs_zanthus" >> /etc/ld.so.conf
+       ldconfig
 
     else
-      sudo echo "libs_zanthus já existe..."
+       echo "libs_zanthus já existe..."
     fi
     ########################### Libs da Zanthus #################################
     
     #Insere a Kernz no .ini do Php e Apache
-    sudo echo -e "\n"
-    sudo echo -e "Digite o caminho para a kernz.so \n"
+     echo -e "\n"
+     echo -e "Digite o caminho para a kernz.so \n"
     read pathkernz
     if [ -d $pathkernz ]; then
-    	sudo echo "extension=$pathkernz" >> /etc/php5/apache2/php.ini
-	    sudo echo -e "\n" >> /etc/php5/apache2/php.ini
-	    sudo echo "extension=$pathkernz" >> /etc/php5/cli/php.ini
-	    sudo echo -e "\n" >> /etc/php5/cli/php.ini
+    	 echo "extension=$pathkernz" >> /etc/php5/apache2/php.ini
+	     echo -e "\n" >> /etc/php5/apache2/php.ini
+	     echo "extension=$pathkernz" >> /etc/php5/cli/php.ini
+	     echo -e "\n" >> /etc/php5/cli/php.ini
     fi
     
     ################### Instala a .so do dbase ########################
-    sudo pecl install dbase
+     pecl install dbase
     pathdbase = /usr/lib/php5/20131226/dbase.so
     if [[ -e $pathdbase ]]; then
-    	sudo echo "extension=$pathdbase" >> /etc/php5/apache2/php.ini
-	    sudo echo -e "\n" >> /etc/php5/apache2/php.ini
-	    sudo echo "extension=$pathdbase" >> /etc/php5/cli/php.ini
-	    sudo echo -e "\n" >> /etc/php5/cli/php.ini
+    	 echo "extension=$pathdbase" >> /etc/php5/apache2/php.ini
+	     echo -e "\n" >> /etc/php5/apache2/php.ini
+	     echo "extension=$pathdbase" >> /etc/php5/cli/php.ini
+	     echo -e "\n" >> /etc/php5/cli/php.ini
     fi
     
 
     #Configura Timezone e charset
-    sudo echo "date.timezone = America/Sao_Paulo" >> /etc/php5/apache2/php.ini
-    sudo echo -e "\n" >> /etc/php5/apache2/php.ini
-    sudo echo -e "default_charset = \"ISO-8859-1\"" >> /etc/php5/apache2/php.ini
-    sudo echo -e "\n" >> /etc/php5/apache2/php.ini
+     echo "date.timezone = America/Sao_Paulo" >> /etc/php5/apache2/php.ini
+     echo -e "\n" >> /etc/php5/apache2/php.ini
+     echo -e "default_charset = \"ISO-8859-1\"" >> /etc/php5/apache2/php.ini
+     echo -e "\n" >> /etc/php5/apache2/php.ini
 
     #Configura Timezone e charset
-    sudo echo "date.timezone = America/Sao_Paulo" >> /etc/php5/cli/php.ini
-    sudo echo -e "\n" >> /etc/php5/cli/php.ini
-    sudo echo -e "default_charset = \"ISO-8859-1\"" >> /etc/php5/cli/php.ini
-    sudo echo -e "\n" >> /etc/php5/cli/php.ini
+     echo "date.timezone = America/Sao_Paulo" >> /etc/php5/cli/php.ini
+     echo -e "\n" >> /etc/php5/cli/php.ini
+     echo -e "default_charset = \"ISO-8859-1\"" >> /etc/php5/cli/php.ini
+     echo -e "\n" >> /etc/php5/cli/php.ini
    
 
     #instala repositorio para Spotify - programador também gosta de música :)
-    sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys D2C19886 
-    sudo sudo echo deb http://repository.spotify.com stable non-free | sudo tee /etc/apt/sources.list.d/spotify.list
-    sudo apt-get update 
+     apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys D2C19886 
+     echo deb http://repository.spotify.com stable non-free |  tee /etc/apt/sources.list.d/spotify.list
+     apt-get update 
 
     #instala repositorio para Java 8
-    sudo add-apt-repository -y ppa:webupd8team/java 
-    sudo apt-get update 
+     add-apt-repository -y ppa:webupd8team/java 
+     apt-get update 
 
     #instala repositorio para Android Studio
-    sudo apt-add-repository -y ppa:paolorotolo/android-studio 
+     apt-add-repository -y ppa:paolorotolo/android-studio 
 
     #instala repositorio para Virtualbox
-    sudo -e sudo echo "\n" >> /etc/apt/sources.list
-    sudo sudo echo "deb http://download.virtualbox.org/virtualbox/debian trusty contrib" >> /etc/apt/sources.list
-    sudo wget -q https://www.virtualbox.org/download/oracle_vbox.asc -O- | sudo apt-key add -
-    sudo apt-get update
+     echo -e   "\n" >> /etc/apt/sources.list
+     echo "deb http://download.virtualbox.org/virtualbox/debian trusty contrib" >> /etc/apt/sources.list
+     wget -q https://www.virtualbox.org/download/oracle_vbox.asc -O- |  apt-key add -
+     apt-get update
 
     #Instala os pacotes e programas
 
     #Intala o skype primeiro por que ele baixa varias libs 32bits que programas com Wine usam
-    sudo apt-get -y install skype 
+     apt-get -y install skype 
     #Instala AcetoneIso programa para rodar isos
-    sudo apt-get -y install acetoneiso
+     apt-get -y install acetoneiso
     #Plugin para abrir o terminal no diretório
-    sudo apt-get -y install nautilus-open-terminal
+     apt-get -y install nautilus-open-terminal
     #Instala Steam
-    sudo apt-get -y install steam 
+     apt-get -y install steam 
     #Instala Gdebi Instalador de pacotes
-    sudo apt-get -y install gdebi 
+     apt-get -y install gdebi 
     #Instala Gerenciador de dependencias
-    sudo apt-get -y install synaptic 
+     apt-get -y install synaptic 
     #Instala treinamento de digitação
-    sudo apt-get -y install klavaro 
+     apt-get -y install klavaro 
     #Instala pacotes extras com flash e codecs mp4
-    sudo apt-get -y install ubuntu-restricted-extras 
+     apt-get -y install ubuntu-restricted-extras 
     #Instala descompactador
-    sudo apt-get -y install rar 
+     apt-get -y install rar 
     #Instala cliente ftp
-    sudo apt-get -y install filezilla 
+     apt-get -y install filezilla 
     #Instala wine para rodar programas do windows
-    sudo apt-get -y install wine 
+     apt-get -y install wine 
     #Instala gimp para edição de imagens
-    sudo apt-get -y install gimp 
+     apt-get -y install gimp 
     #Instala inkscape para edição de imagens
-    sudo apt-get -y install inkscape 
+     apt-get -y install inkscape 
     #Instala cliente de audio do spotify
-    sudo apt-get -y install spotify-client 
+     apt-get -y install spotify-client 
     #Instala java 8
-    sudo apt-get -y install oracle-java8-installer 
+     apt-get -y install oracle-java8-installer 
     #Instala Android Studio IDE Android
-    sudo apt-get -y install android-studio 
+     apt-get -y install android-studio 
     #Instala lib Curl para uso com php
-    sudo apt-get -y install curl 
+     apt-get -y install curl 
     #Instala playonlinux gerenciaento de plataforma wine
-    sudo apt-get -y install playonlinux 
+     apt-get -y install playonlinux 
     #Instala controle de versionamento
-    sudo apt-get -y install git-core 
+     apt-get -y install git-core 
     #Instala virtualbox para rodar maquinas virtuais
-    sudo apt-get -y install virtualbox-5.0
-    sudo wget -c http://download.virtualbox.org/virtualbox/5.0.8/Oracle_VM_VirtualBox_Extension_Pack-5.0.8-103449.vbox-extpack
-    sudo virtualbox Oracle_VM_VirtualBox_Extension_Pack-5.0.8-103449.vbox-extpack
+     apt-get -y install virtualbox-5.0
+     wget -c http://download.virtualbox.org/virtualbox/5.0.8/Oracle_VM_VirtualBox_Extension_Pack-5.0.8-103449.vbox-extpack
+     virtualbox Oracle_VM_VirtualBox_Extension_Pack-5.0.8-103449.vbox-extpack
     #Instala gerenciador de backup
-    sudo apt-get -y install luckybackup
+     apt-get -y install luckybackup
     #Instala  libs php para conexão com banco de dados MSSQL
-    sudo apt-get -y install freetds-common     
+     apt-get -y install freetds-common     
     #Atualiza os headers
-    sudo apt-get update 
+     apt-get update 
     # reinicializa Apache
-    sudo service apache2 restart 
+     service apache2 restart 
     #Da permição para a pasta do apache
-    sudo chmod -R 777 /var/www 
+     chmod -R 777 /var/www
+
     #configura o git com meu email
-    git config --global user.email "tairoroberto@hotmail.com" 
+    echo -e "Digite seu email do Github, deixe nulo caso não queira configurar o github! \n"
+    read emailGit
+    if [[ $emailGit != "" ]]; then
+        git config --global user.email $emailGit
+    fi
     #configura o git com meu usuário
-    git config --global user.name "tairoroberto"
+    echo -e "Digite seu usuario do Github, deixe nulo caso não queira configurar o github! \n"
+    read userGit
+    if [[ $userGit != "" ]]; then
+        git config --global user.name $userGit
+    fi
+
     #Habilita o modrewrite do apache
-    sudo a2enmod rewrite 
+     a2enmod rewrite 
     #Baixa o composer 
     curl -s https://getcomposer.org/installer | php 
     #Move o Composer 
-    sudo mv composer.phar /usr/local/bin/composer 
+     mv composer.phar /usr/local/bin/composer 
     #Intala o instalador do laravel
     composer global require "laravel/installer=~1.1" 
     #Intala o instalador do lumen
@@ -380,15 +392,15 @@ instalarAmbienteDesenvolvimento(){
     #Adiciona os vendors do composer as variáveis de ambiente
     export PATH=$PATH:/home/$usuario/.composer/vendor/bin 
     #Adiciona o NodeJs ao bash para ser instalado
-    curl --silent --location https://deb.nodesource.com/setup_4.x | sudo bash - 
+    curl --silent --location https://deb.nodesource.com/setup_4.x |  bash - 
     #Atualiza os headers 
-    sudo apt-get update 
+     apt-get update 
     #Instala o NodeJs
-    sudo apt-get install --yes nodejs
+     apt-get install --yes nodejs
     #Conversor de pacotes RPM
-    sudo apt-get -y install alien
+     apt-get -y install alien
     #Configurador de discos Ntfs
-    sudo apt-get -y install ntfs-config
+     apt-get -y install ntfs-config
 
     #verifica se é pra intalar PhpStorm
     if [[ $1 == "storm" ]]; then
@@ -406,63 +418,80 @@ instalarAmbienteDesenvolvimento(){
     fi
 
     #Instala Siblime-text 3
-
     versao = $(uname -i)
     if [[  $versao == "i386" || $versao == "i486" || $versao == "i686" ]]; then
-       sudo wget -c http://c758482.r82.cf2.rackcdn.com/sublime-text_build-3083_i386.deb
-       sudo dpkg -i sublime-text_build-3083_i386.deb
-       sudo rm -r sublime-text_build-3083_i386.deb
+        wget -c http://c758482.r82.cf2.rackcdn.com/sublime-text_build-3083_i386.deb
+        dpkg -i sublime-text_build-3083_i386.deb
+        rm -r sublime-text_build-3083_i386.deb
 
     else
-       sudo wget -c http://c758482.r82.cf2.rackcdn.com/sublime-text_build-3083_amd64.deb
-       sudo dpkg -i sublime-text_build-3083_i386.deb
-       sudo rm -r sublime-text_build-3083_amd64.deb
+        wget -c http://c758482.r82.cf2.rackcdn.com/sublime-text_build-3083_amd64.deb
+        dpkg -i sublime-text_build-3083_i386.deb
+        rm -r sublime-text_build-3083_amd64.deb
     fi
+
+    #Instala Dropbox
+    versao = $(uname -i)
+    if [[  $versao == "i386" || $versao == "i486" || $versao == "i686" ]]; then
+        wget -c "https://www.dropbox.com/download?dl=packages/ubuntu/dropbox_2015.10.28_i386.deb" -O dropbox.deb
+        dpkg -i dropbox.deb
+        rm -r dropbox.deb
+
+    else
+        wget -c "https://www.dropbox.com/download?dl=packages/ubuntu/dropbox_2015.10.28_amd64.deb" -O dropbox.deb
+        dpkg -i dropbox.deb
+        rm -r dropbox.deb
+    fi
+
+    #Instala a IDE Eclipse Java EE
+    instalarEclipse
 
     #Adiciona os Lauchers dos aplpicativos na sidebar
     adicionarLauchers
 
-    mostrarMenuOpcoes    
+    mostrarMenuOpcoes
 }
 
 removerAmbienteDesenvolvimento(){
 	clear
-    sudo echo "    Será REMOVIDO Ambiente de desenvolvimento Php que contém:"
-    sudo echo "    Php-5.6 com as libs: php5-dev php5-curl php5-json php5-ldap php5-mssql php5-odbc php5-pgsql php5-mcrypt php5-sybase oci8 xdebug memcache" 
-    sudo echo "    Apache-2.4"
-    sudo echo "    Mysql"
-    sudo echo "    Postgresql"
-    sudo echo "    Skype"
-    sudo echo "    Sublime-text-3"
-    sudo echo "    AcetoneIso programa para rodar isos"
-    sudo echo "    Steam"
-    sudo echo "    Gdebi Instalador de pacotes"
-    sudo echo "    Synaptic Gerenciador de dependencias"
-    sudo echo "    Klavaro treinamento de digitação"
-    sudo echo "    ubuntu-restricted-extras  pacotes extras com flash e codecs mp4"
-    sudo echo "    Rar descompactador"
-    sudo echo "    Filezilla cliente Ftp"
-    sudo echo "    Wine para rodar programas do windows"
-    sudo echo "    Gimp para edição de imagens"
-    sudo echo "    Inkscape para edição de imagens"
-    sudo echo "    Spotify cliente de audio"
-    sudo echo "    java 8"
-    sudo echo "    Android Studio IDE Android"
-    sudo echo "    Curl lib para uso com php"
-    sudo echo "    Playonlinux gerenciamento de plataforma wine"
-    sudo echo "    Git controle de versionamento"
-    sudo echo "    Virtualbox para rodar maquinas virtuais"
-    sudo echo "    Luckybackup gerenciador de backup"
-    sudo echo "    Freetds-commom php para conexão com banco de dados MSSQL"
-    sudo echo "    Composer intalador dependencias Php"
-    sudo echo "    laravel/installer instalador do Laravel 5"
-    sudo echo "    lumen/installer instalador Lumen"
-    sudo echo "    NodeJs"
-    sudo echo "    Alien"
-    sudo echo "    Ntfs-config"
-    sudo echo "    E bibliotecas Zanthus para rodar Zeus_Frente_de_Loja"
-    sudo echo -e "\n"
-    sudo echo "    Deseja continuar? Sim[s], Não[n]"
+     echo "    Será REMOVIDO Ambiente de desenvolvimento Php que contém:"
+     echo "    Php-5.6 com as libs: php5-dev php5-curl php5-json php5-ldap php5-mssql php5-odbc php5-pgsql php5-mcrypt php5-sybase oci8 xdebug memcache" 
+     echo "    Apache-2.4"
+     echo "    Mysql"
+     echo "    Postgresql"
+     echo "    Skype"
+     echo "    Sublime-text-3"
+     echo "    Dropbox"
+     echo "    Eclipse"
+     echo "    AcetoneIso programa para rodar isos"
+     echo "    Steam"
+     echo "    Gdebi Instalador de pacotes"
+     echo "    Synaptic Gerenciador de dependencias"
+     echo "    Klavaro treinamento de digitação"
+     echo "    ubuntu-restricted-extras  pacotes extras com flash e codecs mp4"
+     echo "    Rar descompactador"
+     echo "    Filezilla cliente Ftp"
+     echo "    Wine para rodar programas do windows"
+     echo "    Gimp para edição de imagens"
+     echo "    Inkscape para edição de imagens"
+     echo "    Spotify cliente de audio"
+     echo "    java 8"
+     echo "    Android Studio IDE Android"
+     echo "    Curl lib para uso com php"
+     echo "    Playonlinux gerenciamento de plataforma wine"
+     echo "    Git controle de versionamento"
+     echo "    Virtualbox para rodar maquinas virtuais"
+     echo "    Luckybackup gerenciador de backup"
+     echo "    Freetds-commom php para conexão com banco de dados MSSQL"
+     echo "    Composer intalador dependencias Php"
+     echo "    laravel/installer instalador do Laravel 5"
+     echo "    lumen/installer instalador Lumen"
+     echo "    NodeJs"
+     echo "    Alien"
+     echo "    Ntfs-config"
+     echo "    E bibliotecas Zanthus para rodar Zeus_Frente_de_Loja"
+     echo -e "\n"
+     echo "    Deseja continuar? Sim[s], Não[n]"
     read op
     
     if [ ! $op == "s" ]; then
@@ -471,100 +500,102 @@ removerAmbienteDesenvolvimento(){
 
     capturaUsuario
 
-    sudo echo "    Excluindo pastas e arquivos..."
+     echo "    Excluindo pastas e arquivos..."
     
-    sudo pecl uninstall oci8
-    sudo pecl uninstall xdebug
-    sudo pecl uninstall dbase
-    sudo apt-get -y purge php5.*
-    sudo apt-get -y purge apache2
-    sudo apt-get -y purge postgresql
-    sudo apt-get -y purge mysql-server
-    sudo apt-get -y purge subversion
-    sudo rm -r /usr/lib/oracle
+     pecl uninstall oci8
+     pecl uninstall xdebug
+     pecl uninstall dbase
+     apt-get -y purge php5.*
+     apt-get -y purge apache2
+     apt-get -y purge postgresql
+     apt-get -y purge mysql-server
+     apt-get -y purge subversion
+     rm -r /usr/lib/oracle
     
     ############### Libs ZAnthus #############
     cd /usr/src
-    sudo rm -r /usr/src/libs_zanthus
+     rm -r /usr/src/libs_zanthus
     ############### Libs ZAnthus #############
 
     #Reconfigura carregamento de bibliotecas
-    sudo ldconfig
+     ldconfig
 
     #Desistala os pacotes e programas
    
     #Remove repositorio para php5-5.6
-    sudo add-apt-repository -r ppa:ondrej/php5-5.6
-    sudo apt-get update 
+     add-apt-repository -r ppa:ondrej/php5-5.6
+     apt-get update 
 
     #Remove repositorio para Java 8
-    sudo add-apt-repository -r ppa:webupd8team/java 
-    sudo apt-get update 
+     add-apt-repository -r ppa:webupd8team/java 
+     apt-get update 
 
     #Remove repositorio para Android Studio
-    sudo apt-add-repository -r ppa:paolorotolo/android-studio 
-    sudo apt-get update 
+     apt-add-repository -r ppa:paolorotolo/android-studio 
+     apt-get update 
     
     #Desistala sendmail
-    sudo apt-get -y purge sendmail 
+     apt-get -y purge sendmail 
     #Desistala AcetoneIso programa para rodar isos
-    sudo apt-get -y purge acetoneiso
+     apt-get -y purge acetoneiso
     #Plugin para abrir o terminal no diretório
-    sudo apt-get -y purge nautilus-open-terminal
+     apt-get -y purge nautilus-open-terminal
     #Desistala Steam
-    sudo apt-get -y install steam 
+     apt-get -y install steam 
     #Desistala Gdebi Instalador de pacotes
-    sudo apt-get -y purge gdebi 
+     apt-get -y purge gdebi 
     #Desistala Gerenciador de dependencias
-    sudo apt-get -y purge synaptic 
+     apt-get -y purge synaptic 
     #Desistala treinamento de digitação
-    sudo apt-get -y purge klavaro 
+     apt-get -y purge klavaro 
     #Desistala pacotes extras com flash e codecs mp4
-    sudo apt-get -y purge ubuntu-restricted-extras 
+     apt-get -y purge ubuntu-restricted-extras 
     #Desistala descompactador
-    sudo apt-get -y purge rar 
+     apt-get -y purge rar 
     #Desistala cliente ftp
-    sudo apt-get -y purge filezilla 
+     apt-get -y purge filezilla 
     #Desistala wine para rodar programas do windows
-    sudo apt-get -y purge wine 
+     apt-get -y purge wine 
     #Desistala gimp para edição de imagens
-    sudo apt-get -y purge gimp 
+     apt-get -y purge gimp 
     #Desistala inkscape para edição de imagens
-    sudo apt-get -y purge inkscape 
+     apt-get -y purge inkscape 
     #Desistala cliente de audio do spotify
-    sudo apt-get -y purge spotify-client 
+     apt-get -y purge spotify-client 
     #Desistala java 8
-    sudo apt-get -y purge oracle-java8-installer 
+     apt-get -y purge oracle-java8-installer 
     #Desistala Android Studio IDE Android
-    sudo apt-get -y purge android-studio 
+     apt-get -y purge android-studio 
     #Desistala lib Curl para uso com php
-    sudo apt-get -y purge curl 
+     apt-get -y purge curl 
     #Desistala playonlinux gerenciaento de plataforma wine
-    sudo apt-get -y purge playonlinux 
+     apt-get -y purge playonlinux 
     #Desistala controle de versionamento
-    sudo apt-get -y purge git-core 
+     apt-get -y purge git-core 
     #Desistala virtualbox para rodar maquinas virtuais
-    sudo apt-get -y purge virtualbox-5.0 
+     apt-get -y purge virtualbox-5.0 
     #Desistala gerenciador de backup
-    sudo apt-get -y purge luckybackup
+     apt-get -y purge luckybackup
     #Desistala  libs php para conexão com banco de dados MSSQL
-    sudo apt-get -y purge freetds-common   
+     apt-get -y purge freetds-common   
     #Desistala o Composer 
-    sudo rm -r /usr/local/bin/composer 
+     rm -r /usr/local/bin/composer 
     #Desistala o instalador do laravel
-    sudo rm -r /home/$usuario/.composer/vendor/
+     rm -r /home/$usuario/.composer/vendor/
     #Desistala o NodeJs
-    sudo apt-get purge --yes nodejs
+     apt-get purge --yes nodejs
     #Desistala o skype por ultimo por que ele baixa varias libs 32bits que programas com Wine usam
-    sudo apt-get -y purge skype
+     apt-get -y purge skype
     #Desistala conversor de pacotes
-    sudo apt-get -y purge alien
+     apt-get -y purge alien
     #Desistala configurador de discos Ntfs
-    sudo apt-get -y purge ntfs-config
+     apt-get -y purge ntfs-config
+   #Desistala Dropbox
+     apt-get -y purge dropbox
 
     #remove os pacotes não ultilizados
-    sudo apt-get -y autoremove
-    sudo apt-get clean
+     apt-get -y autoremove
+     apt-get clean
 
     #verifica se é pra remover PhpStorm
     if [[ $1 == "storm" ]]; then
@@ -581,54 +612,142 @@ removerAmbienteDesenvolvimento(){
    		removerClion "-op"
     fi
 
+    #Desistala Eclipse Java EE
+    removerEclipse
+
     removerLauchers
 
-    sudo echo "    Ambiente Servidor Ubuntu removido"
+    echo "    Ambiente Servidor Ubuntu removido"
 
     mostrarMenuOpcoes
+}
+
+#Instala Eclipse Mars
+instalarEclipse(){
+
+    versao = $(uname -i)
+    if [[  $versao == "i386" || $versao == "i486" || $versao == "i686" ]]; then
+         wget -c "https://www.eclipse.org/downloads/download.php?file=/technology/epp/downloads/release/mars/1/eclipse-jee-mars-1-linux-gtk.tar.gz&r=1" -O eclipse-jee-mars-1-linux-gtk.tar.gz
+         tar -zxvf eclipse-jee-mars-1-linux-gtk.tar.gz
+         mv eclipse /opt/eclipse
+         chmod +x /opt/eclipse/eclipse
+         chmod -R 777 /opt/eclipse
+
+        #Cria arquivo executavel#
+         touch /usr/bin/eclipse
+         chmod 755 /usr/bin/eclipse
+         echo "#!/bin/sh" >> /usr/bin/eclipse
+         echo "export UBUNTU_MENUPROXY=0" >> /usr/bin/eclipse
+         echo "export ECLIPSE_HOME=/opt/eclipse" >> /usr/bin/eclipse
+         echo "\$ECLIPSE_HOME/eclipse $*" >> /usr/bin/eclipse
+         ln -s /usr/bin/eclipse /bin/eclipse
+
+        #Cria icone do desktop#
+         touch /usr/share/applications/eclipse.desktop
+         echo "[Desktop Entry]" >> /usr/share/applications/eclipse.desktop
+         echo "Encoding=UTF-8" >> /usr/share/applications/eclipse.desktop
+         echo "Name=Eclipse" >> /usr/share/applications/eclipse.desktop
+         echo "Comment=Eclipse IDE" >> /usr/share/applications/eclipse.desktop
+         echo "Exec=eclipse" >> /usr/share/applications/eclipse.desktop
+         echo "Icon=/opt/eclipse/icon.xpm" >> /usr/share/applications/eclipse.desktop
+         echo "Terminal=false" >> /usr/share/applications/eclipse.desktop
+         echo "Type=Application" >> /usr/share/applications/eclipse.desktop
+         echo "Categories=GNOME;Application;Development;" >> /usr/share/applications/eclipse.desktop
+         echo "StartupNotify=true" >> /usr/share/applications/eclipse.desktop
+
+         rm -r eclipse-jee-mars-1-linux-gtk.tar.gz
+
+    else
+         wget -c "https://www.eclipse.org/downloads/download.php?file=/technology/epp/downloads/release/mars/1/eclipse-jee-mars-1-linux-gtk-x86_64.tar.gz&r=1" -O eclipse-jee-mars-1-linux-gtk-x86_64.tar.gz
+         tar -zxvf eclipse-jee-mars-1-linux-gtk-x86_64.tar.gz
+         mv eclipse /opt/eclipse
+         chmod +x /opt/eclipse/eclipse
+         chmod -R 777 /opt/eclipse
+
+        #Cria arquivo executavel#
+         touch /usr/bin/eclipse
+         chmod 755 /usr/bin/eclipse
+         echo "#!/bin/sh" >> /usr/bin/eclipse
+         echo "export UBUNTU_MENUPROXY=0" >> /usr/bin/eclipse
+         echo "export ECLIPSE_HOME=/opt/eclipse" >> /usr/bin/eclipse
+         echo "\$ECLIPSE_HOME/eclipse $*" >> /usr/bin/eclipse
+         ln -s /usr/bin/eclipse /bin/eclipse
+
+        #Cria icone do desktop#
+         touch /usr/share/applications/eclipse.desktop
+         echo "[Desktop Entry]" >> /usr/share/applications/eclipse.desktop
+         echo "Encoding=UTF-8" >> /usr/share/applications/eclipse.desktop
+         echo "Name=Eclipse" >> /usr/share/applications/eclipse.desktop
+         echo "Comment=Eclipse IDE" >> /usr/share/applications/eclipse.desktop
+         echo "Exec=eclipse" >> /usr/share/applications/eclipse.desktop
+         echo "Icon=/opt/eclipse/icon.xpm" >> /usr/share/applications/eclipse.desktop
+         echo "Terminal=false" >> /usr/share/applications/eclipse.desktop
+         echo "Type=Application" >> /usr/share/applications/eclipse.desktop
+         echo "Categories=GNOME;Application;Development;" >> /usr/share/applications/eclipse.desktop
+         echo "StartupNotify=true" >> /usr/share/applications/eclipse.desktop
+
+         rm -r eclipse-jee-mars-1-linux-gtk-x86_64.tar.gz
+    fi
+
+    if [[ $1 == "op" ]]; then
+        mostrarMenuOpcoes
+    fi
+}
+
+#Remove IDE Eclipse
+removerEclipse(){
+    rm -r /usr/bin/eclipse
+    rm -r /bin/eclipse
+    rm -r /opt/eclipse
+    rm -r /usr/share/applications/eclipse.desktop
+
+    if [[ $1 == "op" ]]; then
+        mostrarMenuOpcoes
+    fi
 }
 
 
 # IDE de desenvolvimento PHP #
 instalarPhpStorm(){
   clear
-  sudo echo "    Será instalado a IDE de desenvolvimento PhpStorm-10"
-  sudo echo "    Deseja continuar? Sim[s], Não[n]"
+  cd ~
+   echo "    Será instalado a IDE de desenvolvimento PhpStorm-10"
+   echo "    Deseja continuar? Sim[s], Não[n]"
   read op
 
   if [ ! $op == "s" ]; then
     mostrarMenuOpcoes
   fi
 
-  sudo wget -c http://download.jetbrains.com/webide/PhpStorm-10.0.tar.gz
-  sudo tar -zxvf PhpStorm-10.0.tar.gz
-  sudo mv PhpStorm-141.2462 /opt/PhpStorm
-  sudo chmod +x /opt/PhpStorm2/bin/phpstorm.sh
-  sudo chmod -R 777 /opt/PhpStorm2
+   wget -c http://download.jetbrains.com/webide/PhpStorm-10.0.tar.gz
+   tar -zxvf PhpStorm-10.0.tar.gz
+   mv PhpStorm-143.381.48 /opt/PhpStorm
+   chmod +x /opt/PhpStorm/bin/phpstorm.sh
+   chmod -R 777 /opt/PhpStorm
 
   #Cria arquivo executavel#
-  sudo touch /usr/bin/phpstorm
-  sudo chmod 755 /usr/bin/phpstorm
-  sudo echo "#!/bin/sh" >> /usr/bin/phpstorm
-  sudo echo "export UBUNTU_MENUPROXY=0" >> /usr/bin/phpstorm
-  sudo echo "export PHPSTORM_HOME=/opt/PhpStorm" >> /usr/bin/phpstorm
-  sudo echo "\$PHPSTORM_HOME/bin/phpstorm.sh $*" >> /usr/bin/phpstorm
-  sudo ln -s /usr/bin/phpstorm /bin/phpstorm
+   touch /usr/bin/phpstorm
+   chmod 755 /usr/bin/phpstorm
+   echo "#!/bin/sh" >> /usr/bin/phpstorm
+   echo "export UBUNTU_MENUPROXY=0" >> /usr/bin/phpstorm
+   echo "export PHPSTORM_HOME=/opt/PhpStorm" >> /usr/bin/phpstorm
+   echo "\$PHPSTORM_HOME/bin/phpstorm.sh $*" >> /usr/bin/phpstorm
+   ln -s /usr/bin/phpstorm /bin/phpstorm
 
   #Cria icone do desktop#
-  sudo touch /usr/share/applications/phpstorm.desktop
-  sudo echo "[Desktop Entry]" >> /usr/share/applications/phpstorm.desktop
-  sudo echo "Encoding=UTF-8" >> /usr/share/applications/phpstorm.desktop
-  sudo echo "Name=PhpStorm" >> /usr/share/applications/phpstorm.desktop
-  sudo echo "Comment=PhpStorm IDE" >> /usr/share/applications/phpstorm.desktop
-  sudo echo "Exec=phpstorm" >> /usr/share/applications/phpstorm.desktop
-  sudo echo "Icon=/opt/PhpStorm/bin/webide.png" >> /usr/share/applications/phpstorm.desktop
-  sudo echo "Terminal=false" >> /usr/share/applications/phpstorm.desktop
-  sudo echo "Type=Application" >> /usr/share/applications/phpstorm.desktop
-  sudo echo "Categories=GNOME;Application;Development;" >> /usr/share/applications/phpstorm.desktop
-  sudo echo "StartupNotify=true" >> /usr/share/applications/phpstorm.desktop
+   touch /usr/share/applications/phpstorm.desktop
+   echo "[Desktop Entry]" >> /usr/share/applications/phpstorm.desktop
+   echo "Encoding=UTF-8" >> /usr/share/applications/phpstorm.desktop
+   echo "Name=PhpStorm" >> /usr/share/applications/phpstorm.desktop
+   echo "Comment=PhpStorm IDE" >> /usr/share/applications/phpstorm.desktop
+   echo "Exec=phpstorm" >> /usr/share/applications/phpstorm.desktop
+   echo "Icon=/opt/PhpStorm/bin/webide.png" >> /usr/share/applications/phpstorm.desktop
+   echo "Terminal=false" >> /usr/share/applications/phpstorm.desktop
+   echo "Type=Application" >> /usr/share/applications/phpstorm.desktop
+   echo "Categories=GNOME;Application;Development;" >> /usr/share/applications/phpstorm.desktop
+   echo "StartupNotify=true" >> /usr/share/applications/phpstorm.desktop
 
-  sudo rm -r PhpStorm-10.0.tar.gz
+   rm -r PhpStorm-10.0.tar.gz
 
   if [[ $1 == "op" ]]; then
      mostrarMenuOpcoes
@@ -638,18 +757,18 @@ instalarPhpStorm(){
 
 removerPhpStorm(){
 	clear
-	sudo echo "    Será removido a IDE de desenvolvimento PhpStorm-10"
-	sudo echo "    Deseja continuar? Sim[s], Não[n]"
+	 echo "    Será removido a IDE de desenvolvimento PhpStorm-10"
+	 echo "    Deseja continuar? Sim[s], Não[n]"
 	read op
 
 	if [ ! $op == "s" ]; then
 		mostrarMenuOpcoes
 	fi
 
-    sudo rm -r /usr/bin/phpstorm
-    sudo rm -r /bin/phpstorm
-    sudo rm -r /opt/PhpStorm
-    sudo rm -r /usr/share/applications/phpstorm.desktop
+     rm -r /usr/bin/phpstorm
+     rm -r /bin/phpstorm    
+     rm -r /usr/share/applications/phpstorm.desktop
+     rm -r /opt/PhpStorm
 
     if [[ $1 == "op" ]]; then
     	mostrarMenuOpcoes
@@ -660,43 +779,43 @@ removerPhpStorm(){
 # IDE de desenvolvimento JAVA #
 instalarIntelliJ(){
 	clear
-	sudo echo "    Será instalado a IDE de desenvolvimento Intellij-IDEA"
-	sudo echo "    Deseja continuar? Sim[s], Não[n]"
+	 echo "    Será instalado a IDE de desenvolvimento Intellij-IDEA"
+	 echo "    Deseja continuar? Sim[s], Não[n]"
 	read op
 
 	if [ ! $op == "s" ]; then
 		mostrarMenuOpcoes
 	fi
 
-	sudo wget -c http://download.jetbrains.com/idea/ideaIU-14.1.5.tar.gz
-	sudo tar -zxvf ideaIU-14.1.5.tar.gz
-	sudo mv idea-IU-141.2735.5 /opt/IntelliJ-IDEA
-	sudo chmod +x /opt/IntelliJ-IDEA/bin/idea.sh
-	sudo chmod -R 777 /opt/IntelliJ-IDEA
+	 wget -c http://download.jetbrains.com/idea/ideaIU-14.1.5.tar.gz
+	 tar -zxvf ideaIU-14.1.5.tar.gz
+	 mv idea-IU-141.2735.5 /opt/IntelliJ-IDEA
+	 chmod +x /opt/IntelliJ-IDEA/bin/idea.sh
+	 chmod -R 777 /opt/IntelliJ-IDEA
 
 	#Cria arquivo executavel#
-	sudo touch /usr/bin/idea
-	sudo chmod 755 /usr/bin/idea
-	sudo echo "#!/bin/sh" >> /usr/bin/idea
-	sudo echo "export UBUNTU_MENUPROXY=0" >> /usr/bin/idea
-	sudo echo "export IntelliJ_HOME=/opt/IntelliJ-IDEA" >> /usr/bin/idea
-	sudo echo "\$IntelliJ_HOME/bin/idea.sh $*" >> /usr/bin/idea
-	sudo ln -s /usr/bin/idea /bin/idea
+	 touch /usr/bin/idea
+	 chmod 755 /usr/bin/idea
+	 echo "#!/bin/sh" >> /usr/bin/idea
+	 echo "export UBUNTU_MENUPROXY=0" >> /usr/bin/idea
+	 echo "export IntelliJ_HOME=/opt/IntelliJ-IDEA" >> /usr/bin/idea
+	 echo "\$IntelliJ_HOME/bin/idea.sh $*" >> /usr/bin/idea
+	 ln -s /usr/bin/idea /bin/idea
 
 	#Cria icone do desktop#
-	sudo touch /usr/share/applications/idea.desktop
-	sudo echo "[Desktop Entry]" >> /usr/share/applications/idea.desktop
-	sudo echo "Encoding=UTF-8" >> /usr/share/applications/idea.desktop
-	sudo echo "Name=IntelliJ-IDEA" >> /usr/share/applications/idea.desktop
-	sudo echo "Comment=IntelliJ-IDEA IDE" >> /usr/share/applications/idea.desktop
-	sudo echo "Exec=idea" >> /usr/share/applications/idea.desktop
-	sudo echo "Icon=/opt/IntelliJ-IDEA/bin/idea.png" >> /usr/share/applications/idea.desktop
-	sudo echo "Terminal=false" >> /usr/share/applications/idea.desktop
-	sudo echo "Type=Application" >> /usr/share/applications/idea.desktop
-	sudo echo "Categories=GNOME;Application;Development;" >> /usr/share/applications/idea.desktop
-	sudo echo "StartupNotify=true" >> /usr/share/applications/idea.desktop
+	 touch /usr/share/applications/idea.desktop
+	 echo "[Desktop Entry]" >> /usr/share/applications/idea.desktop
+	 echo "Encoding=UTF-8" >> /usr/share/applications/idea.desktop
+	 echo "Name=IntelliJ-IDEA" >> /usr/share/applications/idea.desktop
+	 echo "Comment=IntelliJ-IDEA IDE" >> /usr/share/applications/idea.desktop
+	 echo "Exec=idea" >> /usr/share/applications/idea.desktop
+	 echo "Icon=/opt/IntelliJ-IDEA/bin/idea.png" >> /usr/share/applications/idea.desktop
+	 echo "Terminal=false" >> /usr/share/applications/idea.desktop
+	 echo "Type=Application" >> /usr/share/applications/idea.desktop
+	 echo "Categories=GNOME;Application;Development;" >> /usr/share/applications/idea.desktop
+	 echo "StartupNotify=true" >> /usr/share/applications/idea.desktop
 
-	sudo rm -r ideaIU-14.1.5.tar.gz
+	 rm -r ideaIU-14.1.5.tar.gz
 
 	if [[ $1 == "op" ]]; then
 	 mostrarMenuOpcoes
@@ -705,17 +824,17 @@ instalarIntelliJ(){
 
 removerIntelliJ(){
 	clear
-	sudo echo "    Será removido a IDE de desenvolvimento Intellij-IDEA"
-	sudo echo "    Deseja continuar? Sim[s], Não[n]"
+	 echo "    Será removido a IDE de desenvolvimento Intellij-IDEA"
+	 echo "    Deseja continuar? Sim[s], Não[n]"
 	read op
 
 	if [ ! $op == "s" ]; then
 		mostrarMenuOpcoes
 	fi
-    sudo rm -r /usr/bin/idea
-    sudo rm -r /bin/idea
-    sudo rm -r /opt/IntelliJ-IDEA
-    sudo rm -r /usr/share/applications/idea.desktop
+     rm -r /usr/bin/idea
+     rm -r /bin/idea
+     rm -r /opt/IntelliJ-IDEA
+     rm -r /usr/share/applications/idea.desktop
 
     if [[ $1 == "op" ]]; then
 		mostrarMenuOpcoes
@@ -725,42 +844,42 @@ removerIntelliJ(){
 # IDE de desenvolvimento C/C++ #
 instalarClion(){
 	clear
-	sudo echo "    Será instalado a IDE de desenvolvimento Clion"
-	sudo echo "    Deseja continuar? Sim[s], Não[n]"
+	 echo "    Será instalado a IDE de desenvolvimento Clion"
+	 echo "    Deseja continuar? Sim[s], Não[n]"
 	read op
 
 	if [ ! $op == "s" ]; then
 		mostrarMenuOpcoes
 	fi
-    sudo wget -c https://download.jetbrains.com/cpp/clion-1.1.1.tar.gz
-    sudo tar -zxvf clion-1.1.1.tar.gz
-    sudo mv clion-1.1.1 /opt/Clion
-    sudo chmod +x /opt/Clion/bin/clion.sh
-    sudo chmod -R 777 /opt/Clion
+     wget -c https://download.jetbrains.com/cpp/clion-1.1.1.tar.gz
+     tar -zxvf clion-1.1.1.tar.gz
+     mv clion-1.1.1 /opt/Clion
+     chmod +x /opt/Clion/bin/clion.sh
+     chmod -R 777 /opt/Clion
 
     #Cria arquivo executavel#
-    sudo touch /usr/bin/clion
-    sudo chmod 755 /usr/bin/clion
-    sudo echo "#!/bin/sh" >> /usr/bin/clion
-    sudo echo "export UBUNTU_MENUPROXY=0" >> /usr/bin/clion
-    sudo echo "export CLION_HOME=/opt/IntelliJ-IDEA" >> /usr/bin/clion
-    sudo echo "\$CLION_HOME/bin/clion.sh $*" >> /usr/bin/clion
-    sudo ln -s /usr/bin/clion /bin/clion
+     touch /usr/bin/clion
+     chmod 755 /usr/bin/clion
+     echo "#!/bin/sh" >> /usr/bin/clion
+     echo "export UBUNTU_MENUPROXY=0" >> /usr/bin/clion
+     echo "export CLION_HOME=/opt/IntelliJ-IDEA" >> /usr/bin/clion
+     echo "\$CLION_HOME/bin/clion.sh $*" >> /usr/bin/clion
+     ln -s /usr/bin/clion /bin/clion
 
     #Cria icone do desktop#
-    sudo touch /usr/share/applications/clion.desktop
-    sudo echo "[Desktop Entry]" >> /usr/share/applications/clion.desktop
-    sudo echo "Encoding=UTF-8" >> /usr/share/applications/clion.desktop
-    sudo echo "Name=Clion" >> /usr/share/applications/clion.desktop
-    sudo echo "Comment=Clion IDE" >> /usr/share/applications/clion.desktop
-    sudo echo "Exec=clion" >> /usr/share/applications/clion.desktop
-    sudo echo "Icon=/opt/Clion/bin/clion.svg" >> /usr/share/applications/clion.desktop
-    sudo echo "Terminal=false" >> /usr/share/applications/clion.desktop
-    sudo echo "Type=Application" >> /usr/share/applications/clion.desktop
-    sudo echo "Categories=GNOME;Application;Development;" >> /usr/share/applications/clion.desktop
-    sudo echo "StartupNotify=true" >> /usr/share/applications/clion.desktop
+     touch /usr/share/applications/clion.desktop
+     echo "[Desktop Entry]" >> /usr/share/applications/clion.desktop
+     echo "Encoding=UTF-8" >> /usr/share/applications/clion.desktop
+     echo "Name=Clion" >> /usr/share/applications/clion.desktop
+     echo "Comment=Clion IDE" >> /usr/share/applications/clion.desktop
+     echo "Exec=clion" >> /usr/share/applications/clion.desktop
+     echo "Icon=/opt/Clion/bin/clion.svg" >> /usr/share/applications/clion.desktop
+     echo "Terminal=false" >> /usr/share/applications/clion.desktop
+     echo "Type=Application" >> /usr/share/applications/clion.desktop
+     echo "Categories=GNOME;Application;Development;" >> /usr/share/applications/clion.desktop
+     echo "StartupNotify=true" >> /usr/share/applications/clion.desktop
 
-    sudo rm -r clion-1.1.1.tar.gz
+     rm -r clion-1.1.1.tar.gz
 
     if [[ $1 == "op" ]]; then
      mostrarMenuOpcoes
@@ -769,18 +888,18 @@ instalarClion(){
 
 removerClion(){
 	clear
-	sudo echo "    Será removido a IDE de desenvolvimento Clion"
-	sudo echo "    Deseja continuar? Sim[s], Não[n]"
+	 echo "    Será removido a IDE de desenvolvimento Clion"
+	 echo "    Deseja continuar? Sim[s], Não[n]"
 	read op
 
 	if [ ! $op == "s" ]; then
 		mostrarMenuOpcoes
 	fi
 
-    sudo rm -r /usr/bin/clion
-    sudo rm -r /bin/clion
-    sudo rm -r /opt/Clion
-    sudo rm -r /usr/share/applications/clion.desktop
+     rm -r /usr/bin/clion
+     rm -r /bin/clion
+     rm -r /opt/Clion
+     rm -r /usr/share/applications/clion.desktop
 
     if [[ $1 == "op" ]]; then
         mostrarMenuOpcoes
@@ -789,98 +908,98 @@ removerClion(){
 
 instalarAmbienteServidorCentOs(){
 	clear
-    sudo echo "    Será instalado Ambiente para servidor CentOs que contém:"
-    sudo echo "    Php-5.6 com libs: memcache, phpize"
-    sudo echo "    Apache-2.4"
-    sudo echo "    Oracle Instant-Client"
-    sudo echo "    NodeJs"
-    sudo echo "    E bibliotecas Zanthus para rodar Zeus_Frente_de_Loja"
-    sudo echo -e "\n"
-    sudo echo "    Deseja continuar? Sim[s], Não[n]"
+     echo "    Será instalado Ambiente para servidor CentOs que contém:"
+     echo "    Php-5.6 com libs: memcache, phpize"
+     echo "    Apache-2.4"
+     echo "    Oracle Instant-Client"
+     echo "    NodeJs"
+     echo "    E bibliotecas Zanthus para rodar Zeus_Frente_de_Loja"
+     echo -e "\n"
+     echo "    Deseja continuar? Sim[s], Não[n]"
     read op
 
     if [ ! $op == "s" ]; then
     mostrarMenuOpcoes
     fi
 
-    sudo echo "    Iniciando a instalação do servidor"
+     echo "    Iniciando a instalação do servidor"
     cd /usr/src
 
-    sudo echo "    Baixando bibliotecas"
+     echo "    Baixando bibliotecas"
 
     criarDiretorio "libs_zanthus"
     cd libs_zanthus
-    sudo wget ftp://ftp.zanthus.com.br/pub/Zeus_Frente_de_Loja/_Complementares/so/* .
-    sudo wget ftp://ftp.zanthus.com.br/pub/Zeus_Frente_de_Loja/_Complementares/so_r64/* .
-    sudo wget ftp://ftp.zanthus.com.br/pub/Zeus_Frente_de_Loja/_Complementares/KernD/v2_1/*.so .
+     wget ftp://ftp.zanthus.com.br/pub/Zeus_Frente_de_Loja/_Complementares/so/* .
+     wget ftp://ftp.zanthus.com.br/pub/Zeus_Frente_de_Loja/_Complementares/so_r64/* .
+     wget ftp://ftp.zanthus.com.br/pub/Zeus_Frente_de_Loja/_Complementares/KernD/v2_1/*.so .
     cd ..
 
-    sudo echo "    Baixando pacotes de instalação"
-    sudo wget ftp://192.168.0.54/* --ftp-user=eber --ftp-password=123456 .
+     echo "    Baixando pacotes de instalação"
+     wget ftp://192.168.0.54/* --ftp-user=eber --ftp-password=123456 .
 
     #Verifica se conseguiu fazer o download de tudo para continuar senão sai do processo
     if [ $? == 0 ]; then
 
-      sudo echo "    Saindo do diretório"
+       echo "    Saindo do diretório"
       cd /
-      sudo echo "    Descompactando php"
-      sudo tar -xzvf /usr/src/instalar_apr_centos_6_5.tar.gz
-      sudo echo "    Descompactando Apache"
-      sudo tar -xzvf /usr/src/instalar_apache_centos_6_5.tar.gz
-      sudo echo "    Descompactando InstantClient"
-      sudo tar -xzvf /usr/src/instalar_instant_client_12_1.tar.gz
-      sudo echo "    Descompactando libEvent"
-      sudo tar -xzvf /usr/src/instalar_libevent_centos_6_5.tar.gz
-      sudo echo "    Descompactando memcached"
-      sudo tar -xzvf /usr/src/instalar_memcached_centos_6_5.tar.gz
-      sudo echo "    Descompactando node"
-      sudo tar -xzvf /usr/src/instalar_node_centos_6_5.tar.gz
-      sudo echo "    Descompactando php"
-      sudo tar -xzvf /usr/src/instalar_php_centos_6_5.tar.gz
+       echo "    Descompactando php"
+       tar -xzvf /usr/src/instalar_apr_centos_6_5.tar.gz
+       echo "    Descompactando Apache"
+       tar -xzvf /usr/src/instalar_apache_centos_6_5.tar.gz
+       echo "    Descompactando InstantClient"
+       tar -xzvf /usr/src/instalar_instant_client_12_1.tar.gz
+       echo "    Descompactando libEvent"
+       tar -xzvf /usr/src/instalar_libevent_centos_6_5.tar.gz
+       echo "    Descompactando memcached"
+       tar -xzvf /usr/src/instalar_memcached_centos_6_5.tar.gz
+       echo "    Descompactando node"
+       tar -xzvf /usr/src/instalar_node_centos_6_5.tar.gz
+       echo "    Descompactando php"
+       tar -xzvf /usr/src/instalar_php_centos_6_5.tar.gz
 
-      sudo echo "    Criando links e copiando arquivos"
+       echo "    Criando links e copiando arquivos"
       cd /usr/src
-      sudo mv bibliotecas_zanthus.conf /etc/ld.so.conf.d/.
-      sudo mv instant_client.conf /etc/ld.so.conf.d/.
-      sudo mv -f index.html /usr/local/apache22/htdocs/.
+       mv bibliotecas_zanthus.conf /etc/ld.so.conf.d/.
+       mv instant_client.conf /etc/ld.so.conf.d/.
+       mv -f index.html /usr/local/apache22/htdocs/.
 
-      sudo chmod +x memcached
+       chmod +x memcached
       criarDiretorio "/usr/local/Zend"
       criarDiretorio "/usr/local/Zend/etc"
-      sudo cp php.ini /usr/local/Zend/etc/.
+       cp php.ini /usr/local/Zend/etc/.
       #O php precisa ter o mesmo caminho do módulo php no apache
-      sudo ln -sf /usr/local/Zend/etc/php.ini  /usr/local/php/lib/php.ini
-      sudo ln -sf /usr/local/php/bin/php /usr/local/bin/php
-      sudo ln -sf /usr/local/php/bin/php-config /usr/local/bin/php-config
-      sudo ln -sf /usr/local/php/bin/phpize /usr/local/bin/phpize
-      sudo ln -sf /usr/local/memcached/bin/memcached /usr/local/bin/memcached
-      sudo ln -sf /usr/local/apache22/bin/apachectl /etc/init.d/apache
-      sudo ln -sf /usr/src/libevent-2.0.22-stable/.libs/libevent-2.0.so.5 /lib64/libevent-2.0.so.5
-      sudo ln -sf /usr/local/apr/lib/libaprutil-1.so.0 /lib64/libaprutil-1.so.0
-      sudo ln -sf /usr/local/memcached/bin/memcached /var/run/memcached
-      sudo ln -sf /usr/local/node/bin/node /usr/local/bin/node
-      sudo ln -sf /usr/src/memcached /etc/init.d/memcached
-      sudo ln -sf /etc/init.d/memcached /etc/rc3.d/S99memcached
-      sudo ln -sf /etc/init.d/apache /etc/rc3.d/S99apache
-      sudo ln -sf /usr/local/apache22/htdocs /web
+       ln -sf /usr/local/Zend/etc/php.ini  /usr/local/php/lib/php.ini
+       ln -sf /usr/local/php/bin/php /usr/local/bin/php
+       ln -sf /usr/local/php/bin/php-config /usr/local/bin/php-config
+       ln -sf /usr/local/php/bin/phpize /usr/local/bin/phpize
+       ln -sf /usr/local/memcached/bin/memcached /usr/local/bin/memcached
+       ln -sf /usr/local/apache22/bin/apachectl /etc/init.d/apache
+       ln -sf /usr/src/libevent-2.0.22-stable/.libs/libevent-2.0.so.5 /lib64/libevent-2.0.so.5
+       ln -sf /usr/local/apr/lib/libaprutil-1.so.0 /lib64/libaprutil-1.so.0
+       ln -sf /usr/local/memcached/bin/memcached /var/run/memcached
+       ln -sf /usr/local/node/bin/node /usr/local/bin/node
+       ln -sf /usr/src/memcached /etc/init.d/memcached
+       ln -sf /etc/init.d/memcached /etc/rc3.d/S99memcached
+       ln -sf /etc/init.d/apache /etc/rc3.d/S99apache
+       ln -sf /usr/local/apache22/htdocs /web
 
-      sudo ldconfig
+       ldconfig
 
-      sudo echo "    vamos subir o serviço Apache"
-      sudo service apache start
+       echo "    vamos subir o serviço Apache"
+       service apache start
 
-      sudo echo "    vamos subir o serviço do Memcached"
-      sudo service memcached start
-      sudo service apache start
+       echo "    vamos subir o serviço do Memcached"
+       service memcached start
+       service apache start
 
-      sudo echo "    criando usuário"
-      sudo adduser zanthus
+       echo "    criando usuário"
+       adduser zanthus
 
-      sudo echo "    fim"
+       echo "    fim"
       mostrarMenuOpcoes
 
      else
-     sudo echo "Erro ao fazer download de pacotes de instalação"
+      echo "Erro ao fazer download de pacotes de instalação"
      read res
      mostrarMenuOpcoes
     fi
@@ -890,52 +1009,52 @@ instalarAmbienteServidorCentOs(){
 #Remove o Ambiente Servidor CentOs
 removerAmbienteServidorCentOs(){
 	clear
-    sudo echo "    Será REMOVIDO Ambiente para servidor CentOs que contém:"
-    sudo echo "    Php-5.6 com libs: memcache, phpize"
-    sudo echo "    Apache-2.4"
-    sudo echo "    Oracle Instant-Client"
-    sudo echo "    NodeJs"
-    sudo echo "    E bibliotecas Zanthus para rodar Zeus_Frente_de_Loja"
-    sudo echo -e "\n"
-    sudo echo "    Deseja continuar? Sim[s], Não[n]"
+     echo "    Será REMOVIDO Ambiente para servidor CentOs que contém:"
+     echo "    Php-5.6 com libs: memcache, phpize"
+     echo "    Apache-2.4"
+     echo "    Oracle Instant-Client"
+     echo "    NodeJs"
+     echo "    E bibliotecas Zanthus para rodar Zeus_Frente_de_Loja"
+     echo -e "\n"
+     echo "    Deseja continuar? Sim[s], Não[n]"
     read op
 
     if [ ! $op == "s" ]; then
     mostrarMenuOpcoes
     fi
 
-    sudo echo "    Excluindo pastas e arquivos..."
+     echo "    Excluindo pastas e arquivos..."
 
     cd /usr/src
-    sudo rm -r /usr/src/libs_zanthus
-    sudo rm -r /usr/local/Zend
-    sudo rm -r /usr/local/apache22
-    sudo rm -r /etc/init.d/apache
-    sudo rm -r /etc/rc3.d/S99apache
-    sudo rm -r /usr/local/php
-    sudo rm -r /usr/local/bin/php
-    sudo rm -r /usr/local/bin/php-config
-    sudo rm -r /usr/local/bin/phpize
+     rm -r /usr/src/libs_zanthus
+     rm -r /usr/local/Zend
+     rm -r /usr/local/apache22
+     rm -r /etc/init.d/apache
+     rm -r /etc/rc3.d/S99apache
+     rm -r /usr/local/php
+     rm -r /usr/local/bin/php
+     rm -r /usr/local/bin/php-config
+     rm -r /usr/local/bin/phpize
 
-    sudo rm -r /usr/local/memcached/
-    sudo rm -r /var/run/memcached
-    sudo rm -r /etc/init.d/memcached
-    sudo rm -r /etc/rc3.d/S99memcached
-    sudo rm -r /usr/local/bin/memcached
+     rm -r /usr/local/memcached/
+     rm -r /var/run/memcached
+     rm -r /etc/init.d/memcached
+     rm -r /etc/rc3.d/S99memcached
+     rm -r /usr/local/bin/memcached
 
-    sudo rm -r /usr/local/node/
-    sudo rm -r /usr/local/bin/node
-    sudo rm -r /web
-    sudo rm -r /etc/init.d/apache
-    sudo rm -r /lib64/libevent-2.0.so.5
-    sudo rm -r /lib64/libaprutil-1.so.0
-    sudo rm -r /usr/local/instant_client_12_1
+     rm -r /usr/local/node/
+     rm -r /usr/local/bin/node
+     rm -r /web
+     rm -r /etc/init.d/apache
+     rm -r /lib64/libevent-2.0.so.5
+     rm -r /lib64/libaprutil-1.so.0
+     rm -r /usr/local/instant_client_12_1
 
-    sudo ldconfig
+     ldconfig
 
-    sudo deluser zanthus
+     deluser zanthus
 
-    sudo echo "    Ambiente CentOs removido"
+     echo "    Ambiente CentOs removido"
     mostrarMenuOpcoes
 }
 
@@ -943,27 +1062,27 @@ removerAmbienteServidorCentOs(){
 
 instalarAmbienteServidorUbuntu(){
 	clear
-    sudo echo "    Será instalado o Ambiente para servidor Ubuntu/Debian que contém:"
-    sudo echo "    Php-5.6 com as libs: php5-dev php5-curl php5-json php5-ldap php5-mssql php5-odbc php5-pgsql php5-mcrypt php5-sybase oci8 xdebug memcache"
-    sudo echo "    Apache-2.4"
-    sudo echo "    Mysql"
-    sudo echo "    Postgresql"
-    sudo echo "    Subversion"
-    sudo echo "    Gdebi Instalador de pacotes"
-    sudo echo "    Synaptic Gerenciador de dependencias"
-    sudo echo "    Rar descompactador"
-    sudo echo "    Filezilla cliente Ftp"
-    sudo echo "    java 8"
-    sudo echo "    Curl lib para uso com php"
-    sudo echo "    Freetds-commom php para conexão com banco de dados MSSQL"
-    sudo echo "    Composer intalador dependencias Php"
-    sudo echo "    laravel/installer instalador do Laravel 5"
-    sudo echo "    lumen/installer instalador Lumen"
-    sudo echo "    NodeJs"
-    sudo echo "    Para instalar a lib oci8.so certifique-se de que o Oracle Instant Client esteja instalado!"
+     echo "    Será instalado o Ambiente para servidor Ubuntu/Debian que contém:"
+     echo "    Php-5.6 com as libs: php5-dev php5-curl php5-json php5-ldap php5-mssql php5-odbc php5-pgsql php5-mcrypt php5-sybase oci8 xdebug memcache"
+     echo "    Apache-2.4"
+     echo "    Mysql"
+     echo "    Postgresql"
+     echo "    Subversion"
+     echo "    Gdebi Instalador de pacotes"
+     echo "    Synaptic Gerenciador de dependencias"
+     echo "    Rar descompactador"
+     echo "    Filezilla cliente Ftp"
+     echo "    java 8"
+     echo "    Curl lib para uso com php"
+     echo "    Freetds-commom php para conexão com banco de dados MSSQL"
+     echo "    Composer intalador dependencias Php"
+     echo "    laravel/installer instalador do Laravel 5"
+     echo "    lumen/installer instalador Lumen"
+     echo "    NodeJs"
+     echo "    Para instalar a lib oci8.so certifique-se de que o Oracle Instant Client esteja instalado!"
 
-    sudo echo -e "\n"
-    sudo echo "Deseja continuar? Sim[s], Não[n]"
+     echo -e "\n"
+     echo "Deseja continuar? Sim[s], Não[n]"
     read op
 
     if [ ! $op == "s" ]; then
@@ -973,37 +1092,37 @@ instalarAmbienteServidorUbuntu(){
     capturaUsuario
 
     cd ~
-    sudo add-apt-repository -y ppa:ondrej/php5-5.6
-    sudo apt-get update
-    sudo apt-get install -y php5
-    sudo apt-get install -y apache2
-    sudo apt-get install -y mysql-server
-    sudo apt-get install -y phpmyadmin
-    sudo apt-get install -y postgresql
-    sudo apt-get install -y subversion
-    sudo apt-get install -y php5-dev
-    sudo apt-get install -y php5-curl
-    sudo apt-get install -y php5-json
-    sudo apt-get install -y php5-ldap
-    sudo apt-get install -y php5-mssql
-    sudo apt-get install -y php5-odbc
-    sudo apt-get install -y php5-pgsql
-    sudo apt-get install -y php5-mcrypt
-    sudo apt-get install -y php5-sybase
-    sudo apt-get install -y php5-memcached
-    sudo apt-get install -y php5-openssl
-    sudo apt-get install -y memcached
-    sudo apt-get install -y sendmail
+     add-apt-repository -y ppa:ondrej/php5-5.6
+     apt-get update
+     apt-get install -y php5
+     apt-get install -y apache2
+     apt-get install -y mysql-server
+     apt-get install -y phpmyadmin
+     apt-get install -y postgresql
+     apt-get install -y subversion
+     apt-get install -y php5-dev
+     apt-get install -y php5-curl
+     apt-get install -y php5-json
+     apt-get install -y php5-ldap
+     apt-get install -y php5-mssql
+     apt-get install -y php5-odbc
+     apt-get install -y php5-pgsql
+     apt-get install -y php5-mcrypt
+     apt-get install -y php5-sybase
+     apt-get install -y php5-memcached
+     apt-get install -y php5-openssl
+     apt-get install -y memcached
+     apt-get install -y sendmail
 
     ###################  Instala a .so do oracle ###################### /home/tairo/extensions/no-debug-non-zts-20131226
     #Verifica se o caminho padrão para a pasta oracle existe
     pathInstantClient = /usr/lib/php5/20131226/oci8.so
     if [ -e $pathInstantClient ]; then
-      sudo pecl install oci8
-      sudo echo "extension=/usr/lib/php5/20131226/oci8.so" >> /etc/php5/apache2/php.ini
-      sudo echo -e "\n" >> /etc/php5/apache2/php.ini
-      sudo echo "extension=/usr/lib/php5/20131226/oci8.so" >> /etc/php5/cli/php.ini
-      sudo echo -e "\n" >> /etc/php5/cli/php.ini
+       pecl install oci8
+       echo "extension=/usr/lib/php5/20131226/oci8.so" >> /etc/php5/apache2/php.ini
+       echo -e "\n" >> /etc/php5/apache2/php.ini
+       echo "extension=/usr/lib/php5/20131226/oci8.so" >> /etc/php5/cli/php.ini
+       echo -e "\n" >> /etc/php5/cli/php.ini
     fi
 
 
@@ -1011,90 +1130,90 @@ instalarAmbienteServidorUbuntu(){
     cd /usr/src
 
     if [ ! -d /usr/src/libs_zanthus  ]; then
-      sudo echo "Criando e baixando bibliotecas para a pasta libs_zanthus..."
+       echo "Criando e baixando bibliotecas para a pasta libs_zanthus..."
       criarDiretorio "/usr/src/libs_zanthus"
       cd libs_zanthus
-      sudo wget ftp://ftp.zanthus.com.br/pub/Zeus_Frente_de_Loja/_Complementares/so/* .
-      sudo wget ftp://ftp.zanthus.com.br/pub/Zeus_Frente_de_Loja/_Complementares/so_r64/* .
-      sudo wget ftp://ftp.zanthus.com.br/pub/Zeus_Frente_de_Loja/_Complementares/KernD/v2_1/*.so .
+       wget ftp://ftp.zanthus.com.br/pub/Zeus_Frente_de_Loja/_Complementares/so/* .
+       wget ftp://ftp.zanthus.com.br/pub/Zeus_Frente_de_Loja/_Complementares/so_r64/* .
+       wget ftp://ftp.zanthus.com.br/pub/Zeus_Frente_de_Loja/_Complementares/KernD/v2_1/*.so .
 
       #Adiciona ao carregamento de libs do sistema
-      sudo echo "/usr/src/libs_zanthus" >> /etc/ld.so.conf
-      sudo ldconfig
+       echo "/usr/src/libs_zanthus" >> /etc/ld.so.conf
+       ldconfig
 
     else
-      sudo echo "libs_zanthus já existe..."
+       echo "libs_zanthus já existe..."
     fi
     ########################### Libs da Zanthus #################################
 
     #Insere a Kernz no .ini do Php e Apache
-    sudo echo -e "\n"
-    sudo echo -e "Digite o caminho para a kernz.so \n"
+     echo -e "\n"
+     echo -e "Digite o caminho para a kernz.so \n"
     read pathkernz
     if [ -d $pathkernz ]; then
-        sudo echo "extension=$pathkernz" >> /etc/php5/apache2/php.ini
-        sudo echo -e "\n" >> /etc/php5/apache2/php.ini
-        sudo echo "extension=$pathkernz" >> /etc/php5/cli/php.ini
-        sudo echo -e "\n" >> /etc/php5/cli/php.ini
+         echo "extension=$pathkernz" >> /etc/php5/apache2/php.ini
+         echo -e "\n" >> /etc/php5/apache2/php.ini
+         echo "extension=$pathkernz" >> /etc/php5/cli/php.ini
+         echo -e "\n" >> /etc/php5/cli/php.ini
     fi
 
 
     ################### Instala a .so do dbase ########################
-    sudo pecl install dbase
+     pecl install dbase
     pathdbase = /usr/lib/php5/20131226/dbase.so
     if [[ -e $pathdbase ]]; then
-        sudo echo "extension=$pathdbase" >> /etc/php5/apache2/php.ini
-        sudo echo -e "\n" >> /etc/php5/apache2/php.ini
-        sudo echo "extension=$pathdbase" >> /etc/php5/cli/php.ini
-        sudo echo -e "\n" >> /etc/php5/cli/php.ini
+         echo "extension=$pathdbase" >> /etc/php5/apache2/php.ini
+         echo -e "\n" >> /etc/php5/apache2/php.ini
+         echo "extension=$pathdbase" >> /etc/php5/cli/php.ini
+         echo -e "\n" >> /etc/php5/cli/php.ini
     fi
 
 
     #Configura Timezone e charset
-    sudo echo "date.timezone = America/Sao_Paulo" >> /etc/php5/apache2/php.ini
-    sudo echo -e "\n" >> /etc/php5/apache2/php.ini
-    sudo echo -e "default_charset = \"ISO-8859-1\"" >> /etc/php5/apache2/php.ini
-    sudo echo -e "\n" >> /etc/php5/apache2/php.ini
+     echo "date.timezone = America/Sao_Paulo" >> /etc/php5/apache2/php.ini
+     echo -e "\n" >> /etc/php5/apache2/php.ini
+     echo -e "default_charset = \"ISO-8859-1\"" >> /etc/php5/apache2/php.ini
+     echo -e "\n" >> /etc/php5/apache2/php.ini
 
     #Configura Timezone e charset
-    sudo echo "date.timezone = America/Sao_Paulo" >> /etc/php5/cli/php.ini
-    sudo echo -e "\n" >> /etc/php5/cli/php.ini
-    sudo echo -e "default_charset = \"ISO-8859-1\"" >> /etc/php5/cli/php.ini
-    sudo echo -e "\n" >> /etc/php5/cli/php.ini
+     echo "date.timezone = America/Sao_Paulo" >> /etc/php5/cli/php.ini
+     echo -e "\n" >> /etc/php5/cli/php.ini
+     echo -e "default_charset = \"ISO-8859-1\"" >> /etc/php5/cli/php.ini
+     echo -e "\n" >> /etc/php5/cli/php.ini
 
 
     #instala repositorio para Java 8
-    sudo add-apt-repository -y ppa:webupd8team/java
-    sudo apt-get update
+     add-apt-repository -y ppa:webupd8team/java
+     apt-get update
 
     #Instala os pacotes e programas
 
     #Instala Gdebi Instalador de pacotes
-    sudo apt-get -y install gdebi
+     apt-get -y install gdebi
     #Instala Gerenciador de dependencias
-    sudo apt-get -y install synaptic
+     apt-get -y install synaptic
     #Instala descompactador
-    sudo apt-get -y install rar
+     apt-get -y install rar
     #Instala cliente ftp
-    sudo apt-get -y install filezilla
+     apt-get -y install filezilla
     #Instala java 8
-    sudo apt-get -y install oracle-java8-installer
+     apt-get -y install oracle-java8-installer
     #Instala lib Curl para uso com php
-    sudo apt-get -y install curl
+     apt-get -y install curl
     #Instala  libs php para conexão com banco de dados MSSQL
-    sudo apt-get -y install freetds-common
+     apt-get -y install freetds-common
     #Atualiza os headers
-    sudo apt-get update
+     apt-get update
     # reinicializa Apache
-    sudo service apache2 restart
+     service apache2 restart
     #Da permição para a pasta do apache
-    sudo chmod -R 777 /var/www
+     chmod -R 777 /var/www
     #Habilita o modrewrite do apache
-    sudo a2enmod rewrite
+     a2enmod rewrite
     #Baixa o composer
     curl -s https://getcomposer.org/installer | php
     #Move o Composer
-    sudo mv composer.phar /usr/local/bin/composer
+     mv composer.phar /usr/local/bin/composer
     #Intala o instalador do laravel
     composer global require "laravel/installer=~1.1"
     #Intala o instalador do lumen
@@ -1102,11 +1221,11 @@ instalarAmbienteServidorUbuntu(){
     #Adiciona os vendors do composer as variáveis de ambiente
     export PATH=$PATH:/home/$usuario/.composer/vendor/bin
     #Adiciona o NodeJs ao bash para ser instalado
-    curl --silent --location https://deb.nodesource.com/setup_4.x | sudo bash -
+    curl --silent --location https://deb.nodesource.com/setup_4.x |  bash -
     #Atualiza os headers
-    sudo apt-get update
+     apt-get update
     #Instala o NodeJs
-    sudo apt-get install --yes nodejs
+     apt-get install --yes nodejs
 
     mostrarMenuOpcoes
 
@@ -1116,25 +1235,25 @@ instalarAmbienteServidorUbuntu(){
 #Remove Ambiente Servidor Ubuntu
 removerAmbienteServidorUbuntu(){
 	clear
-    sudo echo "    Será REMOVIDO o Ambiente para servidor Ubuntu/Debian que contém:"
-    sudo echo "    Php-5.6 com as libs: php5-dev php5-curl php5-json php5-ldap php5-mssql php5-odbc php5-pgsql php5-mcrypt php5-sybase oci8 xdebug memcache"
-    sudo echo "    Apache-2.4"
-    sudo echo "    Mysql"
-    sudo echo "    Postgresql"
-    sudo echo "    Gdebi Instalador de pacotes"
-    sudo echo "    Synaptic Gerenciador de dependencias"
-    sudo echo "    Rar descompactador"
-    sudo echo "    Filezilla cliente Ftp"
-    sudo echo "    java 8"
-    sudo echo "    Curl lib para uso com php"
-    sudo echo "    Freetds-commom php para conexão com banco de dados MSSQL"
-    sudo echo "    Composer intalador dependencias Php"
-    sudo echo "    laravel/installer instalador do Laravel 5"
-    sudo echo "    lumen/installer instalador Lumen"
-    sudo echo "    NodeJs"
-    sudo echo "    E bibliotecas Zanthus para rodar Zeus_Frente_de_Loja"
-    sudo echo -e "\n"
-    sudo echo "    Deseja continuar? Sim[s], Não[n]"
+     echo "    Será REMOVIDO o Ambiente para servidor Ubuntu/Debian que contém:"
+     echo "    Php-5.6 com as libs: php5-dev php5-curl php5-json php5-ldap php5-mssql php5-odbc php5-pgsql php5-mcrypt php5-sybase oci8 xdebug memcache"
+     echo "    Apache-2.4"
+     echo "    Mysql"
+     echo "    Postgresql"
+     echo "    Gdebi Instalador de pacotes"
+     echo "    Synaptic Gerenciador de dependencias"
+     echo "    Rar descompactador"
+     echo "    Filezilla cliente Ftp"
+     echo "    java 8"
+     echo "    Curl lib para uso com php"
+     echo "    Freetds-commom php para conexão com banco de dados MSSQL"
+     echo "    Composer intalador dependencias Php"
+     echo "    laravel/installer instalador do Laravel 5"
+     echo "    lumen/installer instalador Lumen"
+     echo "    NodeJs"
+     echo "    E bibliotecas Zanthus para rodar Zeus_Frente_de_Loja"
+     echo -e "\n"
+     echo "    Deseja continuar? Sim[s], Não[n]"
     read op
 
     if [ ! $op == "s" ]; then
@@ -1143,66 +1262,66 @@ removerAmbienteServidorUbuntu(){
 
     capturaUsuario
 
-    sudo echo "    Excluindo pastas e arquivos..."
+     echo "    Excluindo pastas e arquivos..."
 
-    sudo pecl uninstall oci8
-    sudo pecl uninstall dbase
-    sudo apt-get -y purge php5.*
-    sudo apt-get -y purge apache2
-    sudo apt-get -y purge postgresql
-    sudo apt-get -y purge mysql-server
-    sudo apt-get -y purge subversion
-    sudo rm -r /usr/lib/oracle
+     pecl uninstall oci8
+     pecl uninstall dbase
+     apt-get -y purge php5.*
+     apt-get -y purge apache2
+     apt-get -y purge postgresql
+     apt-get -y purge mysql-server
+     apt-get -y purge subversion
+     rm -r /usr/lib/oracle
 
     ############### Libs ZAnthus #############
     cd /usr/src
-    sudo rm -r /usr/src/libs_zanthus
+     rm -r /usr/src/libs_zanthus
     ############### Libs ZAnthus #############
 
     #Reconfigura carregamento de bibliotecas
-    sudo ldconfig
+     ldconfig
 
     #Desistala os pacotes e programas
 
     #Remove repositorio para php5-5.6
-    sudo add-apt-repository -r ppa:ondrej/php5-5.6
-    sudo apt-get update
+     add-apt-repository -r ppa:ondrej/php5-5.6
+     apt-get update
 
     #Remove repositorio para Java 8
-    sudo add-apt-repository -r ppa:webupd8team/java
-    sudo apt-get update
+     add-apt-repository -r ppa:webupd8team/java
+     apt-get update
 
 
     #Desistala sendmail
-    sudo apt-get -y purge sendmail
+     apt-get -y purge sendmail
     #Desistala Gdebi Instalador de pacotes
-    sudo apt-get -y purge gdebi
+     apt-get -y purge gdebi
     #Desistala Gerenciador de dependencias
-    sudo apt-get -y purge synaptic
+     apt-get -y purge synaptic
     #Desistala descompactador
-    sudo apt-get -y purge rar
+     apt-get -y purge rar
     #Desistala cliente ftp
-    sudo apt-get -y purge filezilla
+     apt-get -y purge filezilla
     #Desistala java 8
-    sudo apt-get -y purge oracle-java8-installer
+     apt-get -y purge oracle-java8-installer
     #Desistala lib Curl para uso com php
-    sudo apt-get -y purge curl
+     apt-get -y purge curl
     #Desistala  libs php para conexão com banco de dados MSSQL
-    sudo apt-get -y purge freetds-common
+     apt-get -y purge freetds-common
     #Desistala o Composer
-    sudo rm -r /usr/local/bin/composer
+     rm -r /usr/local/bin/composer
     #Desistala o instalador do laravel
-    sudo rm -r /home/$usuario/.composer/vendor/
+     rm -r /home/$usuario/.composer/vendor/
     #Desistala o NodeJs
-    sudo apt-get purge --yes nodejs
+     apt-get purge --yes nodejs
     #Desistala o skype por ultimo por que ele baixa varias libs 32bits que programas com Wine usam
-    sudo apt-get -y purge skype
+     apt-get -y purge skype
 
     #remove os pacotes não ultilizados
-    sudo apt-get -y autoremove
-    sudo apt-get clean
+     apt-get -y autoremove
+     apt-get clean
 
-    sudo echo "    Ambiente Servidor Ubuntu removido"
+     echo "    Ambiente Servidor Ubuntu removido"
 
     mostrarMenuOpcoes
 }
@@ -1213,52 +1332,52 @@ instalarOracleInstantClient(){
 
     cd ~
     #Insere a Kernz no .ini do Php e Apache
-    sudo echo -e "\n"
-    sudo echo -e "    Digite o link para baixar o instant_client \n"
+     echo -e "\n"
+     echo -e "    Digite o link para baixar o instant_client \n"
     read pathOracleInstantClient
 
     if [[ $pathOracleInstantClient == "" ]]; then
-        sudo echo "link inválido..."
+         echo "link inválido..."
         read res
         mostrarMenuOpcoes
     fi
 
-    sudo wget "$pathOracleInstantClient"
+     wget "$pathOracleInstantClient"
 
     #Verifica se ultima ação foi efetuada com sucesso
     if [ -e instant_client_12.1.tar.gz ]; then
 
       #Descompacta intant Client
-      sudo tar -zxvf instant_client_12.1.tar.gz
+       tar -zxvf instant_client_12.1.tar.gz
 
       #Instala pacotes
-      sudo dpkg -i oracle-instantclient12.1-basic.deb
-      sudo dpkg -i oracle-instantclient12.1-devel.deb
-      sudo dpkg -i oracle-instantclient12.1-jdbc.deb
-      sudo dpkg -i oracle-instantclient12.1-odbc.deb
-      sudo dpkg -i oracle-instantclient12.1-sqlplus_.deb
-      sudo dpkg -i oracle-instantclient12.1-tools.deb
+       dpkg -i oracle-instantclient12.1-basic.deb
+       dpkg -i oracle-instantclient12.1-devel.deb
+       dpkg -i oracle-instantclient12.1-jdbc.deb
+       dpkg -i oracle-instantclient12.1-odbc.deb
+       dpkg -i oracle-instantclient12.1-sqlplus_.deb
+       dpkg -i oracle-instantclient12.1-tools.deb
 
       export ORACLE_HOME=$ORACLE_HOME:/usr/lib/oracle/12.1/client64/lib
       export ORACLE_HOME=$ORACLE_HOME:/usr/lib/oracle/12.1/client64/bin
 
       #Remove pacotes pacotes
-      sudo rm -r oracle-instantclient12.1-basic.deb
-      sudo rm -r oracle-instantclient12.1-devel.deb
-      sudo rm -r oracle-instantclient12.1-jdbc.deb
-      sudo rm -r oracle-instantclient12.1-odbc.deb
-      sudo rm -r oracle-instantclient12.1-sqlplus.deb
-      sudo rm -r oracle-instantclient12.1-tools.deb
-      sudo rm -r instant_client_12.1.tar.gz
+       rm -r oracle-instantclient12.1-basic.deb
+       rm -r oracle-instantclient12.1-devel.deb
+       rm -r oracle-instantclient12.1-jdbc.deb
+       rm -r oracle-instantclient12.1-odbc.deb
+       rm -r oracle-instantclient12.1-sqlplus.deb
+       rm -r oracle-instantclient12.1-tools.deb
+       rm -r instant_client_12.1.tar.gz
 
 	  clear
-      sudo echo -e " Oracle Instant Client instalado com sucesso.. \n"
+       echo -e " Oracle Instant Client instalado com sucesso.. \n"
       read res
       mostrarMenuOpcoes
 
     else
       clear
-      sudo echo "    Não foi possível fazer o download dos arquivos do instant_client verifique a conexão ou o link dos arquivos"
+       echo "    Não foi possível fazer o download dos arquivos do instant_client verifique a conexão ou o link dos arquivos"
       read res
     fi
 
@@ -1268,56 +1387,56 @@ instalarOracleInstantClient(){
 
 removerOracleInstantClient(){
 	clear
-    sudo echo -e "\n"		
-    sudo echo "    Deseja continuar? Sim[s], Não[n]"
+     echo -e "\n"		
+     echo "    Deseja continuar? Sim[s], Não[n]"
     read op
 
     if [ ! $op == "s" ]; then
       mostrarMenuOpcoes
     fi
 
-    sudo rm -r /usr/lib/oracle
-    sudo echo ""
+     rm -r /usr/lib/oracle
+     echo ""
     read res
     mostrarMenuOpcoes
 }
 
 
 adicionarLauchers(){
-    sudo gsettings set com.canonical.Unity.Launcher favorites "['application://gnome-terminal.desktop', 'application://nautilus.desktop', 'application://google-chrome.desktop', 'application://firefox.desktop', 'application://phpstorm.desktop', 'application://idea.desktop', 'application://android-studio.desktop', 'application://sublime_text.desktop', 'application://virtualbox.desktop', 'application://filezilla.desktop', 'application://skype.desktop', 'application://spotify.desktop', 'application://rhythmbox.desktop', 'application://PlayOnLinux.desktop', 'application://ubuntu-software-center.desktop', 'application://ntfs-config.desktop', 'application://unity-control-center.desktop', 'application://gnome-system-monitor.desktop', 'unity://running-apps', 'unity://expo-icon', 'unity://devices', 'unity://desktop-icon']"
+     gsettings set com.canonical.Unity.Launcher favorites "['application://gnome-terminal.desktop', 'application://nautilus.desktop', 'application://google-chrome.desktop', 'application://firefox.desktop', 'application://phpstorm.desktop', 'application://idea.desktop', 'application://android-studio.desktop', 'application://sublime_text.desktop', 'application://virtualbox.desktop', 'application://filezilla.desktop', 'application://skype.desktop', 'application://spotify.desktop', 'application://rhythmbox.desktop', 'application://PlayOnLinux.desktop', 'application://ubuntu-software-center.desktop', 'application://ntfs-config.desktop', 'application://unity-control-center.desktop', 'application://gnome-system-monitor.desktop', 'unity://running-apps', 'unity://expo-icon', 'unity://devices', 'unity://desktop-icon']"
 }
 
 removerLauchers(){
-    sudo gsettings reset com.canonical.Unity.Launcher favorites
+     gsettings reset com.canonical.Unity.Launcher favorites
 }
 
 mostrarAjuda(){
 	clear
-	sudo echo "    #######################################################################################"
-	sudo echo "    #                           Menu de ajuda para script linux                           #"
-	sudo echo "    #######################################################################################"
-	sudo echo -e "\n"
- 	sudo echo -e "    Este script contém as principais aplicações para montar o ambiente"
- 	sudo echo -e "    desenvolvimento."
- 	sudo echo -e "    Não são mostradas as opções 9,10,11,12,13,14,15,16 e 79"
- 	sudo echo -e "     9 - Instalação da IDE PhpStorm"
- 	sudo echo -e "    10 - Remove IDE PhpStorm"
- 	sudo echo -e "    11 - Instalação da IDE Intellij-IDEA"
- 	sudo echo -e "    12 - Remove IDE Intellij-IDEA"
- 	sudo echo -e "    13 - Instalação IDE Clion"
- 	sudo echo -e "    14 - Remove IDE Clion"
- 	sudo echo -e "    15 - Monta o Ambiente de desenvolvimento com PhpStorm, Intellij-IDEA e Clion"
- 	sudo echo -e "    16 - Remove o Ambiente de desenvolvimento instalado na opção 15"
- 	sudo echo -e "    79 - opção de teste"
- 	sudo echo -e "\n"
-	sudo echo "    #######################################################################################"
+	 echo "    #######################################################################################"
+	 echo "    #                           Menu de ajuda para script linux                           #"
+	 echo "    #######################################################################################"
+	 echo -e "\n"
+ 	 echo -e "    Este script contém as principais aplicações para montar o ambiente"
+ 	 echo -e "    desenvolvimento."
+ 	 echo -e "    Não são mostradas as opções 9,10,11,12,13,14,15,16 e 79"
+ 	 echo -e "     9 - Instalação da IDE PhpStorm"
+ 	 echo -e "    10 - Remove IDE PhpStorm"
+ 	 echo -e "    11 - Instalação da IDE Intellij-IDEA"
+ 	 echo -e "    12 - Remove IDE Intellij-IDEA"
+ 	 echo -e "    13 - Instalação IDE Clion"
+ 	 echo -e "    14 - Remove IDE Clion"
+ 	 echo -e "    15 - Monta o Ambiente de desenvolvimento com PhpStorm, Intellij-IDEA e Clion"
+ 	 echo -e "    16 - Remove o Ambiente de desenvolvimento instalado na opção 15"
+ 	 echo -e "    79 - opção de teste"
+ 	 echo -e "\n"
+	 echo "    #######################################################################################"
 	read res
 	mostrarMenuOpcoes
 }
 
 teste(){
 
-   sudo wget -c http://c758482.r82.cf2.rackcdn.com/sublime-text_build-3083_amd64.deb
+    wget -c http://c758482.r82.cf2.rackcdn.com/sublime-text_build-3083_amd64.deb
    read res
 
    mostrarMenuOpcoes
@@ -1359,6 +1478,6 @@ mostrarMenuOpcoes
 # >= : que propõe, que uma expressão seja maior ou igual a outra;
 # <  : ou "-lt" que propõe, que uma expressão seja menor que outra;
 # <= : que propõe, que uma expressão seja menor ou igual a outra;
-# sudo echo -e \$VARIAVEL : imprime a string, não o conteúdo
-# sudo echo $VARIAVEL : imprime o conteúdo da variável
+#  echo -e \$VARIAVEL : imprime a string, não o conteúdo
+#  echo $VARIAVEL : imprime o conteúdo da variável
 #######################################################################################
