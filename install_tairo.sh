@@ -414,17 +414,22 @@ instalarAmbienteDesenvolvimento(){
         instalarClion "-op"
     fi
 
-    #Instala Siblime-text 3
+    #Instala Siblime-text 3 e Notepad++
     versao = $(uname -i)
     if [[  $versao == "i386" || $versao == "i486" || $versao == "i686" ]]; then
         wget -c http://c758482.r82.cf2.rackcdn.com/sublime-text_build-3083_i386.deb
         dpkg -i sublime-text_build-3083_i386.deb
         rm -r sublime-text_build-3083_i386.deb
 
+        wget -c "https://notepad-plus-plus.org/repository/6.x/6.8.6/npp.6.8.6.Installer.exe"
+        wine npp.6.8.6.Installer.exe
     else
         wget -c http://c758482.r82.cf2.rackcdn.com/sublime-text_build-3083_amd64.deb
         dpkg -i sublime-text_build-3083_i386.deb
         rm -r sublime-text_build-3083_amd64.deb
+
+        wget -c "https://notepad-plus-plus.org/repository/6.x/6.8.6/npp.6.8.6.Installer.exe"
+        wine npp.6.8.6.Installer.exe
     fi
 
     #Instala Dropbox
