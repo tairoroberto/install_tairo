@@ -195,6 +195,7 @@ instalarAmbienteDesenvolvimento(){
     apt-get install -y php5-openssl
     apt-get install -y memcached
     apt-get install -y sendmail
+    apt-get install -y unetbootin
 
     ###################  Instala a .so do oracle ######################
     pecl install oci8
@@ -415,35 +416,10 @@ instalarAmbienteDesenvolvimento(){
     fi
 
     #Instala Siblime-text 3 e Notepad++
-    versao = $(uname -i)
-    if [[  $versao == "i386" || $versao == "i486" || $versao == "i686" ]]; then
-        wget -c http://c758482.r82.cf2.rackcdn.com/sublime-text_build-3083_i386.deb
-        dpkg -i sublime-text_build-3083_i386.deb
-        rm -r sublime-text_build-3083_i386.deb
-
-        wget -c "https://notepad-plus-plus.org/repository/6.x/6.8.6/npp.6.8.6.Installer.exe"
-        wine npp.6.8.6.Installer.exe
-    else
-        wget -c http://c758482.r82.cf2.rackcdn.com/sublime-text_build-3083_amd64.deb
-        dpkg -i sublime-text_build-3083_i386.deb
-        rm -r sublime-text_build-3083_amd64.deb
-
-        wget -c "https://notepad-plus-plus.org/repository/6.x/6.8.6/npp.6.8.6.Installer.exe"
-        wine npp.6.8.6.Installer.exe
-    fi
+    instalarSublime
 
     #Instala Dropbox
-    versao = $(uname -i)
-    if [[  $versao == "i386" || $versao == "i486" || $versao == "i686" ]]; then
-        wget -c "https://www.dropbox.com/download?dl=packages/ubuntu/dropbox_2015.10.28_i386.deb" -O dropbox.deb
-        dpkg -i dropbox.deb
-        rm -r dropbox.deb
-
-    else
-        wget -c "https://www.dropbox.com/download?dl=packages/ubuntu/dropbox_2015.10.28_amd64.deb" -O dropbox.deb
-        dpkg -i dropbox.deb
-        rm -r dropbox.deb
-    fi
+    instalarDropbox
 
     #Instala a IDE Eclipse Java EE
     instalarEclipse
@@ -592,8 +568,8 @@ removerAmbienteDesenvolvimento(){
     apt-get -y purge alien
     #Desistala configurador de discos Ntfs
     apt-get -y purge ntfs-config
-    #Desistala Dropbox
-    apt-get -y purge dropbox
+    #Desistala Unetbootin
+    apt-get -y purge unetbootin
 
     #remove os pacotes não ultilizados
     apt-get -y autoremove
@@ -616,6 +592,9 @@ removerAmbienteDesenvolvimento(){
 
     #Desistala Eclipse Java EE
     removerEclipse
+
+    #Desistala Dropbox
+    removerDropbox
 
     removerLauchers
 
@@ -706,6 +685,48 @@ removerEclipse(){
     if [[ $1 == "op" ]]; then
         mostrarMenuOpcoes
     fi
+}
+
+#Instala o Editor de texto Sublime-Text 3 e o Notepad++
+instalarSublime(){
+    versao = $(uname -i)
+    if [[  $versao == "i386" || $versao == "i486" || $versao == "i686" ]]; then
+        wget -c http://c758482.r82.cf2.rackcdn.com/sublime-text_build-3083_i386.deb
+        dpkg -i sublime-text_build-3083_i386.deb
+        rm -r sublime-text_build-3083_i386.deb
+
+        wget -c "https://notepad-plus-plus.org/repository/6.x/6.8.6/npp.6.8.6.Installer.exe"
+        wine npp.6.8.6.Installer.exe
+    else
+        wget -c http://c758482.r82.cf2.rackcdn.com/sublime-text_build-3083_amd64.deb
+        dpkg -i sublime-text_build-3083_i386.deb
+        rm -r sublime-text_build-3083_amd64.deb
+
+        wget -c "https://notepad-plus-plus.org/repository/6.x/6.8.6/npp.6.8.6.Installer.exe"
+        wine npp.6.8.6.Installer.exe
+    fi
+}
+
+
+
+instalarDropbox(){
+    #Instala Dropbox
+    versao = $(uname -i)
+    if [[  $versao == "i386" || $versao == "i486" || $versao == "i686" ]]; then
+        wget -c "https://www.dropbox.com/download?dl=packages/ubuntu/dropbox_2015.10.28_i386.deb" -O dropbox.deb
+        dpkg -i dropbox.deb
+        rm -r dropbox.deb
+
+    else
+        wget -c "https://www.dropbox.com/download?dl=packages/ubuntu/dropbox_2015.10.28_amd64.deb" -O dropbox.deb
+        dpkg -i dropbox.deb
+        rm -r dropbox.deb
+    fi
+}
+
+removerDropbox(){
+    #Desistala Dropbox
+    apt-get -y purge dropbox
 }
 
 
@@ -1335,16 +1356,16 @@ instalarOracleInstantClient(){
     cd ~
     #Insere a Kernz no .ini do Php e Apache
     echo -e "\n"
-    echo -e "    Digite o link para baixar o instant_client \n"
+    echo -e "    Digite o para o instant_client \n"
     read pathOracleInstantClient
 
     if [[ $pathOracleInstantClient == "" ]]; then
-        echo "link inválido..."
+        echo "Caminho inválido..."
     read res
         mostrarMenuOpcoes
     fi
 
-    wget "$pathOracleInstantClient"
+    cd $pathOracleInstantClient
 
     #Verifica se ultima ação foi efetuada com sucesso
     if [ -e instant_client_12.1.tar.gz ]; then
@@ -1359,9 +1380,6 @@ instalarOracleInstantClient(){
         dpkg -i oracle-instantclient12.1-odbc.deb
         dpkg -i oracle-instantclient12.1-sqlplus_.deb
         dpkg -i oracle-instantclient12.1-tools.deb
-
-        export ORACLE_HOME=$ORACLE_HOME:/usr/lib/oracle/12.1/client64/lib
-        export ORACLE_HOME=$ORACLE_HOME:/usr/lib/oracle/12.1/client64/bin
 
         #Remove pacotes pacotes
         rm -r oracle-instantclient12.1-basic.deb
@@ -1413,31 +1431,69 @@ removerLauchers(){
 }
 
 mostrarAjuda(){
-	clear
-	 echo "    #######################################################################################"
-	 echo "    #                           Menu de ajuda para script linux                           #"
-	 echo "    #######################################################################################"
-	 echo -e "\n"
- 	 echo -e "    Este script contém as principais aplicações para montar o ambiente"
- 	 echo -e "    desenvolvimento."
- 	 echo -e "    Não são mostradas as opções 9,10,11,12,13,14,15,16 e 79"
- 	 echo -e "     9 - Instalação da IDE PhpStorm"
- 	 echo -e "    10 - Remove IDE PhpStorm"
- 	 echo -e "    11 - Instalação da IDE Intellij-IDEA"
- 	 echo -e "    12 - Remove IDE Intellij-IDEA"
- 	 echo -e "    13 - Instalação IDE Clion"
- 	 echo -e "    14 - Remove IDE Clion"
- 	 echo -e "    15 - Monta o Ambiente de desenvolvimento com PhpStorm, Intellij-IDEA e Clion"
- 	 echo -e "    16 - Remove o Ambiente de desenvolvimento instalado na opção 15"
- 	 echo -e "    79 - opção de teste"
- 	 echo -e "\n"
-	 echo "    #######################################################################################"
+    clear
+    echo "    #######################################################################################"
+    echo "    #                           Menu de ajuda para script linux                           #"
+    echo "    #######################################################################################"
+    echo -e "\n"
+    echo -e "    Este script contém as principais aplicações para montar o ambiente"
+    echo -e "    desenvolvimento."
+    echo -e "    Não são mostradas as opções 9,10,11,12,13,14,15,16 e 79"
+    echo -e "     9 - Instalação da IDE PhpStorm"
+    echo -e "    10 - Remove IDE PhpStorm"
+    echo -e "    11 - Instalação da IDE Intellij-IDEA"
+    echo -e "    12 - Remove IDE Intellij-IDEA"
+    echo -e "    13 - Instalação IDE Clion"
+    echo -e "    14 - Remove IDE Clion"
+    echo -e "    15 - Monta o Ambiente de desenvolvimento com PhpStorm, Intellij-IDEA e Clion"
+    echo -e "    16 - Remove o Ambiente de desenvolvimento instalado na opção 15"
+    echo -e "    79 - opção de teste"
+    echo -e "\n"
+    echo -e "\n"
+    echo -e "#-------------------------------------------------------------------------------------#"
+    echo -e "                                  METODOS DO SCRIP                                     "
+    echo -e "#-------------------------------------------------------------------------------------#"
+    echo -e "    mostrarMenuOpcoes"
+    echo -e "    capturaUsuario"
+    echo -e "    listarDiretorio"
+    echo -e "    criarDiretorio"
+    echo -e "    versaoLinux"
+    echo -e "    instalarAmbienteDesenvolvimento"
+    echo -e "    removerAmbienteDesenvolvimento"
+    echo -e "    instalarEclipse"
+    echo -e "    removerEclipse"
+    echo -e "    instalarSublime"
+    echo -e "    instalarDropbox"
+    echo -e "    removerDropbox"
+    echo -e "    instalarPhpStorm"
+    echo -e "    removerPhpStorm"
+    echo -e "    instalarIntelliJ"
+    echo -e "    removerIntelliJ"
+    echo -e "    instalarClion"
+    echo -e "    removerClion"
+    echo -e "    instalarAmbienteServidorCentOs"
+    echo -e "    removerAmbienteServidorCentOs"
+    echo -e "    instalarAmbienteServidorUbuntu"
+    echo -e "    removerAmbienteServidorUbuntu"
+    echo -e "    instalarOracleInstantClient"
+    echo -e "    removerOracleInstantClient"
+    echo -e "    adicionarLauchers"
+    echo -e "    removerLauchers"
+    echo -e "    mostrarAjuda"
+    echo -e "    teste"
+    echo "    #######################################################################################"
 	read res
-	mostrarMenuOpcoes
+
+	if [[ $res == "" ]]; then
+	    mostrarMenuOpcoes
+    else
+	    $res
+	fi
+
 }
 
 teste(){
-    wget -c http://c758482.r82.cf2.rackcdn.com/sublime-text_build-3083_amd64.deb
+    echo "    Teste..."
     read res
 
     mostrarMenuOpcoes
