@@ -200,7 +200,7 @@ instalarAmbienteDesenvolvimento(){
     ###################  Instala a .so do oracle ######################
     pecl install oci8
     #Verifica se o caminho padrão para a pasta oracle existe
-    pathInstantClient = /usr/lib/php5/20131226/oci8.so
+    pathInstantClient = "/usr/lib/php5/20131226/oci8.so"
     if [ -e $pathInstantClient ]; then
         echo "extension=/usr/lib/php5/20131226/oci8.so" >> /etc/php5/apache2/php.ini
         echo -e "\n" >> /etc/php5/apache2/php.ini
@@ -237,12 +237,11 @@ instalarAmbienteDesenvolvimento(){
 
 
     ########################### Libs da Zanthus #################################
-    cd /usr/src
 
     if [ ! -d /usr/src/libs_zanthus  ]; then
         echo "Criando e baixando bibliotecas para a pasta libs_zanthus..."
         criarDiretorio "/usr/src/libs_zanthus"
-        cd libs_zanthus
+        cd /usr/src/libs_zanthus
         wget ftp://ftp.zanthus.com.br/pub/Zeus_Frente_de_Loja/_Complementares/so/* .
         wget ftp://ftp.zanthus.com.br/pub/Zeus_Frente_de_Loja/_Complementares/so_r64/* .
         wget ftp://ftp.zanthus.com.br/pub/Zeus_Frente_de_Loja/_Complementares/KernD/v2_1/*.so .
@@ -254,6 +253,7 @@ instalarAmbienteDesenvolvimento(){
     else
         echo "libs_zanthus já existe..."
     fi
+    cd ~
     ########################### Libs da Zanthus #################################
     
     #Insere a Kernz no .ini do Php e Apache
@@ -269,7 +269,7 @@ instalarAmbienteDesenvolvimento(){
 
     ################### Instala a .so do dbase ########################
     pecl install dbase
-    pathdbase = /usr/lib/php5/20131226/dbase.so
+    pathdbase = "/usr/lib/php5/20131226/dbase.so"
     if [[ -e $pathdbase ]]; then
         echo "extension=$pathdbase" >> /etc/php5/apache2/php.ini
         echo -e "\n" >> /etc/php5/apache2/php.ini
@@ -699,7 +699,7 @@ instalarSublime(){
         wine npp.6.8.6.Installer.exe
     else
         wget -c http://c758482.r82.cf2.rackcdn.com/sublime-text_build-3083_amd64.deb
-        dpkg -i sublime-text_build-3083_i386.deb
+        dpkg -i sublime-text_build-3083_amd64.deb
         rm -r sublime-text_build-3083_amd64.deb
 
         wget -c "https://notepad-plus-plus.org/repository/6.x/6.8.6/npp.6.8.6.Installer.exe"
