@@ -687,6 +687,32 @@ removerEclipse(){
     fi
 }
 
+#Instala Google chrome
+instalarGoogleChrome(){
+    versao = $(uname -i)
+    if [[  $versao == "i386" || $versao == "i486" || $versao == "i686" ]]; then
+        cd ~
+        wget -c "https://dl.google.com/linux/direct/google-chrome-stable_current_i386.deb"
+        dpkg -i google-chrome-stable_current_i386.deb
+        apt-get -y install libappindicator1
+        apt-get -f install
+        dpkg -i google-chrome-stable_current_i386.deb
+        rm -r google-chrome-stable_current_i386.deb
+    else
+        cd ~
+        wget -c "https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb"
+        dpkg -i google-chrome-stable_current_amd64.deb
+        apt-get -y install libappindicator1
+        apt-get -f install
+        dpkg -i google-chrome-stable_current_amd64.deb
+        rm -r google-chrome-stable_current_amd64.deb
+    fi
+}
+
+removerGoogleChrome(){
+    apt-get -y purge google-chrome-stable
+}
+
 #Instala o Editor de texto Sublime-Text 3 e o Notepad++
 instalarSublime(){
     versao = $(uname -i)
@@ -1460,6 +1486,8 @@ mostrarAjuda(){
     echo -e "    versaoLinux"
     echo -e "    instalarAmbienteDesenvolvimento"
     echo -e "    removerAmbienteDesenvolvimento"
+    echo -e "    instalarGoogleChrome"
+    echo -e "    removerGoogleChrome"
     echo -e "    instalarEclipse"
     echo -e "    removerEclipse"
     echo -e "    instalarSublime"
