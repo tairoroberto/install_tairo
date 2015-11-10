@@ -709,6 +709,7 @@ instalarGoogleChrome(){
     fi
 }
 
+#Remove o navegador Google Chrome
 removerGoogleChrome(){
     apt-get -y purge google-chrome-stable
 }
@@ -1508,6 +1509,8 @@ mostrarAjuda(){
     echo -e "    adicionarLauchers"
     echo -e "    removerLauchers"
     echo -e "    mostrarAjuda"
+    echo -e "    instalarSwap"
+    echo -e "    desabilitarSwap"
     echo -e "    teste"
     echo "    #######################################################################################"
 	read res
@@ -1519,6 +1522,20 @@ mostrarAjuda(){
 	fi
 
 }
+
+
+#Monta uma partição de Swap de 8GB
+instalarSwap(){
+    dd if=/dev/zero of=/swapfile bs=1024 count=8388608
+    mkswap /swapfile
+    echo "/swapfile swap swap defaults 0 0 " >> /etc/fstab
+}
+
+#Desabilita Swap
+desabilitarSwap(){
+    swapoff /swapfile
+}
+
 
 teste(){
     echo "    Teste..."
