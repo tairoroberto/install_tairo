@@ -399,6 +399,8 @@ instalarAmbienteDesenvolvimento(){
     apt-get -y install alien
     #Configurador de discos Ntfs
     apt-get -y install ntfs-config
+    #instala ruby
+    apt-get -y install ruby
 
     #verifica se é pra intalar PhpStorm
     if [[ $1 == "storm" ]]; then
@@ -570,6 +572,8 @@ removerAmbienteDesenvolvimento(){
     apt-get -y purge ntfs-config
     #Desistala Unetbootin
     apt-get -y purge unetbootin
+    #Desistala ruby
+    apt-get -y purge ruby
 
     #remove os pacotes não ultilizados
     apt-get -y autoremove
@@ -722,13 +726,19 @@ instalarSublime(){
         dpkg -i sublime-text_build-3083_i386.deb
         rm -r sublime-text_build-3083_i386.deb
 
-        wget -c "https://notepad-plus-plus.org/repository/6.x/6.8.6/npp.6.8.6.Installer.exe"
-        wine npp.6.8.6.Installer.exe
     else
         wget -c http://c758482.r82.cf2.rackcdn.com/sublime-text_build-3083_amd64.deb
         dpkg -i sublime-text_build-3083_amd64.deb
         rm -r sublime-text_build-3083_amd64.deb
+    fi
+}
 
+intalarNotePad(){
+	versao = $(uname -i)
+    if [[  $versao == "i386" || $versao == "i486" || $versao == "i686" ]]; then
+        wget -c "https://notepad-plus-plus.org/repository/6.x/6.8.6/npp.6.8.6.Installer.exe"
+        wine npp.6.8.6.Installer.exe
+    else
         wget -c "https://notepad-plus-plus.org/repository/6.x/6.8.6/npp.6.8.6.Installer.exe"
         wine npp.6.8.6.Installer.exe
     fi
@@ -769,9 +779,9 @@ instalarPhpStorm(){
         mostrarMenuOpcoes
     fi
 
-    wget -c http://download.jetbrains.com/webide/PhpStorm-10.0.tar.gz
-    tar -zxvf PhpStorm-10.0.tar.gz
-    mv PhpStorm-143.381.48 /opt/PhpStorm
+    wget -c http://download.jetbrains.com/webide/PhpStorm-10.0.1.tar.gz
+    tar -zxvf PhpStorm-10.0.1.tar.gz
+    mv PhpStorm-143.382.38 /opt/PhpStorm
     chmod +x /opt/PhpStorm/bin/phpstorm.sh
     chmod -R 777 /opt/PhpStorm
 
@@ -797,7 +807,7 @@ instalarPhpStorm(){
     echo "Categories=GNOME;Application;Development;" >> /usr/share/applications/phpstorm.desktop
     echo "StartupNotify=true" >> /usr/share/applications/phpstorm.desktop
 
-    rm -r PhpStorm-10.0.tar.gz
+    rm -r PhpStorm-10.0.1.tar.gz
 
     if [[ $1 == "op" ]]; then
         mostrarMenuOpcoes
@@ -1450,7 +1460,7 @@ removerOracleInstantClient(){
 
 
 adicionarLauchers(){
-     gsettings set com.canonical.Unity.Launcher favorites "['application://gnome-terminal.desktop', 'application://nautilus.desktop', 'application://google-chrome.desktop', 'application://firefox.desktop', 'application://phpstorm.desktop', 'application://idea.desktop', 'application://android-studio.desktop', 'application://sublime_text.desktop', 'application://wine-Programs-Notepad++-Notepad++.desktop', 'application://gedit.desktop', 'application://virtualbox.desktop', 'application://filezilla.desktop', 'application://skype.desktop', 'application://spotify.desktop', 'application://rhythmbox.desktop', 'application://PlayOnLinux.desktop', 'application://ubuntu-software-center.desktop', 'application://dropbox.desktop', 'application://ntfs-config.desktop', 'application://unity-control-center.desktop', 'application://gnome-system-monitor.desktop', 'unity://running-apps', 'unity://expo-icon', 'unity://devices', 'unity://desktop-icon']"
+     gsettings set com.canonical.Unity.Launcher favorites "['application://gnome-terminal.desktop', 'application://nautilus.desktop', 'application://google-chrome.desktop', 'application://firefox.desktop', 'application://phpstorm.desktop', 'application://android-studio.desktop', 'application://idea.desktop', 'application://clion.desktop', 'application://gedit.desktop', 'application://sublime_text.desktop', 'application://wine-Programs-Notepad++-Notepad++.desktop', 'application://virtualbox.desktop', 'application://filezilla.desktop', 'application://skype.desktop', 'application://spotify.desktop', 'application://rhythmbox.desktop', 'application://PlayOnLinux.desktop', 'application://ubuntu-software-center.desktop', 'application://dropbox.desktop', 'application://ntfs-config.desktop', 'application://unity-control-center.desktop', 'application://gnome-system-monitor.desktop', 'unity://running-apps', 'unity://expo-icon', 'unity://devices', 'unity://desktop-icon']"
 }
 
 removerLauchers(){
@@ -1492,6 +1502,7 @@ mostrarAjuda(){
     echo -e "    instalarEclipse"
     echo -e "    removerEclipse"
     echo -e "    instalarSublime"
+    echo -e "    intalarNotePad"
     echo -e "    instalarDropbox"
     echo -e "    removerDropbox"
     echo -e "    instalarPhpStorm"
