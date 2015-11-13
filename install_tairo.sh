@@ -238,16 +238,32 @@ instalarAmbienteDesenvolvimento(){
 
     ########################### Libs da Zanthus #################################
 
-    if [ ! -d /usr/src/libs_zanthus  ]; then
+    if [ ! -d /Zanthus/Zeus/lib  ]; then
         echo "Criando e baixando bibliotecas para a pasta libs_zanthus..."
-        criarDiretorio "/usr/src/libs_zanthus"
-        cd /usr/src/libs_zanthus
-        wget ftp://ftp.zanthus.com.br/pub/Zeus_Frente_de_Loja/_Complementares/so/* .
-        wget ftp://ftp.zanthus.com.br/pub/Zeus_Frente_de_Loja/_Complementares/so_r64/* .
-        wget ftp://ftp.zanthus.com.br/pub/Zeus_Frente_de_Loja/_Complementares/KernD/v2_1/*.so .
+        criarDiretorio "/Zanthus/Zeus/lib"
+        cd /Zanthus/Zeus/lib
+        wget -c ftp://ftp.zanthus.com.br/pub/Zeus_Frente_de_Loja/_Complementares/so/* .
+        wget -c ftp://ftp.zanthus.com.br/pub/Zeus_Frente_de_Loja/_Complementares/so_r64/* .
+        wget -c ftp://ftp.zanthus.com.br/pub/Zeus_Frente_de_Loja/_Complementares/KernD/v2_1/*.so .
+
+        wget -c ftp://ftp.zanthus.com.br/pub/Zeus_Frente_de_Loja/v_1_11_40/KC_ZMAN_1_11_40_244_CZ.EXL
+
+        mv KC_ZMAN_1_11_40_244_CZ.EXL KC_ZMAN_1_11_40_244_CZ.tar.gz
+
+        versao = $(uname -i)
+        if [[  $versao == "i386" || $versao == "i486" || $versao == "i686" ]]; then
+            tar vxf KC_ZMAN_1_11_40_244_CZ.tar.gz  lib_rotkernC_CZ.so.rh9
+        else
+            tar vxf KC_ZMAN_1_11_40_244_CZ.tar.gz  lib_rotkernC_CZ.so.r64
+        fi
+
+        rm -r KC_ZMAN_1_11_40_244_CZ.tar.gz
+
+        ln -s /lib/x86_64-linux-gnu/libcrypto.so.1.0.0 /lib/x86_64-linux-gnu/libcrypto.so.6
+        ln -s /lib/x86_64-linux-gnu/libssl.so.1.0.0 /lib/x86_64-linux-gnu/libssl.so.6
 
         #Adiciona ao carregamento de libs do sistema
-        echo "/usr/src/libs_zanthus" >> /etc/ld.so.conf
+        echo "/Zanthus/Zeus/lib" >> /etc/ld.so.conf
         ldconfig
 
     else
@@ -493,8 +509,7 @@ removerAmbienteDesenvolvimento(){
     rm -r /usr/lib/oracle
 
     ############### Libs ZAnthus #############
-    cd /usr/src
-    rm -r /usr/src/libs_zanthus
+    rm -r /Zanthus/Zeus/lib
     ############### Libs ZAnthus #############
 
     #Reconfigura carregamento de bibliotecas
@@ -1174,11 +1189,11 @@ instalarAmbienteServidorUbuntu(){
     apt-get install -y memcached
     apt-get install -y sendmail
 
-    ###################  Instala a .so do oracle ###################### /home/tairo/extensions/no-debug-non-zts-20131226
+    ###################  Instala a .so do oracle ######################
+    pecl install oci8
     #Verifica se o caminho padrão para a pasta oracle existe
-    pathInstantClient = /usr/lib/php5/20131226/oci8.so
+    pathInstantClient = "/usr/lib/php5/20131226/oci8.so"
     if [ -e $pathInstantClient ]; then
-        pecl install oci8
         echo "extension=/usr/lib/php5/20131226/oci8.so" >> /etc/php5/apache2/php.ini
         echo -e "\n" >> /etc/php5/apache2/php.ini
         echo "extension=/usr/lib/php5/20131226/oci8.so" >> /etc/php5/cli/php.ini
@@ -1187,23 +1202,39 @@ instalarAmbienteServidorUbuntu(){
 
 
     ########################### Libs da Zanthus #################################
-    cd /usr/src
 
-    if [ ! -d /usr/src/libs_zanthus  ]; then
+    if [ ! -d /Zanthus/Zeus/lib  ]; then
         echo "Criando e baixando bibliotecas para a pasta libs_zanthus..."
-        criarDiretorio "/usr/src/libs_zanthus"
-        cd libs_zanthus
-        wget ftp://ftp.zanthus.com.br/pub/Zeus_Frente_de_Loja/_Complementares/so/* .
-        wget ftp://ftp.zanthus.com.br/pub/Zeus_Frente_de_Loja/_Complementares/so_r64/* .
-        wget ftp://ftp.zanthus.com.br/pub/Zeus_Frente_de_Loja/_Complementares/KernD/v2_1/*.so .
+        criarDiretorio "/Zanthus/Zeus/lib"
+        cd /Zanthus/Zeus/lib
+        wget -c ftp://ftp.zanthus.com.br/pub/Zeus_Frente_de_Loja/_Complementares/so/* .
+        wget -c ftp://ftp.zanthus.com.br/pub/Zeus_Frente_de_Loja/_Complementares/so_r64/* .
+        wget -c ftp://ftp.zanthus.com.br/pub/Zeus_Frente_de_Loja/_Complementares/KernD/v2_1/*.so .
+
+        wget -c ftp://ftp.zanthus.com.br/pub/Zeus_Frente_de_Loja/v_1_11_40/KC_ZMAN_1_11_40_244_CZ.EXL
+
+        mv KC_ZMAN_1_11_40_244_CZ.EXL KC_ZMAN_1_11_40_244_CZ.tar.gz
+
+        versao = $(uname -i)
+        if [[  $versao == "i386" || $versao == "i486" || $versao == "i686" ]]; then
+            tar vxf KC_ZMAN_1_11_40_244_CZ.tar.gz  lib_rotkernC_CZ.so.rh9
+        else
+            tar vxf KC_ZMAN_1_11_40_244_CZ.tar.gz  lib_rotkernC_CZ.so.r64
+        fi
+
+        rm -r KC_ZMAN_1_11_40_244_CZ.tar.gz
+
+        ln -s /lib/x86_64-linux-gnu/libcrypto.so.1.0.0 /lib/x86_64-linux-gnu/libcrypto.so.6
+        ln -s /lib/x86_64-linux-gnu/libssl.so.1.0.0 /lib/x86_64-linux-gnu/libssl.so.6
 
         #Adiciona ao carregamento de libs do sistema
-        echo "/usr/src/libs_zanthus" >> /etc/ld.so.conf
+        echo "/Zanthus/Zeus/lib" >> /etc/ld.so.conf
         ldconfig
 
     else
         echo "libs_zanthus já existe..."
     fi
+    cd ~
     ########################### Libs da Zanthus #################################
 
     #Insere a Kernz no .ini do Php e Apache
@@ -1220,7 +1251,7 @@ instalarAmbienteServidorUbuntu(){
 
     ################### Instala a .so do dbase ########################
     pecl install dbase
-    pathdbase = /usr/lib/php5/20131226/dbase.so
+    pathdbase = "/usr/lib/php5/20131226/dbase.so"
     if [[ -e $pathdbase ]]; then
         echo "extension=$pathdbase" >> /etc/php5/apache2/php.ini
         echo -e "\n" >> /etc/php5/apache2/php.ini
@@ -1334,8 +1365,7 @@ removerAmbienteServidorUbuntu(){
     rm -r /usr/lib/oracle
 
     ############### Libs ZAnthus #############
-    cd /usr/src
-    rm -r /usr/src/libs_zanthus
+    rm -r /Zanthus/Zeus/lib
     ############### Libs ZAnthus #############
 
     #Reconfigura carregamento de bibliotecas
