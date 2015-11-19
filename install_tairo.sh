@@ -236,41 +236,7 @@ instalarAmbienteDesenvolvimento(){
     fi
 
 
-    ########################### Libs da Zanthus #################################
-
-    if [ ! -d /Zanthus/Zeus/lib  ]; then
-        echo "Criando e baixando bibliotecas para a pasta libs_zanthus..."
-        criarDiretorio "/Zanthus/Zeus/lib"
-        cd /Zanthus/Zeus/lib
-        wget -c ftp://ftp.zanthus.com.br/pub/Zeus_Frente_de_Loja/_Complementares/so/* .
-        wget -c ftp://ftp.zanthus.com.br/pub/Zeus_Frente_de_Loja/_Complementares/so_r64/* .
-        wget -c ftp://ftp.zanthus.com.br/pub/Zeus_Frente_de_Loja/_Complementares/KernD/v2_1/*.so .
-
-        wget -c ftp://ftp.zanthus.com.br/pub/Zeus_Frente_de_Loja/v_1_11_40/KC_ZMAN_1_11_40_244_CZ.EXL
-
-        mv KC_ZMAN_1_11_40_244_CZ.EXL KC_ZMAN_1_11_40_244_CZ.tar.gz
-
-        versao = $(uname -i)
-        if [[  $versao == "i386" || $versao == "i486" || $versao == "i686" ]]; then
-            tar vxf KC_ZMAN_1_11_40_244_CZ.tar.gz  lib_rotkernC_CZ.so.rh9
-        else
-            tar vxf KC_ZMAN_1_11_40_244_CZ.tar.gz  lib_rotkernC_CZ.so.r64
-        fi
-
-        rm -r KC_ZMAN_1_11_40_244_CZ.tar.gz
-
-        ln -s /lib/x86_64-linux-gnu/libcrypto.so.1.0.0 /lib/x86_64-linux-gnu/libcrypto.so.6
-        ln -s /lib/x86_64-linux-gnu/libssl.so.1.0.0 /lib/x86_64-linux-gnu/libssl.so.6
-
-        #Adiciona ao carregamento de libs do sistema
-        echo "/Zanthus/Zeus/lib" >> /etc/ld.so.conf
-        ldconfig
-
-    else
-        echo "libs_zanthus já existe..."
-    fi
-    cd ~
-    ########################### Libs da Zanthus #################################
+    instalarPacotesZanthus "op"
     
     #Insere a Kernz no .ini do Php e Apache
     echo -e "\n"
@@ -862,9 +828,9 @@ instalarIntelliJ(){
         mostrarMenuOpcoes
     fi
 
-    wget -c http://download.jetbrains.com/idea/ideaIU-14.1.5.tar.gz
-    tar -zxvf ideaIU-14.1.5.tar.gz
-    mv idea-IU-141.2735.5 /opt/IntelliJ-IDEA
+    wget -c http://download.jetbrains.com/idea/ideaIU-15.0.1.tar.gz
+    tar -zxvf ideaIU-15.0.1.tar.gz
+    mv idea-IU-143.382.35 /opt/IntelliJ-IDEA
     chmod +x /opt/IntelliJ-IDEA/bin/idea.sh
     chmod -R 777 /opt/IntelliJ-IDEA
 
@@ -890,7 +856,7 @@ instalarIntelliJ(){
     echo "Categories=GNOME;Application;Development;" >> /usr/share/applications/idea.desktop
     echo "StartupNotify=true" >> /usr/share/applications/idea.desktop
 
-    rm -r ideaIU-14.1.5.tar.gz
+    rm -r ideaIU-15.0.1.tar.gz
 
     if [[ $1 == "op" ]]; then
         mostrarMenuOpcoes
@@ -1553,6 +1519,7 @@ mostrarAjuda(){
     echo -e "    instalarSwap"
     echo -e "    desabilitarSwap"
     echo -e "    teste"
+    echo -e "    instalarPacotesZanthus"
     echo "    #######################################################################################"
 	read res
 
@@ -1562,6 +1529,48 @@ mostrarAjuda(){
 	    $res
 	fi
 
+}
+
+instalarPacotesZanthus(){
+    ########################### Libs da Zanthus #################################
+
+    if [ ! -d /Zanthus/Zeus/lib  ]; then
+        echo "Criando e baixando bibliotecas para a pasta libs_zanthus..."
+        criarDiretorio "/Zanthus/Zeus/lib"
+        cd /Zanthus/Zeus/lib
+        wget -c ftp://ftp.zanthus.com.br/pub/Zeus_Frente_de_Loja/_Complementares/so/* .
+        wget -c ftp://ftp.zanthus.com.br/pub/Zeus_Frente_de_Loja/_Complementares/so_r64/* .
+        wget -c ftp://ftp.zanthus.com.br/pub/Zeus_Frente_de_Loja/_Complementares/KernD/v2_1/*.so .
+
+        wget -c ftp://ftp.zanthus.com.br/pub/Zeus_Frente_de_Loja/v_1_11_40/KC_ZMAN_1_11_40_244_CZ.EXL
+
+        mv KC_ZMAN_1_11_40_244_CZ.EXL KC_ZMAN_1_11_40_244_CZ.tar.gz
+
+        versao = $(uname -i)
+        if [[  $versao == "i386" || $versao == "i486" || $versao == "i686" ]]; then
+            tar vxf KC_ZMAN_1_11_40_244_CZ.tar.gz  lib_rotkernC_CZ.so.rh9
+        else
+            tar vxf KC_ZMAN_1_11_40_244_CZ.tar.gz  lib_rotkernC_CZ.so.r64
+        fi
+
+        rm -r KC_ZMAN_1_11_40_244_CZ.tar.gz
+
+        ln -s /lib/x86_64-linux-gnu/libcrypto.so.1.0.0 /lib/x86_64-linux-gnu/libcrypto.so.6
+        ln -s /lib/x86_64-linux-gnu/libssl.so.1.0.0 /lib/x86_64-linux-gnu/libssl.so.6
+
+        #Adiciona ao carregamento de libs do sistema
+        echo "/Zanthus/Zeus/lib" >> /etc/ld.so.conf
+        ldconfig
+
+    else
+        echo "libs_zanthus já existe..."
+    fi
+    cd ~
+    ########################### Libs da Zanthus #################################
+
+    if [[ $1 == "op" ]]; then
+	        mostrarMenuOpcoes
+    fi
 }
 
 
