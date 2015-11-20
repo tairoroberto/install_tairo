@@ -332,9 +332,9 @@ instalarAmbienteDesenvolvimento(){
     #Instala o guzzle
     sudo --user=$usuario composer global require "guzzlehttp/guzzle:~5.0"
     #Instala o instalador do lumen
-    sudo --user=$usuariocomposer global require "laravel/lumen-installer=~1.0"
+    sudo --user=$usuario composer global require "laravel/lumen-installer=~1.0"
     #Adiciona os vendors do composer as variáveis de ambiente
-    export PATH=$PATH:/home/$usuario/.composer/vendor/bin
+    sudo --user=$usuario echo "export PATH=$PATH:/home/$usuario/.composer/vendor/bin" >> /home/$usuario/.bashrc
     #Adiciona o NodeJs ao bash para ser instalado
     curl --silent --location https://deb.nodesource.com/setup_4.x |  bash -
     #Atualiza os headers
@@ -1160,7 +1160,7 @@ instalarAmbienteServidorUbuntu(){
     #Intala o instalador do lumen
     sudo --user=$usuario composer global require "laravel/lumen-installer=~1.0"
     #Adiciona os vendors do composer as variáveis de ambiente
-    export PATH=$PATH:/home/$usuario/.composer/vendor/bin
+    sudo --user=$usuario echo "export PATH=$PATH:/home/$usuario/.composer/vendor/bin" >> /home/$usuario/.bashrc
     #Adiciona o NodeJs ao bash para ser instalado
     curl --silent --location https://deb.nodesource.com/setup_4.x |  bash -
     #Atualiza os headers
