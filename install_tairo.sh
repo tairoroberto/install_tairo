@@ -176,10 +176,16 @@ instalarAmbienteDesenvolvimento(){
     cd ~
     add-apt-repository -y ppa:ondrej/php5-5.6
     apt-get update
+    apt-get install -y g++
+    apt-get install -y gcc
+    apt-get install -y make
     apt-get install -y php5
     apt-get install -y apache2
     apt-get install -y mysql-server
     apt-get install -y phpmyadmin
+    instalarJava
+    instalarWine
+    instalarSteam
     apt-get install -y postgresql
     apt-get install -y subversion
     apt-get install -y php5-dev
@@ -200,7 +206,7 @@ instalarAmbienteDesenvolvimento(){
     ###################  Instala a .so do oracle ######################
     pecl install oci8
     #Verifica se o caminho padrão para a pasta oracle existe
-    pathInstantClient = "/usr/lib/php5/20131226/oci8.so"
+    pathInstantClient="/usr/lib/php5/20131226/oci8.so"
     if [ -e $pathInstantClient ]; then
         echo "extension=/usr/lib/php5/20131226/oci8.so" >> /etc/php5/apache2/php.ini
         echo -e "\n" >> /etc/php5/apache2/php.ini
@@ -210,8 +216,7 @@ instalarAmbienteDesenvolvimento(){
 
     ################### Instala a .so do Xdebug ########################
     pecl install xdebug
-    echo -e "Digite o caminho para a xdebug.so \n"
-    read pathxdebug
+    pathxdebug="/usr/lib/php5/20131226/xdebug.so"
 
     if [ -e $pathxdebug ]; then
         echo "[XDebug]" >> /etc/php5/apache2/php.ini
@@ -236,22 +241,13 @@ instalarAmbienteDesenvolvimento(){
     fi
 
 
-    instalarPacotesZanthus "op"
+    instalarLibsZanthus "-op"
     
-    #Insere a Kernz no .ini do Php e Apache
-    echo -e "\n"
-    echo -e "Digite o caminho para a kernz.so \n"
-    read pathkernz
-    if [ -d $pathkernz ]; then
-        echo "extension=$pathkernz" >> /etc/php5/apache2/php.ini
-        echo -e "\n" >> /etc/php5/apache2/php.ini
-        echo "extension=$pathkernz" >> /etc/php5/cli/php.ini
-        echo -e "\n" >> /etc/php5/cli/php.ini
-    fi
+
 
     ################### Instala a .so do dbase ########################
     pecl install dbase
-    pathdbase = "/usr/lib/php5/20131226/dbase.so"
+    pathdbase="/usr/lib/php5/20131226/dbase.so"
     if [[ -e $pathdbase ]]; then
         echo "extension=$pathdbase" >> /etc/php5/apache2/php.ini
         echo -e "\n" >> /etc/php5/apache2/php.ini
@@ -272,24 +268,9 @@ instalarAmbienteDesenvolvimento(){
     echo -e "default_charset = \"ISO-8859-1\"" >> /etc/php5/cli/php.ini
     echo -e "\n" >> /etc/php5/cli/php.ini
 
+    instalarSpotify
 
-    #instala repositorio para Spotify - programador também gosta de música :)
-    apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys D2C19886
-    echo deb http://repository.spotify.com stable non-free |  tee /etc/apt/sources.list.d/spotify.list
-    apt-get update
-
-    #instala repositorio para Java 8
-    add-apt-repository -y ppa:webupd8team/java
-    apt-get update
-
-    #instala repositorio para Android Studio
-    apt-add-repository -y ppa:paolorotolo/android-studio
-
-    #instala repositorio para Virtualbox
-    echo -e   "\n" >> /etc/apt/sources.list
-    echo "deb http://download.virtualbox.org/virtualbox/debian trusty contrib" >> /etc/apt/sources.list
-    wget -q https://www.virtualbox.org/download/oracle_vbox.asc -O- |  apt-key add -
-    apt-get update
+    instalarAndroidStudio
 
     #Instala os pacotes e programas
 
@@ -299,8 +280,6 @@ instalarAmbienteDesenvolvimento(){
     apt-get -y install acetoneiso
     #Plugin para abrir o terminal no diretório
     apt-get -y install nautilus-open-terminal
-    #Instala Steam
-    apt-get -y install steam
     #Instala Gdebi Instalador de pacotes
     apt-get -y install gdebi
     #Instala Gerenciador de dependencias
@@ -313,28 +292,19 @@ instalarAmbienteDesenvolvimento(){
     apt-get -y install rar
     #Instala cliente ftp
     apt-get -y install filezilla
-    #Instala wine para rodar programas do windows
-    apt-get -y install wine
     #Instala gimp para edição de imagens
     apt-get -y install gimp
     #Instala inkscape para edição de imagens
     apt-get -y install inkscape
     #Instala cliente de audio do spotify
     apt-get -y install spotify-client
-    #Instala java 8
-    apt-get -y install oracle-java8-installer
-    #Instala Android Studio IDE Android
-    apt-get -y install android-studio
     #Instala lib Curl para uso com php
     apt-get -y install curl
     #Instala playonlinux gerenciaento de plataforma wine
     apt-get -y install playonlinux
     #Instala controle de versionamento
     apt-get -y install git-core
-    #Instala virtualbox para rodar maquinas virtuais
-    apt-get -y install virtualbox-5.0
-    wget -c http://download.virtualbox.org/virtualbox/5.0.8/Oracle_VM_VirtualBox_Extension_Pack-5.0.8-103449.vbox-extpack
-    virtualbox Oracle_VM_VirtualBox_Extension_Pack-5.0.8-103449.vbox-extpack
+    instalarVirtualBox
     #Instala gerenciador de backup
     apt-get -y install luckybackup
     #Instala  libs php para conexão com banco de dados MSSQL
@@ -347,17 +317,9 @@ instalarAmbienteDesenvolvimento(){
     chmod -R 777 /var/www
 
     #configura o git com meu email
-    echo -e "Digite seu email do Github, deixe nulo caso não queira configurar o github! \n"
-    read emailGit
-    if [[ $emailGit != "" ]]; then
-        git config --global user.email $emailGit
-    fi
+    git config --global user.email "tairoroberto@hotmail.com"
     #configura o git com meu usuário
-    echo -e "Digite seu usuario do Github, deixe nulo caso não queira configurar o github! \n"
-    read userGit
-    if [[ $userGit != "" ]]; then
-        git config --global user.name $userGit
-    fi
+    git config --global user.name "tairoroberto"
 
     #Habilita o modrewrite do apache
     a2enmod rewrite
@@ -365,10 +327,12 @@ instalarAmbienteDesenvolvimento(){
     curl -s https://getcomposer.org/installer | php
     #Move o Composer
     mv composer.phar /usr/local/bin/composer
-    #Intala o instalador do laravel
-    composer global require "laravel/installer=~1.1"
-    #Intala o instalador do lumen
-    composer global require "laravel/lumen-installer=~1.0"
+    #Instala o instalador do laravel
+    sudo --user=$usuario composer global require "laravel/installer=~1.1"
+    #Instala o guzzle
+    sudo --user=$usuario composer global require "guzzlehttp/guzzle:~5.0"
+    #Instala o instalador do lumen
+    sudo --user=$usuariocomposer global require "laravel/lumen-installer=~1.0"
     #Adiciona os vendors do composer as variáveis de ambiente
     export PATH=$PATH:/home/$usuario/.composer/vendor/bin
     #Adiciona o NodeJs ao bash para ser instalado
@@ -381,7 +345,7 @@ instalarAmbienteDesenvolvimento(){
     apt-get -y install alien
     #Configurador de discos Ntfs
     apt-get -y install ntfs-config
-    #instala ruby
+    #Instala ruby
     apt-get -y install ruby
 
     #verifica se é pra intalar PhpStorm
@@ -408,8 +372,11 @@ instalarAmbienteDesenvolvimento(){
     #Instala a IDE Eclipse Java EE
     instalarEclipse
 
+    #Instala O navegador GoogleChrome
+    instalarGoogleChrome
+
     #Adiciona os Lauchers dos aplpicativos na sidebar
-    adicionarLauchers
+    adicionarLauchers $usuario
 
     mostrarMenuOpcoes
 }
@@ -474,12 +441,7 @@ removerAmbienteDesenvolvimento(){
     apt-get -y purge subversion
     rm -r /usr/lib/oracle
 
-    ############### Libs ZAnthus #############
-    rm -r /Zanthus/Zeus/lib
-    ############### Libs ZAnthus #############
-
-    #Reconfigura carregamento de bibliotecas
-    ldconfig
+    removerLibsZanthus
 
     #Desistala os pacotes e programas
 
@@ -487,13 +449,9 @@ removerAmbienteDesenvolvimento(){
     add-apt-repository -r ppa:ondrej/php5-5.6
     apt-get update
 
-    #Remove repositorio para Java 8
-    add-apt-repository -r ppa:webupd8team/java
-    apt-get update
+    removerJava
 
-    #Remove repositorio para Android Studio
-    apt-add-repository -r ppa:paolorotolo/android-studio
-    apt-get update
+    removerAndroidStudio
 
     #Desistala sendmail
     apt-get -y purge sendmail
@@ -501,8 +459,7 @@ removerAmbienteDesenvolvimento(){
     apt-get -y purge acetoneiso
     #Plugin para abrir o terminal no diretório
     apt-get -y purge nautilus-open-terminal
-    #Desistala Steam
-    apt-get -y install steam
+    removerSteam
     #Desistala Gdebi Instalador de pacotes
     apt-get -y purge gdebi
     #Desistala Gerenciador de dependencias
@@ -516,25 +473,18 @@ removerAmbienteDesenvolvimento(){
     #Desistala cliente ftp
     apt-get -y purge filezilla
     #Desistala wine para rodar programas do windows
-    apt-get -y purge wine
+    removerWine
     #Desistala gimp para edição de imagens
     apt-get -y purge gimp
     #Desistala inkscape para edição de imagens
     apt-get -y purge inkscape
-    #Desistala cliente de audio do spotify
-    apt-get -y purge spotify-client
-    #Desistala java 8
-    apt-get -y purge oracle-java8-installer
-    #Desistala Android Studio IDE Android
-    apt-get -y purge android-studio
     #Desistala lib Curl para uso com php
     apt-get -y purge curl
     #Desistala playonlinux gerenciaento de plataforma wine
     apt-get -y purge playonlinux
     #Desistala controle de versionamento
     apt-get -y purge git-core
-    #Desistala virtualbox para rodar maquinas virtuais
-    apt-get -y purge virtualbox-5.0
+    removerVirtualBox
     #Desistala gerenciador de backup
     apt-get -y purge luckybackup
     #Desistala  libs php para conexão com banco de dados MSSQL
@@ -581,7 +531,7 @@ removerAmbienteDesenvolvimento(){
     #Desistala Dropbox
     removerDropbox
 
-    removerLauchers
+    removerLauchers $usuario
 
     echo "    Ambiente Servidor Ubuntu removido"
 
@@ -591,7 +541,7 @@ removerAmbienteDesenvolvimento(){
 #Instala Eclipse Mars
 instalarEclipse(){
 
-    versao = $(uname -i)
+    versao=$(uname -i)
     if [[  $versao == "i386" || $versao == "i486" || $versao == "i686" ]]; then
         wget -c "https://www.eclipse.org/downloads/download.php?file=/technology/epp/downloads/release/mars/1/eclipse-jee-mars-1-linux-gtk.tar.gz&r=1" -O eclipse-jee-mars-1-linux-gtk.tar.gz
         tar -zxvf eclipse-jee-mars-1-linux-gtk.tar.gz
@@ -674,7 +624,7 @@ removerEclipse(){
 
 #Instala Google chrome
 instalarGoogleChrome(){
-    versao = $(uname -i)
+    versao=$(uname -i)
     if [[  $versao == "i386" || $versao == "i486" || $versao == "i686" ]]; then
         cd ~
         wget -c "https://dl.google.com/linux/direct/google-chrome-stable_current_i386.deb"
@@ -701,7 +651,7 @@ removerGoogleChrome(){
 
 #Instala o Editor de texto Sublime-Text 3 e o Notepad++
 instalarSublime(){
-    versao = $(uname -i)
+    versao=$(uname -i)
     if [[  $versao == "i386" || $versao == "i486" || $versao == "i686" ]]; then
         wget -c http://c758482.r82.cf2.rackcdn.com/sublime-text_build-3083_i386.deb
         dpkg -i sublime-text_build-3083_i386.deb
@@ -715,13 +665,15 @@ instalarSublime(){
 }
 
 intalarNotePad(){
-	versao = $(uname -i)
+	versao=$(uname -i)
     if [[  $versao == "i386" || $versao == "i486" || $versao == "i686" ]]; then
         wget -c "https://notepad-plus-plus.org/repository/6.x/6.8.6/npp.6.8.6.Installer.exe"
         wine npp.6.8.6.Installer.exe
+        rm -r npp.6.8.6.Installer.exe
     else
         wget -c "https://notepad-plus-plus.org/repository/6.x/6.8.6/npp.6.8.6.Installer.exe"
         wine npp.6.8.6.Installer.exe
+        rm -r npp.6.8.6.Installer.exe
     fi
 }
 
@@ -729,7 +681,7 @@ intalarNotePad(){
 
 instalarDropbox(){
     #Instala Dropbox
-    versao = $(uname -i)
+    versao=$(uname -i)
     if [[  $versao == "i386" || $versao == "i486" || $versao == "i686" ]]; then
         wget -c "https://www.dropbox.com/download?dl=packages/ubuntu/dropbox_2015.10.28_i386.deb" -O dropbox.deb
         dpkg -i dropbox.deb
@@ -752,14 +704,6 @@ removerDropbox(){
 instalarPhpStorm(){
     clear
     cd ~
-    echo "    Será instalado a IDE de desenvolvimento PhpStorm-10"
-    echo "    Deseja continuar? Sim[s], Não[n]"
-    read op
-
-    if [ ! $op == "s" ]; then
-        mostrarMenuOpcoes
-    fi
-
     wget -c http://download.jetbrains.com/webide/PhpStorm-10.0.1.tar.gz
     tar -zxvf PhpStorm-10.0.1.tar.gz
     mv PhpStorm-143.382.38 /opt/PhpStorm
@@ -819,15 +763,7 @@ removerPhpStorm(){
 
 # IDE de desenvolvimento JAVA #
 instalarIntelliJ(){
-    clear
-    echo "    Será instalado a IDE de desenvolvimento Intellij-IDEA"
-    echo "    Deseja continuar? Sim[s], Não[n]"
-    read op
-
-    if [ ! $op == "s" ]; then
-        mostrarMenuOpcoes
-    fi
-
+    cd ~
     wget -c http://download.jetbrains.com/idea/ideaIU-15.0.1.tar.gz
     tar -zxvf ideaIU-15.0.1.tar.gz
     mv idea-IU-143.382.35 /opt/IntelliJ-IDEA
@@ -884,14 +820,8 @@ removerIntelliJ(){
 
 # IDE de desenvolvimento C/C++ #
 instalarClion(){
+    cd ~
     clear
-    echo "    Será instalado a IDE de desenvolvimento Clion"
-    echo "    Deseja continuar? Sim[s], Não[n]"
-    read op
-
-    if [ ! $op == "s" ]; then
-        mostrarMenuOpcoes
-    fi
     wget -c https://download.jetbrains.com/cpp/clion-1.1.1.tar.gz
     tar -zxvf clion-1.1.1.tar.gz
     mv clion-1.1.1 /opt/Clion
@@ -1135,6 +1065,9 @@ instalarAmbienteServidorUbuntu(){
     cd ~
     add-apt-repository -y ppa:ondrej/php5-5.6
     apt-get update
+    apt-get install -y g++
+    apt-get install -y gcc
+    apt-get install -y make
     apt-get install -y php5
     apt-get install -y apache2
     apt-get install -y mysql-server
@@ -1158,7 +1091,7 @@ instalarAmbienteServidorUbuntu(){
     ###################  Instala a .so do oracle ######################
     pecl install oci8
     #Verifica se o caminho padrão para a pasta oracle existe
-    pathInstantClient = "/usr/lib/php5/20131226/oci8.so"
+    pathInstantClient="/usr/lib/php5/20131226/oci8.so"
     if [ -e $pathInstantClient ]; then
         echo "extension=/usr/lib/php5/20131226/oci8.so" >> /etc/php5/apache2/php.ini
         echo -e "\n" >> /etc/php5/apache2/php.ini
@@ -1168,56 +1101,12 @@ instalarAmbienteServidorUbuntu(){
 
 
     ########################### Libs da Zanthus #################################
-
-    if [ ! -d /Zanthus/Zeus/lib  ]; then
-        echo "Criando e baixando bibliotecas para a pasta libs_zanthus..."
-        criarDiretorio "/Zanthus/Zeus/lib"
-        cd /Zanthus/Zeus/lib
-        wget -c ftp://ftp.zanthus.com.br/pub/Zeus_Frente_de_Loja/_Complementares/so/* .
-        wget -c ftp://ftp.zanthus.com.br/pub/Zeus_Frente_de_Loja/_Complementares/so_r64/* .
-        wget -c ftp://ftp.zanthus.com.br/pub/Zeus_Frente_de_Loja/_Complementares/KernD/v2_1/*.so .
-
-        wget -c ftp://ftp.zanthus.com.br/pub/Zeus_Frente_de_Loja/v_1_11_40/KC_ZMAN_1_11_40_244_CZ.EXL
-
-        mv KC_ZMAN_1_11_40_244_CZ.EXL KC_ZMAN_1_11_40_244_CZ.tar.gz
-
-        versao = $(uname -i)
-        if [[  $versao == "i386" || $versao == "i486" || $versao == "i686" ]]; then
-            tar vxf KC_ZMAN_1_11_40_244_CZ.tar.gz  lib_rotkernC_CZ.so.rh9
-        else
-            tar vxf KC_ZMAN_1_11_40_244_CZ.tar.gz  lib_rotkernC_CZ.so.r64
-        fi
-
-        rm -r KC_ZMAN_1_11_40_244_CZ.tar.gz
-
-        ln -s /lib/x86_64-linux-gnu/libcrypto.so.1.0.0 /lib/x86_64-linux-gnu/libcrypto.so.6
-        ln -s /lib/x86_64-linux-gnu/libssl.so.1.0.0 /lib/x86_64-linux-gnu/libssl.so.6
-
-        #Adiciona ao carregamento de libs do sistema
-        echo "/Zanthus/Zeus/lib" >> /etc/ld.so.conf
-        ldconfig
-
-    else
-        echo "libs_zanthus já existe..."
-    fi
-    cd ~
+    instalarLibsZanthus
     ########################### Libs da Zanthus #################################
-
-    #Insere a Kernz no .ini do Php e Apache
-    echo -e "\n"
-    echo -e "Digite o caminho para a kernz.so \n"
-    read pathkernz
-    if [ -d $pathkernz ]; then
-        echo "extension=$pathkernz" >> /etc/php5/apache2/php.ini
-        echo -e "\n" >> /etc/php5/apache2/php.ini
-        echo "extension=$pathkernz" >> /etc/php5/cli/php.ini
-        echo -e "\n" >> /etc/php5/cli/php.ini
-    fi
-
 
     ################### Instala a .so do dbase ########################
     pecl install dbase
-    pathdbase = "/usr/lib/php5/20131226/dbase.so"
+    pathdbase="/usr/lib/php5/20131226/dbase.so"
     if [[ -e $pathdbase ]]; then
         echo "extension=$pathdbase" >> /etc/php5/apache2/php.ini
         echo -e "\n" >> /etc/php5/apache2/php.ini
@@ -1238,11 +1127,6 @@ instalarAmbienteServidorUbuntu(){
     echo -e "default_charset = \"ISO-8859-1\"" >> /etc/php5/cli/php.ini
     echo -e "\n" >> /etc/php5/cli/php.ini
 
-
-    #instala repositorio para Java 8
-    add-apt-repository -y ppa:webupd8team/java
-    apt-get update
-
     #Instala os pacotes e programas
 
     #Instala Gdebi Instalador de pacotes
@@ -1254,7 +1138,7 @@ instalarAmbienteServidorUbuntu(){
     #Instala cliente ftp
     apt-get -y install filezilla
     #Instala java 8
-    apt-get -y install oracle-java8-installer
+    instalarJava
     #Instala lib Curl para uso com php
     apt-get -y install curl
     #Instala  libs php para conexão com banco de dados MSSQL
@@ -1272,9 +1156,9 @@ instalarAmbienteServidorUbuntu(){
     #Move o Composer
     mv composer.phar /usr/local/bin/composer
     #Intala o instalador do laravel
-    composer global require "laravel/installer=~1.1"
+    sudo --user=$usuario composer global require "laravel/installer=~1.1"
     #Intala o instalador do lumen
-    composer global require "laravel/lumen-installer=~1.0"
+    sudo --user=$usuario composer global require "laravel/lumen-installer=~1.0"
     #Adiciona os vendors do composer as variáveis de ambiente
     export PATH=$PATH:/home/$usuario/.composer/vendor/bin
     #Adiciona o NodeJs ao bash para ser instalado
@@ -1344,9 +1228,7 @@ removerAmbienteServidorUbuntu(){
     apt-get update
 
     #Remove repositorio para Java 8
-    add-apt-repository -r ppa:webupd8team/java
-    apt-get update
-
+    removerJava
 
     #Desistala sendmail
     apt-get -y purge sendmail
@@ -1454,13 +1336,199 @@ removerOracleInstantClient(){
     mostrarMenuOpcoes
 }
 
-
+#Adiciona os lauchers na barra lateral do Unity para Unbutu
+#parametro 'usuario'
 adicionarLauchers(){
-     gsettings set com.canonical.Unity.Launcher favorites "['application://gnome-terminal.desktop', 'application://nautilus.desktop', 'application://google-chrome.desktop', 'application://firefox.desktop', 'application://phpstorm.desktop', 'application://android-studio.desktop', 'application://idea.desktop', 'application://clion.desktop', 'application://gedit.desktop', 'application://sublime_text.desktop', 'application://wine-Programs-Notepad++-Notepad++.desktop', 'application://virtualbox.desktop', 'application://filezilla.desktop', 'application://skype.desktop', 'application://spotify.desktop', 'application://rhythmbox.desktop', 'application://PlayOnLinux.desktop', 'application://ubuntu-software-center.desktop', 'application://dropbox.desktop', 'application://ntfs-config.desktop', 'application://unity-control-center.desktop', 'application://gnome-system-monitor.desktop', 'unity://running-apps', 'unity://expo-icon', 'unity://devices', 'unity://desktop-icon']"
+     sudo --user=$1 gsettings set com.canonical.Unity.Launcher favorites "['application://gnome-terminal.desktop', 'application://nautilus.desktop', 'application://google-chrome.desktop', 'application://firefox.desktop', 'application://phpstorm.desktop', 'application://android-studio.desktop', 'application://idea.desktop', 'application://clion.desktop', 'application://gedit.desktop', 'application://sublime_text.desktop', 'application://wine-Programs-Notepad++-Notepad++.desktop', 'application://virtualbox.desktop', 'application://filezilla.desktop', 'application://skype.desktop', 'application://spotify.desktop', 'application://rhythmbox.desktop', 'application://PlayOnLinux.desktop', 'application://ubuntu-software-center.desktop', 'application://dropbox.desktop', 'application://ntfs-config.desktop', 'application://unity-control-center.desktop', 'application://gnome-system-monitor.desktop', 'unity://running-apps', 'unity://expo-icon', 'unity://devices', 'unity://desktop-icon']"
 }
 
+#Remove os lauchers na barra lateral do Unity para Unbutu
+#parametro 'usuario'
 removerLauchers(){
-     gsettings reset com.canonical.Unity.Launcher favorites
+     sudo --user=$1 gsettings reset com.canonical.Unity.Launcher favorites
+}
+
+
+instalarLibsZanthus(){
+    ########################### Libs da Zanthus #################################
+
+    if [ ! -d /Zanthus/Zeus/lib  ]; then
+        echo "Criando e baixando bibliotecas para a pasta libs_zanthus..."
+        criarDiretorio "/Zanthus/Zeus/lib"
+        cd /Zanthus/Zeus/lib
+        wget -c ftp://ftp.zanthus.com.br/pub/Zeus_Frente_de_Loja/_Complementares/so/* .
+        wget -c ftp://ftp.zanthus.com.br/pub/Zeus_Frente_de_Loja/_Complementares/so_r64/* .
+        wget -c ftp://ftp.zanthus.com.br/pub/Zeus_Frente_de_Loja/_Complementares/KernD/v2_1/*.so .
+
+        wget -c ftp://ftp.zanthus.com.br/pub/Zeus_Frente_de_Loja/v_1_11_40/KC_ZMAN_1_11_40_244_CZ.EXL
+
+        mv KC_ZMAN_1_11_40_244_CZ.EXL KC_ZMAN_1_11_40_244_CZ.tar.gz
+
+        versao=$(uname -i)
+        if [[  $versao == "i386" || $versao == "i486" || $versao == "i686" ]]; then
+            tar vxf KC_ZMAN_1_11_40_244_CZ.tar.gz  lib_rotkernC_CZ.so.rh9
+        else
+            tar vxf KC_ZMAN_1_11_40_244_CZ.tar.gz  lib_rotkernC_CZ.so.r64
+        fi
+
+        rm -r KC_ZMAN_1_11_40_244_CZ.tar.gz
+
+        ln -s /lib/x86_64-linux-gnu/libcrypto.so.1.0.0 /lib/x86_64-linux-gnu/libcrypto.so.6
+        ln -s /lib/x86_64-linux-gnu/libssl.so.1.0.0 /lib/x86_64-linux-gnu/libssl.so.6
+
+        #Adiciona ao carregamento de libs do sistema
+        echo "/Zanthus/Zeus/lib" >> /etc/ld.so.conf
+        ldconfig
+
+
+        #Insere a Kernz no .ini do Php e Apache
+        pathkernz="/Zanthus/Zeus/lib/kernz.so"
+        if [ -d $pathkernz ]; then
+            echo "extension=$pathkernz" >> /etc/php5/apache2/php.ini
+            echo -e "\n" >> /etc/php5/apache2/php.ini
+            echo "extension=$pathkernz" >> /etc/php5/cli/php.ini
+            echo -e "\n" >> /etc/php5/cli/php.ini
+        fi
+        pathZendGuardLoader="/Zanthus/Zeus/lib/ZendGuardLoader.so"
+        if [ -d $pathZendGuardLoader ]; then
+            echo "zend_extension=$pathZendGuardLoader" >> /etc/php5/apache2/php.ini
+            echo -e "\n" >> /etc/php5/apache2/php.ini
+            echo "zend_extension=$pathZendGuardLoader" >> /etc/php5/cli/php.ini
+            echo -e "\n" >> /etc/php5/cli/php.ini
+        fi
+
+    else
+        echo "libs_zanthus já existe..."
+    fi
+    cd ~
+    ########################### Libs da Zanthus #################################
+
+    if [[ $1 == "op" ]]; then
+	        mostrarMenuOpcoes
+    fi
+}
+
+
+removerLibsZanthus(){
+    ############### Libs ZAnthus #############
+    rm -r /Zanthus/Zeus/lib
+    ############### Libs ZAnthus #############
+
+    #Reconfigura carregamento de bibliotecas
+    ldconfig
+}
+
+
+
+#instala repositorio para Spotify - programador também gosta de música :)
+instalarSpotify(){
+
+    apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys D2C19886
+    echo deb http://repository.spotify.com stable non-free |  tee /etc/apt/sources.list.d/spotify.list
+    apt-get update
+
+    wget -c "http://ftp.us.debian.org/debian/pool/main/libg/libgcrypt11/libgcrypt11_1.5.0-5+deb7u3_amd64.deb"
+    dpkg -i libgcrypt11_1.5.0-5+deb7u3_amd64.deb
+    sudo apt-get install spotify-client
+
+}
+
+#Rmove cliente de audio do spotify
+removerSpotify(){
+    apt-get -y purge spotify-client
+    apt-get -y autoremove
+    add-apt-repository --remove 'deb http://repository.spotify.com stable non-free'
+}
+
+
+#Instala virtualbox para rodar maquinas virtuais
+instalarVirtualBox(){
+    #instala repositorio para Virtualbox
+    echo -e   "\n" >> /etc/apt/sources.list
+    echo "deb http://download.virtualbox.org/virtualbox/debian wily contrib" >> /etc/apt/sources.list
+    wget -q https://www.virtualbox.org/download/oracle_vbox.asc -O- |  apt-key add -
+    apt-get update
+
+    apt-get -y install virtualbox-5.0
+    wget -c http://download.virtualbox.org/virtualbox/5.0.8/Oracle_VM_VirtualBox_Extension_Pack-5.0.8-103449.vbox-extpack
+    virtualbox Oracle_VM_VirtualBox_Extension_Pack-5.0.8-103449.vbox-extpack
+    rm -r Oracle_VM_VirtualBox_Extension_Pack-5.0.8-103449.vbox-extpack
+}
+
+#Desistala virtualbox para rodar maquinas virtuais
+removerVirtualBox(){
+    apt-get -y purge virtualbox-5.0
+}
+
+#instala repositorio para Java 8
+instalarJava(){
+    add-apt-repository -y ppa:webupd8team/java
+    apt-get update
+    #Instala java 8
+    apt-get -y install oracle-java8-installer
+}
+
+#Remove repositorio para Java 8
+removerJava(){
+    add-apt-repository -r ppa:webupd8team/java
+    apt-get update
+    #Desistala java 8
+    apt-get -y purge oracle-java8-installer
+}
+
+#Instala wine para rodar programas do windows
+instalarWine(){
+    apt-get -y install wine
+}
+
+#Remove wine para rodar programas do windows
+removerWine(){
+    apt-get -y purge wine
+}
+
+#instala repositorio para Android Studio
+instalarAndroidStudio(){
+    apt-add-repository -y ppa:paolorotolo/android-studio
+    #Instala Android Studio IDE Android
+    apt-get -y install android-studio
+}
+
+removerAndroidStudio(){
+    #Remove repositorio para Android Studio
+    apt-add-repository -r ppa:paolorotolo/android-studio
+    apt-get update
+    #Desistala Android Studio IDE Android
+    apt-get -y purge android-studio
+}
+
+#Instala Steam
+instalarSteam(){
+    apt-get -y install steam
+}
+
+#Desistala Steam
+removerSteam(){
+    apt-get -y install steam
+}
+
+#Monta uma partição de Swap de 8GB
+instalarSwap(){
+    dd if=/dev/zero of=/swapfile bs=1024 count=8388608
+    mkswap /swapfile
+    echo "/swapfile swap swap defaults 0 0 " >> /etc/fstab
+}
+
+#Desabilita Swap
+desabilitarSwap(){
+    swapoff /swapfile
+}
+
+
+teste(){
+    echo "    Teste..."
+    read res
+
+    mostrarMenuOpcoes
 }
 
 mostrarAjuda(){
@@ -1483,44 +1551,36 @@ mostrarAjuda(){
     echo -e "    79 - opção de teste"
     echo -e "\n"
     echo -e "\n"
-    echo -e "#-------------------------------------------------------------------------------------#"
-    echo -e "                                  METODOS DO SCRIP                                     "
-    echo -e "#-------------------------------------------------------------------------------------#"
-    echo -e "    mostrarMenuOpcoes"
-    echo -e "    capturaUsuario"
-    echo -e "    listarDiretorio"
-    echo -e "    criarDiretorio"
-    echo -e "    versaoLinux"
-    echo -e "    instalarAmbienteDesenvolvimento"
-    echo -e "    removerAmbienteDesenvolvimento"
-    echo -e "    instalarGoogleChrome"
-    echo -e "    removerGoogleChrome"
-    echo -e "    instalarEclipse"
-    echo -e "    removerEclipse"
-    echo -e "    instalarSublime"
-    echo -e "    intalarNotePad"
-    echo -e "    instalarDropbox"
-    echo -e "    removerDropbox"
-    echo -e "    instalarPhpStorm"
-    echo -e "    removerPhpStorm"
-    echo -e "    instalarIntelliJ"
-    echo -e "    removerIntelliJ"
-    echo -e "    instalarClion"
-    echo -e "    removerClion"
-    echo -e "    instalarAmbienteServidorCentOs"
-    echo -e "    removerAmbienteServidorCentOs"
-    echo -e "    instalarAmbienteServidorUbuntu"
-    echo -e "    removerAmbienteServidorUbuntu"
-    echo -e "    instalarOracleInstantClient"
-    echo -e "    removerOracleInstantClient"
-    echo -e "    adicionarLauchers"
-    echo -e "    removerLauchers"
-    echo -e "    mostrarAjuda"
-    echo -e "    instalarSwap"
-    echo -e "    desabilitarSwap"
-    echo -e "    teste"
-    echo -e "    instalarPacotesZanthus"
-    echo "    #######################################################################################"
+    echo -e "#--------------------------------------------------------------------------------------#"
+    echo -e "#                                 METODOS DO SCRIP                                     #"
+    echo -e "#--------------------------------------------------------------------------------------#"
+    echo -e "#    mostrarMenuOpcoes                                                                 #"
+    echo -e "#    capturaUsuario                                    instalarAmbienteServidorUbuntu  #"
+    echo -e "#    listarDiretorio                                   removerAmbienteServidorUbuntu   #"
+    echo -e "#    criarDiretorio                                    instalarOracleInstantClient     #"
+    echo -e "#    versaoLinux                                       removerOracleInstantClient      #"
+    echo -e "#    instalarAmbienteDesenvolvimento                   adicionarLauchers               #"
+    echo -e "#    removerAmbienteDesenvolvimento                    removerLauchers                 #"
+    echo -e "#    instalarEclipse                                   instalarLibsZanthus             #"
+    echo -e "#    removerEclipse                                    removerLibsZanthus              #"
+    echo -e "#    instalarGoogleChrome                              instalarSpotify                 #"
+    echo -e "#    removerGoogleChrome                               removerSpotify                  #"
+    echo -e "#    instalarSublime                                   instalarVirtualBox              #"
+    echo -e "#    intalarNotePad                                    removerVirtualBox               #"
+    echo -e "#    instalarDropbox                                   instalarJava                    #"
+    echo -e "#    removerDropbox                                    removerJava                     #"
+    echo -e "#    instalarPhpStorm                                  instalarWine                    #"
+    echo -e "#    removerPhpStorm                                   removerWine                     #"
+    echo -e "#    instalarIntelliJ                                  instalarAndroidStudio           #"
+    echo -e "#    removerIntelliJ                                   removerAndroidStudio            #"
+    echo -e "#    instalarClion                                     instalarSteam                   #"
+    echo -e "#    removerClion                                      removerSteam                    #"
+    echo -e "#    instalarAmbienteServidorCentOs                    instalarSwap                    #"
+    echo -e "#    removerAmbienteServidorCentOs                     desabilitarSwap                 #"
+    echo -e "#                                                                                      #"
+    echo -e "#                                                                                      #"
+    echo -e "#    teste                                                                             #"
+    echo -e "########################################################################################"
 	read res
 
 	if [[ $res == "" ]]; then
@@ -1531,68 +1591,7 @@ mostrarAjuda(){
 
 }
 
-instalarPacotesZanthus(){
-    ########################### Libs da Zanthus #################################
 
-    if [ ! -d /Zanthus/Zeus/lib  ]; then
-        echo "Criando e baixando bibliotecas para a pasta libs_zanthus..."
-        criarDiretorio "/Zanthus/Zeus/lib"
-        cd /Zanthus/Zeus/lib
-        wget -c ftp://ftp.zanthus.com.br/pub/Zeus_Frente_de_Loja/_Complementares/so/* .
-        wget -c ftp://ftp.zanthus.com.br/pub/Zeus_Frente_de_Loja/_Complementares/so_r64/* .
-        wget -c ftp://ftp.zanthus.com.br/pub/Zeus_Frente_de_Loja/_Complementares/KernD/v2_1/*.so .
-
-        wget -c ftp://ftp.zanthus.com.br/pub/Zeus_Frente_de_Loja/v_1_11_40/KC_ZMAN_1_11_40_244_CZ.EXL
-
-        mv KC_ZMAN_1_11_40_244_CZ.EXL KC_ZMAN_1_11_40_244_CZ.tar.gz
-
-        versao = $(uname -i)
-        if [[  $versao == "i386" || $versao == "i486" || $versao == "i686" ]]; then
-            tar vxf KC_ZMAN_1_11_40_244_CZ.tar.gz  lib_rotkernC_CZ.so.rh9
-        else
-            tar vxf KC_ZMAN_1_11_40_244_CZ.tar.gz  lib_rotkernC_CZ.so.r64
-        fi
-
-        rm -r KC_ZMAN_1_11_40_244_CZ.tar.gz
-
-        ln -s /lib/x86_64-linux-gnu/libcrypto.so.1.0.0 /lib/x86_64-linux-gnu/libcrypto.so.6
-        ln -s /lib/x86_64-linux-gnu/libssl.so.1.0.0 /lib/x86_64-linux-gnu/libssl.so.6
-
-        #Adiciona ao carregamento de libs do sistema
-        echo "/Zanthus/Zeus/lib" >> /etc/ld.so.conf
-        ldconfig
-
-    else
-        echo "libs_zanthus já existe..."
-    fi
-    cd ~
-    ########################### Libs da Zanthus #################################
-
-    if [[ $1 == "op" ]]; then
-	        mostrarMenuOpcoes
-    fi
-}
-
-
-#Monta uma partição de Swap de 8GB
-instalarSwap(){
-    dd if=/dev/zero of=/swapfile bs=1024 count=8388608
-    mkswap /swapfile
-    echo "/swapfile swap swap defaults 0 0 " >> /etc/fstab
-}
-
-#Desabilita Swap
-desabilitarSwap(){
-    swapoff /swapfile
-}
-
-
-teste(){
-    echo "    Teste..."
-    read res
-
-    mostrarMenuOpcoes
-}
 
 # __END_METHODS__
 
