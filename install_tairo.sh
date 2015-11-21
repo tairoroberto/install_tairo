@@ -9,16 +9,16 @@
 # Este script monta o Ambiente de desenvolvimento em distribuições linux 
 # Baseadas em Debian
 #-------------------------------------------------------------------------
-    clear
-    echo "    #################################################################################"
-    echo "    #   Scrypt para instalação de ambiente de desenvolvimento PHP-ANDROID-C-JAVA    #"
-    echo "    #                         - TAIRO ROBERTO M. ASSUNÇÃO -                         #"
-    echo "    #                                                                               #"
-    echo "    #################################################################################"
-    echo -e "\n"
+
 
 mostrarMenuOpcoes(){
     clear
+    echo "    #######################################################################################"
+    echo "    #     Scrypt para instalação de ambiente de desenvolvimento PHP-ANDROID-C-JAVA        #"
+    echo "    #                            - TAIRO ROBERTO M. ASSUNÇÃO -                            #"
+    echo "    #                                                                                     #"
+    echo "    #######################################################################################"
+    echo -e "\n"
     echo "    #######################################################################################"
     echo "    #                            Digite a opção desejada                                  #"
     echo "    #-------------------------------------------------------------------------------------#"
@@ -42,7 +42,7 @@ mostrarMenuOpcoes(){
     echo -e "\n"
     read opcao
 
-    if [[ $opcao == "--help" || $opcao == "help" || $opcao == "ajuda" ]]; then
+    if [[ $opcao == "--help" || $opcao == "help" || $opcao == "ajuda" || $opcao == "h" ]]; then
         mostrarAjuda
     else
         case $opcao in
@@ -161,6 +161,15 @@ instalarAmbienteDesenvolvimento(){
     echo "    laravel/installer instalador do Laravel 5"
     echo "    lumen/installer instalador Lumen"
     echo "    NodeJs"
+    echo "    Sendmail"
+    echo "    Unetbootin"
+    echo "    alien"
+    echo "    ntfs-config"
+    echo "    ruby"
+    echo "    Sublime"
+    echo "    Dropbox"
+    echo "    Eclipse"
+    echo "    GoogleChrome"
     echo "    Para instalar a lib oci8.so certifique-se de que o Oracle Instant Client esteja instalado!"
 
     echo -e "\n"
@@ -418,6 +427,13 @@ removerAmbienteDesenvolvimento(){
     echo "    NodeJs"
     echo "    Alien"
     echo "    Ntfs-config"
+    echo "    Sendmail"
+    echo "    Unetbootin"
+    echo "    ruby"
+    echo "    Sublime"
+    echo "    Dropbox"
+    echo "    Eclipse"
+    echo "    GoogleChrome"
     echo "    E bibliotecas Zanthus para rodar Zeus_Frente_de_Loja"
     echo -e "\n"
     echo "    Deseja continuar? Sim[s], Não[n]"
