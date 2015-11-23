@@ -65,8 +65,8 @@ mostrarMenuOpcoes(){
         14) removerClion "op";;
 
         #Ambiente Tairo com PhpStorm, Intellij-IDEA e Clion
-        15) instalarAmbienteDesenvolvimento "storm" "idea" "clion" ;;
-        16) removerAmbienteDesenvolvimento "storm" "idea" "clion" ;;
+        15) instalarAmbienteDesenvolvimento "storm" "idea" "clion" "webstorm" ;;
+        16) removerAmbienteDesenvolvimento "storm" "idea" "clion" "webstorm" ;;
         79) teste ;;
         esac
             clear
@@ -372,6 +372,11 @@ instalarAmbienteDesenvolvimento(){
         instalarClion "-op"
     fi
 
+    #verifica se é pra intalar Clion
+    if [[ $4 == "webstorm" ]]; then
+        instalarWebStorm "-op"
+    fi
+
     #Instala Siblime-text 3 e Notepad++
     instalarSublime
 
@@ -539,6 +544,11 @@ removerAmbienteDesenvolvimento(){
     #verifica se é pra remover Clion
     if [[ $3 == "clion" ]]; then
         removerClion "-op"
+    fi
+
+    #verifica se é pra remover Clion
+    if [[ $4 == "webstorm" ]]; then
+        removerWebStorm "-op"
     fi
 
     #Desistala Eclipse Java EE
@@ -756,6 +766,8 @@ instalarPhpStorm(){
   
 }
 
+
+
 removerPhpStorm(){
     clear
     echo "    Será removido a IDE de desenvolvimento PhpStorm-10"
@@ -776,6 +788,67 @@ removerPhpStorm(){
     fi
 }
 
+
+
+# IDE de desenvolvimento JavaScript #
+instalarWebStorm(){
+    clear
+    cd ~
+    wget -c https://download.jetbrains.com/webstorm/WebStorm-11.0.1.tar.gz
+    tar -zxvf WebStorm-11.0.1.tar.gz
+    mv WebStorm-143.382.36 /opt/WebStorm
+    chmod +x /opt/WebStorm/bin/webstorm.sh
+    chmod -R 777 /opt/WebStorm
+
+    #Cria arquivo executavel#
+    touch /usr/bin/webstorm
+    chmod 755 /usr/bin/webstorm
+    echo "#!/bin/sh" >> /usr/bin/webstorm
+    echo "export UBUNTU_MENUPROXY=0" >> /usr/bin/webstorm
+    echo "export WEBSTORM_HOME=/opt/WebStorm" >> /usr/bin/webstorm
+    echo "\$WEBSTORM_HOME/bin/webstorm.sh $*" >> /usr/bin/webstorm
+    ln -s /usr/bin/webstorm /bin/webstorm
+
+    #Cria icone do desktop#
+    touch /usr/share/applications/webstorm.desktop
+    echo "[Desktop Entry]" >> /usr/share/applications/webstorm.desktop
+    echo "Encoding=UTF-8" >> /usr/share/applications/webstorm.desktop
+    echo "Name=WebStorm" >> /usr/share/applications/webstorm.desktop
+    echo "Comment=WebStorm IDE" >> /usr/share/applications/webstorm.desktop
+    echo "Exec=webstorm" >> /usr/share/applications/webstorm.desktop
+    echo "Icon=/opt/WebStorm/bin/webstorm.svg" >> /usr/share/applications/webstorm.desktop
+    echo "Terminal=false" >> /usr/share/applications/webstorm.desktop
+    echo "Type=Application" >> /usr/share/applications/webstorm.desktop
+    echo "Categories=GNOME;Application;Development;" >> /usr/share/applications/webstorm.desktop
+    echo "StartupNotify=true" >> /usr/share/applications/webstorm.desktop
+
+    rm -r WebStorm-11.0.1.tar.gz
+
+    if [[ $1 == "op" ]]; then
+        mostrarMenuOpcoes
+    fi
+
+}
+
+removerWebStorm(){
+    clear
+    echo "    Será removido a IDE de desenvolvimento WebStorm-11"
+    echo "    Deseja continuar? Sim[s], Não[n]"
+    read op
+
+    if [ ! $op == "s" ]; then
+        mostrarMenuOpcoes
+    fi
+
+    rm -r /usr/bin/webstorm
+    rm -r /bin/webstorm
+    rm -r /usr/share/applications/webstorm.desktop
+    rm -r /opt/WebStorm
+
+    if [[ $1 == "op" ]]; then
+        mostrarMenuOpcoes
+    fi
+}
 
 # IDE de desenvolvimento JAVA #
 instalarIntelliJ(){
