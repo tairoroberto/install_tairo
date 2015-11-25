@@ -1664,8 +1664,10 @@ mostrarAjuda(){
     echo -e "#    removerIntelliJ                                   removerAndroidStudio            #"
     echo -e "#    instalarClion                                     instalarSteam                   #"
     echo -e "#    removerClion                                      removerSteam                    #"
-    echo -e "#    instalarAmbienteServidorCentOs                    instalarSwap                    #"
-    echo -e "#    removerAmbienteServidorCentOs                     desabilitarSwap                 #"
+    echo -e "#    instalarWebStorm                                  instalarSwap"                   #
+    echo -e "#    removerWebStorm                                   desabilitarSwap"                #
+    echo -e "#    instalarAmbienteServidorCentOs                                                    #"
+    echo -e "#    removerAmbienteServidorCentOs                                                     #"
     echo -e "#                                                                                      #"
     echo -e "#                                                                                      #"
     echo -e "#    teste                                                                             #"
