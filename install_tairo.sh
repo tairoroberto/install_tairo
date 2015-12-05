@@ -6,7 +6,7 @@
 # @DATE Qua 21 Out, 01:39 - 2015
 # @VERSION 1.0.1
 #
-# Este script monta o Ambiente de desenvolvimento em distribuições linux 
+# Este script monta o Ambiente de desenvolvimento em distribuições linux
 # Baseadas em Debian
 #-------------------------------------------------------------------------
 
@@ -211,6 +211,7 @@ instalarAmbienteDesenvolvimento(){
     apt-get install -y memcached
     apt-get install -y sendmail
     apt-get install -y unetbootin
+    instalarOracleInstantClient
 
     ###################  Instala a .so do oracle ######################
     pecl install oci8
@@ -251,7 +252,7 @@ instalarAmbienteDesenvolvimento(){
 
 
     instalarLibsZanthus "-op"
-    
+
 
 
     ################### Instala a .so do dbase ########################
@@ -263,7 +264,7 @@ instalarAmbienteDesenvolvimento(){
         echo "extension=$pathdbase" >> /etc/php5/cli/php.ini
         echo -e "\n" >> /etc/php5/cli/php.ini
     fi
-    
+
 
     #Configura Timezone e charset
     echo "date.timezone = America/Sao_Paulo" >> /etc/php5/apache2/php.ini
@@ -443,7 +444,7 @@ removerAmbienteDesenvolvimento(){
     echo -e "\n"
     echo "    Deseja continuar? Sim[s], Não[n]"
     read op
-    
+
     if [ ! $op == "s" ]; then
         mostrarMenuOpcoes
     fi
@@ -460,7 +461,8 @@ removerAmbienteDesenvolvimento(){
     apt-get -y purge postgresql
     apt-get -y purge mysql-server
     apt-get -y purge subversion
-    rm -r /usr/lib/oracle
+
+    removerOracleInstantClient
 
     removerLibsZanthus
 
@@ -763,7 +765,7 @@ instalarPhpStorm(){
     if [[ $1 == "op" ]]; then
         mostrarMenuOpcoes
     fi
-  
+
 }
 
 
@@ -1176,6 +1178,7 @@ instalarAmbienteServidorUbuntu(){
     apt-get install -y php5-openssl
     apt-get install -y memcached
     apt-get install -y sendmail
+    instalarOracleInstantClient
 
     ###################  Instala a .so do oracle ######################
     pecl install oci8
@@ -1301,7 +1304,8 @@ removerAmbienteServidorUbuntu(){
     apt-get -y purge postgresql
     apt-get -y purge mysql-server
     apt-get -y purge subversion
-    rm -r /usr/lib/oracle
+
+    removerOracleInstantClient
 
     ############### Libs ZAnthus #############
     rm -r /Zanthus/Zeus/lib
@@ -1358,18 +1362,13 @@ removerAmbienteServidorUbuntu(){
 instalarOracleInstantClient(){
 
     cd ~
-    #Insere a Kernz no .ini do Php e Apache
-    echo -e "\n"
-    echo -e "    Digite o para o instant_client \n"
-    read pathOracleInstantClient
+    versao=$(uname -i)
+    if [[  $versao == "i386" || $versao == "i486" || $versao == "i686" ]]; then
+        wget ftp://ftp.zanthus.com.br/interno/Tairo/intant_client_12.1_32bits/instant_client_12.1.tar.gz --ftp-user=kassio.matos --ftp-password=zanthus1 .
 
-    if [[ $pathOracleInstantClient == "" ]]; then
-        echo "Caminho inválido..."
-    read res
-        mostrarMenuOpcoes
+    else
+        wget ftp://ftp.zanthus.com.br/interno/Tairo/intant_client_12.1_64bits/instant_client_12.1.tar.gz --ftp-user=kassio.matos --ftp-password=zanthus1 .
     fi
-
-    cd $pathOracleInstantClient
 
     #Verifica se ultima ação foi efetuada com sucesso
     if [ -e instant_client_12.1.tar.gz ]; then
@@ -1419,6 +1418,12 @@ removerOracleInstantClient(){
         mostrarMenuOpcoes
     fi
 
+    apt-get -y purge oracle-instantclient12.1-basic
+    apt-get -y purge oracle-instantclient12.1-devel
+    apt-get -y purge oracle-instantclient12.1-jdbc
+    apt-get -y purge oracle-instantclient12.1-odbc
+    apt-get -y purge oracle-instantclient12.1-sqlplus
+    apt-get -y purge oracle-instantclient12.1-tools
     rm -r /usr/lib/oracle
     echo ""
     read res
@@ -1443,30 +1448,9 @@ instalarLibsZanthus(){
 
     if [ ! -d /Zanthus/Zeus/lib  ]; then
         echo "Criando e baixando bibliotecas para a pasta libs_zanthus..."
-        criarDiretorio "/Zanthus/Zeus/lib"
-        cd /Zanthus/Zeus/lib
-        wget -c ftp://ftp.zanthus.com.br/pub/Zeus_Frente_de_Loja/_Complementares/so/* .
-        wget -c ftp://ftp.zanthus.com.br/pub/Zeus_Frente_de_Loja/_Complementares/so_r64/* .
-        wget -c ftp://ftp.zanthus.com.br/pub/Zeus_Frente_de_Loja/_Complementares/KernD/v2_1/*.so .
 
-        wget -c ftp://ftp.zanthus.com.br/pub/Zeus_Frente_de_Loja/v_1_11_40/KC_ZMAN_1_11_40_244_CZ.EXL
-
-        mv KC_ZMAN_1_11_40_244_CZ.EXL KC_ZMAN_1_11_40_244_CZ.tar.gz
-
-        versao=$(uname -i)
-        if [[  $versao == "i386" || $versao == "i486" || $versao == "i686" ]]; then
-            tar vxf KC_ZMAN_1_11_40_244_CZ.tar.gz  lib_rotkernC_CZ.so.rh9
-        else
-            tar vxf KC_ZMAN_1_11_40_244_CZ.tar.gz  lib_rotkernC_CZ.so.r64
-        fi
-
-        rm -r KC_ZMAN_1_11_40_244_CZ.tar.gz
-
-        ln -s /lib/x86_64-linux-gnu/libcrypto.so.1.0.0 /lib/x86_64-linux-gnu/libcrypto.so.6
-        ln -s /lib/x86_64-linux-gnu/libssl.so.1.0.0 /lib/x86_64-linux-gnu/libssl.so.6
-
-        #Adiciona ao carregamento de libs do sistema
-        echo "/Zanthus/Zeus/lib" >> /etc/ld.so.conf
+        wget ftp://ftp.zanthus.com.br/interno/Tairo/Zanthus-Server-Debian.deb --ftp-user=kassio.matos --ftp-password=zanthus1 .
+        dpkg -i Zanthus-Server-Debian.deb
         ldconfig
 
 
