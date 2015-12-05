@@ -1484,6 +1484,7 @@ instalarLibsZanthus(){
 
 removerLibsZanthus(){
     ############### Libs ZAnthus #############
+    apt-get -y purge zanthus-server-debian
     rm -r /Zanthus/Zeus/lib
     ############### Libs ZAnthus #############
 
