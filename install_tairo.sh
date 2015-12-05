@@ -357,6 +357,8 @@ instalarAmbienteDesenvolvimento(){
     apt-get -y install ntfs-config
     #Instala ruby
     apt-get -y install ruby
+    #Intala player de filmes
+    instalarNetFlix
 
     #verifica se é pra intalar PhpStorm
     if [[ $1 == "storm" ]]; then
@@ -528,6 +530,8 @@ removerAmbienteDesenvolvimento(){
     apt-get -y purge unetbootin
     #Desistala ruby
     apt-get -y purge ruby
+    #Desistla player de filmes
+    removerNetFlix
 
     #remove os pacotes não ultilizados
     apt-get -y autoremove
@@ -1503,7 +1507,7 @@ instalarSpotify(){
 
     wget -c "http://ftp.us.debian.org/debian/pool/main/libg/libgcrypt11/libgcrypt11_1.5.0-5+deb7u3_amd64.deb"
     dpkg -i libgcrypt11_1.5.0-5+deb7u3_amd64.deb
-    sudo apt-get install spotify-client
+    sudo apt-get -y install spotify-client
 
 }
 
@@ -1514,6 +1518,23 @@ removerSpotify(){
     add-apt-repository --remove 'deb http://repository.spotify.com stable non-free'
 }
 
+#Instalar player de filmes
+instalarNetFlix(){
+    apt-add-repository ppa:pipelight/stable -y
+    apt-get update
+    apt-get install pipelight-multi -y
+    pipelight-plugin --enable silverlight
+    apt-get install netflix-desktop
+}
+
+#remover player de filmes
+removerNetFlix(){
+    apt-get install ppa-purge -y
+    apt-get remove netflix-desktop -y
+    apt-get remove pipelight-multi -y
+    ppa-purge ppa:pipelight/stable -y
+    apt-get update
+}
 
 #Instala virtualbox para rodar maquinas virtuais
 instalarVirtualBox(){
@@ -1649,10 +1670,10 @@ mostrarAjuda(){
     echo -e "#    removerIntelliJ                                   removerAndroidStudio            #"
     echo -e "#    instalarClion                                     instalarSteam                   #"
     echo -e "#    removerClion                                      removerSteam                    #"
-    echo -e "#    instalarWebStorm                                  instalarSwap"                   #
-    echo -e "#    removerWebStorm                                   desabilitarSwap"                #
-    echo -e "#    instalarAmbienteServidorCentOs                                                    #"
-    echo -e "#    removerAmbienteServidorCentOs                                                     #"
+    echo -e "#    instalarWebStorm                                  instalarSwap                    #"
+    echo -e "#    removerWebStorm                                   desabilitarSwap                 #"
+    echo -e "#    instalarAmbienteServidorCentOs                    instalarNetFlix                 #"
+    echo -e "#    removerAmbienteServidorCentOs                     removerNetFlix                  #"
     echo -e "#                                                                                      #"
     echo -e "#                                                                                      #"
     echo -e "#    teste                                                                             #"
