@@ -543,7 +543,7 @@ removerAmbienteDesenvolvimento(){
     fi
 
 	#verifica se é pra remover IntelliJ-IDEA
-	if [[ $2 == "idea" ]]; then
+	if [[ $2 == "idea" ]              ; then
    		removerIntelliJ "-op"
     fi
 
@@ -1518,23 +1518,6 @@ removerSpotify(){
     add-apt-repository --remove 'deb http://repository.spotify.com stable non-free'
 }
 
-#Instalar player de filmes
-instalarNetFlix(){
-    apt-add-repository ppa:pipelight/stable -y
-    apt-get update
-    apt-get install pipelight-multi -y
-    pipelight-plugin --enable silverlight
-    apt-get install netflix-desktop
-}
-
-#remover player de filmes
-removerNetFlix(){
-    apt-get install ppa-purge -y
-    apt-get remove netflix-desktop -y
-    apt-get remove pipelight-multi -y
-    ppa-purge ppa:pipelight/stable -y
-    apt-get update
-}
 
 #Instala virtualbox para rodar maquinas virtuais
 instalarVirtualBox(){
@@ -1672,8 +1655,8 @@ mostrarAjuda(){
     echo -e "#    removerClion                                      removerSteam                    #"
     echo -e "#    instalarWebStorm                                  instalarSwap                    #"
     echo -e "#    removerWebStorm                                   desabilitarSwap                 #"
-    echo -e "#    instalarAmbienteServidorCentOs                    instalarNetFlix                 #"
-    echo -e "#    removerAmbienteServidorCentOs                     removerNetFlix                  #"
+    echo -e "#    instalarAmbienteServidorCentOs                                                    #"
+    echo -e "#    removerAmbienteServidorCentOs                                                     #"
     echo -e "#                                                                                      #"
     echo -e "#                                                                                      #"
     echo -e "#    teste                                                                             #"
