@@ -543,7 +543,7 @@ removerAmbienteDesenvolvimento(){
     fi
 
 	#verifica se é pra remover IntelliJ-IDEA
-	if [[ $2 == "idea" ]              ; then
+	if [[ $2 == "idea" ]]; then
    		removerIntelliJ "-op"
     fi
 
@@ -736,9 +736,9 @@ removerDropbox(){
 instalarPhpStorm(){
     clear
     cd ~
-    wget -c http://download.jetbrains.com/webide/PhpStorm-10.0.1.tar.gz
-    tar -zxvf PhpStorm-10.0.1.tar.gz
-    mv PhpStorm-143.382.38 /opt/PhpStorm
+    wget -c https://download.jetbrains.com/webide/PhpStorm-10.0.2.tar.gz
+    tar -zxvf PhpStorm-10.0.2.tar.gz
+    mv PhpStorm-143.1184.87 /opt/PhpStorm
     chmod +x /opt/PhpStorm/bin/phpstorm.sh
     chmod -R 777 /opt/PhpStorm
 
@@ -764,7 +764,7 @@ instalarPhpStorm(){
     echo "Categories=GNOME;Application;Development;" >> /usr/share/applications/phpstorm.desktop
     echo "StartupNotify=true" >> /usr/share/applications/phpstorm.desktop
 
-    rm -r PhpStorm-10.0.1.tar.gz
+    rm -r PhpStorm-10.0.2.tar.gz
 
     if [[ $1 == "op" ]]; then
         mostrarMenuOpcoes
@@ -859,9 +859,9 @@ removerWebStorm(){
 # IDE de desenvolvimento JAVA #
 instalarIntelliJ(){
     cd ~
-    wget -c http://download.jetbrains.com/idea/ideaIU-15.0.1.tar.gz
-    tar -zxvf ideaIU-15.0.1.tar.gz
-    mv idea-IU-143.382.35 /opt/IntelliJ-IDEA
+    wget -c https://download.jetbrains.com/idea/ideaIU-15.0.2.tar.gz
+    tar -zxvf ideaIU-15.0.2.tar.gz
+    mv idea-IU-143.1184.17 /opt/IntelliJ-IDEA
     chmod +x /opt/IntelliJ-IDEA/bin/idea.sh
     chmod -R 777 /opt/IntelliJ-IDEA
 
@@ -887,7 +887,7 @@ instalarIntelliJ(){
     echo "Categories=GNOME;Application;Development;" >> /usr/share/applications/idea.desktop
     echo "StartupNotify=true" >> /usr/share/applications/idea.desktop
 
-    rm -r ideaIU-15.0.1.tar.gz
+    rm -r ideaIU-15.0.2.tar.gz
 
     if [[ $1 == "op" ]]; then
         mostrarMenuOpcoes
