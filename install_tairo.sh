@@ -1437,13 +1437,13 @@ removerOracleInstantClient(){
 #Adiciona os lauchers na barra lateral do Unity para Unbutu
 #parametro 'usuario'
 adicionarLauchers(){
-     sudo --user=$1 gsettings set com.canonical.Unity.Launcher favorites "['application://gnome-terminal.desktop', 'application://nautilus.desktop', 'application://google-chrome.desktop', 'application://firefox.desktop', 'application://phpstorm.desktop', 'application://android-studio.desktop', 'application://idea.desktop', 'application://clion.desktop', 'application://gedit.desktop', 'application://sublime_text.desktop', 'application://wine-Programs-Notepad++-Notepad++.desktop', 'application://virtualbox.desktop', 'application://filezilla.desktop', 'application://skype.desktop', 'application://spotify.desktop', 'application://rhythmbox.desktop', 'application://PlayOnLinux.desktop', 'application://ubuntu-software-center.desktop', 'application://dropbox.desktop', 'application://ntfs-config.desktop', 'application://unity-control-center.desktop', 'application://gnome-system-monitor.desktop', 'unity://running-apps', 'unity://expo-icon', 'unity://devices', 'unity://desktop-icon']"
+     gsettings set com.canonical.Unity.Launcher favorites "['application://gnome-terminal.desktop', 'application://nautilus.desktop', 'application://google-chrome.desktop', 'application://firefox.desktop', 'application://phpstorm.desktop', 'application://android-studio.desktop', 'application://idea.desktop', 'application://clion.desktop', 'application://gedit.desktop', 'application://sublime_text.desktop', 'application://wine-Programs-Notepad++-Notepad++.desktop', 'application://virtualbox.desktop', 'application://filezilla.desktop', 'application://skype.desktop', 'application://spotify.desktop', 'application://rhythmbox.desktop', 'application://PlayOnLinux.desktop', 'application://ubuntu-software-center.desktop', 'application://dropbox.desktop', 'application://ntfs-config.desktop', 'application://unity-control-center.desktop', 'application://gnome-system-monitor.desktop', 'unity://running-apps', 'unity://expo-icon', 'unity://devices', 'unity://desktop-icon']"
 }
 
 #Remove os lauchers na barra lateral do Unity para Unbutu
 #parametro 'usuario'
 removerLauchers(){
-     sudo --user=$1 gsettings reset com.canonical.Unity.Launcher favorites
+     gsettings reset com.canonical.Unity.Launcher favorites
 }
 
 
@@ -1601,6 +1601,118 @@ desabilitarSwap(){
     swapoff /swapfile
 }
 
+configurarWebProxy(){
+    gsettings set org.gnome.system.proxy autoconfig-url http://$usuario:$senha@$ipServidor:$porta
+	gsettings set org.gnome.system.proxy ignore-hosts ['localhost', '127.0.0.0/8']
+	gsettings set org.gnome.system.proxy mode 'none'
+	gsettings set org.gnome.system.proxy use-same-proxy false
+	gsettings set org.gnome.system.proxy.ftp host $ipServidor
+	gsettings set org.gnome.system.proxy.ftp port $porta
+	gsettings set org.gnome.system.proxy.http authentication-password $senha
+	gsettings set org.gnome.system.proxy.http authentication-user $usuario
+	gsettings set org.gnome.system.proxy.http enabled false
+	gsettings set org.gnome.system.proxy.http host $ipServidor
+	gsettings set org.gnome.system.proxy.http port $porta
+	gsettings set org.gnome.system.proxy.http use-authentication false
+	gsettings set org.gnome.system.proxy.https host $ipServidor
+	gsettings set org.gnome.system.proxy.https port $porta
+	gsettings set org.gnome.system.proxy.socks host $ipServidor
+	gsettings set org.gnome.system.proxy.socks port $porta
+}
+
+configurarAptProxy(){
+
+    echo -e "Digite o usuario"
+    read usuario
+
+    echo -e "Digite a senha"
+    read senha
+
+    echo -e "Digite o ip do servidor"
+    read ipServidor
+
+    echo -e "Digite a porta"
+    read porta
+
+    echo -e "\n" >> /etc/basch.bashrc
+    echo -e "\n" >> /etc/basch.bashrc
+    echo -e "\n" >> /etc/basch.bashrc
+    echo -e "\n" >> /etc/basch.bashrc
+    echo -e "PROXY_URL=http://$usuario:$senha@$ipServidor:$porta" >> /etc/basch.bashrc
+    echo -e "export HTTP_PROXY=$PROXY_URL" >> /etc/basch.bashrc
+    echo -e "export http_proxy=$PROXY_URL" >> /etc/basch.bashrc
+    echo -e "export HTTPS_PROXY=$PROXY_URL" >> /etc/basch.bashrc
+    echo -e "export https_proxy=$PROXY_URL" >> /etc/basch.bashrc
+    echo -e "export FTP_PROXY=$PROXY_URL" >> /etc/basch.bashrc
+    echo -e "export ftp_proxy=$PROXY_URL" >> /etc/basch.bashrc
+    echo -e "export dns_proxy=$PROXY_URL" >> /etc/basch.bashrc
+    echo -e "export rsync_proxy=$PROXY_URL" >> /etc/basch.bashrc
+    echo -e "export no_proxy=\'localhost,127.0.0.1,192.168.*.*\'" >> /etc/basch.bashrc
+    echo -e "alias curl=\'curl -x $PROXY_URL\'" >> /etc/basch.bashrc
+    echo -e "git config --global http.proxy $PROXY_URL" >> /etc/basch.bashrc
+    echo -e "git config --global https.proxy $PROXY_URL" >> /etc/basch.bashrc
+
+
+    echo -e "Acquire {" >> /etc/apt/apt.conf
+    echo -e "HTTP::Proxy \"$PROXY_URL\";" >> /etc/apt/apt.conf
+    echo -e "HTTPS::Proxy \"$PROXY_URL\";" >> /etc/apt/apt.conf
+    echo -e "FTP::Proxy \"$PROXY_URL\";" >> /etc/apt/apt.conf
+    echo -e "SOCKS::proxy \"$PROXY_URL\";" >> /etc/apt/apt.conf
+    echo -e "};" >> /etc/apt/apt.conf
+    echo -e "\n" >> /etc/apt/apt.conf
+    echo -e "\n" >> /etc/apt/apt.conf
+
+
+    echo -e "\n" >> /etc/wgetrc
+    echo -e "\n" >> /etc/wgetrc
+    echo -e "\n" >> /etc/wgetrc
+    echo -e "\n" >> /etc/wgetrc
+    echo -e "https_proxy = $PROXY_URL/" >> /etc/wgetrc
+    echo -e "http_proxy = $PROXY_URL/" >> /etc/wgetrc
+    echo -e "ftp_proxy = $PROXY_URL/" >> /etc/wgetrc
+    echo -e "use_proxy = on" >> /etc/wgetrc
+}
+
+mostarProxy(){
+    gsettings get org.gnome.system.proxy autoconfig-url
+	gsettings get org.gnome.system.proxy ignore-hosts
+	gsettings get org.gnome.system.proxy mode
+	gsettings get org.gnome.system.proxy use-same-proxy
+	gsettings get org.gnome.system.proxy.ftp host
+	gsettings get org.gnome.system.proxy.ftp port
+	gsettings get org.gnome.system.proxy.http authentication-password
+	gsettings get org.gnome.system.proxy.http authentication-user
+	gsettings get org.gnome.system.proxy.http enabled
+	gsettings get org.gnome.system.proxy.http host
+	gsettings get org.gnome.system.proxy.http port
+	gsettings get org.gnome.system.proxy.http use-authentication
+	gsettings get org.gnome.system.proxy.https host
+	gsettings get org.gnome.system.proxy.https port
+	gsettings get org.gnome.system.proxy.socks host
+	gsettings get org.gnome.system.proxy.socks port
+}
+
+
+resetarProxy(){
+    gsettings reset org.gnome.system.proxy autoconfig-url
+	gsettings reset org.gnome.system.proxy ignore-hosts
+	gsettings reset org.gnome.system.proxy mode
+	gsettings reset org.gnome.system.proxy use-same-proxy
+	gsettings reset org.gnome.system.proxy.ftp host
+	gsettings reset org.gnome.system.proxy.ftp port
+	gsettings reset org.gnome.system.proxy.http authentication-password
+	gsettings reset org.gnome.system.proxy.http authentication-user
+	gsettings reset org.gnome.system.proxy.http enabled
+	gsettings reset org.gnome.system.proxy.http host
+	gsettings reset org.gnome.system.proxy.http port
+	gsettings reset org.gnome.system.proxy.http use-authentication
+	gsettings reset org.gnome.system.proxy.https host
+	gsettings reset org.gnome.system.proxy.https port
+	gsettings reset org.gnome.system.proxy.socks host
+	gsettings reset org.gnome.system.proxy.socks port
+}
+
+
 
 teste(){
     echo "    Teste..."
@@ -1657,6 +1769,10 @@ mostrarAjuda(){
     echo -e "#    removerWebStorm                                   desabilitarSwap                 #"
     echo -e "#    instalarAmbienteServidorCentOs                                                    #"
     echo -e "#    removerAmbienteServidorCentOs                                                     #"
+    echo -e "#    configurarWebProxy                                                                #"
+    echo -e "#    configurarAptProxy                                                                #"
+    echo -e "#    mostarProxy                                                                       #"
+    echo -e "#    resetarProxy                                                                      #"
     echo -e "#                                                                                      #"
     echo -e "#                                                                                      #"
     echo -e "#    teste                                                                             #"
