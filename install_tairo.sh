@@ -1485,6 +1485,71 @@ instalarLibsZanthus(){
     fi
 }
 
+criarDebZanthus(){
+########################### Libs da Zanthus #################################
+
+    cd /tmp/
+    if [ ! -d /tmp/Zanthus-Server-Debian  ]; then
+        echo "Criando e baixando bibliotecas..."
+        criarDiretorio "/tmp/Zanthus-Server-Debian/DEBIAN"
+        criarDiretorio "/tmp/Zanthus-Server-Debian/Zanthus/Zeus/lib"
+
+        # Abre o diretório
+        cd /tmp/Zanthus-Server-Debian/Zanthus/Zeus/lib
+
+        # baixa as Libs
+        wget -c ftp://ftp.zanthus.com.br/pub/Zeus_Frente_de_Loja/_Complementares/so/* .
+        wget -c ftp://ftp.zanthus.com.br/pub/Zeus_Frente_de_Loja/_Complementares/so_r64/* .
+        wget -c ftp://ftp.zanthus.com.br/pub/Zeus_Frente_de_Loja/_Complementares/KernD/v2_1/*.so .
+        wget -c ftp://ftp.zanthus.com.br/pub/Zeus_Frente_de_Loja/v_1_11_41/KC_ZMAN_1_11_41_250_CZ.EXL
+        wget -c ftp://ftp.zanthus.com.br/interno/Tairo/Kernz_php5.6/kernz.so --ftp-user=kassio.matos --ftp-password=zanthus1 .
+        wget -c ftp://ftp.zanthus.com.br/interno/Tairo/Kernz_php5.6/ZendGuardLoader.so --ftp-user=kassio.matos --ftp-password=zanthus1 .
+        mv KC_ZMAN_1_11_41_250_CZ.EXL KC_ZMAN_1_11_41_250_CZ.tar.gz
+
+        versao=$(uname -i)
+        if [[  $versao == "i386" || $versao == "i486" || $versao == "i686" ]]; then
+            tar vxf KC_ZMAN_1_11_41_250_CZ.tar.gz  lib_rotkernC_CZ.so.rh9
+        else
+            tar vxf KC_ZMAN_1_11_41_250_CZ.tar.gz  lib_rotkernC_CZ.so.r64
+        fi
+
+        #Remove o pacote baixado
+        rm -f -r KC_ZMAN_1_11_41_250_CZ.tar.gz
+
+        cd /tmp/Zanthus-Server-Debian
+        # Cria e escreve no arquivo de informações
+        touch /tmp/Zanthus-Server-Debian/DEBIAN/control
+        chmod -R 755 /tmp/Zanthus-Server-Debian/DEBIAN/control
+
+        echo -e "Section: misc" >> /tmp/Zanthus-Server-Debian/DEBIAN/control
+        echo -e "Priority: optional" >> /tmp/Zanthus-Server-Debian/DEBIAN/control
+        echo -e "Package: Zanthus-Server-Debian" >> /tmp/Zanthus-Server-Debian/DEBIAN/control
+        echo -e "Version: 1.0" >> /tmp/Zanthus-Server-Debian/DEBIAN/control
+        echo -e "Maintainer: Tairo Roberto Miguel de Assunção" >> /tmp/Zanthus-Server-Debian/DEBIAN/control
+        echo -e "Depends:" >> /tmp/Zanthus-Server-Debian/DEBIAN/control
+        echo -e "Architecture: all" >> /tmp/Zanthus-Server-Debian/DEBIAN/control
+        echo -e "Description: Pacotes de instalação para rodar servidor MANAGER com php e apache." >> /tmp/Zanthus-Server-Debian/DEBIAN/control
+
+        touch /tmp/Zanthus-Server-Debian/DEBIAN/preinst
+        chmod -R 755 /tmp/Zanthus-Server-Debian/DEBIAN/preinst
+        echo -e "#!/bin/sh" >> /tmp/Zanthus-Server-Debian/DEBIAN/preinst
+        echo -e "\n" >> /tmp/Zanthus-Server-Debian/DEBIAN/preinst
+        echo -e "ln -s -f /lib/x86_64-linux-gnu/libcrypto.so.1.0.0 /lib/x86_64-linux-gnu/libcrypto.so.6" >> /tmp/Zanthus-Server-Debian/DEBIAN/preinst
+        echo -e "ln -s -f /lib/x86_64-linux-gnu/libssl.so.1.0.0 /lib/x86_64-linux-gnu/libssl.so.6" >> /tmp/Zanthus-Server-Debian/DEBIAN/preinst
+        echo -e "ldconfig" >> /tmp/Zanthus-Server-Debian/DEBIAN/preinst
+
+        cd /tmp
+        dpkg-deb -b /tmp/Zanthus-Server-Debian /tmp/
+
+        cd ~
+        mv /tmp/zanthus-server-debian_1.0_all.deb  $(pwd)/Zanthus-Server-Debian.deb
+        rm -f -r /tmp/Zanthus-Server-Debian
+
+    else
+        echo "Pacote Zanthus-Server-Debian já existe..."
+    fi
+    ########################### Libs da Zanthus #################################
+}
 
 removerLibsZanthus(){
     ############### Libs ZAnthus #############
@@ -1767,7 +1832,7 @@ mostrarAjuda(){
     echo -e "#    removerClion                                      removerSteam                    #"
     echo -e "#    instalarWebStorm                                  instalarSwap                    #"
     echo -e "#    removerWebStorm                                   desabilitarSwap                 #"
-    echo -e "#    instalarAmbienteServidorCentOs                                                    #"
+    echo -e "#    instalarAmbienteServidorCentOs                    criarDebZanthus                 #"
     echo -e "#    removerAmbienteServidorCentOs                                                     #"
     echo -e "#    configurarWebProxy                                                                #"
     echo -e "#    configurarAptProxy                                                                #"
