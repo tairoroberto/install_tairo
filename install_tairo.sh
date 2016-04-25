@@ -307,7 +307,7 @@ instalarAmbienteDesenvolvimento(){
     #Instala inkscape para edição de imagens
     apt-get -y install inkscape
     #Instala cliente de audio do spotify
-    apt-get -y install spotify-client
+    instalarSpotify
     #Instala lib Curl para uso com php
     apt-get -y install curl
     #Instala playonlinux gerenciaento de plataforma wine
@@ -357,8 +357,6 @@ instalarAmbienteDesenvolvimento(){
     apt-get -y install ntfs-config
     #Instala ruby
     apt-get -y install ruby
-    #Intala player de filmes
-    instalarNetFlix
 
     #verifica se é pra intalar PhpStorm
     if [[ $1 == "storm" ]]; then
@@ -393,7 +391,7 @@ instalarAmbienteDesenvolvimento(){
     instalarGoogleChrome
 
     #Adiciona os Lauchers dos aplpicativos na sidebar
-    adicionarLauchers $usuario
+    adicionarLauchers
 
     mostrarMenuOpcoes
 }
@@ -1501,20 +1499,20 @@ criarDebZanthus(){
         wget -c ftp://ftp.zanthus.com.br/pub/Zeus_Frente_de_Loja/_Complementares/so/* .
         wget -c ftp://ftp.zanthus.com.br/pub/Zeus_Frente_de_Loja/_Complementares/so_r64/* .
         wget -c ftp://ftp.zanthus.com.br/pub/Zeus_Frente_de_Loja/_Complementares/KernD/v2_1/*.so .
-        wget -c ftp://ftp.zanthus.com.br/pub/Zeus_Frente_de_Loja/v_1_11_41/KC_ZMAN_1_11_41_250_CZ.EXL
+        wget -c ftp://ftp.zanthus.com.br/pub/Zeus_Frente_de_Loja/v_1_X_44/KC_ZMAN_1_X_44_256_CZ.EXL
         wget -c ftp://ftp.zanthus.com.br/interno/Tairo/Kernz_php5.6/kernz.so --ftp-user=kassio.matos --ftp-password=zanthus1 .
         wget -c ftp://ftp.zanthus.com.br/interno/Tairo/Kernz_php5.6/ZendGuardLoader.so --ftp-user=kassio.matos --ftp-password=zanthus1 .
-        mv KC_ZMAN_1_11_41_250_CZ.EXL KC_ZMAN_1_11_41_250_CZ.tar.gz
+        mv KC_ZMAN_1_X_44_256_CZ.EXL KC_ZMAN_1_X_44_256_CZ.tar.gz
 
         versao=$(uname -i)
         if [[  $versao == "i386" || $versao == "i486" || $versao == "i686" ]]; then
-            tar vxf KC_ZMAN_1_11_41_250_CZ.tar.gz  lib_rotkernC_CZ.so.rh9
+            tar vxf KC_ZMAN_1_X_44_256_CZ.tar.gz  lib_rotkernC_CZ.so.rh9
         else
-            tar vxf KC_ZMAN_1_11_41_250_CZ.tar.gz  lib_rotkernC_CZ.so.r64
+            tar vxf KC_ZMAN_1_X_44_256_CZ.tar.gz  lib_rotkernC_CZ.so.r64
         fi
 
         #Remove o pacote baixado
-        rm -f -r KC_ZMAN_1_11_41_250_CZ.tar.gz
+        rm -f -r KC_ZMAN_1_X_44_256_CZ.tar.gz
 
         cd /tmp/Zanthus-Server-Debian
         # Cria e escreve no arquivo de informações
@@ -1566,8 +1564,8 @@ removerLibsZanthus(){
 #instala repositorio para Spotify - programador também gosta de música :)
 instalarSpotify(){
 
-    apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys D2C19886
-    echo deb http://repository.spotify.com stable non-free |  tee /etc/apt/sources.list.d/spotify.list
+    apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys BBEBDCB318AD50EC6865090613B00F1FD2C19886
+    echo deb http://repository.spotify.com stable non-free | sudo tee /etc/apt/sources.list.d/spotify.list
     apt-get update
 
     wget -c "http://ftp.us.debian.org/debian/pool/main/libg/libgcrypt11/libgcrypt11_1.5.0-5+deb7u3_amd64.deb"
