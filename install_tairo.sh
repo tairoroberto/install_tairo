@@ -85,6 +85,13 @@ capturaUsuario(){
     read usuario
 }
 
+capturarVersaoPhp(){
+    clear
+    echo "    ########################## Qual a versão do PHP deseja intalar? #######################"
+    echo "    1 - PHP5.6"
+    echo "    2 - PHP7.0"
+    read phpVersion
+}
 # __BEGIN_METHODS__
 
 # Lista um diretorio
@@ -180,16 +187,27 @@ instalarAmbienteDesenvolvimento(){
         mostrarMenuOpcoes
     fi
 
-    capturaUsuario
+    echo "Deseja continuar? Sim[s], Não[n]"
+    read op
 
     cd ~
-    add-apt-repository -y ppa:ondrej/php5-5.6
+    capturaUsuario
+    capturarVersaoPhp
+
     apt-get update
     apt-get install -y g++
     apt-get install -y gcc
     apt-get install -y make
-    apt-get install -y php5
     apt-get install -y apache2
+
+    if [[ $phpVersion == 1 ]]; then
+        instalarPHP56
+    fi
+
+    if [[ $phpVersion == 2 ]]; then
+        instalarPHP7
+    fi
+
     apt-get install -y mysql-server
     apt-get install -y phpmyadmin
     instalarJava
@@ -197,89 +215,10 @@ instalarAmbienteDesenvolvimento(){
     instalarSteam
     apt-get install -y postgresql
     apt-get install -y subversion
-    apt-get install -y php5-dev
-    apt-get install -y php5-curl
-    apt-get install -y php5-json
-    apt-get install -y php5-ldap
-    apt-get install -y php5-mssql
-    apt-get install -y php5-odbc
-    apt-get install -y php5-pgsql
-    apt-get install -y php5-mcrypt
-    apt-get install -y php5-sybase
-    apt-get install -y php5-memcached
-    apt-get install -y php5-openssl
     apt-get install -y memcached
     apt-get install -y sendmail
     apt-get install -y unetbootin
-    instalarOracleInstantClient
-
-    ###################  Instala a .so do oracle ######################
-    pecl install oci8
-    #Verifica se o caminho padrão para a pasta oracle existe
-    pathInstantClient="/usr/lib/php5/20131226/oci8.so"
-    if [ -e $pathInstantClient ]; then
-        echo "extension=/usr/lib/php5/20131226/oci8.so" >> /etc/php5/apache2/php.ini
-        echo -e "\n" >> /etc/php5/apache2/php.ini
-        echo "extension=/usr/lib/php5/20131226/oci8.so" >> /etc/php5/cli/php.ini
-        echo -e "\n" >> /etc/php5/cli/php.ini
-    fi
-
-    ################### Instala a .so do Xdebug ########################
-    pecl install xdebug
-    pathxdebug="/usr/lib/php5/20131226/xdebug.so"
-
-    if [ -e $pathxdebug ]; then
-        echo "[XDebug]" >> /etc/php5/apache2/php.ini
-        echo "zend_extension=$pathxdebug" >> /etc/php5/apache2/php.ini
-        echo "xdebug.default_enable = 1" >> /etc/php5/apache2/php.ini
-        echo "xdebug.show_exception_trace = 1" >> /etc/php5/apache2/php.ini
-        echo "xdebug.show_local_vars = 1" >> /etc/php5/apache2/php.ini
-        echo "xdebug.remote_enable = 1" >> /etc/php5/apache2/php.ini
-        echo "xdebug.var_display_max_data   = 50000" >> /etc/php5/apache2/php.ini
-        echo "xdebug.max_nesting_level = 250" >> /etc/php5/apache2/php.ini
-        echo -e "\n" >> /etc/php5/apache2/php.ini
-
-        echo "[XDebug]" >> /etc/php5/cli/php.ini
-        echo "zend_extension=$pathxdebug" >> /etc/php5/cli/php.ini
-        echo "xdebug.default_enable = 1" >> /etc/php5/cli/php.ini
-        echo "xdebug.show_exception_trace = 1" >> /etc/php5/cli/php.ini
-        echo "xdebug.show_local_vars = 1" >> /etc/php5/cli/php.ini
-        echo "xdebug.remote_enable = 1" >> /etc/php5/cli/php.ini
-        echo "xdebug.var_display_max_data   = 50000" >> /etc/php5/cli/php.ini
-        echo "xdebug.max_nesting_level = 250" >> /etc/php5/cli/php.ini
-        echo -e "\n" >> /etc/php5/cli/php.ini
-    fi
-
-
-    instalarLibsZanthus "-op"
-
-
-
-    ################### Instala a .so do dbase ########################
-    pecl install dbase
-    pathdbase="/usr/lib/php5/20131226/dbase.so"
-    if [[ -e $pathdbase ]]; then
-        echo "extension=$pathdbase" >> /etc/php5/apache2/php.ini
-        echo -e "\n" >> /etc/php5/apache2/php.ini
-        echo "extension=$pathdbase" >> /etc/php5/cli/php.ini
-        echo -e "\n" >> /etc/php5/cli/php.ini
-    fi
-
-
-    #Configura Timezone e charset
-    echo "date.timezone = America/Sao_Paulo" >> /etc/php5/apache2/php.ini
-    echo -e "\n" >> /etc/php5/apache2/php.ini
-    echo -e "default_charset = \"ISO-8859-1\"" >> /etc/php5/apache2/php.ini
-    echo -e "\n" >> /etc/php5/apache2/php.ini
-
-    #Configura Timezone e charset
-    echo "date.timezone = America/Sao_Paulo" >> /etc/php5/cli/php.ini
-    echo -e "\n" >> /etc/php5/cli/php.ini
-    echo -e "default_charset = \"ISO-8859-1\"" >> /etc/php5/cli/php.ini
-    echo -e "\n" >> /etc/php5/cli/php.ini
-
-    instalarSpotify
-
+    criarDebZanthus
     instalarAndroidStudio
 
     #Instala os pacotes e programas
@@ -390,9 +329,6 @@ instalarAmbienteDesenvolvimento(){
     #Instala O navegador GoogleChrome
     instalarGoogleChrome
 
-    #Adiciona os Lauchers dos aplpicativos na sidebar
-    adicionarLauchers
-
     mostrarMenuOpcoes
 }
 
@@ -456,7 +392,7 @@ removerAmbienteDesenvolvimento(){
     pecl uninstall oci8
     pecl uninstall xdebug
     pecl uninstall dbase
-    apt-get -y purge php5.*
+    apt-get -y purge php*
     apt-get -y purge apache2
     apt-get -y purge postgresql
     apt-get -y purge mysql-server
@@ -734,9 +670,9 @@ removerDropbox(){
 instalarPhpStorm(){
     clear
     cd ~
-    wget -c https://download.jetbrains.com/webide/PhpStorm-10.0.2.tar.gz
-    tar -zxvf PhpStorm-10.0.2.tar.gz
-    mv PhpStorm-143.1184.87 /opt/PhpStorm
+    wget -c https://download.jetbrains.com/webide/PhpStorm-2016.1.tar.gz
+    tar -zxvf PhpStorm-2016.1.tar.gz
+    mv PhpStorm-* /opt/PhpStorm
     chmod +x /opt/PhpStorm/bin/phpstorm.sh
     chmod -R 777 /opt/PhpStorm
 
@@ -762,7 +698,7 @@ instalarPhpStorm(){
     echo "Categories=GNOME;Application;Development;" >> /usr/share/applications/phpstorm.desktop
     echo "StartupNotify=true" >> /usr/share/applications/phpstorm.desktop
 
-    rm -r PhpStorm-10.0.2.tar.gz
+    rm -r PhpStorm-2016.1.tar.gz
 
     if [[ $1 == "op" ]]; then
         mostrarMenuOpcoes
@@ -793,73 +729,12 @@ removerPhpStorm(){
 }
 
 
-
-# IDE de desenvolvimento JavaScript #
-instalarWebStorm(){
-    clear
-    cd ~
-    wget -c https://download.jetbrains.com/webstorm/WebStorm-11.0.1.tar.gz
-    tar -zxvf WebStorm-11.0.1.tar.gz
-    mv WebStorm-143.382.36 /opt/WebStorm
-    chmod +x /opt/WebStorm/bin/webstorm.sh
-    chmod -R 777 /opt/WebStorm
-
-    #Cria arquivo executavel#
-    touch /usr/bin/webstorm
-    chmod 755 /usr/bin/webstorm
-    echo "#!/bin/sh" >> /usr/bin/webstorm
-    echo "export UBUNTU_MENUPROXY=0" >> /usr/bin/webstorm
-    echo "export WEBSTORM_HOME=/opt/WebStorm" >> /usr/bin/webstorm
-    echo "\$WEBSTORM_HOME/bin/webstorm.sh $*" >> /usr/bin/webstorm
-    ln -s /usr/bin/webstorm /bin/webstorm
-
-    #Cria icone do desktop#
-    touch /usr/share/applications/webstorm.desktop
-    echo "[Desktop Entry]" >> /usr/share/applications/webstorm.desktop
-    echo "Encoding=UTF-8" >> /usr/share/applications/webstorm.desktop
-    echo "Name=WebStorm" >> /usr/share/applications/webstorm.desktop
-    echo "Comment=WebStorm IDE" >> /usr/share/applications/webstorm.desktop
-    echo "Exec=webstorm" >> /usr/share/applications/webstorm.desktop
-    echo "Icon=/opt/WebStorm/bin/webstorm.svg" >> /usr/share/applications/webstorm.desktop
-    echo "Terminal=false" >> /usr/share/applications/webstorm.desktop
-    echo "Type=Application" >> /usr/share/applications/webstorm.desktop
-    echo "Categories=GNOME;Application;Development;" >> /usr/share/applications/webstorm.desktop
-    echo "StartupNotify=true" >> /usr/share/applications/webstorm.desktop
-
-    rm -r WebStorm-11.0.1.tar.gz
-
-    if [[ $1 == "op" ]]; then
-        mostrarMenuOpcoes
-    fi
-
-}
-
-removerWebStorm(){
-    clear
-    echo "    Será removido a IDE de desenvolvimento WebStorm-11"
-    echo "    Deseja continuar? Sim[s], Não[n]"
-    read op
-
-    if [ ! $op == "s" ]; then
-        mostrarMenuOpcoes
-    fi
-
-    rm -r /usr/bin/webstorm
-    rm -r /bin/webstorm
-    rm -r /usr/share/applications/webstorm.desktop
-    rm -r /opt/WebStorm
-
-    if [[ $1 == "op" ]]; then
-        mostrarMenuOpcoes
-    fi
-}
-
 # IDE de desenvolvimento JAVA #
 instalarIntelliJ(){
     cd ~
-    wget -c https://download.jetbrains.com/idea/ideaIU-15.0.2.tar.gz
-    tar -zxvf ideaIU-15.0.2.tar.gz
-    mv idea-IU-143.1184.17 /opt/IntelliJ-IDEA
+    wget -c https://download.jetbrains.com/idea/ideaIU-2016.1.1.tar.gz
+    tar -zxvf ideaIU-2016.1.1.tar.gz
+    mv idea-IU-* /opt/IntelliJ-IDEA
     chmod +x /opt/IntelliJ-IDEA/bin/idea.sh
     chmod -R 777 /opt/IntelliJ-IDEA
 
@@ -885,7 +760,7 @@ instalarIntelliJ(){
     echo "Categories=GNOME;Application;Development;" >> /usr/share/applications/idea.desktop
     echo "StartupNotify=true" >> /usr/share/applications/idea.desktop
 
-    rm -r ideaIU-15.0.2.tar.gz
+    rm -r ideaIU-2016.1.1.tar.gz
 
     if [[ $1 == "op" ]]; then
         mostrarMenuOpcoes
@@ -905,6 +780,67 @@ removerIntelliJ(){
     rm -r /bin/idea
     rm -r /opt/IntelliJ-IDEA
     rm -r /usr/share/applications/idea.desktop
+
+    if [[ $1 == "op" ]]; then
+        mostrarMenuOpcoes
+    fi
+}
+
+
+# IDE de desenvolvimento JavaScript #
+instalarWebStorm(){
+    clear
+    cd ~
+    wget -c https://download.jetbrains.com/webstorm/WebStorm-2016.1.1.tar.gz
+    tar -zxvf WebStorm-2016.1.1.tar.gz
+    mv WebStorm-* /opt/WebStorm
+    chmod +x /opt/WebStorm/bin/webstorm.sh
+    chmod -R 777 /opt/WebStorm
+
+    #Cria arquivo executavel#
+    touch /usr/bin/webstorm
+    chmod 755 /usr/bin/webstorm
+    echo "#!/bin/sh" >> /usr/bin/webstorm
+    echo "export UBUNTU_MENUPROXY=0" >> /usr/bin/webstorm
+    echo "export WEBSTORM_HOME=/opt/WebStorm" >> /usr/bin/webstorm
+    echo "\$WEBSTORM_HOME/bin/webstorm.sh $*" >> /usr/bin/webstorm
+    ln -s /usr/bin/webstorm /bin/webstorm
+
+    #Cria icone do desktop#
+    touch /usr/share/applications/webstorm.desktop
+    echo "[Desktop Entry]" >> /usr/share/applications/webstorm.desktop
+    echo "Encoding=UTF-8" >> /usr/share/applications/webstorm.desktop
+    echo "Name=WebStorm" >> /usr/share/applications/webstorm.desktop
+    echo "Comment=WebStorm IDE" >> /usr/share/applications/webstorm.desktop
+    echo "Exec=webstorm" >> /usr/share/applications/webstorm.desktop
+    echo "Icon=/opt/WebStorm/bin/webstorm.svg" >> /usr/share/applications/webstorm.desktop
+    echo "Terminal=false" >> /usr/share/applications/webstorm.desktop
+    echo "Type=Application" >> /usr/share/applications/webstorm.desktop
+    echo "Categories=GNOME;Application;Development;" >> /usr/share/applications/webstorm.desktop
+    echo "StartupNotify=true" >> /usr/share/applications/webstorm.desktop
+
+    rm -r WebStorm-2016.1.1.tar.gz
+
+    if [[ $1 == "op" ]]; then
+        mostrarMenuOpcoes
+    fi
+
+}
+
+removerWebStorm(){
+    clear
+    echo "    Será removido a IDE de desenvolvimento WebStorm-11"
+    echo "    Deseja continuar? Sim[s], Não[n]"
+    read op
+
+    if [ ! $op == "s" ]; then
+        mostrarMenuOpcoes
+    fi
+
+    rm -r /usr/bin/webstorm
+    rm -r /bin/webstorm
+    rm -r /usr/share/applications/webstorm.desktop
+    rm -r /opt/WebStorm
 
     if [[ $1 == "op" ]]; then
         mostrarMenuOpcoes
@@ -970,395 +906,6 @@ removerClion(){
     fi
 }
 
-instalarAmbienteServidorCentOs(){
-    clear
-    echo "    Será instalado Ambiente para servidor CentOs que contém:"
-    echo "    Php-5.6 com libs: memcache, phpize"
-    echo "    Apache-2.4"
-    echo "    Oracle Instant-Client"
-    echo "    NodeJs"
-    echo "    E bibliotecas Zanthus para rodar Zeus_Frente_de_Loja"
-    echo -e "\n"
-    echo "    Deseja continuar? Sim[s], Não[n]"
-    read op
-
-    if [ ! $op == "s" ]; then
-        mostrarMenuOpcoes
-    fi
-
-    echo "    Iniciando a instalação do servidor"
-    cd /usr/src
-
-    echo "    Baixando bibliotecas"
-
-    criarDiretorio "libs_zanthus"
-    cd libs_zanthus
-    wget ftp://ftp.zanthus.com.br/pub/Zeus_Frente_de_Loja/_Complementares/so/* .
-    wget ftp://ftp.zanthus.com.br/pub/Zeus_Frente_de_Loja/_Complementares/so_r64/* .
-    wget ftp://ftp.zanthus.com.br/pub/Zeus_Frente_de_Loja/_Complementares/KernD/v2_1/*.so .
-    cd ..
-
-    echo "    Baixando pacotes de instalação"
-    wget ftp://192.168.0.54/* --ftp-user=eber --ftp-password=123456 .
-
-    #Verifica se conseguiu fazer o download de tudo para continuar senão sai do processo
-    if [ $? == 0 ]; then
-
-        echo "    Saindo do diretório"
-        cd /
-        echo "    Descompactando php"
-        tar -xzvf /usr/src/instalar_apr_centos_6_5.tar.gz
-        echo "    Descompactando Apache"
-        tar -xzvf /usr/src/instalar_apache_centos_6_5.tar.gz
-        echo "    Descompactando InstantClient"
-        tar -xzvf /usr/src/instalar_instant_client_12_1.tar.gz
-        echo "    Descompactando libEvent"
-        tar -xzvf /usr/src/instalar_libevent_centos_6_5.tar.gz
-        echo "    Descompactando memcached"
-        tar -xzvf /usr/src/instalar_memcached_centos_6_5.tar.gz
-        echo "    Descompactando node"
-        tar -xzvf /usr/src/instalar_node_centos_6_5.tar.gz
-        echo "    Descompactando php"
-        tar -xzvf /usr/src/instalar_php_centos_6_5.tar.gz
-
-        echo "    Criando links e copiando arquivos"
-        cd /usr/src
-        mv bibliotecas_zanthus.conf /etc/ld.so.conf.d/.
-        mv instant_client.conf /etc/ld.so.conf.d/.
-        mv -f index.html /usr/local/apache22/htdocs/.
-
-        chmod +x memcached
-        criarDiretorio "/usr/local/Zend"
-        criarDiretorio "/usr/local/Zend/etc"
-        cp php.ini /usr/local/Zend/etc/.
-        #O php precisa ter o mesmo caminho do módulo php no apache
-        ln -sf /usr/local/Zend/etc/php.ini  /usr/local/php/lib/php.ini
-        ln -sf /usr/local/php/bin/php /usr/local/bin/php
-        ln -sf /usr/local/php/bin/php-config /usr/local/bin/php-config
-        ln -sf /usr/local/php/bin/phpize /usr/local/bin/phpize
-        ln -sf /usr/local/memcached/bin/memcached /usr/local/bin/memcached
-        ln -sf /usr/local/apache22/bin/apachectl /etc/init.d/apache
-        ln -sf /usr/src/libevent-2.0.22-stable/.libs/libevent-2.0.so.5 /lib64/libevent-2.0.so.5
-        ln -sf /usr/local/apr/lib/libaprutil-1.so.0 /lib64/libaprutil-1.so.0
-        ln -sf /usr/local/memcached/bin/memcached /var/run/memcached
-        ln -sf /usr/local/node/bin/node /usr/local/bin/node
-        ln -sf /usr/src/memcached /etc/init.d/memcached
-        ln -sf /etc/init.d/memcached /etc/rc3.d/S99memcached
-        ln -sf /etc/init.d/apache /etc/rc3.d/S99apache
-        ln -sf /usr/local/apache22/htdocs /web
-
-        ldconfig
-
-        echo "    vamos subir o serviço Apache"
-        service apache start
-
-        echo "    vamos subir o serviço do Memcached"
-        service memcached start
-        service apache start
-
-        echo "    criando usuário"
-        adduser zanthus
-
-        echo "    fim"
-        mostrarMenuOpcoes
-
-    else
-        echo "Erro ao fazer download de pacotes de instalação"
-        read res
-        mostrarMenuOpcoes
-    fi
-}
-
-
-#Remove o Ambiente Servidor CentOs
-removerAmbienteServidorCentOs(){
-    clear
-    echo "    Será REMOVIDO Ambiente para servidor CentOs que contém:"
-    echo "    Php-5.6 com libs: memcache, phpize"
-    echo "    Apache-2.4"
-    echo "    Oracle Instant-Client"
-    echo "    NodeJs"
-    echo "    E bibliotecas Zanthus para rodar Zeus_Frente_de_Loja"
-    echo -e "\n"
-    echo "    Deseja continuar? Sim[s], Não[n]"
-    read op
-
-    if [ ! $op == "s" ]; then
-        mostrarMenuOpcoes
-    fi
-
-    echo "    Excluindo pastas e arquivos..."
-
-    cd /usr/src
-    rm -r /usr/src/libs_zanthus
-    rm -r /usr/local/Zend
-    rm -r /usr/local/apache22
-    rm -r /etc/init.d/apache
-    rm -r /etc/rc3.d/S99apache
-    rm -r /usr/local/php
-    rm -r /usr/local/bin/php
-    rm -r /usr/local/bin/php-config
-    rm -r /usr/local/bin/phpize
-
-    rm -r /usr/local/memcached/
-    rm -r /var/run/memcached
-    rm -r /etc/init.d/memcached
-    rm -r /etc/rc3.d/S99memcached
-    rm -r /usr/local/bin/memcached
-
-    rm -r /usr/local/node/
-    rm -r /usr/local/bin/node
-    rm -r /web
-    rm -r /etc/init.d/apache
-    rm -r /lib64/libevent-2.0.so.5
-    rm -r /lib64/libaprutil-1.so.0
-    rm -r /usr/local/instant_client_12_1
-
-    ldconfig
-
-    deluser zanthus
-
-    echo "    Ambiente CentOs removido"
-    mostrarMenuOpcoes
-}
-
-
-
-instalarAmbienteServidorUbuntu(){
-    clear
-    echo "    Será instalado o Ambiente para servidor Ubuntu/Debian que contém:"
-    echo "    Php-5.6 com as libs: php5-dev php5-curl php5-json php5-ldap php5-mssql php5-odbc php5-pgsql php5-mcrypt php5-sybase oci8 xdebug memcache"
-    echo "    Apache-2.4"
-    echo "    Mysql"
-    echo "    Postgresql"
-    echo "    Subversion"
-    echo "    Gdebi Instalador de pacotes"
-    echo "    Synaptic Gerenciador de dependencias"
-    echo "    Rar descompactador"
-    echo "    Filezilla cliente Ftp"
-    echo "    java 8"
-    echo "    Curl lib para uso com php"
-    echo "    Freetds-commom php para conexão com banco de dados MSSQL"
-    echo "    Composer intalador dependencias Php"
-    echo "    laravel/installer instalador do Laravel 5"
-    echo "    lumen/installer instalador Lumen"
-    echo "    NodeJs"
-    echo "    Para instalar a lib oci8.so certifique-se de que o Oracle Instant Client esteja instalado!"
-
-    echo -e "\n"
-    echo "Deseja continuar? Sim[s], Não[n]"
-    read op
-
-    if [ ! $op == "s" ]; then
-        mostrarMenuOpcoes
-    fi
-
-    capturaUsuario
-
-    cd ~
-    add-apt-repository -y ppa:ondrej/php5-5.6
-    apt-get update
-    apt-get install -y g++
-    apt-get install -y gcc
-    apt-get install -y make
-    apt-get install -y php5
-    apt-get install -y apache2
-    apt-get install -y mysql-server
-    apt-get install -y phpmyadmin
-    apt-get install -y postgresql
-    apt-get install -y subversion
-    apt-get install -y php5-dev
-    apt-get install -y php5-curl
-    apt-get install -y php5-json
-    apt-get install -y php5-ldap
-    apt-get install -y php5-mssql
-    apt-get install -y php5-odbc
-    apt-get install -y php5-pgsql
-    apt-get install -y php5-mcrypt
-    apt-get install -y php5-sybase
-    apt-get install -y php5-memcached
-    apt-get install -y php5-openssl
-    apt-get install -y memcached
-    apt-get install -y sendmail
-    instalarOracleInstantClient
-
-    ###################  Instala a .so do oracle ######################
-    pecl install oci8
-    #Verifica se o caminho padrão para a pasta oracle existe
-    pathInstantClient="/usr/lib/php5/20131226/oci8.so"
-    if [ -e $pathInstantClient ]; then
-        echo "extension=/usr/lib/php5/20131226/oci8.so" >> /etc/php5/apache2/php.ini
-        echo -e "\n" >> /etc/php5/apache2/php.ini
-        echo "extension=/usr/lib/php5/20131226/oci8.so" >> /etc/php5/cli/php.ini
-        echo -e "\n" >> /etc/php5/cli/php.ini
-    fi
-
-
-    ########################### Libs da Zanthus #################################
-    instalarLibsZanthus
-    ########################### Libs da Zanthus #################################
-
-    ################### Instala a .so do dbase ########################
-    pecl install dbase
-    pathdbase="/usr/lib/php5/20131226/dbase.so"
-    if [[ -e $pathdbase ]]; then
-        echo "extension=$pathdbase" >> /etc/php5/apache2/php.ini
-        echo -e "\n" >> /etc/php5/apache2/php.ini
-        echo "extension=$pathdbase" >> /etc/php5/cli/php.ini
-        echo -e "\n" >> /etc/php5/cli/php.ini
-    fi
-
-
-    #Configura Timezone e charset
-    echo "date.timezone = America/Sao_Paulo" >> /etc/php5/apache2/php.ini
-    echo -e "\n" >> /etc/php5/apache2/php.ini
-    echo -e "default_charset = \"ISO-8859-1\"" >> /etc/php5/apache2/php.ini
-    echo -e "\n" >> /etc/php5/apache2/php.ini
-
-    #Configura Timezone e charset
-    echo "date.timezone = America/Sao_Paulo" >> /etc/php5/cli/php.ini
-    echo -e "\n" >> /etc/php5/cli/php.ini
-    echo -e "default_charset = \"ISO-8859-1\"" >> /etc/php5/cli/php.ini
-    echo -e "\n" >> /etc/php5/cli/php.ini
-
-    #Instala os pacotes e programas
-
-    #Instala Gdebi Instalador de pacotes
-    apt-get -y install gdebi
-    #Instala Gerenciador de dependencias
-    apt-get -y install synaptic
-    #Instala descompactador
-    apt-get -y install rar
-    #Instala cliente ftp
-    apt-get -y install filezilla
-    #Instala java 8
-    instalarJava
-    #Instala lib Curl para uso com php
-    apt-get -y install curl
-    #Instala  libs php para conexão com banco de dados MSSQL
-    apt-get -y install freetds-common
-    #Atualiza os headers
-    apt-get update
-    # reinicializa Apache
-    service apache2 restart
-    #Da permição para a pasta do apache
-    chmod -R 777 /var/www
-    #Habilita o modrewrite do apache
-    a2enmod rewrite
-    #Baixa o composer
-    curl -s https://getcomposer.org/installer | php
-    #Move o Composer
-    mv composer.phar /usr/local/bin/composer
-    #Intala o instalador do laravel
-    sudo --user=$usuario composer global require "laravel/installer=~1.1"
-    #Intala o instalador do lumen
-    sudo --user=$usuario composer global require "laravel/lumen-installer=~1.0"
-    #Adiciona os vendors do composer as variáveis de ambiente
-    sudo --user=$usuario echo "export PATH=$PATH:/home/$usuario/.composer/vendor/bin" >> /home/$usuario/.bashrc
-    #Adiciona o NodeJs ao bash para ser instalado
-    curl --silent --location https://deb.nodesource.com/setup_4.x |  bash -
-    #Atualiza os headers
-    apt-get update
-    #Instala o NodeJs
-    apt-get install --yes nodejs
-
-    mostrarMenuOpcoes
-
-}
-
-
-#Remove Ambiente Servidor Ubuntu
-removerAmbienteServidorUbuntu(){
-    clear
-    echo "    Será REMOVIDO o Ambiente para servidor Ubuntu/Debian que contém:"
-    echo "    Php-5.6 com as libs: php5-dev php5-curl php5-json php5-ldap php5-mssql php5-odbc php5-pgsql php5-mcrypt php5-sybase oci8 xdebug memcache"
-    echo "    Apache-2.4"
-    echo "    Mysql"
-    echo "    Postgresql"
-    echo "    Gdebi Instalador de pacotes"
-    echo "    Synaptic Gerenciador de dependencias"
-    echo "    Rar descompactador"
-    echo "    Filezilla cliente Ftp"
-    echo "    java 8"
-    echo "    Curl lib para uso com php"
-    echo "    Freetds-commom php para conexão com banco de dados MSSQL"
-    echo "    Composer intalador dependencias Php"
-    echo "    laravel/installer instalador do Laravel 5"
-    echo "    lumen/installer instalador Lumen"
-    echo "    NodeJs"
-    echo "    E bibliotecas Zanthus para rodar Zeus_Frente_de_Loja"
-    echo -e "\n"
-    echo "    Deseja continuar? Sim[s], Não[n]"
-    read op
-
-    if [ ! $op == "s" ]; then
-        mostrarMenuOpcoes
-    fi
-
-    capturaUsuario
-
-    echo "    Excluindo pastas e arquivos..."
-
-    pecl uninstall oci8
-    pecl uninstall dbase
-    apt-get -y purge php5.*
-    apt-get -y purge apache2
-    apt-get -y purge postgresql
-    apt-get -y purge mysql-server
-    apt-get -y purge subversion
-
-    removerOracleInstantClient
-
-    ############### Libs ZAnthus #############
-    rm -r /Zanthus/Zeus/lib
-    ############### Libs ZAnthus #############
-
-    #Reconfigura carregamento de bibliotecas
-    ldconfig
-
-    #Desistala os pacotes e programas
-
-    #Remove repositorio para php5-5.6
-    add-apt-repository -r ppa:ondrej/php5-5.6
-    apt-get update
-
-    #Remove repositorio para Java 8
-    removerJava
-
-    #Desistala sendmail
-    apt-get -y purge sendmail
-    #Desistala Gdebi Instalador de pacotes
-    apt-get -y purge gdebi
-    #Desistala Gerenciador de dependencias
-    apt-get -y purge synaptic
-    #Desistala descompactador
-    apt-get -y purge rar
-    #Desistala cliente ftp
-    apt-get -y purge filezilla
-    #Desistala java 8
-    apt-get -y purge oracle-java8-installer
-    #Desistala lib Curl para uso com php
-    apt-get -y purge curl
-    #Desistala  libs php para conexão com banco de dados MSSQL
-    apt-get -y purge freetds-common
-    #Desistala o Composer
-    rm -r /usr/local/bin/composer
-    #Desistala o instalador do laravel
-    rm -r /home/$usuario/.composer/vendor/
-    #Desistala o NodeJs
-    apt-get purge --yes nodejs
-    #Desistala o skype por ultimo por que ele baixa varias libs 32bits que programas com Wine usam
-    apt-get -y purge skype
-
-    #remove os pacotes não ultilizados
-    apt-get -y autoremove
-    apt-get clean
-
-    echo "    Ambiente Servidor Ubuntu removido"
-
-    mostrarMenuOpcoes
-}
-
 
 #Converte o arquivo .rpm para .deb e instala no caminho padrão do oracle
 instalarOracleInstantClient(){
@@ -1397,16 +944,16 @@ instalarOracleInstantClient(){
 
         clear
         echo -e " Oracle Instant Client instalado com sucesso.. \n"
-        read res
-        mostrarMenuOpcoes
-
+        if [[ $1 == "op" ]]; then
+            mostrarMenuOpcoes
+        fi
     else
         clear
         echo "    Não foi possível fazer o download dos arquivos do instant_client verifique a conexão ou o link dos arquivos"
-        read res
+        if [[ $1 == "op" ]]; then
+            mostrarMenuOpcoes
+        fi
     fi
-
-    mostrarMenuOpcoes
 }
 
 
@@ -1445,44 +992,6 @@ removerLauchers(){
 }
 
 
-instalarLibsZanthus(){
-    ########################### Libs da Zanthus #################################
-
-    if [ ! -d /Zanthus/Zeus/lib  ]; then
-        echo "Criando e baixando bibliotecas para a pasta libs_zanthus..."
-
-        wget ftp://ftp.zanthus.com.br/interno/Tairo/Zanthus-Server-Debian.deb --ftp-user=kassio.matos --ftp-password=zanthus1 .
-        dpkg -i Zanthus-Server-Debian.deb
-        ldconfig
-
-
-        #Insere a Kernz no .ini do Php e Apache
-        pathkernz="/Zanthus/Zeus/lib/kernz.so"
-        if [ -d $pathkernz ]; then
-            echo "extension=$pathkernz" >> /etc/php5/apache2/php.ini
-            echo -e "\n" >> /etc/php5/apache2/php.ini
-            echo "extension=$pathkernz" >> /etc/php5/cli/php.ini
-            echo -e "\n" >> /etc/php5/cli/php.ini
-        fi
-        pathZendGuardLoader="/Zanthus/Zeus/lib/ZendGuardLoader.so"
-        if [ -d $pathZendGuardLoader ]; then
-            echo "zend_extension=$pathZendGuardLoader" >> /etc/php5/apache2/php.ini
-            echo -e "\n" >> /etc/php5/apache2/php.ini
-            echo "zend_extension=$pathZendGuardLoader" >> /etc/php5/cli/php.ini
-            echo -e "\n" >> /etc/php5/cli/php.ini
-        fi
-
-    else
-        echo "libs_zanthus já existe..."
-    fi
-    cd ~
-    ########################### Libs da Zanthus #################################
-
-    if [[ $1 == "op" ]]; then
-	        mostrarMenuOpcoes
-    fi
-}
-
 criarDebZanthus(){
 ########################### Libs da Zanthus #################################
 
@@ -1501,6 +1010,7 @@ criarDebZanthus(){
         wget -c ftp://ftp.zanthus.com.br/pub/Zeus_Frente_de_Loja/_Complementares/KernD/v2_1/*.so .
         wget -c ftp://ftp.zanthus.com.br/pub/Zeus_Frente_de_Loja/v_1_X_44/KC_ZMAN_1_X_44_256_CZ.EXL
         wget -c ftp://ftp.zanthus.com.br/interno/Tairo/Kernz_php5.6/kernz.so --ftp-user=kassio.matos --ftp-password=zanthus1 .
+        wget -c ftp://ftp.zanthus.com.br/interno/Tairo/mssql/php5.6/mssql.so --ftp-user=kassio.matos --ftp-password=zanthus1 .
         wget -c ftp://ftp.zanthus.com.br/interno/Tairo/Kernz_php5.6/ZendGuardLoader.so --ftp-user=kassio.matos --ftp-password=zanthus1 .
         mv KC_ZMAN_1_X_44_256_CZ.EXL KC_ZMAN_1_X_44_256_CZ.tar.gz
 
@@ -1541,7 +1051,62 @@ criarDebZanthus(){
 
         cd ~
         mv /tmp/zanthus-server-debian_1.0_all.deb  $(pwd)/Zanthus-Server-Debian.deb
+        dpkg -i $(pwd)/Zanthus-Server-Debian.deb
+        ldconfig
         rm -f -r /tmp/Zanthus-Server-Debian
+        rm -f -r $(pwd)/Zanthus-Server-Debian.deb
+
+        capturarVersaoPhp
+
+        #Insere a Kernz no .ini do Php e Apache para php5.6
+        if [[ $phpVersion == 1 ]]; then
+            pathkernz="/Zanthus/Zeus/lib/kernz.so"
+            if [ -e $pathkernz ]; then
+                echo "extension=$pathkernz" >> /etc/php/5.6/apache2/php.ini
+                echo -e "\n" >> /etc/php/5.6/apache2/php.ini
+                echo "extension=$pathkernz" >> /etc/php/5.6/cli/php.ini
+                echo -e "\n" >> /etc/php/5.6/cli/php.ini
+            fi
+            pathZendGuardLoader="/Zanthus/Zeus/lib/ZendGuardLoader.so"
+            if [ -e $pathZendGuardLoader ]; then
+                echo "zend_extension=$pathZendGuardLoader" >> /etc/php/5.6/apache2/php.ini
+                echo -e "\n" >> /etc/php/5.6/apache2/php.ini
+                echo "zend_extension=$pathZendGuardLoader" >> /etc/php/5.6/cli/php.ini
+                echo -e "\n" >> /etc/php/5.6/cli/php.ini
+            fi
+            pathMssql="/Zanthus/Zeus/lib/mssql.so"
+            if [ -e $pathMssql ]; then
+                echo "extension=$pathMssql" >> /etc/php/5.6/apache2/php.ini
+                echo -e "\n" >> /etc/php/5.6/apache2/php.ini
+                echo "extension=$pathMssql" >> /etc/php/5.6/cli/php.ini
+                echo -e "\n" >> /etc/php/5.6/cli/php.ini
+            fi
+        fi
+
+        #Insere a Kernz no .ini do Php e Apache para ph7.0
+        if [[ $phpVersion == 2 ]]; then
+            pathkernz="/Zanthus/Zeus/lib/kernz.so"
+            if [ -e $pathkernz ]; then
+                echo "extension=$pathkernz" >> /etc/php/7.0/apache2/php.ini
+                echo -e "\n" >> /etc/php/7.0/apache2/php.ini
+                echo "extension=$pathkernz" >> /etc/php/7.0/cli/php.ini
+                echo -e "\n" >> /etc/php/7.0/cli/php.ini
+            fi
+            pathZendGuardLoader="/Zanthus/Zeus/lib/ZendGuardLoader.so"
+            if [ -e $pathZendGuardLoader ]; then
+                echo "zend_extension=$pathZendGuardLoader" >> /etc/php/7.0/apache2/php.ini
+                echo -e "\n" >> /etc/php/7.0/apache2/php.ini
+                echo "zend_extension=$pathZendGuardLoader" >> /etc/php/7.0/cli/php.ini
+                echo -e "\n" >> /etc/php/7.0/cli/php.ini
+            fi
+            pathMssql="/Zanthus/Zeus/lib/mssql.so"
+            if [ -e $pathMssql ]; then
+                echo "extension=$pathMssql" >> /etc/php/7.0/apache2/php.ini
+                echo -e "\n" >> /etc/php/7.0/apache2/php.ini
+                echo "extension=$pathMssql" >> /etc/php/7.0/cli/php.ini
+                echo -e "\n" >> /etc/php/7.0/cli/php.ini
+            fi
+        fi
 
     else
         echo "Pacote Zanthus-Server-Debian já existe..."
@@ -1568,9 +1133,9 @@ instalarSpotify(){
     echo deb http://repository.spotify.com stable non-free | sudo tee /etc/apt/sources.list.d/spotify.list
     apt-get update
 
-    wget -c "http://ftp.us.debian.org/debian/pool/main/libg/libgcrypt11/libgcrypt11_1.5.0-5+deb7u3_amd64.deb"
-    dpkg -i libgcrypt11_1.5.0-5+deb7u3_amd64.deb
-    sudo apt-get -y install spotify-client
+    wget -c "https://launchpad.net/ubuntu/+archive/primary/+files/libgcrypt11_1.5.3-2ubuntu4.2_amd64.deb"
+    dpkg -i libgcrypt11_1.5.3-2ubuntu4.2_amd64.deb
+    sudo apt-get -y install spotify-client-0.9.17
 
 }
 
@@ -1584,21 +1149,15 @@ removerSpotify(){
 
 #Instala virtualbox para rodar maquinas virtuais
 instalarVirtualBox(){
-    #instala repositorio para Virtualbox
-    echo -e   "\n" >> /etc/apt/sources.list
-    echo "deb http://download.virtualbox.org/virtualbox/debian wily contrib" >> /etc/apt/sources.list
-    wget -q https://www.virtualbox.org/download/oracle_vbox.asc -O- |  apt-key add -
-    apt-get update
-
-    apt-get -y install virtualbox-5.0
-    wget -c http://download.virtualbox.org/virtualbox/5.0.8/Oracle_VM_VirtualBox_Extension_Pack-5.0.8-103449.vbox-extpack
-    virtualbox Oracle_VM_VirtualBox_Extension_Pack-5.0.8-103449.vbox-extpack
-    rm -r Oracle_VM_VirtualBox_Extension_Pack-5.0.8-103449.vbox-extpack
+    apt-get -y install virtualbox
+    wget -c http://download.virtualbox.org/virtualbox/5.0.18/Oracle_VM_VirtualBox_Extension_Pack-5.0.18-106667.vbox-extpack
+    virtualbox Oracle_VM_VirtualBox_Extension_Pack-5.0.18-106667.vbox-extpack
+    rm -f -r Oracle_VM_VirtualBox_Extension_Pack-5.0.18-106667.vbox-extpack
 }
 
 #Desistala virtualbox para rodar maquinas virtuais
 removerVirtualBox(){
-    apt-get -y purge virtualbox-5.0
+    apt-get -y purge virtualbox
 }
 
 #instala repositorio para Java 8
@@ -1630,6 +1189,7 @@ removerWine(){
 #instala repositorio para Android Studio
 instalarAndroidStudio(){
     apt-add-repository -y ppa:paolorotolo/android-studio
+    apt-get update
     #Instala Android Studio IDE Android
     apt-get -y install android-studio
 }
@@ -1775,7 +1335,180 @@ resetarProxy(){
 	gsettings reset org.gnome.system.proxy.socks port
 }
 
+instalarPHP56(){
+    add-apt-repository -y ppa:ondrej/php5-5.6
+    apt-get install -y php5.6
+    apt-get install -y php5.6-dev
+    apt-get install -y php5.6-curl
+    apt-get install -y php5.6-json
+    apt-get install -y php5.6-ldap
+    apt-get install -y php5.6-odbc
+    apt-get install -y php5.6-pgsql
+    apt-get install -y php5.6-mcrypt
+    apt-get install -y php5.6-sybase
+    apt-get install -y php5.6-xml
+    apt-get install -y php5.6-zip
+    apt-get install -y php5.6-soap
+    apt-get install -y php5.6-gd
+    apt-get install -y php5.6-sqlite3
+    apt-get install -y php-memcached
+    apt-get install -y libapache2-mod-php5.6
 
+    instalarOracleInstantClient
+
+    ###################  Instala a .so do oracle ######################
+    pecl uninstall oci8
+    pecl install oci8-2.0.11
+    #Verifica se o caminho padrão para a pasta oracle existe
+    pathOci8="/usr/lib/php/20131226/oci8.so"
+    if [ -e $pathOci8 ]; then
+        echo "extension=$pathOci8 " >> /etc/php/5.6/apache2/php.ini
+        echo -e "\n" >> /etc/php/5.6/apache2/php.ini
+        echo "extension=$pathOci8" >> /etc/php/5.6/cli/php.ini
+        echo -e "\n" >> /etc/php/5.6/cli/php.ini
+    fi
+
+    ################### Instala a .so do Xdebug ########################
+    pecl uninstall xdebug
+    pecl install xdebug
+    pathxdebug="/usr/lib/php/20131226/xdebug.so"
+
+    if [ -e $pathxdebug ]; then
+        echo "[XDebug]" >> /etc/php/5.6/apache2/php.ini
+        echo "zend_extension=$pathxdebug" >> /etc/php/5.6/apache2/php.ini
+        echo "xdebug.default_enable = 1" >> /etc/php/5.6/apache2/php.ini
+        echo "xdebug.show_exception_trace = 1" >> /etc/php/5.6/apache2/php.ini
+        echo "xdebug.show_local_vars = 1" >> /etc/php/5.6/apache2/php.ini
+        echo "xdebug.remote_enable = 1" >> /etc/php/5.6/apache2/php.ini
+        echo "xdebug.var_display_max_data   = 50000" >> /etc/php/5.6/apache2/php.ini
+        echo "xdebug.max_nesting_level = 250" >> /etc/php/5.6/apache2/php.ini
+        echo -e "\n" >> /etc/php/5.6/apache2/php.ini
+
+        echo "[XDebug]" >> /etc/php/5.6/cli/php.ini
+        echo "zend_extension=$pathxdebug" >> /etc/php/5.6/cli/php.ini
+        echo "xdebug.default_enable = 1" >> /etc/php/5.6/cli/php.ini
+        echo "xdebug.show_exception_trace = 1" >> /etc/php/5.6/cli/php.ini
+        echo "xdebug.show_local_vars = 1" >> /etc/php/5.6/cli/php.ini
+        echo "xdebug.remote_enable = 1" >> /etc/php/5.6/cli/php.ini
+        echo "xdebug.var_display_max_data   = 50000" >> /etc/php/5.6/cli/php.ini
+        echo "xdebug.max_nesting_level = 250" >> /etc/php/5.6/cli/php.ini
+        echo -e "\n" >> /etc/php/5.6/cli/php.ini
+    fi
+
+
+    ################### Instala a .so do dbase ########################
+    pecl uninstall dbase
+    pecl install dbase
+    pathdbase="/usr/lib/php/20131226/dbase.so"
+    if [[ -e $pathdbase ]]; then
+        echo "extension=$pathdbase" >> /etc/php/5.6/apache2/php.ini
+        echo -e "\n" >> /etc/php/5.6/apache2/php.ini
+        echo "extension=$pathdbase" >> /etc/php/5.6/cli/php.ini
+        echo -e "\n" >> /etc/php/5.6/cli/php.ini
+    fi
+
+    ################### Instala a mssql.so ########################
+    pathMssql="/Zanthus/Zeus/lib/mssql.so"
+    if [[ -e $pathMssql ]]; then
+        echo "extension=$pathMssql" >> /etc/php/5.6/apache2/php.ini
+        echo -e "\n" >> /etc/php/5.6/apache2/php.ini
+        echo "extension=$pathMssql" >> /etc/php/5.6/cli/php.ini
+        echo -e "\n" >> /etc/php/5.6/cli/php.ini
+    fi
+
+    #Configura Timezone e charset
+    echo "date.timezone = America/Sao_Paulo" >> /etc/php/5.6/apache2/php.ini
+    echo -e "\n" >> /etc/php/5.6/apache2/php.ini
+    echo -e "default_charset = \"ISO-8859-1\"" >> /etc/php/5.6/apache2/php.ini
+    echo -e "\n" >> /etc/php/5.6/apache2/php.ini
+
+    #Configura Timezone e charset
+    echo "date.timezone = America/Sao_Paulo" >> /etc/php/5.6/cli/php.ini
+    echo -e "\n" >> /etc/php/5.6/cli/php.ini
+    echo -e "default_charset = \"ISO-8859-1\"" >> /etc/php/5.6/cli/php.ini
+    echo -e "\n" >> /etc/php/5.6/cli/php.ini
+}
+
+instalarPHP7(){
+    apt-get install -y php
+    apt-get install -y php-dev
+    apt-get install -y php-curl
+    apt-get install -y php-json
+    apt-get install -y php-ldap
+    apt-get install -y php-odbc
+    apt-get install -y php-pgsql
+    apt-get install -y php-mcrypt
+    apt-get install -y php-sybase
+    apt-get install -y php-xml
+    apt-get install -y php-zip
+    apt-get install -y php-soap
+    apt-get install -y php-gd
+    apt-get install -y php-sqlite3
+    apt-get install -y php-memcached
+    apt-get install -y libapache2-mod-php
+
+    instalarOracleInstantClient
+
+    ###################  Instala a .so do oracle ######################
+    pecl install oci8
+    #Verifica se o caminho padrão para a pasta oracle existe
+    pathOci8="/usr/lib/php/20151012/oci8.so"
+    if [ -e $pathOci8 ]; then
+        echo "extension=$pathOci8" >> /etc/php/7.0/apache2/php.ini
+        echo -e "\n" >> /etc/php/7.0/apache2/php.ini
+        echo "extension=$pathOci8" >> /etc/php/7.0/cli/php.ini
+        echo -e "\n" >> /etc/php/7.0/cli/php.ini
+    fi
+
+    ################### Instala a .so do Xdebug ########################
+    pecl install xdebug
+    pathxdebug="/usr/lib/php/20151012/xdebug.so"
+
+    if [ -e $pathxdebug ]; then
+        echo "[XDebug]" >> /etc/php/7.0/apache2/php.ini
+        echo "zend_extension=$pathxdebug" >> /etc/php/7.0/apache2/php.ini
+        echo "xdebug.default_enable = 1" >> /etc/php/7.0/apache2/php.ini
+        echo "xdebug.show_exception_trace = 1" >> /etc/php/7.0/apache2/php.ini
+        echo "xdebug.show_local_vars = 1" >> /etc/php/7.0/apache2/php.ini
+        echo "xdebug.remote_enable = 1" >> /etc/php/7.0/apache2/php.ini
+        echo "xdebug.var_display_max_data   = 50000" >> /etc/php/7.0/apache2/php.ini
+        echo "xdebug.max_nesting_level = 250" >> /etc/php/7.0/apache2/php.ini
+        echo -e "\n" >> /etc/php/7.0/apache2/php.ini
+
+        echo "[XDebug]" >> /etc/php/7.0/cli/php.ini
+        echo "zend_extension=$pathxdebug" >> /etc/php/7.0/cli/php.ini
+        echo "xdebug.default_enable = 1" >> /etc/php/7.0/cli/php.ini
+        echo "xdebug.show_exception_trace = 1" >> /etc/php/7.0/cli/php.ini
+        echo "xdebug.show_local_vars = 1" >> /etc/php/7.0/cli/php.ini
+        echo "xdebug.remote_enable = 1" >> /etc/php/7.0/cli/php.ini
+        echo "xdebug.var_display_max_data   = 50000" >> /etc/php/7.0/cli/php.ini
+        echo "xdebug.max_nesting_level = 250" >> /etc/php/7.0/cli/php.ini
+        echo -e "\n" >> /etc/php/7.0/cli/php.ini
+    fi
+
+
+    ################### Instala a .so do dbase ########################
+    pecl install dbase
+    pathdbase="/usr/lib/php/20151012/dbase.so"
+    if [[ -e $pathdbase ]]; then
+        echo "extension=$pathdbase" >> /etc/php/7.0/apache2/php.ini
+        echo -e "\n" >> /etc/php/7.0/apache2/php.ini
+        echo "extension=$pathdbase" >> /etc/php/7.0/cli/php.ini
+        echo -e "\n" >> /etc/php/7.0/cli/php.ini
+    fi
+
+    #Configura Timezone e charset
+    echo "date.timezone = America/Sao_Paulo" >> /etc/php/7.0/apache2/php.ini
+    echo -e "\n" >> /etc/php/7.0/apache2/php.ini
+    echo -e "default_charset = \"ISO-8859-1\"" >> /etc/php/7.0/apache2/php.ini
+    echo -e "\n" >> /etc/php/7.0/apache2/php.ini
+
+    #Configura Timezone e charset
+    echo "date.timezone = America/Sao_Paulo" >> /etc/php/7.0/cli/php.ini
+    echo -e "\n" >> /etc/php/7.0/cli/php.ini
+    echo -e "default_charset = \"ISO-8859-1\"" >> /etc/php/5.6/cli/php.ini
+    echo -e "\n" >> /etc/php/7.0/cli/php.ini
+}
 
 teste(){
     echo "    Teste..."
@@ -1831,8 +1564,8 @@ mostrarAjuda(){
     echo -e "#    instalarWebStorm                                  instalarSwap                    #"
     echo -e "#    removerWebStorm                                   desabilitarSwap                 #"
     echo -e "#    instalarAmbienteServidorCentOs                    criarDebZanthus                 #"
-    echo -e "#    removerAmbienteServidorCentOs                                                     #"
-    echo -e "#    configurarWebProxy                                                                #"
+    echo -e "#    removerAmbienteServidorCentOs                     instalarPHP56                   #"
+    echo -e "#    configurarWebProxy                                instalarPHP7                    #"
     echo -e "#    configurarAptProxy                                                                #"
     echo -e "#    mostarProxy                                                                       #"
     echo -e "#    resetarProxy                                                                      #"
