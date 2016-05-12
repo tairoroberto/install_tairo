@@ -608,11 +608,19 @@ instalarGoogleChrome(){
         dpkg -i google-chrome-stable_current_amd64.deb
         rm -r google-chrome-stable_current_amd64.deb
     fi
+
+    if [[ $1 == "op" ]]; then
+        mostrarMenuOpcoes
+    fi
 }
 
 #Remove o navegador Google Chrome
 removerGoogleChrome(){
     apt-get -y purge google-chrome-stable
+
+    if [[ $1 == "op" ]]; then
+        mostrarMenuOpcoes
+    fi
 }
 
 #Instala o Editor de texto Sublime-Text 3 e o Notepad++
@@ -628,6 +636,10 @@ instalarSublime(){
         dpkg -i sublime-text_build-3083_amd64.deb
         rm -r sublime-text_build-3083_amd64.deb
     fi
+
+    if [[ $1 == "op" ]]; then
+        mostrarMenuOpcoes
+    fi
 }
 
 intalarNotePad(){
@@ -640,6 +652,10 @@ intalarNotePad(){
         wget -c "https://notepad-plus-plus.org/repository/6.x/6.8.6/npp.6.8.6.Installer.exe"
         wine npp.6.8.6.Installer.exe
         rm -r npp.6.8.6.Installer.exe
+    fi
+
+    if [[ $1 == "op" ]]; then
+        mostrarMenuOpcoes
     fi
 }
 
@@ -658,11 +674,19 @@ instalarDropbox(){
         dpkg -i dropbox.deb
         rm -r dropbox.deb
     fi
+
+    if [[ $1 == "op" ]]; then
+        mostrarMenuOpcoes
+    fi
 }
 
 removerDropbox(){
     #Desistala Dropbox
     apt-get -y purge dropbox
+
+    if [[ $1 == "op" ]]; then
+        mostrarMenuOpcoes
+    fi
 }
 
 
@@ -703,7 +727,6 @@ instalarPhpStorm(){
     if [[ $1 == "op" ]]; then
         mostrarMenuOpcoes
     fi
-
 }
 
 
@@ -824,7 +847,6 @@ instalarWebStorm(){
     if [[ $1 == "op" ]]; then
         mostrarMenuOpcoes
     fi
-
 }
 
 removerWebStorm(){
@@ -974,21 +996,30 @@ removerOracleInstantClient(){
     apt-get -y purge oracle-instantclient12.1-sqlplus
     apt-get -y purge oracle-instantclient12.1-tools
     rm -r /usr/lib/oracle
-    echo ""
-    read res
-    mostrarMenuOpcoes
+
+    if [[ $1 == "op" ]]; then
+        mostrarMenuOpcoes
+    fi
 }
 
 #Adiciona os lauchers na barra lateral do Unity para Unbutu
 #parametro 'usuario'
 adicionarLauchers(){
-     gsettings set com.canonical.Unity.Launcher favorites "['application://gnome-terminal.desktop', 'application://nautilus.desktop', 'application://google-chrome.desktop', 'application://firefox.desktop', 'application://phpstorm.desktop', 'application://android-studio.desktop', 'application://idea.desktop', 'application://clion.desktop', 'application://gedit.desktop', 'application://sublime_text.desktop', 'application://wine-Programs-Notepad++-Notepad++.desktop', 'application://virtualbox.desktop', 'application://filezilla.desktop', 'application://skype.desktop', 'application://spotify.desktop', 'application://rhythmbox.desktop', 'application://PlayOnLinux.desktop', 'application://ubuntu-software-center.desktop', 'application://dropbox.desktop', 'application://ntfs-config.desktop', 'application://unity-control-center.desktop', 'application://gnome-system-monitor.desktop', 'unity://running-apps', 'unity://expo-icon', 'unity://devices', 'unity://desktop-icon']"
+    gsettings set com.canonical.Unity.Launcher favorites "['application://gnome-terminal.desktop', 'application://nautilus.desktop', 'application://google-chrome.desktop', 'application://firefox.desktop', 'application://phpstorm.desktop', 'application://android-studio.desktop', 'application://idea.desktop', 'application://clion.desktop', 'application://gedit.desktop', 'application://sublime_text.desktop', 'application://wine-Programs-Notepad++-Notepad++.desktop', 'application://virtualbox.desktop', 'application://filezilla.desktop', 'application://skype.desktop', 'application://spotify.desktop', 'application://rhythmbox.desktop', 'application://PlayOnLinux.desktop', 'application://ubuntu-software-center.desktop', 'application://dropbox.desktop', 'application://ntfs-config.desktop', 'application://unity-control-center.desktop', 'application://gnome-system-monitor.desktop', 'unity://running-apps', 'unity://expo-icon', 'unity://devices', 'unity://desktop-icon']"
+
+    if [[ $1 == "op" ]]; then
+        mostrarMenuOpcoes
+    fi
 }
 
 #Remove os lauchers na barra lateral do Unity para Unbutu
 #parametro 'usuario'
 removerLauchers(){
-     gsettings reset com.canonical.Unity.Launcher favorites
+    gsettings reset com.canonical.Unity.Launcher favorites
+
+    if [[ $1 == "op" ]]; then
+        mostrarMenuOpcoes
+    fi
 }
 
 
@@ -996,120 +1027,121 @@ criarDebZanthus(){
 ########################### Libs da Zanthus #################################
 
     cd /tmp/
-    if [ ! -d /tmp/Zanthus-Server-Debian  ]; then
-        echo "Criando e baixando bibliotecas..."
-        criarDiretorio "/tmp/Zanthus-Server-Debian/DEBIAN"
-        criarDiretorio "/tmp/Zanthus-Server-Debian/Zanthus/Zeus/lib"
+    rm -r -f /tmp/Zanthus-Server-Debian
 
-        # Abre o diretório
-        cd /tmp/Zanthus-Server-Debian/Zanthus/Zeus/lib
+    echo "Criando e baixando bibliotecas..."
+    criarDiretorio "/tmp/Zanthus-Server-Debian/DEBIAN"
+    criarDiretorio "/tmp/Zanthus-Server-Debian/Zanthus/Zeus/lib"
 
-        # baixa as Libs
-        wget -c ftp://ftp.zanthus.com.br/pub/Zeus_Frente_de_Loja/_Complementares/so/* .
-        wget -c ftp://ftp.zanthus.com.br/pub/Zeus_Frente_de_Loja/_Complementares/so_r64/* .
-        wget -c ftp://ftp.zanthus.com.br/pub/Zeus_Frente_de_Loja/_Complementares/KernD/v2_1/*.so .
-        wget -c ftp://ftp.zanthus.com.br/pub/Zeus_Frente_de_Loja/v_1_X_44/KC_ZMAN_1_X_44_256_CZ.EXL
-        wget -c ftp://ftp.zanthus.com.br/interno/Tairo/Kernz_php5.6/kernz.so --ftp-user=kassio.matos --ftp-password=zanthus1 .
-        wget -c ftp://ftp.zanthus.com.br/interno/Tairo/mssql/php5.6/mssql.so --ftp-user=kassio.matos --ftp-password=zanthus1 .
-        wget -c ftp://ftp.zanthus.com.br/interno/Tairo/Kernz_php5.6/ZendGuardLoader.so --ftp-user=kassio.matos --ftp-password=zanthus1 .
-        mv KC_ZMAN_1_X_44_256_CZ.EXL KC_ZMAN_1_X_44_256_CZ.tar.gz
+    # Abre o diretório
+    cd /tmp/Zanthus-Server-Debian/Zanthus/Zeus/lib
 
-        versao=$(uname -i)
-        if [[  $versao == "i386" || $versao == "i486" || $versao == "i686" ]]; then
-            tar vxf KC_ZMAN_1_X_44_256_CZ.tar.gz  lib_rotkernC_CZ.so.rh9
-        else
-            tar vxf KC_ZMAN_1_X_44_256_CZ.tar.gz  lib_rotkernC_CZ.so.r64
-        fi
+    # baixa as Libs
+    wget -c ftp://ftp.zanthus.com.br/pub/Zeus_Frente_de_Loja/_Complementares/so/* .
+    wget -c ftp://ftp.zanthus.com.br/pub/Zeus_Frente_de_Loja/_Complementares/so_r64/* .
+    wget -c ftp://ftp.zanthus.com.br/pub/Zeus_Frente_de_Loja/_Complementares/KernD/v2_1/*.so .
+    wget -c ftp://ftp.zanthus.com.br/pub/Zeus_Frente_de_Loja/v_1_X_44/KC_ZMAN_1_X_44_256_CZ.EXL
+    wget -c ftp://ftp.zanthus.com.br/interno/Tairo/Kernz_php5.6/kernz.so --ftp-user=kassio.matos --ftp-password=zanthus1 .
+    wget -c ftp://ftp.zanthus.com.br/interno/Tairo/mssql/php5.6/mssql.so --ftp-user=kassio.matos --ftp-password=zanthus1 .
+    wget -c ftp://ftp.zanthus.com.br/interno/Tairo/Kernz_php5.6/ZendGuardLoader.so --ftp-user=kassio.matos --ftp-password=zanthus1 .
+    mv KC_ZMAN_1_X_44_256_CZ.EXL KC_ZMAN_1_X_44_256_CZ.tar.gz
 
-        #Remove o pacote baixado
-        rm -f -r KC_ZMAN_1_X_44_256_CZ.tar.gz
-
-        cd /tmp/Zanthus-Server-Debian
-        # Cria e escreve no arquivo de informações
-        touch /tmp/Zanthus-Server-Debian/DEBIAN/control
-        chmod -R 755 /tmp/Zanthus-Server-Debian/DEBIAN/control
-
-        echo -e "Section: misc" >> /tmp/Zanthus-Server-Debian/DEBIAN/control
-        echo -e "Priority: optional" >> /tmp/Zanthus-Server-Debian/DEBIAN/control
-        echo -e "Package: Zanthus-Server-Debian" >> /tmp/Zanthus-Server-Debian/DEBIAN/control
-        echo -e "Version: 1.0" >> /tmp/Zanthus-Server-Debian/DEBIAN/control
-        echo -e "Maintainer: Tairo Roberto Miguel de Assunção" >> /tmp/Zanthus-Server-Debian/DEBIAN/control
-        echo -e "Depends:" >> /tmp/Zanthus-Server-Debian/DEBIAN/control
-        echo -e "Architecture: all" >> /tmp/Zanthus-Server-Debian/DEBIAN/control
-        echo -e "Description: Pacotes de instalação para rodar servidor MANAGER com php e apache." >> /tmp/Zanthus-Server-Debian/DEBIAN/control
-
-        touch /tmp/Zanthus-Server-Debian/DEBIAN/preinst
-        chmod -R 755 /tmp/Zanthus-Server-Debian/DEBIAN/preinst
-        echo -e "#!/bin/sh" >> /tmp/Zanthus-Server-Debian/DEBIAN/preinst
-        echo -e "\n" >> /tmp/Zanthus-Server-Debian/DEBIAN/preinst
-        echo -e "ln -s -f /lib/x86_64-linux-gnu/libcrypto.so.1.0.0 /lib/x86_64-linux-gnu/libcrypto.so.6" >> /tmp/Zanthus-Server-Debian/DEBIAN/preinst
-        echo -e "ln -s -f /lib/x86_64-linux-gnu/libssl.so.1.0.0 /lib/x86_64-linux-gnu/libssl.so.6" >> /tmp/Zanthus-Server-Debian/DEBIAN/preinst
-        echo -e "ldconfig" >> /tmp/Zanthus-Server-Debian/DEBIAN/preinst
-
-        cd /tmp
-        dpkg-deb -b /tmp/Zanthus-Server-Debian /tmp/
-
-        cd ~
-        mv /tmp/zanthus-server-debian_1.0_all.deb  $(pwd)/Zanthus-Server-Debian.deb
-        dpkg -i $(pwd)/Zanthus-Server-Debian.deb
-        ldconfig
-        rm -f -r /tmp/Zanthus-Server-Debian
-        rm -f -r $(pwd)/Zanthus-Server-Debian.deb
-
-        capturarVersaoPhp
-
-        #Insere a Kernz no .ini do Php e Apache para php5.6
-        if [[ $phpVersion == 1 ]]; then
-            pathkernz="/Zanthus/Zeus/lib/kernz.so"
-            if [ -e $pathkernz ]; then
-                echo "extension=$pathkernz" >> /etc/php/5.6/apache2/php.ini
-                echo -e "\n" >> /etc/php/5.6/apache2/php.ini
-                echo "extension=$pathkernz" >> /etc/php/5.6/cli/php.ini
-                echo -e "\n" >> /etc/php/5.6/cli/php.ini
-            fi
-            pathZendGuardLoader="/Zanthus/Zeus/lib/ZendGuardLoader.so"
-            if [ -e $pathZendGuardLoader ]; then
-                echo "zend_extension=$pathZendGuardLoader" >> /etc/php/5.6/apache2/php.ini
-                echo -e "\n" >> /etc/php/5.6/apache2/php.ini
-                echo "zend_extension=$pathZendGuardLoader" >> /etc/php/5.6/cli/php.ini
-                echo -e "\n" >> /etc/php/5.6/cli/php.ini
-            fi
-            pathMssql="/Zanthus/Zeus/lib/mssql.so"
-            if [ -e $pathMssql ]; then
-                echo "extension=$pathMssql" >> /etc/php/5.6/apache2/php.ini
-                echo -e "\n" >> /etc/php/5.6/apache2/php.ini
-                echo "extension=$pathMssql" >> /etc/php/5.6/cli/php.ini
-                echo -e "\n" >> /etc/php/5.6/cli/php.ini
-            fi
-        fi
-
-        #Insere a Kernz no .ini do Php e Apache para ph7.0
-        if [[ $phpVersion == 2 ]]; then
-            pathkernz="/Zanthus/Zeus/lib/kernz.so"
-            if [ -e $pathkernz ]; then
-                echo "extension=$pathkernz" >> /etc/php/7.0/apache2/php.ini
-                echo -e "\n" >> /etc/php/7.0/apache2/php.ini
-                echo "extension=$pathkernz" >> /etc/php/7.0/cli/php.ini
-                echo -e "\n" >> /etc/php/7.0/cli/php.ini
-            fi
-            pathZendGuardLoader="/Zanthus/Zeus/lib/ZendGuardLoader.so"
-            if [ -e $pathZendGuardLoader ]; then
-                echo "zend_extension=$pathZendGuardLoader" >> /etc/php/7.0/apache2/php.ini
-                echo -e "\n" >> /etc/php/7.0/apache2/php.ini
-                echo "zend_extension=$pathZendGuardLoader" >> /etc/php/7.0/cli/php.ini
-                echo -e "\n" >> /etc/php/7.0/cli/php.ini
-            fi
-            pathMssql="/Zanthus/Zeus/lib/mssql.so"
-            if [ -e $pathMssql ]; then
-                echo "extension=$pathMssql" >> /etc/php/7.0/apache2/php.ini
-                echo -e "\n" >> /etc/php/7.0/apache2/php.ini
-                echo "extension=$pathMssql" >> /etc/php/7.0/cli/php.ini
-                echo -e "\n" >> /etc/php/7.0/cli/php.ini
-            fi
-        fi
-
+    versao=$(uname -i)
+    if [[  $versao == "i386" || $versao == "i486" || $versao == "i686" ]]; then
+        tar vxf KC_ZMAN_1_X_44_256_CZ.tar.gz  lib_rotkernC_CZ.so.rh9
     else
-        echo "Pacote Zanthus-Server-Debian já existe..."
+        tar vxf KC_ZMAN_1_X_44_256_CZ.tar.gz  lib_rotkernC_CZ.so.r64
+    fi
+
+    #Remove o pacote baixado
+    rm -f -r KC_ZMAN_1_X_44_256_CZ.tar.gz
+
+    cd /tmp/Zanthus-Server-Debian
+    # Cria e escreve no arquivo de informações
+    touch /tmp/Zanthus-Server-Debian/DEBIAN/control
+    chmod -R 755 /tmp/Zanthus-Server-Debian/DEBIAN/control
+
+    echo -e "Section: misc" >> /tmp/Zanthus-Server-Debian/DEBIAN/control
+    echo -e "Priority: optional" >> /tmp/Zanthus-Server-Debian/DEBIAN/control
+    echo -e "Package: Zanthus-Server-Debian" >> /tmp/Zanthus-Server-Debian/DEBIAN/control
+    echo -e "Version: 1.0" >> /tmp/Zanthus-Server-Debian/DEBIAN/control
+    echo -e "Maintainer: Tairo Roberto Miguel de Assunção" >> /tmp/Zanthus-Server-Debian/DEBIAN/control
+    echo -e "Depends:" >> /tmp/Zanthus-Server-Debian/DEBIAN/control
+    echo -e "Architecture: all" >> /tmp/Zanthus-Server-Debian/DEBIAN/control
+    echo -e "Description: Pacotes de instalação para rodar servidor MANAGER com php e apache." >> /tmp/Zanthus-Server-Debian/DEBIAN/control
+
+    touch /tmp/Zanthus-Server-Debian/DEBIAN/preinst
+    chmod -R 755 /tmp/Zanthus-Server-Debian/DEBIAN/preinst
+    echo -e "#!/bin/sh" >> /tmp/Zanthus-Server-Debian/DEBIAN/preinst
+    echo -e "\n" >> /tmp/Zanthus-Server-Debian/DEBIAN/preinst
+    echo -e "ln -s -f /lib/x86_64-linux-gnu/libcrypto.so.1.0.0 /lib/x86_64-linux-gnu/libcrypto.so.6" >> /tmp/Zanthus-Server-Debian/DEBIAN/preinst
+    echo -e "ln -s -f /lib/x86_64-linux-gnu/libssl.so.1.0.0 /lib/x86_64-linux-gnu/libssl.so.6" >> /tmp/Zanthus-Server-Debian/DEBIAN/preinst
+    echo -e "ldconfig" >> /tmp/Zanthus-Server-Debian/DEBIAN/preinst
+
+    cd /tmp
+    dpkg-deb -b /tmp/Zanthus-Server-Debian /tmp/
+
+    cd ~
+    mv /tmp/zanthus-server-debian_1.0_all.deb  $(pwd)/Zanthus-Server-Debian.deb
+    dpkg -i $(pwd)/Zanthus-Server-Debian.deb
+    ldconfig
+    rm -f -r /tmp/Zanthus-Server-Debian
+    rm -f -r $(pwd)/Zanthus-Server-Debian.deb
+
+    capturarVersaoPhp
+
+    #Insere a Kernz no .ini do Php e Apache para php5.6
+    if [[ $phpVersion == 1 ]]; then
+        pathkernz="/Zanthus/Zeus/lib/kernz.so"
+        if [[ -e $pathkernz && -e /etc/php/5.6/apache2/php.ini ]]; then
+            echo "extension=$pathkernz" >> /etc/php/5.6/apache2/php.ini
+            echo -e "\n" >> /etc/php/5.6/apache2/php.ini
+            echo "extension=$pathkernz" >> /etc/php/5.6/cli/php.ini
+            echo -e "\n" >> /etc/php/5.6/cli/php.ini
+        fi
+        pathZendGuardLoader="/Zanthus/Zeus/lib/ZendGuardLoader.so"
+        if [[ -e $pathZendGuardLoader && -e /etc/php/5.6/apache2/php.ini ]]; then
+            echo "zend_extension=$pathZendGuardLoader" >> /etc/php/5.6/apache2/php.ini
+            echo -e "\n" >> /etc/php/5.6/apache2/php.ini
+            echo "zend_extension=$pathZendGuardLoader" >> /etc/php/5.6/cli/php.ini
+            echo -e "\n" >> /etc/php/5.6/cli/php.ini
+        fi
+        pathMssql="/Zanthus/Zeus/lib/mssql.so"
+        if [[ -e $pathMssql && -e /etc/php/5.6/apache2/php.ini ]]; then
+            echo "extension=$pathMssql" >> /etc/php/5.6/apache2/php.ini
+            echo -e "\n" >> /etc/php/5.6/apache2/php.ini
+            echo "extension=$pathMssql" >> /etc/php/5.6/cli/php.ini
+            echo -e "\n" >> /etc/php/5.6/cli/php.ini
+        fi
+    fi
+
+    #Insere a Kernz no .ini do Php e Apache para ph7.0
+    if [[ $phpVersion == 2 ]]; then
+        pathkernz="/Zanthus/Zeus/lib/kernz.so"
+        if [[ -e $pathkernz && -e /etc/php/7.0/apache2/php.ini ]]; then
+            echo "extension=$pathkernz" >> /etc/php/7.0/apache2/php.ini
+            echo -e "\n" >> /etc/php/7.0/apache2/php.ini
+            echo "extension=$pathkernz" >> /etc/php/7.0/cli/php.ini
+            echo -e "\n" >> /etc/php/7.0/cli/php.ini
+        fi
+        pathZendGuardLoader="/Zanthus/Zeus/lib/ZendGuardLoader.so"
+        if [[ -e $pathZendGuardLoader && -e /etc/php/7.0/apache2/php.ini ]]; then
+            echo "zend_extension=$pathZendGuardLoader" >> /etc/php/7.0/apache2/php.ini
+            echo -e "\n" >> /etc/php/7.0/apache2/php.ini
+            echo "zend_extension=$pathZendGuardLoader" >> /etc/php/7.0/cli/php.ini
+            echo -e "\n" >> /etc/php/7.0/cli/php.ini
+        fi
+        pathMssql="/Zanthus/Zeus/lib/mssql.so"
+        if [[ -e $pathMssql && -e /etc/php/7.0/apache2/php.ini ]]; then
+            echo "extension=$pathMssql" >> /etc/php/7.0/apache2/php.ini
+            echo -e "\n" >> /etc/php/7.0/apache2/php.ini
+            echo "extension=$pathMssql" >> /etc/php/7.0/cli/php.ini
+            echo -e "\n" >> /etc/php/7.0/cli/php.ini
+        fi
+    fi
+
+    if [[ $1 == "op" ]]; then
+        mostrarMenuOpcoes
     fi
     ########################### Libs da Zanthus #################################
 }
@@ -1122,6 +1154,10 @@ removerLibsZanthus(){
 
     #Reconfigura carregamento de bibliotecas
     ldconfig
+
+    if [[ $1 == "op" ]]; then
+        mostrarMenuOpcoes
+    fi
 }
 
 
@@ -1137,6 +1173,9 @@ instalarSpotify(){
     dpkg -i libgcrypt11_1.5.3-2ubuntu4.2_amd64.deb
     sudo apt-get -y install spotify-client-0.9.17
 
+    if [[ $1 == "op" ]]; then
+        mostrarMenuOpcoes
+    fi
 }
 
 #Rmove cliente de audio do spotify
@@ -1144,6 +1183,10 @@ removerSpotify(){
     apt-get -y purge spotify-client
     apt-get -y autoremove
     add-apt-repository --remove 'deb http://repository.spotify.com stable non-free'
+
+    if [[ $1 == "op" ]]; then
+        mostrarMenuOpcoes
+    fi
 }
 
 
@@ -1153,11 +1196,19 @@ instalarVirtualBox(){
     wget -c http://download.virtualbox.org/virtualbox/5.0.18/Oracle_VM_VirtualBox_Extension_Pack-5.0.18-106667.vbox-extpack
     virtualbox Oracle_VM_VirtualBox_Extension_Pack-5.0.18-106667.vbox-extpack
     rm -f -r Oracle_VM_VirtualBox_Extension_Pack-5.0.18-106667.vbox-extpack
+
+    if [[ $1 == "op" ]]; then
+        mostrarMenuOpcoes
+    fi
 }
 
 #Desistala virtualbox para rodar maquinas virtuais
 removerVirtualBox(){
     apt-get -y purge virtualbox
+
+    if [[ $1 == "op" ]]; then
+        mostrarMenuOpcoes
+    fi
 }
 
 #instala repositorio para Java 8
@@ -1166,6 +1217,10 @@ instalarJava(){
     apt-get update
     #Instala java 8
     apt-get -y install oracle-java8-installer
+
+    if [[ $1 == "op" ]]; then
+        mostrarMenuOpcoes
+    fi
 }
 
 #Remove repositorio para Java 8
@@ -1174,16 +1229,28 @@ removerJava(){
     apt-get update
     #Desistala java 8
     apt-get -y purge oracle-java8-installer
+
+    if [[ $1 == "op" ]]; then
+        mostrarMenuOpcoes
+    fi
 }
 
 #Instala wine para rodar programas do windows
 instalarWine(){
     apt-get -y install wine
+
+    if [[ $1 == "op" ]]; then
+        mostrarMenuOpcoes
+    fi
 }
 
 #Remove wine para rodar programas do windows
 removerWine(){
     apt-get -y purge wine
+
+    if [[ $1 == "op" ]]; then
+        mostrarMenuOpcoes
+    fi
 }
 
 #instala repositorio para Android Studio
@@ -1192,6 +1259,10 @@ instalarAndroidStudio(){
     apt-get update
     #Instala Android Studio IDE Android
     apt-get -y install android-studio
+
+    if [[ $1 == "op" ]]; then
+        mostrarMenuOpcoes
+    fi
 }
 
 removerAndroidStudio(){
@@ -1200,16 +1271,29 @@ removerAndroidStudio(){
     apt-get update
     #Desistala Android Studio IDE Android
     apt-get -y purge android-studio
+
+    if [[ $1 == "op" ]]; then
+        mostrarMenuOpcoes
+    fi
 }
 
 #Instala Steam
 instalarSteam(){
     apt-get -y install steam
+
+    if [[ $1 == "op" ]]; then
+        mostrarMenuOpcoes
+    fi
 }
 
 #Desistala Steam
 removerSteam(){
-    apt-get -y install steam
+    apt-get -y purge steam
+
+    if [[ $1 == "op" ]]; then
+        mostrarMenuOpcoes
+    fi
+
 }
 
 #Monta uma partição de Swap de 8GB
@@ -1217,6 +1301,10 @@ instalarSwap(){
     dd if=/dev/zero of=/swapfile bs=1024 count=8388608
     mkswap /swapfile
     echo "/swapfile swap swap defaults 0 0 " >> /etc/fstab
+
+    if [[ $1 == "op" ]]; then
+        mostrarMenuOpcoes
+    fi
 }
 
 #Desabilita Swap
@@ -1373,7 +1461,7 @@ instalarPHP56(){
     pecl install xdebug
     pathxdebug="/usr/lib/php/20131226/xdebug.so"
 
-    if [ -e $pathxdebug ]; then
+    if [[ -e $pathxdebug && -e /etc/php/5.6/apache2/php.ini ]]; then
         echo "[XDebug]" >> /etc/php/5.6/apache2/php.ini
         echo "zend_extension=$pathxdebug" >> /etc/php/5.6/apache2/php.ini
         echo "xdebug.default_enable = 1" >> /etc/php/5.6/apache2/php.ini
@@ -1400,7 +1488,7 @@ instalarPHP56(){
     pecl uninstall dbase
     pecl install dbase
     pathdbase="/usr/lib/php/20131226/dbase.so"
-    if [[ -e $pathdbase ]]; then
+    if [[ -e $pathdbase && -e /etc/php/5.6/apache2/php.ini ]]; then
         echo "extension=$pathdbase" >> /etc/php/5.6/apache2/php.ini
         echo -e "\n" >> /etc/php/5.6/apache2/php.ini
         echo "extension=$pathdbase" >> /etc/php/5.6/cli/php.ini
@@ -1409,7 +1497,7 @@ instalarPHP56(){
 
     ################### Instala a mssql.so ########################
     pathMssql="/Zanthus/Zeus/lib/mssql.so"
-    if [[ -e $pathMssql ]]; then
+    if [[ -e $pathMssql && -e /etc/php/5.6/apache2/php.ini ]]; then
         echo "extension=$pathMssql" >> /etc/php/5.6/apache2/php.ini
         echo -e "\n" >> /etc/php/5.6/apache2/php.ini
         echo "extension=$pathMssql" >> /etc/php/5.6/cli/php.ini
@@ -1427,6 +1515,10 @@ instalarPHP56(){
     echo -e "\n" >> /etc/php/5.6/cli/php.ini
     echo -e "default_charset = \"ISO-8859-1\"" >> /etc/php/5.6/cli/php.ini
     echo -e "\n" >> /etc/php/5.6/cli/php.ini
+
+    if [[ $1 == "op" ]]; then
+        mostrarMenuOpcoes
+    fi
 }
 
 instalarPHP7(){
@@ -1453,7 +1545,7 @@ instalarPHP7(){
     pecl install oci8
     #Verifica se o caminho padrão para a pasta oracle existe
     pathOci8="/usr/lib/php/20151012/oci8.so"
-    if [ -e $pathOci8 ]; then
+    if [[ -e $pathOci8 && -e /etc/php/7.0/apache2/php.ini ]]; then
         echo "extension=$pathOci8" >> /etc/php/7.0/apache2/php.ini
         echo -e "\n" >> /etc/php/7.0/apache2/php.ini
         echo "extension=$pathOci8" >> /etc/php/7.0/cli/php.ini
@@ -1464,7 +1556,7 @@ instalarPHP7(){
     pecl install xdebug
     pathxdebug="/usr/lib/php/20151012/xdebug.so"
 
-    if [ -e $pathxdebug ]; then
+    if [[ -e $pathxdebug && -e /etc/php/7.0/apache2/php.ini ]]; then
         echo "[XDebug]" >> /etc/php/7.0/apache2/php.ini
         echo "zend_extension=$pathxdebug" >> /etc/php/7.0/apache2/php.ini
         echo "xdebug.default_enable = 1" >> /etc/php/7.0/apache2/php.ini
@@ -1490,7 +1582,7 @@ instalarPHP7(){
     ################### Instala a .so do dbase ########################
     pecl install dbase
     pathdbase="/usr/lib/php/20151012/dbase.so"
-    if [[ -e $pathdbase ]]; then
+    if [[ -e $pathdbase && -e /etc/php/7.0/apache2/php.ini ]]; then
         echo "extension=$pathdbase" >> /etc/php/7.0/apache2/php.ini
         echo -e "\n" >> /etc/php/7.0/apache2/php.ini
         echo "extension=$pathdbase" >> /etc/php/7.0/cli/php.ini
@@ -1508,77 +1600,70 @@ instalarPHP7(){
     echo -e "\n" >> /etc/php/7.0/cli/php.ini
     echo -e "default_charset = \"ISO-8859-1\"" >> /etc/php/5.6/cli/php.ini
     echo -e "\n" >> /etc/php/7.0/cli/php.ini
+
+    if [[ $1 == "op" ]]; then
+        mostrarMenuOpcoes
+    fi
 }
 
 teste(){
+    clear
     echo "    Teste..."
-    read res
 
-    mostrarMenuOpcoes
+    if [[ $1 == "op" ]]; then
+        mostrarMenuOpcoes
+    fi
 }
 
 mostrarAjuda(){
     clear
-    echo "    #######################################################################################"
-    echo "    #                           Menu de ajuda para script linux                           #"
-    echo "    #######################################################################################"
-    echo -e "\n"
-    echo -e "    Este script contém as principais aplicações para montar o ambiente"
-    echo -e "    desenvolvimento."
-    echo -e "    Não são mostradas as opções 9,10,11,12,13,14,15,16 e 79"
-    echo -e "     9 - Instalação da IDE PhpStorm"
-    echo -e "    10 - Remove IDE PhpStorm"
-    echo -e "    11 - Instalação da IDE Intellij-IDEA"
-    echo -e "    12 - Remove IDE Intellij-IDEA"
-    echo -e "    13 - Instalação IDE Clion"
-    echo -e "    14 - Remove IDE Clion"
-    echo -e "    15 - Monta o Ambiente de desenvolvimento com PhpStorm, Intellij-IDEA e Clion"
-    echo -e "    16 - Remove o Ambiente de desenvolvimento instalado na opção 15"
-    echo -e "    79 - opção de teste"
-    echo -e "\n"
-    echo -e "\n"
-    echo -e "#--------------------------------------------------------------------------------------#"
-    echo -e "#                                 METODOS DO SCRIP                                     #"
-    echo -e "#--------------------------------------------------------------------------------------#"
-    echo -e "#    mostrarMenuOpcoes                                                                 #"
-    echo -e "#    capturaUsuario                                    instalarAmbienteServidorUbuntu  #"
-    echo -e "#    listarDiretorio                                   removerAmbienteServidorUbuntu   #"
-    echo -e "#    criarDiretorio                                    instalarOracleInstantClient     #"
-    echo -e "#    versaoLinux                                       removerOracleInstantClient      #"
-    echo -e "#    instalarAmbienteDesenvolvimento                   adicionarLauchers               #"
-    echo -e "#    removerAmbienteDesenvolvimento                    removerLauchers                 #"
-    echo -e "#    instalarEclipse                                   instalarLibsZanthus             #"
-    echo -e "#    removerEclipse                                    removerLibsZanthus              #"
-    echo -e "#    instalarGoogleChrome                              instalarSpotify                 #"
-    echo -e "#    removerGoogleChrome                               removerSpotify                  #"
-    echo -e "#    instalarSublime                                   instalarVirtualBox              #"
-    echo -e "#    intalarNotePad                                    removerVirtualBox               #"
-    echo -e "#    instalarDropbox                                   instalarJava                    #"
-    echo -e "#    removerDropbox                                    removerJava                     #"
-    echo -e "#    instalarPhpStorm                                  instalarWine                    #"
-    echo -e "#    removerPhpStorm                                   removerWine                     #"
-    echo -e "#    instalarIntelliJ                                  instalarAndroidStudio           #"
-    echo -e "#    removerIntelliJ                                   removerAndroidStudio            #"
-    echo -e "#    instalarClion                                     instalarSteam                   #"
-    echo -e "#    removerClion                                      removerSteam                    #"
-    echo -e "#    instalarWebStorm                                  instalarSwap                    #"
-    echo -e "#    removerWebStorm                                   desabilitarSwap                 #"
-    echo -e "#    instalarAmbienteServidorCentOs                    criarDebZanthus                 #"
-    echo -e "#    removerAmbienteServidorCentOs                     instalarPHP56                   #"
-    echo -e "#    configurarWebProxy                                instalarPHP7                    #"
-    echo -e "#    configurarAptProxy                                                                #"
-    echo -e "#    mostarProxy                                                                       #"
-    echo -e "#    resetarProxy                                                                      #"
-    echo -e "#                                                                                      #"
-    echo -e "#                                                                                      #"
-    echo -e "#    teste                                                                             #"
-    echo -e "########################################################################################"
+    echo    "    ########################################################################################"
+    echo    "    #                           Menu de ajuda para script linux                            #"
+    echo    "    ########################################################################################"
+    echo -e "    #--------------------------------------------------------------------------------------#"
+    echo -e "    #                                 METODOS DO SCRIP                                     #"
+    echo -e "    #--------------------------------------------------------------------------------------#"
+    echo -e "    #    mostrarMenuOpcoes                                                                 #"
+    echo -e "    #    capturaUsuario                                    instalarAmbienteServidorUbuntu  #"
+    echo -e "    #    listarDiretorio                                   removerAmbienteServidorUbuntu   #"
+    echo -e "    #    criarDiretorio                                    instalarOracleInstantClient     #"
+    echo -e "    #    versaoLinux                                       removerOracleInstantClient      #"
+    echo -e "    #    instalarAmbienteDesenvolvimento                   adicionarLauchers               #"
+    echo -e "    #    removerAmbienteDesenvolvimento                    removerLauchers                 #"
+    echo -e "    #    instalarEclipse                                   criarDebZanthus                 #"
+    echo -e "    #    removerEclipse                                    removerLibsZanthus              #"
+    echo -e "    #    instalarGoogleChrome                              instalarSpotify                 #"
+    echo -e "    #    removerGoogleChrome                               removerSpotify                  #"
+    echo -e "    #    instalarSublime                                   instalarVirtualBox              #"
+    echo -e "    #    intalarNotePad                                    removerVirtualBox               #"
+    echo -e "    #    instalarDropbox                                   instalarJava                    #"
+    echo -e "    #    removerDropbox                                    removerJava                     #"
+    echo -e "    #    instalarPhpStorm                                  instalarWine                    #"
+    echo -e "    #    removerPhpStorm                                   removerWine                     #"
+    echo -e "    #    instalarIntelliJ                                  instalarAndroidStudio           #"
+    echo -e "    #    removerIntelliJ                                   removerAndroidStudio            #"
+    echo -e "    #    instalarClion                                     instalarSteam                   #"
+    echo -e "    #    removerClion                                      removerSteam                    #"
+    echo -e "    #    instalarWebStorm                                  instalarSwap                    #"
+    echo -e "    #    removerWebStorm                                   desabilitarSwap                 #"
+    echo -e "    #    instalarAmbienteServidorCentOs                    instalarPHP56                   #"
+    echo -e "    #    removerAmbienteServidorCentOs                     instalarPHP7                    #"
+    echo -e "    #    configurarWebProxy                                                                #"
+    echo -e "    #    configurarAptProxy                                                                #"
+    echo -e "    #    mostarProxy                                                                       #"
+    echo -e "    #    resetarProxy                                                                      #"
+    echo -e "    #                                                                                      #"
+    echo -e "    #    teste                                                                             #"
+    echo -e "    ########################################################################################"
+    echo    "    ########################################################################################"
+    echo    "    #                       DIGITE O NOME DA TAREFA A SER EXECUTADA                        #"
+    echo    "    ########################################################################################"
 	read res
 
 	if [[ $res == "" ]]; then
 	    mostrarMenuOpcoes
     else
-	    $res
+	    $res "op"
 	fi
 
 }
