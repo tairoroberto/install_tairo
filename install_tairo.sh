@@ -694,8 +694,10 @@ removerDropbox(){
 instalarPhpStorm(){
     clear
     cd ~
-    wget -c https://download.jetbrains.com/webide/PhpStorm-2016.1.tar.gz
-    tar -zxvf PhpStorm-2016.1.tar.gz
+    wget -c https://download.jetbrains.com/webide/PhpStorm-2016.1.1.tar.gz
+    tar -zxvf PhpStorm-2016.1.1.tar.gz
+    rm -f PhpStorm-2016.1.1.tar.gz
+    
     mv PhpStorm-* /opt/PhpStorm
     chmod +x /opt/PhpStorm/bin/phpstorm.sh
     chmod -R 777 /opt/PhpStorm
@@ -721,8 +723,6 @@ instalarPhpStorm(){
     echo "Type=Application" >> /usr/share/applications/phpstorm.desktop
     echo "Categories=GNOME;Application;Development;" >> /usr/share/applications/phpstorm.desktop
     echo "StartupNotify=true" >> /usr/share/applications/phpstorm.desktop
-
-    rm -r PhpStorm-2016.1.tar.gz
 
     if [[ $1 == "op" ]]; then
         mostrarMenuOpcoes
@@ -755,8 +755,10 @@ removerPhpStorm(){
 # IDE de desenvolvimento JAVA #
 instalarIntelliJ(){
     cd ~
-    wget -c https://download.jetbrains.com/idea/ideaIU-2016.1.1.tar.gz
-    tar -zxvf ideaIU-2016.1.1.tar.gz
+    wget -c https://download.jetbrains.com/idea/ideaIU-2016.1.2.tar.gz
+    tar -zxvf ideaIU-2016.1.2.tar.gz
+    rm -f ideaIU-2016.1.2.tar.gz
+
     mv idea-IU-* /opt/IntelliJ-IDEA
     chmod +x /opt/IntelliJ-IDEA/bin/idea.sh
     chmod -R 777 /opt/IntelliJ-IDEA
@@ -782,8 +784,6 @@ instalarIntelliJ(){
     echo "Type=Application" >> /usr/share/applications/idea.desktop
     echo "Categories=GNOME;Application;Development;" >> /usr/share/applications/idea.desktop
     echo "StartupNotify=true" >> /usr/share/applications/idea.desktop
-
-    rm -r ideaIU-2016.1.1.tar.gz
 
     if [[ $1 == "op" ]]; then
         mostrarMenuOpcoes
@@ -814,8 +814,10 @@ removerIntelliJ(){
 instalarWebStorm(){
     clear
     cd ~
-    wget -c https://download.jetbrains.com/webstorm/WebStorm-2016.1.1.tar.gz
-    tar -zxvf WebStorm-2016.1.1.tar.gz
+    wget -c https://download.jetbrains.com/webstorm/WebStorm-2016.1.2.tar.gz
+    tar -zxvf WebStorm-2016.1.2.tar.gz
+    rm -f WebStorm-2016.1.2.tar.gz
+
     mv WebStorm-* /opt/WebStorm
     chmod +x /opt/WebStorm/bin/webstorm.sh
     chmod -R 777 /opt/WebStorm
@@ -841,8 +843,6 @@ instalarWebStorm(){
     echo "Type=Application" >> /usr/share/applications/webstorm.desktop
     echo "Categories=GNOME;Application;Development;" >> /usr/share/applications/webstorm.desktop
     echo "StartupNotify=true" >> /usr/share/applications/webstorm.desktop
-
-    rm -r WebStorm-2016.1.1.tar.gz
 
     if [[ $1 == "op" ]]; then
         mostrarMenuOpcoes
