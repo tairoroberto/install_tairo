@@ -1025,7 +1025,7 @@ removerLauchers(){
 
 criarDebZanthus(){
 ########################### Libs da Zanthus #################################
-
+    capturarVersaoPhp
     cd /tmp/
     rm -r -f /tmp/Zanthus-Server-Debian
 
@@ -1036,25 +1036,28 @@ criarDebZanthus(){
     # Abre o diretório
     cd /tmp/Zanthus-Server-Debian/Zanthus/Zeus/lib
 
+    KC_ZMAN_EXL="KC_ZMAN_1_X_44_260_CZ.EXL"
+    KC_ZMAN_TARGZ="KC_ZMAN_1_X_44_260_CZ.tar.gz"
+
     # baixa as Libs
     wget -c ftp://ftp.zanthus.com.br/pub/Zeus_Frente_de_Loja/_Complementares/so/* .
     wget -c ftp://ftp.zanthus.com.br/pub/Zeus_Frente_de_Loja/_Complementares/so_r64/* .
     wget -c ftp://ftp.zanthus.com.br/pub/Zeus_Frente_de_Loja/_Complementares/KernD/v2_1/*.so .
-    wget -c ftp://ftp.zanthus.com.br/pub/Zeus_Frente_de_Loja/v_1_X_44/KC_ZMAN_1_X_44_256_CZ.EXL
+    wget -c ftp://ftp.zanthus.com.br/pub/Zeus_Frente_de_Loja/v_1_X_44/$KC_ZMAN_EXL
     wget -c ftp://ftp.zanthus.com.br/interno/Tairo/Kernz_php5.6/kernz.so --ftp-user=kassio.matos --ftp-password=zanthus1 .
     wget -c ftp://ftp.zanthus.com.br/interno/Tairo/mssql/php5.6/mssql.so --ftp-user=kassio.matos --ftp-password=zanthus1 .
     wget -c ftp://ftp.zanthus.com.br/interno/Tairo/Kernz_php5.6/ZendGuardLoader.so --ftp-user=kassio.matos --ftp-password=zanthus1 .
-    mv KC_ZMAN_1_X_44_256_CZ.EXL KC_ZMAN_1_X_44_256_CZ.tar.gz
+    mv $KC_ZMAN_EXL $KC_ZMAN_TARGZ
 
     versao=$(uname -i)
     if [[  $versao == "i386" || $versao == "i486" || $versao == "i686" ]]; then
-        tar vxf KC_ZMAN_1_X_44_256_CZ.tar.gz  lib_rotkernC_CZ.so.rh9
+        tar vxf $KC_ZMAN_TARGZ  lib_rotkernC_CZ.so.rh9
     else
-        tar vxf KC_ZMAN_1_X_44_256_CZ.tar.gz  lib_rotkernC_CZ.so.r64
+        tar vxf $KC_ZMAN_TARGZ  lib_rotkernC_CZ.so.r64
     fi
 
     #Remove o pacote baixado
-    rm -f -r KC_ZMAN_1_X_44_256_CZ.tar.gz
+    rm -f -r $KC_ZMAN_TARGZ
 
     cd /tmp/Zanthus-Server-Debian
     # Cria e escreve no arquivo de informações
@@ -1087,8 +1090,6 @@ criarDebZanthus(){
     ldconfig
     rm -f -r /tmp/Zanthus-Server-Debian
     rm -f -r $(pwd)/Zanthus-Server-Debian.deb
-
-    capturarVersaoPhp
 
     #Insere a Kernz no .ini do Php e Apache para php5.6
     if [[ $phpVersion == 1 ]]; then
