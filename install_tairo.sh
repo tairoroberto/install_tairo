@@ -1043,10 +1043,13 @@ criarDebZanthus(){
     wget -c ftp://ftp.zanthus.com.br/pub/Zeus_Frente_de_Loja/_Complementares/so/* .
     wget -c ftp://ftp.zanthus.com.br/pub/Zeus_Frente_de_Loja/_Complementares/so_r64/* .
     wget -c ftp://ftp.zanthus.com.br/pub/Zeus_Frente_de_Loja/_Complementares/KernD/v2_1/*.so .
+    wget -c ftp://ftp.zanthus.com.br/pub/Zeus_Frente_de_Loja/_Complementares/ZANSINC/Linux/lib/* .
     wget -c ftp://ftp.zanthus.com.br/pub/Zeus_Frente_de_Loja/v_1_X_44/$KC_ZMAN_EXL
     wget -c ftp://ftp.zanthus.com.br/interno/Tairo/Kernz_php5.6/kernz.so --ftp-user=kassio.matos --ftp-password=zanthus1 .
     wget -c ftp://ftp.zanthus.com.br/interno/Tairo/mssql/php5.6/mssql.so --ftp-user=kassio.matos --ftp-password=zanthus1 .
     wget -c ftp://ftp.zanthus.com.br/interno/Tairo/Kernz_php5.6/ZendGuardLoader.so --ftp-user=kassio.matos --ftp-password=zanthus1 .
+
+
     mv $KC_ZMAN_EXL $KC_ZMAN_TARGZ
 
     versao=$(uname -i)
