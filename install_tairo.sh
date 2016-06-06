@@ -198,7 +198,6 @@ instalarAmbienteDesenvolvimento(){
     apt-get install -y g++
     apt-get install -y gcc
     apt-get install -y make
-    apt-get install -y apache2
 
     if [[ $phpVersion == 1 ]]; then
         instalarPHP56
@@ -1429,6 +1428,7 @@ resetarProxy(){
 
 instalarPHP56(){
     add-apt-repository -y ppa:ondrej/php5-5.6
+    apt-get install -y apache2
     apt-get install -y php5.6
     apt-get install -y php5.6-dev
     apt-get install -y php5.6-curl
@@ -1526,6 +1526,7 @@ instalarPHP56(){
 }
 
 instalarPHP7(){
+    apt-get install -y apache2
     apt-get install -y php
     apt-get install -y php-dev
     apt-get install -y php-curl
