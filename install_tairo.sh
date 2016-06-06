@@ -178,10 +178,8 @@ instalarAmbienteDesenvolvimento(){
     echo "    Eclipse"
     echo "    GoogleChrome"
     echo "    Para instalar a lib oci8.so certifique-se de que o Oracle Instant Client esteja instalado!"
-
     echo -e "\n"
-    echo "Deseja continuar? Sim[s], Não[n]"
-    read op
+
 
     if [ ! $op == "s" ]; then
         mostrarMenuOpcoes
@@ -1427,7 +1425,8 @@ resetarProxy(){
 }
 
 instalarPHP56(){
-    add-apt-repository -y ppa:ondrej/php5-5.6
+    add-apt-repository -y ppa:ondrej/php
+    apt-get update
     apt-get install -y apache2
     apt-get install -y php5.6
     apt-get install -y php5.6-dev
@@ -1526,6 +1525,8 @@ instalarPHP56(){
 }
 
 instalarPHP7(){
+    add-apt-repository -y ppa:ondrej/php
+    apt-get update
     apt-get install -y apache2
     apt-get install -y php
     apt-get install -y php-dev
