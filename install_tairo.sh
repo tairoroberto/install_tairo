@@ -1317,7 +1317,7 @@ desabilitarSwap(){
 
 configurarWebProxy(){
     gsettings set org.gnome.system.proxy autoconfig-url http://$usuario:$senha@$ipServidor:$porta
-	gsettings set org.gnome.system.proxy ignore-hosts ['localhost', '127.0.0.0/8']
+	gsettings set org.gnome.system.proxy ignore-hosts [ 'localhost', '127.0.0.0/8' ]
 	gsettings set org.gnome.system.proxy mode 'none'
 	gsettings set org.gnome.system.proxy use-same-proxy false
 	gsettings set org.gnome.system.proxy.ftp host $ipServidor
