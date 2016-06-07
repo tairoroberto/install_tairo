@@ -1079,6 +1079,8 @@ criarDebZanthus(){
     echo -e "\n" >> /tmp/Zanthus-Server-Debian/DEBIAN/preinst
     echo -e "ln -s -f /lib/x86_64-linux-gnu/libcrypto.so.1.0.0 /lib/x86_64-linux-gnu/libcrypto.so.6" >> /tmp/Zanthus-Server-Debian/DEBIAN/preinst
     echo -e "ln -s -f /lib/x86_64-linux-gnu/libssl.so.1.0.0 /lib/x86_64-linux-gnu/libssl.so.6" >> /tmp/Zanthus-Server-Debian/DEBIAN/preinst
+    echo -e "\n" >> /etc/ld.so.conf
+    echo -e "/Zanthus/Zeus/lib/" >> /etc/ld.so.conf
     echo -e "ldconfig" >> /tmp/Zanthus-Server-Debian/DEBIAN/preinst
 
     cd /tmp
