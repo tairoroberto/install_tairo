@@ -92,8 +92,20 @@ capturarVersaoPhp(){
     echo "    2 - PHP7.0"
     read phpVersion
 }
-# __BEGIN_METHODS__
 
+capturarUsuarioFtp(){
+    clear
+    echo "    ########################## Digite o seu usuario do FTP  #######################"
+    read userFtp
+}
+
+capturarSenhaFtp(){
+    clear
+    echo "    ########################## Digite o sua senha do FTP  #######################"
+    read passwordFtp
+}
+
+# __BEGIN_METHODS__
 # Lista um diretorio
 #Recebe o caminho do diretorio como parametro
 listarDiretorio(){
@@ -191,6 +203,8 @@ instalarAmbienteDesenvolvimento(){
     cd ~
     capturaUsuario
     capturarVersaoPhp
+    capturarUsuarioFtp
+    capturarSenhaFtp
 
     apt-get update
     apt-get install -y g++
@@ -932,10 +946,10 @@ instalarOracleInstantClient(){
     cd ~
     versao=$(uname -i)
     if [[  $versao == "i386" || $versao == "i486" || $versao == "i686" ]]; then
-        wget ftp://ftp.zanthus.com.br/interno/Tairo/intant_client_12.1_32bits/instant_client_12.1.tar.gz --ftp-user=kassio.matos --ftp-password=zanthus1 .
+        wget ftp://ftp.zanthus.com.br/interno/Tairo/intant_client_12.1_32bits/instant_client_12.1.tar.gz --ftp-user=$userFtp --ftp-password=$passwordFtp .
 
     else
-        wget ftp://ftp.zanthus.com.br/interno/Tairo/intant_client_12.1_64bits/instant_client_12.1.tar.gz --ftp-user=kassio.matos --ftp-password=zanthus1 .
+        wget ftp://ftp.zanthus.com.br/interno/Tairo/intant_client_12.1_64bits/instant_client_12.1.tar.gz --ftp-user=$userFtp --ftp-password=$passwordFtp .
     fi
 
     #Verifica se ultima ação foi efetuada com sucesso
@@ -1042,9 +1056,9 @@ criarDebZanthus(){
     wget -c ftp://ftp.zanthus.com.br/pub/Zeus_Frente_de_Loja/_Complementares/KernD/v2_1/*.so .
     wget -c ftp://ftp.zanthus.com.br/pub/Zeus_Frente_de_Loja/_Complementares/ZANSINC/Linux/lib/* .
     wget -c ftp://ftp.zanthus.com.br/pub/Zeus_Frente_de_Loja/v_1_X_44/$KC_ZMAN_EXL
-    wget -c ftp://ftp.zanthus.com.br/interno/Tairo/Kernz_php5.6/kernz.so --ftp-user=kassio.matos --ftp-password=zanthus1 .
-    wget -c ftp://ftp.zanthus.com.br/interno/Tairo/mssql/php5.6/mssql.so --ftp-user=kassio.matos --ftp-password=zanthus1 .
-    wget -c ftp://ftp.zanthus.com.br/interno/Tairo/Kernz_php5.6/ZendGuardLoader.so --ftp-user=kassio.matos --ftp-password=zanthus1 .
+    wget -c ftp://ftp.zanthus.com.br/interno/Tairo/Kernz_php5.6/kernz.so --ftp-user=$userFtp --ftp-password=$passwordFtp .
+    wget -c ftp://ftp.zanthus.com.br/interno/Tairo/mssql/php5.6/mssql.so --ftp-user=$userFtp --ftp-password=$passwordFtp .
+    wget -c ftp://ftp.zanthus.com.br/interno/Tairo/Kernz_php5.6/ZendGuardLoader.so --ftp-user=$userFtp --ftp-password=$passwordFtp .
 
 
     mv $KC_ZMAN_EXL $KC_ZMAN_TARGZ
