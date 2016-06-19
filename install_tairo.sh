@@ -97,12 +97,14 @@ capturarUsuarioFtp(){
     clear
     echo "    ########################## Digite o seu usuario do FTP  #######################"
     read userFtp
+    clear
 }
 
 capturarSenhaFtp(){
     clear
     echo "    ########################## Digite o sua senha do FTP  #######################"
     read passwordFtp
+    clear
 }
 
 # __BEGIN_METHODS__
@@ -705,9 +707,9 @@ removerDropbox(){
 instalarPhpStorm(){
     clear
     cd ~
-    wget -c https://download.jetbrains.com/webide/PhpStorm-2016.1.1.tar.gz
-    tar -zxvf PhpStorm-2016.1.1.tar.gz
-    rm -f PhpStorm-2016.1.1.tar.gz
+    wget -c https://download.jetbrains.com/webide/PhpStorm-2016.1.2.tar.gz
+    tar -zxvf PhpStorm-2016.1.2.tar.gz
+    rm -f PhpStorm-2016.1.2.tar.gz
     
     mv PhpStorm-* /opt/PhpStorm
     chmod +x /opt/PhpStorm/bin/phpstorm.sh
@@ -766,9 +768,9 @@ removerPhpStorm(){
 # IDE de desenvolvimento JAVA #
 instalarIntelliJ(){
     cd ~
-    wget -c https://download.jetbrains.com/idea/ideaIU-2016.1.2.tar.gz
-    tar -zxvf ideaIU-2016.1.2.tar.gz
-    rm -f ideaIU-2016.1.2.tar.gz
+    wget -c https://download.jetbrains.com/idea/ideaIU-2016.1.3.tar.gz
+    tar -zxvf ideaIU-2016.1.3.tar.gz
+    rm -f ideaIU-2016.1.3.tar.gz
 
     mv idea-IU-* /opt/IntelliJ-IDEA
     chmod +x /opt/IntelliJ-IDEA/bin/idea.sh
@@ -825,9 +827,9 @@ removerIntelliJ(){
 instalarWebStorm(){
     clear
     cd ~
-    wget -c https://download.jetbrains.com/webstorm/WebStorm-2016.1.2.tar.gz
-    tar -zxvf WebStorm-2016.1.2.tar.gz
-    rm -f WebStorm-2016.1.2.tar.gz
+    wget -c https://download.jetbrains.com/webstorm/WebStorm-2016.1.3.tar.gz
+    tar -zxvf WebStorm-2016.1.3.tar.gz
+    rm -f WebStorm-2016.1.3.tar.gz
 
     mv WebStorm-* /opt/WebStorm
     chmod +x /opt/WebStorm/bin/webstorm.sh
@@ -884,9 +886,10 @@ removerWebStorm(){
 instalarClion(){
     cd ~
     clear
-    wget -c https://download.jetbrains.com/cpp/clion-1.1.1.tar.gz
-    tar -zxvf clion-1.1.1.tar.gz
-    mv clion-1.1.1 /opt/Clion
+    wget -c https://download.jetbrains.com/cpp/CLion-2016.1.3.tar.gz
+    tar -zxvf CLion-2016.1.3.tar.gz
+    rm -f CLion-2016.1.3.tar.gz
+    mv clion-* /opt/Clion
     chmod +x /opt/Clion/bin/clion.sh
     chmod -R 777 /opt/Clion
 
@@ -1037,41 +1040,65 @@ removerLauchers(){
 criarDebZanthus(){
 ########################### Libs da Zanthus #################################
     capturarVersaoPhp
+    capturarUsuarioFtp
+    capturarSenhaFtp
+    apt-get -y purge zanthus-server-debian
+    rm -f -r /Zanthus
+    rm -f -r /usr/share/applications/pdv.desktop
+    clear
+
     cd /tmp/
     rm -r -f /tmp/Zanthus-Server-Debian
 
-    echo "Criando e baixando bibliotecas..."
+    #Crio o diretório para criar os .deb
+    echo    "    ########################################################################################"
+    echo    "    #                       VÁ TOMAR UM CAFÉ ISSO PODE DEMORAR UM POUCO                    #"
+    echo    "    #                                                                                      #"
+    echo    "    ########################################################################################"
+    echo -e "\n"
+    echo    "    Criando e baixando bibliotecas..."
     criarDiretorio "/tmp/Zanthus-Server-Debian/DEBIAN"
-    criarDiretorio "/tmp/Zanthus-Server-Debian/Zanthus/Zeus/lib"
+
+    #Baixo os arquivos e descompacto
+    cd /tmp/Zanthus-Server-Debian/
+    wget -c ftp://ftp.zanthus.com.br/interno/Tairo/Zanthus_pdv.tar.gz --ftp-user=$userFtp --ftp-password=$passwordFtp .
+    tar -zxvf Zanthus_pdv.tar.gz
+    rm -f Zanthus_pdv.tar.gz
 
     # Abre o diretório
     cd /tmp/Zanthus-Server-Debian/Zanthus/Zeus/lib
 
-    KC_ZMAN_EXL="KC_ZMAN_1_X_44_260_CZ.EXL"
-    KC_ZMAN_TARGZ="KC_ZMAN_1_X_44_260_CZ.tar.gz"
+    KC_ZMAN_CZ_EXL="KC_ZMAN_1_X_102_263_CZ.EXL"
+    KC_ZMAN_CZ_TARGZ="KC_ZMAN_1_X_102_263_CZ.tar.gz"
 
-    # baixa as Libs
+    KC_ZMAN_CW_EXL="KC_ZMAN_1_X_102_263_CW.EXL"
+    KC_ZMAN_CW_TARGZ="KC_ZMAN_1_X_102_263_CW.tar.gz"
+
+    # baixa as Libs atualizadas do ftp
+    wget -c ftp://ftp.zanthus.com.br/interno/Tairo/lib_zanthus/* --ftp-user=$userFtp --ftp-password=$passwordFtp .
     wget -c ftp://ftp.zanthus.com.br/pub/Zeus_Frente_de_Loja/_Complementares/so/* .
     wget -c ftp://ftp.zanthus.com.br/pub/Zeus_Frente_de_Loja/_Complementares/so_r64/* .
     wget -c ftp://ftp.zanthus.com.br/pub/Zeus_Frente_de_Loja/_Complementares/KernD/v2_1/*.so .
     wget -c ftp://ftp.zanthus.com.br/pub/Zeus_Frente_de_Loja/_Complementares/ZANSINC/Linux/lib/* .
-    wget -c ftp://ftp.zanthus.com.br/pub/Zeus_Frente_de_Loja/v_1_X_44/$KC_ZMAN_EXL
+    wget -c ftp://ftp.zanthus.com.br/pub/Zeus_Frente_de_Loja/v_1_X_102/$KC_ZMAN_CZ_EXL
+    wget -c ftp://ftp.zanthus.com.br/pub/Zeus_Frente_de_Loja/v_1_X_102/$KC_ZMAN_CW_EXL
     wget -c ftp://ftp.zanthus.com.br/interno/Tairo/Kernz_php5.6/kernz.so --ftp-user=$userFtp --ftp-password=$passwordFtp .
     wget -c ftp://ftp.zanthus.com.br/interno/Tairo/mssql/php5.6/mssql.so --ftp-user=$userFtp --ftp-password=$passwordFtp .
     wget -c ftp://ftp.zanthus.com.br/interno/Tairo/Kernz_php5.6/ZendGuardLoader.so --ftp-user=$userFtp --ftp-password=$passwordFtp .
 
 
-    mv $KC_ZMAN_EXL $KC_ZMAN_TARGZ
+    mv $KC_ZMAN_CZ_EXL $KC_ZMAN_CZ_TARGZ
+    mv $KC_ZMAN_CW_EXL $KC_ZMAN_CW_TARGZ
 
-    versao=$(uname -i)
-    if [[  $versao == "i386" || $versao == "i486" || $versao == "i686" ]]; then
-        tar vxf $KC_ZMAN_TARGZ  lib_rotkernC_CZ.so.rh9
-    else
-        tar vxf $KC_ZMAN_TARGZ  lib_rotkernC_CZ.so.r64
-    fi
+    tar vxf $KC_ZMAN_CZ_TARGZ  lib_rotkernC_CZ.so.rh9
+    tar vxf $KC_ZMAN_CZ_TARGZ  lib_rotkernC_CZ.so.r64
+
+    tar vxf $KC_ZMAN_CW_TARGZ  lib_rotkernC_CW.so.rh9
+    tar vxf $KC_ZMAN_CW_TARGZ  lib_rotkernC_CW.so.r64
 
     #Remove o pacote baixado
-    rm -f -r $KC_ZMAN_TARGZ
+    rm -f -r $KC_ZMAN_CZ_TARGZ
+    rm -f -r $KC_ZMAN_CW_TARGZ
 
     cd /tmp/Zanthus-Server-Debian
     # Cria e escreve no arquivo de informações
@@ -1085,7 +1112,7 @@ criarDebZanthus(){
     echo -e "Maintainer: Tairo Roberto Miguel de Assunção" >> /tmp/Zanthus-Server-Debian/DEBIAN/control
     echo -e "Depends:" >> /tmp/Zanthus-Server-Debian/DEBIAN/control
     echo -e "Architecture: all" >> /tmp/Zanthus-Server-Debian/DEBIAN/control
-    echo -e "Description: Pacotes de instalação para rodar servidor MANAGER com php e apache." >> /tmp/Zanthus-Server-Debian/DEBIAN/control
+    echo -e "Description: Pacotes de instalação para rodar PDV e servidor MANAGER com php e apache." >> /tmp/Zanthus-Server-Debian/DEBIAN/control
 
     touch /tmp/Zanthus-Server-Debian/DEBIAN/preinst
     chmod -R 755 /tmp/Zanthus-Server-Debian/DEBIAN/preinst
@@ -1094,8 +1121,10 @@ criarDebZanthus(){
     echo -e "ln -s -f /lib/x86_64-linux-gnu/libcrypto.so.1.0.0 /lib/x86_64-linux-gnu/libcrypto.so.6" >> /tmp/Zanthus-Server-Debian/DEBIAN/preinst
     echo -e "ln -s -f /lib/x86_64-linux-gnu/libssl.so.1.0.0 /lib/x86_64-linux-gnu/libssl.so.6" >> /tmp/Zanthus-Server-Debian/DEBIAN/preinst
     echo -e "\n" >> /etc/ld.so.conf
-    echo -e "/Zanthus/Zeus/lib/" >> /etc/ld.so.conf
-    echo -e "ldconfig" >> /tmp/Zanthus-Server-Debian/DEBIAN/preinst
+    echo -e "/Zanthus" >> /etc/ld.so.conf
+    echo -e "/Zanthus/Zeus" >> /etc/ld.so.conf
+    echo -e "/Zanthus/Zeus/lib" >> /etc/ld.so.conf
+    echo -e "/Zanthus/Zeus/pdvJava" >> /etc/ld.so.conf
 
     cd /tmp
     dpkg-deb -b /tmp/Zanthus-Server-Debian /tmp/
@@ -1105,30 +1134,38 @@ criarDebZanthus(){
     dpkg -i $(pwd)/Zanthus-Server-Debian.deb
     ldconfig
     rm -f -r /tmp/Zanthus-Server-Debian
-    rm -f -r $(pwd)/Zanthus-Server-Debian.deb
+    chmod -R 777 /Zanthus/
+
+    #Cria icone do desktop#
+    chmod +x /Zanthus/Zeus/pdvJava/pdvJava2
+    touch /usr/share/applications/pdv.desktop
+    echo "[Desktop Entry]" >> /usr/share/applications/pdv.desktop
+    echo "Encoding=UTF-8" >> /usr/share/applications/pdv.desktop
+    echo "Name=PDV" >> /usr/share/applications/pdv.desktop
+    echo "Comment=PDV Zanthus" >> /usr/share/applications/pdv.desktop
+    echo "Exec=/Zanthus/Zeus/pdvJava/pdvJava2" >> /usr/share/applications/pdv.desktop
+    echo "Icon=/Zanthus/Zeus/icons/logo_zanthus.png" >> /usr/share/applications/pdv.desktop
+    echo "Terminal=false" >> /usr/share/applications/pdv.desktop
+    echo "Type=Application" >> /usr/share/applications/pdv.desktop
+    echo "Categories=GNOME;Application;Development;" >> /usr/share/applications/pdv.desktop
+    echo "StartupNotify=true" >> /usr/share/applications/pdv.desktop
 
     #Insere a Kernz no .ini do Php e Apache para php5.6
     if [[ $phpVersion == 1 ]]; then
         pathkernz="/Zanthus/Zeus/lib/kernz.so"
         if [[ -e $pathkernz && -e /etc/php/5.6/apache2/php.ini ]]; then
             echo "extension=$pathkernz" >> /etc/php/5.6/apache2/php.ini
-            echo -e "\n" >> /etc/php/5.6/apache2/php.ini
             echo "extension=$pathkernz" >> /etc/php/5.6/cli/php.ini
-            echo -e "\n" >> /etc/php/5.6/cli/php.ini
         fi
         pathZendGuardLoader="/Zanthus/Zeus/lib/ZendGuardLoader.so"
         if [[ -e $pathZendGuardLoader && -e /etc/php/5.6/apache2/php.ini ]]; then
             echo "zend_extension=$pathZendGuardLoader" >> /etc/php/5.6/apache2/php.ini
-            echo -e "\n" >> /etc/php/5.6/apache2/php.ini
             echo "zend_extension=$pathZendGuardLoader" >> /etc/php/5.6/cli/php.ini
-            echo -e "\n" >> /etc/php/5.6/cli/php.ini
         fi
         pathMssql="/Zanthus/Zeus/lib/mssql.so"
         if [[ -e $pathMssql && -e /etc/php/5.6/apache2/php.ini ]]; then
             echo "extension=$pathMssql" >> /etc/php/5.6/apache2/php.ini
-            echo -e "\n" >> /etc/php/5.6/apache2/php.ini
             echo "extension=$pathMssql" >> /etc/php/5.6/cli/php.ini
-            echo -e "\n" >> /etc/php/5.6/cli/php.ini
         fi
     fi
 
@@ -1137,23 +1174,17 @@ criarDebZanthus(){
         pathkernz="/Zanthus/Zeus/lib/kernz.so"
         if [[ -e $pathkernz && -e /etc/php/7.0/apache2/php.ini ]]; then
             echo "extension=$pathkernz" >> /etc/php/7.0/apache2/php.ini
-            echo -e "\n" >> /etc/php/7.0/apache2/php.ini
             echo "extension=$pathkernz" >> /etc/php/7.0/cli/php.ini
-            echo -e "\n" >> /etc/php/7.0/cli/php.ini
         fi
         pathZendGuardLoader="/Zanthus/Zeus/lib/ZendGuardLoader.so"
         if [[ -e $pathZendGuardLoader && -e /etc/php/7.0/apache2/php.ini ]]; then
             echo "zend_extension=$pathZendGuardLoader" >> /etc/php/7.0/apache2/php.ini
-            echo -e "\n" >> /etc/php/7.0/apache2/php.ini
             echo "zend_extension=$pathZendGuardLoader" >> /etc/php/7.0/cli/php.ini
-            echo -e "\n" >> /etc/php/7.0/cli/php.ini
         fi
         pathMssql="/Zanthus/Zeus/lib/mssql.so"
         if [[ -e $pathMssql && -e /etc/php/7.0/apache2/php.ini ]]; then
             echo "extension=$pathMssql" >> /etc/php/7.0/apache2/php.ini
-            echo -e "\n" >> /etc/php/7.0/apache2/php.ini
             echo "extension=$pathMssql" >> /etc/php/7.0/cli/php.ini
-            echo -e "\n" >> /etc/php/7.0/cli/php.ini
         fi
     fi
 
@@ -1166,7 +1197,8 @@ criarDebZanthus(){
 removerLibsZanthus(){
     ############### Libs ZAnthus #############
     apt-get -y purge zanthus-server-debian
-    rm -r /Zanthus/Zeus/lib
+    rm -f -r /Zanthus
+    rm -f -r /usr/share/applications/pdv.desktop
     ############### Libs ZAnthus #############
 
     #Reconfigura carregamento de bibliotecas
@@ -1460,6 +1492,7 @@ instalarPHP56(){
     apt-get install -y php5.6-sqlite3
     apt-get install -y php-memcached
     apt-get install -y libapache2-mod-php5.6
+    apt-get install -y php5.6-bcmath
 
     instalarOracleInstantClient
 
