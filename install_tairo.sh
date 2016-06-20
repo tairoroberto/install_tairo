@@ -85,6 +85,12 @@ capturaUsuario(){
     read usuario
 }
 
+capturaUsuarioSenha(){
+    clear
+    echo "    ########################### Insira a senha do usuario Linux ##################################"
+    read usuarioSenha
+}
+
 capturarVersaoPhp(){
     clear
     echo "    ########################## Qual a versão do PHP deseja intalar? #######################"
@@ -1040,6 +1046,7 @@ removerLauchers(){
 criarDebZanthus(){
 ########################### Libs da Zanthus #################################
     capturarVersaoPhp
+    capturaUsuarioSenha
     capturarUsuarioFtp
     capturarSenhaFtp
     apt-get -y purge zanthus-server-debian
@@ -1143,7 +1150,7 @@ criarDebZanthus(){
     echo "Encoding=UTF-8" >> /usr/share/applications/pdv.desktop
     echo "Name=PDV" >> /usr/share/applications/pdv.desktop
     echo "Comment=PDV Zanthus" >> /usr/share/applications/pdv.desktop
-    echo "Exec=/Zanthus/Zeus/pdvJava/pdvJava2" >> /usr/share/applications/pdv.desktop
+    echo -e "Exec=bash -c \"echo $usuarioSenha | sudo -S sh /Zanthus/Zeus/pdvJava/pdvJava2\"" >> /usr/share/applications/pdv.desktop
     echo "Icon=/Zanthus/Zeus/icons/logo_zanthus.png" >> /usr/share/applications/pdv.desktop
     echo "Terminal=false" >> /usr/share/applications/pdv.desktop
     echo "Type=Application" >> /usr/share/applications/pdv.desktop
