@@ -1046,16 +1046,15 @@ removerLauchers(){
 criarDebZanthus(){
 ########################### Libs da Zanthus #################################
     capturarVersaoPhp
+    capturaUsuario
     capturaUsuarioSenha
     capturarUsuarioFtp
     capturarSenhaFtp
-    apt-get -y purge zanthus-server-debian
     rm -f -r /Zanthus
     rm -f -r /usr/share/applications/pdv.desktop
     clear
 
-    cd /tmp/
-    rm -r -f /tmp/Zanthus-Server-Debian
+    cd /home/$usuario/
 
     #Crio o diretório para criar os .deb
     echo    "    ########################################################################################"
@@ -1064,16 +1063,15 @@ criarDebZanthus(){
     echo    "    ########################################################################################"
     echo -e "\n"
     echo    "    Criando e baixando bibliotecas..."
-    criarDiretorio "/tmp/Zanthus-Server-Debian/DEBIAN"
 
     #Baixo os arquivos e descompacto
-    cd /tmp/Zanthus-Server-Debian/
-    wget -c ftp://ftp.zanthus.com.br/interno/Tairo/Zanthus_pdv.tar.gz --ftp-user=$userFtp --ftp-password=$passwordFtp .
+    wget -c ftp://ftp.zanthus.com.br/interno/Tairo/Zanthus_pdv.tar.gz --ftp-user=$userFtp --ftp-password=$passwordFtp
     tar -zxvf Zanthus_pdv.tar.gz
     rm -f Zanthus_pdv.tar.gz
+    mv Zanthus /Zanthus
 
     # Abre o diretório
-    cd /tmp/Zanthus-Server-Debian/Zanthus/Zeus/lib
+    cd /Zanthus/Zeus/lib
 
     KC_ZMAN_CZ_EXL="KC_ZMAN_1_X_102_263_CZ.EXL"
     KC_ZMAN_CZ_TARGZ="KC_ZMAN_1_X_102_263_CZ.tar.gz"
@@ -1082,17 +1080,16 @@ criarDebZanthus(){
     KC_ZMAN_CW_TARGZ="KC_ZMAN_1_X_102_263_CW.tar.gz"
 
     # baixa as Libs atualizadas do ftp
-    wget -c ftp://ftp.zanthus.com.br/interno/Tairo/lib_zanthus/* --ftp-user=$userFtp --ftp-password=$passwordFtp .
-    wget -c ftp://ftp.zanthus.com.br/pub/Zeus_Frente_de_Loja/_Complementares/so/* .
-    wget -c ftp://ftp.zanthus.com.br/pub/Zeus_Frente_de_Loja/_Complementares/so_r64/* .
-    wget -c ftp://ftp.zanthus.com.br/pub/Zeus_Frente_de_Loja/_Complementares/KernD/v2_1/*.so .
-    wget -c ftp://ftp.zanthus.com.br/pub/Zeus_Frente_de_Loja/_Complementares/ZANSINC/Linux/lib/* .
+    wget -c ftp://ftp.zanthus.com.br/interno/Tairo/lib_zanthus/* --ftp-user=$userFtp --ftp-password=$passwordFtp
+    wget -c ftp://ftp.zanthus.com.br/pub/Zeus_Frente_de_Loja/_Complementares/so/*
+    wget -c ftp://ftp.zanthus.com.br/pub/Zeus_Frente_de_Loja/_Complementares/so_r64/*
+    wget -c ftp://ftp.zanthus.com.br/pub/Zeus_Frente_de_Loja/_Complementares/KernD/v2_1/*.so
+    wget -c ftp://ftp.zanthus.com.br/pub/Zeus_Frente_de_Loja/_Complementares/ZANSINC/Linux/lib/*
     wget -c ftp://ftp.zanthus.com.br/pub/Zeus_Frente_de_Loja/v_1_X_102/$KC_ZMAN_CZ_EXL
     wget -c ftp://ftp.zanthus.com.br/pub/Zeus_Frente_de_Loja/v_1_X_102/$KC_ZMAN_CW_EXL
-    wget -c ftp://ftp.zanthus.com.br/interno/Tairo/Kernz_php5.6/kernz.so --ftp-user=$userFtp --ftp-password=$passwordFtp .
-    wget -c ftp://ftp.zanthus.com.br/interno/Tairo/mssql/php5.6/mssql.so --ftp-user=$userFtp --ftp-password=$passwordFtp .
-    wget -c ftp://ftp.zanthus.com.br/interno/Tairo/Kernz_php5.6/ZendGuardLoader.so --ftp-user=$userFtp --ftp-password=$passwordFtp .
-
+    wget -c ftp://ftp.zanthus.com.br/interno/Tairo/Kernz_php5.6/kernz.so --ftp-user=$userFtp --ftp-password=$passwordFtp
+    wget -c ftp://ftp.zanthus.com.br/interno/Tairo/mssql/php5.6/mssql.so --ftp-user=$userFtp --ftp-password=$passwordFtp
+    wget -c ftp://ftp.zanthus.com.br/interno/Tairo/Kernz_php5.6/ZendGuardLoader.so --ftp-user=$userFtp --ftp-password=$passwordFtp
 
     mv $KC_ZMAN_CZ_EXL $KC_ZMAN_CZ_TARGZ
     mv $KC_ZMAN_CW_EXL $KC_ZMAN_CW_TARGZ
@@ -1107,26 +1104,9 @@ criarDebZanthus(){
     rm -f -r $KC_ZMAN_CZ_TARGZ
     rm -f -r $KC_ZMAN_CW_TARGZ
 
-    cd /tmp/Zanthus-Server-Debian
-    # Cria e escreve no arquivo de informações
-    touch /tmp/Zanthus-Server-Debian/DEBIAN/control
-    chmod -R 755 /tmp/Zanthus-Server-Debian/DEBIAN/control
+    ln -s -f /lib/x86_64-linux-gnu/libcrypto.so.1.0.0 /lib/x86_64-linux-gnu/libcrypto.so.6
+    ln -s -f /lib/x86_64-linux-gnu/libssl.so.1.0.0 /lib/x86_64-linux-gnu/libssl.so.6
 
-    echo -e "Section: misc" >> /tmp/Zanthus-Server-Debian/DEBIAN/control
-    echo -e "Priority: optional" >> /tmp/Zanthus-Server-Debian/DEBIAN/control
-    echo -e "Package: Zanthus-Server-Debian" >> /tmp/Zanthus-Server-Debian/DEBIAN/control
-    echo -e "Version: 1.0" >> /tmp/Zanthus-Server-Debian/DEBIAN/control
-    echo -e "Maintainer: Tairo Roberto Miguel de Assunção" >> /tmp/Zanthus-Server-Debian/DEBIAN/control
-    echo -e "Depends:" >> /tmp/Zanthus-Server-Debian/DEBIAN/control
-    echo -e "Architecture: all" >> /tmp/Zanthus-Server-Debian/DEBIAN/control
-    echo -e "Description: Pacotes de instalação para rodar PDV e servidor MANAGER com php e apache." >> /tmp/Zanthus-Server-Debian/DEBIAN/control
-
-    touch /tmp/Zanthus-Server-Debian/DEBIAN/preinst
-    chmod -R 755 /tmp/Zanthus-Server-Debian/DEBIAN/preinst
-    echo -e "#!/bin/sh" >> /tmp/Zanthus-Server-Debian/DEBIAN/preinst
-    echo -e "\n" >> /tmp/Zanthus-Server-Debian/DEBIAN/preinst
-    echo -e "ln -s -f /lib/x86_64-linux-gnu/libcrypto.so.1.0.0 /lib/x86_64-linux-gnu/libcrypto.so.6" >> /tmp/Zanthus-Server-Debian/DEBIAN/preinst
-    echo -e "ln -s -f /lib/x86_64-linux-gnu/libssl.so.1.0.0 /lib/x86_64-linux-gnu/libssl.so.6" >> /tmp/Zanthus-Server-Debian/DEBIAN/preinst
     echo -e "\n" >> /etc/ld.so.conf
     echo -e "/Zanthus" >> /etc/ld.so.conf
     echo -e "/Zanthus/Zeus" >> /etc/ld.so.conf
@@ -1134,13 +1114,7 @@ criarDebZanthus(){
     echo -e "/Zanthus/Zeus/pdvJava" >> /etc/ld.so.conf
 
     cd /tmp
-    dpkg-deb -b /tmp/Zanthus-Server-Debian /tmp/
-
-    cd ~
-    mv /tmp/zanthus-server-debian_1.0_all.deb  $(pwd)/Zanthus-Server-Debian.deb
-    dpkg -i $(pwd)/Zanthus-Server-Debian.deb
     ldconfig
-    rm -f -r /tmp/Zanthus-Server-Debian
     chmod -R 777 /Zanthus/
 
     #Cria icone do desktop#
@@ -1194,6 +1168,8 @@ criarDebZanthus(){
             echo "extension=$pathMssql" >> /etc/php/7.0/cli/php.ini
         fi
     fi
+
+    service apache2 restart
 
     if [[ $1 == "op" ]]; then
         mostrarMenuOpcoes
