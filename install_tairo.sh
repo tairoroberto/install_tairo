@@ -1073,20 +1073,37 @@ criarDebZanthus(){
     # Abre o diretório
     cd /Zanthus/Zeus/lib
 
+    # baixa as Libs 32bits atualizadas do ftp
+    cd /Zanthus/Zeus/lib
+    #wget -c ftp://ftp.zanthus.com.br/interno/Tairo/lib_zanthus/* --ftp-user=$userFtp --ftp-password=$passwordFtp
+    wget -c ftp://ftp.zanthus.com.br/pub/Zeus_Frente_de_Loja/_Complementares/so/*
+    wget -c ftp://ftp.zanthus.com.br/pub/Zeus_Frente_de_Loja/_Complementares/ZANSINC/Linux/lib/*
+
+    # Cria o diretório e baixa as libs 64bits
+    criarDiretorio "/Zanthus/Zeus/lib_64"
+    cd /Zanthus/Zeus/lib_64
+    wget -c ftp://ftp.zanthus.com.br/pub/Zeus_Frente_de_Loja/_Complementares/so_r64/*
+
+    criarDiretorio "/Zanthus/Zeus/lib_co5"
+    cd /Zanthus/Zeus/lib_co5
+    wget -c ftp://ftp.zanthus.com.br/pub/Zeus_Frente_de_Loja/_Complementares/so_co5/*
+
+    criarDiretorio "/Zanthus/Zeus/lib_ubu"
+    cd /Zanthus/Zeus/lib_ubu
+    wget -c ftp://ftp.zanthus.com.br/pub/Zeus_Frente_de_Loja/_Complementares/so_ubu/*
+
+    # Nomes das variáveis
     KC_ZMAN_CZ_EXL="KC_ZMAN_1_X_102_263_CZ.EXL"
     KC_ZMAN_CZ_TARGZ="KC_ZMAN_1_X_102_263_CZ.tar.gz"
 
     KC_ZMAN_CW_EXL="KC_ZMAN_1_X_102_263_CW.EXL"
     KC_ZMAN_CW_TARGZ="KC_ZMAN_1_X_102_263_CW.tar.gz"
 
-    # baixa as Libs atualizadas do ftp
-    wget -c ftp://ftp.zanthus.com.br/interno/Tairo/lib_zanthus/* --ftp-user=$userFtp --ftp-password=$passwordFtp
-    wget -c ftp://ftp.zanthus.com.br/pub/Zeus_Frente_de_Loja/_Complementares/so/*
-    wget -c ftp://ftp.zanthus.com.br/pub/Zeus_Frente_de_Loja/_Complementares/so_r64/*
-    wget -c ftp://ftp.zanthus.com.br/pub/Zeus_Frente_de_Loja/_Complementares/KernD/v2_1/*.so
-    wget -c ftp://ftp.zanthus.com.br/pub/Zeus_Frente_de_Loja/_Complementares/ZANSINC/Linux/lib/*
+    criarDiretorio "/Zanthus/Zeus/lib_kernz"
+    cd /Zanthus/Zeus/lib_kernz
     wget -c ftp://ftp.zanthus.com.br/pub/Zeus_Frente_de_Loja/v_1_X_102/$KC_ZMAN_CZ_EXL
     wget -c ftp://ftp.zanthus.com.br/pub/Zeus_Frente_de_Loja/v_1_X_102/$KC_ZMAN_CW_EXL
+    wget -c ftp://ftp.zanthus.com.br/pub/Zeus_Frente_de_Loja/_Complementares/KernD/v2_1/*.so
     wget -c ftp://ftp.zanthus.com.br/interno/Tairo/Kernz_php5.6/kernz.so --ftp-user=$userFtp --ftp-password=$passwordFtp
     wget -c ftp://ftp.zanthus.com.br/interno/Tairo/mssql/php5.6/mssql.so --ftp-user=$userFtp --ftp-password=$passwordFtp
     wget -c ftp://ftp.zanthus.com.br/interno/Tairo/Kernz_php5.6/ZendGuardLoader.so --ftp-user=$userFtp --ftp-password=$passwordFtp
@@ -1109,11 +1126,13 @@ criarDebZanthus(){
 
     echo -e "\n" >> /etc/ld.so.conf
     echo -e "/Zanthus" >> /etc/ld.so.conf
-    echo -e "/Zanthus/Zeus" >> /etc/ld.so.conf
     echo -e "/Zanthus/Zeus/lib" >> /etc/ld.so.conf
+    echo -e "/Zanthus/Zeus/lib_64" >> /etc/ld.so.conf
+    echo -e "/Zanthus/Zeus/lib_kernz" >> /etc/ld.so.conf
+    echo -e "/Zanthus/Zeus/lib_co5" >> /etc/ld.so.conf
+    echo -e "/Zanthus/Zeus/lib_ubu" >> /etc/ld.so.conf
     echo -e "/Zanthus/Zeus/pdvJava" >> /etc/ld.so.conf
 
-    cd /tmp
     ldconfig
     chmod -R 777 /Zanthus/
 
@@ -1133,17 +1152,17 @@ criarDebZanthus(){
 
     #Insere a Kernz no .ini do Php e Apache para php5.6
     if [[ $phpVersion == 1 ]]; then
-        pathkernz="/Zanthus/Zeus/lib/kernz.so"
+        pathkernz="/Zanthus/Zeus/lib_kernz/kernz.so"
         if [[ -e $pathkernz && -e /etc/php/5.6/apache2/php.ini ]]; then
             echo "extension=$pathkernz" >> /etc/php/5.6/apache2/php.ini
             echo "extension=$pathkernz" >> /etc/php/5.6/cli/php.ini
         fi
-        pathZendGuardLoader="/Zanthus/Zeus/lib/ZendGuardLoader.so"
+        pathZendGuardLoader="/Zanthus/Zeus/lib_kernz/ZendGuardLoader.so"
         if [[ -e $pathZendGuardLoader && -e /etc/php/5.6/apache2/php.ini ]]; then
             echo "zend_extension=$pathZendGuardLoader" >> /etc/php/5.6/apache2/php.ini
             echo "zend_extension=$pathZendGuardLoader" >> /etc/php/5.6/cli/php.ini
         fi
-        pathMssql="/Zanthus/Zeus/lib/mssql.so"
+        pathMssql="/Zanthus/Zeus/lib_kernz/mssql.so"
         if [[ -e $pathMssql && -e /etc/php/5.6/apache2/php.ini ]]; then
             echo "extension=$pathMssql" >> /etc/php/5.6/apache2/php.ini
             echo "extension=$pathMssql" >> /etc/php/5.6/cli/php.ini
@@ -1152,17 +1171,17 @@ criarDebZanthus(){
 
     #Insere a Kernz no .ini do Php e Apache para ph7.0
     if [[ $phpVersion == 2 ]]; then
-        pathkernz="/Zanthus/Zeus/lib/kernz.so"
+        pathkernz="/Zanthus/Zeus/lib_kernz/kernz.so"
         if [[ -e $pathkernz && -e /etc/php/7.0/apache2/php.ini ]]; then
             echo "extension=$pathkernz" >> /etc/php/7.0/apache2/php.ini
             echo "extension=$pathkernz" >> /etc/php/7.0/cli/php.ini
         fi
-        pathZendGuardLoader="/Zanthus/Zeus/lib/ZendGuardLoader.so"
+        pathZendGuardLoader="/Zanthus/Zeus/lib_kernz/ZendGuardLoader.so"
         if [[ -e $pathZendGuardLoader && -e /etc/php/7.0/apache2/php.ini ]]; then
             echo "zend_extension=$pathZendGuardLoader" >> /etc/php/7.0/apache2/php.ini
             echo "zend_extension=$pathZendGuardLoader" >> /etc/php/7.0/cli/php.ini
         fi
-        pathMssql="/Zanthus/Zeus/lib/mssql.so"
+        pathMssql="/Zanthus/Zeus/lib_kernz/mssql.so"
         if [[ -e $pathMssql && -e /etc/php/7.0/apache2/php.ini ]]; then
             echo "extension=$pathMssql" >> /etc/php/7.0/apache2/php.ini
             echo "extension=$pathMssql" >> /etc/php/7.0/cli/php.ini
