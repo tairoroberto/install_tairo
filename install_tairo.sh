@@ -1705,6 +1705,7 @@
         echo -e "fi"  >> /sbin/chkconfig
         echo -e "update-rc.d oracle-xe defaults 80 01"  >> /sbin/chkconfig
 
+        chmod +x /sbin/chkconfig
         chmod 755 /sbin/chkconfig
 
         # Adiciona parametros para o Kernel
@@ -1723,14 +1724,15 @@
         echo -e "#!/bin/sh" >> /etc/rc2.d/S01shm_load
         echo -e "case \"\$1\" in" >> /etc/rc2.d/S01shm_load
         echo -e "start) mkdir /var/lock/subsys 2>/dev/null" >> /etc/rc2.d/S01shm_load
-        echo -e "touch /var/lock/subsys/listener" >> /etc/rc2.d/S01shm_load
-        echo -e "rm /dev/shm 2>/dev/null" >> /etc/rc2.d/S01shm_load
-        echo -e "mkdir /dev/shm 2>/dev/null" >> /etc/rc2.d/S01shm_load
-        echo -e "mount -t tmpfs shmfs -o size=2048m /dev/shm ;;" >> /etc/rc2.d/S01shm_load
+        echo -e "       touch /var/lock/subsys/listener" >> /etc/rc2.d/S01shm_load
+        echo -e "       rm /dev/shm 2>/dev/null" >> /etc/rc2.d/S01shm_load
+        echo -e "       mkdir /dev/shm 2>/dev/null" >> /etc/rc2.d/S01shm_load
+        echo -e "       mount -t tmpfs shmfs -o size=2048m /dev/shm ;;" >> /etc/rc2.d/S01shm_load
         echo -e "*) echo error" >> /etc/rc2.d/S01shm_load
-        echo -e "exit 1 ;;" >> /etc/rc2.d/S01shm_load
+        echo -e "     exit 1 ;;" >> /etc/rc2.d/S01shm_load
         echo -e "esac" >> /etc/rc2.d/S01shm_load
 
+        chmod +x /etc/rc2.d/S01shm_load
         chmod 755 /etc/rc2.d/S01shm_load
 
         ln -s /usr/bin/awk /bin/awk
@@ -1755,19 +1757,19 @@
 
     removerOracleDataBase11G(){
 
-    apt-get -y purge oracle-xe
-
-    if [[ -e /u01/app/oracle ]]; then
+        /etc/init.d/oracle-xe stop
+        ps -ef | grep oracle | grep -v grep | awk '{print $2}' | xargs kill
+        dpkg --purge oracle-xe
         rm -rf /u01
-    fi
-    rm -rf /sbin/chkconfig
-    rm -rf /etc/sysctl.d/60-oracle.conf
-    rm -rf /etc/rc2.d/S01shm_load
-    rm -rf /bin/awk
-    rm -rf /var/lock/subsys
-    rm -rf /etc/init.d/oracle-xe
-    rm -rf /etc/default/oracle-xe
-    rm -rf /etc/oratab
+        rm -rf /etc/default/oracle-xe
+        update-rc.d -f oracle-xe remove
+        rm -rf /etc/oratab
+        rm -rf /etc/init.d/oracle-xe
+        rm -rf /var/lock/subsys
+        rm -rf /bin/awk
+        rm -rf /etc/rc2.d/S01shm_load
+        rm -rf /etc/sysctl.d/60-oracle.conf
+        rm -rf /sbin/chkconfig
 
     }
 
