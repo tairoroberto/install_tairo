@@ -1751,6 +1751,14 @@
         export ORACLE_BASE=/u01/app/oracle
         export LD_LIBRARY_PATH=$ORACLE_HOME/lib:$LD_LIBRARY_PATH
         export PATH=$ORACLE_HOME/bin:$PATH
+        export ORACLE_SID=asdb
+
+#       create directory db_dumps  as '/u01/app/oracle/dbs_to_load';
+#       grant read,write on directory db_dumps to desenvolvimento;
+#       grant create any directory to desenvolvimento;
+#       grant imp_full_database to desenvolvimento;
+#       ALTER SYSTEM SET DB_CREATE_FILE_DEST='/u01/app/oracle/oradata/xe' SCOPE=BOTH;
+#       create tablespace zeusretail
 
         rm -rf oracle-xe_11.2.0-2_amd64.deb
     }
