@@ -1759,7 +1759,7 @@
 #       grant create any directory to desenvolvimento;
 #       grant imp_full_database to desenvolvimento;
 #       ALTER SYSTEM SET DB_CREATE_FILE_DEST='/u01/app/oracle/oradata/XE' SCOPE=BOTH;
-#       create tablespace zeusretail
+#       create tablespace zeusretail;
 
 #       /** Mudando o charset do banco - charset original = AL32UTF8 */
 #       conn sys as sysdba;
