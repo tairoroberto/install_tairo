@@ -1760,14 +1760,10 @@
 #       grant imp_full_database to desenvolvimento;
 #       ALTER SYSTEM SET DB_CREATE_FILE_DEST='/u01/app/oracle/oradata/XE' SCOPE=BOTH;
 #       create tablespace zeusretail;
-
-#       /** Mudando o charset do banco - charset original = AL32UTF8 */
-#       conn sys as sysdba;
-#       SHUT;
-#       STARTUP RESTRICT;
-#       Alter database character set INTERNAL_USE WE8MSWIN1252;
-#       SHUT;
-#       STARTUP;
+#       ALTER USER desenvolvimento QUOTA 100M ON zeusretail;
+#       GRANT UNLIMITED TABLESPACE TO desenvolvimento;
+#       grant connect to desenvolvimento;
+#       grant resource to desenvolvimento;
 
         rm -rf oracle-xe_11.2.0-2_amd64.deb
     }
