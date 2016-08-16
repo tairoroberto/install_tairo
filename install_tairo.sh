@@ -26,15 +26,6 @@
         echo "    #-------------------------------------------------------------------------------------#"
         echo "    #  2 - Remover  'Ambiente desenvolvimento'     PHP, Apache, Mysql, Java e etc.        #"
         echo "    #-------------------------------------------------------------------------------------#"
-        echo "    #  3 - Instalar 'Oracle Instant Client'   Bibliotecas para conexão com banco          #"
-        echo "    #  4 - Remover  'Oracle Instant Client                                                #"
-        echo "    #-------------------------------------------------------------------------------------#"
-        echo "    #  5 - Instalar 'Servidor'        Ambiente Servidor Zanthus Linux Ubuntu/Debian       #"
-        echo "    #  6 - Remover  'Servidor Ubuntu'                                                     #"
-        echo "    #-------------------------------------------------------------------------------------#"
-        echo "    #  7 - Instalar 'Servidor'        Ambiente Servidor Zanthus Linux CentOs              #"
-        echo "    #  8 - Remover  'Servidor CentOs'                                                     #"
-        echo "    #-------------------------------------------------------------------------------------#"
         echo "    #  0 - Mostra Menu de opções                                                          #"
         echo "    #-------------------------------------------------------------------------------------#"
         echo "    #  Obs: Digite a opção --help, para mostar menu de ajuda     ex:  --help              #"
@@ -47,26 +38,8 @@
         else
             case $opcao in
              0) mostrarMenuOpcoes  ;;
-             1) instalarAmbienteDesenvolvimento ;;
-             2) removerAmbienteDesenvolvimento ;;
-             3) instalarOracleInstantClient ;;
-             4) removerOracleInstantClient ;;
-             5) instalarAmbienteServidorUbuntu ;;
-             6) removerAmbienteServidorUbuntu ;;
-             7) instalarAmbienteServidorCentOs  ;;
-             8) removerAmbienteServidorCentOs  ;;
-
-             #Instalação de IDE
-             9) instalarPhpStorm "op";;
-            10) removerPhpStorm "op";;
-            11) instalarIntelliJ "op";;
-            12) removerIntelliJ "op";;
-            13) instalarClion "op";;
-            14) removerClion "op";;
-
-            #Ambiente Tairo com PhpStorm, Intellij-IDEA e Clion
-            15) instalarAmbienteDesenvolvimento "storm" "idea" "clion" "webstorm" ;;
-            16) removerAmbienteDesenvolvimento "storm" "idea" "clion" "webstorm" ;;
+             1) instalarAmbienteDesenvolvimento "storm" "idea" "webstorm" ;;
+             2) removerAmbienteDesenvolvimento "storm" "idea" "webstorm" ;;
             79) teste ;;
             esac
                 clear
@@ -291,18 +264,9 @@
 
         #Habilita o modrewrite do apache
         a2enmod rewrite
-        #Baixa o composer
-        curl -s https://getcomposer.org/installer | php
-        #Move o Composer
-        mv composer.phar /usr/local/bin/composer
-        #Instala o instalador do laravel
-        sudo --user=$usuario composer global require "laravel/installer=~1.1"
-        #Instala o guzzle
-        sudo --user=$usuario composer global require "guzzlehttp/guzzle:~5.0"
-        #Instala o instalador do lumen
-        sudo --user=$usuario composer global require "laravel/lumen-installer=~1.0"
-        #Adiciona os vendors do composer as variáveis de ambiente
-        sudo --user=$usuario echo "export PATH=$PATH:/home/$usuario/.composer/vendor/bin" >> /home/$usuario/.bashrc
+        #Instala o Composer
+        instalarComposer
+
         #Adiciona o NodeJs ao bash para ser instalado
         curl --silent --location https://deb.nodesource.com/setup_4.x |  bash -
         #Atualiza os headers
@@ -318,22 +282,17 @@
 
         #verifica se é pra intalar PhpStorm
         if [[ $1 == "storm" ]]; then
-            instalarPhpStorm "-op"
+            instalarPhpStorm
         fi
 
         #verifica se é pra intalar IntelliJ-IDEA
         if [[ $2 == "idea" ]]; then
-            instalarIntelliJ "-op"
+            instalarIntelliJ
         fi
 
         #verifica se é pra intalar Clion
-        if [[ $3 == "clion" ]]; then
-            instalarClion "-op"
-        fi
-
-        #verifica se é pra intalar Clion
-        if [[ $4 == "webstorm" ]]; then
-            instalarWebStorm "-op"
+        if [[ $3 == "webstorm" ]]; then
+            instalarWebStorm
         fi
 
         #Instala Siblime-text 3 e Notepad++
@@ -468,9 +427,7 @@
         #Desistala  libs php para conexão com banco de dados MSSQL
         apt-get -y purge freetds-common
         #Desistala o Composer
-        rm -r /usr/local/bin/composer
-        #Desistala o instalador do laravel
-        rm -r /home/$usuario/.composer/vendor/
+        removerComposer
         #Desistala o NodeJs
         apt-get purge --yes nodejs
         #Desistala o skype por ultimo por que ele baixa varias libs 32bits que programas com Wine usam
@@ -483,8 +440,6 @@
         apt-get -y purge unetbootin
         #Desistala ruby
         apt-get -y purge ruby
-        #Desistla player de filmes
-        removerNetFlix
 
         #remove os pacotes não ultilizados
         apt-get -y autoremove
@@ -492,22 +447,17 @@
 
         #verifica se é pra remover PhpStorm
         if [[ $1 == "storm" ]]; then
-            removerPhpStorm "-op"
+            removerPhpStorm
         fi
 
         #verifica se é pra remover IntelliJ-IDEA
         if [[ $2 == "idea" ]]; then
-            removerIntelliJ "-op"
+            removerIntelliJ
         fi
 
         #verifica se é pra remover Clion
-        if [[ $3 == "clion" ]]; then
-            removerClion "-op"
-        fi
-
-        #verifica se é pra remover Clion
-        if [[ $4 == "webstorm" ]]; then
-            removerWebStorm "-op"
+        if [[ $3 == "webstorm" ]]; then
+            removerWebStorm
         fi
 
         #Desistala Eclipse Java EE
@@ -727,7 +677,7 @@
         echo "#!/bin/sh" >> /usr/bin/phpstorm
         echo "export UBUNTU_MENUPROXY=0" >> /usr/bin/phpstorm
         echo "export PHPSTORM_HOME=/opt/PhpStorm" >> /usr/bin/phpstorm
-        echo "\$PHPSTORM_HOME/bin/phpstorm.sh $*" >> /usr/bin/phpstorm
+        echo "\"\$PHPSTORM_HOME/bin/phpstorm.sh\" %f" >> /usr/bin/phpstorm
         ln -s /usr/bin/phpstorm /bin/phpstorm
 
         #Cria icone do desktop#
@@ -788,7 +738,7 @@
         echo "#!/bin/sh" >> /usr/bin/idea
         echo "export UBUNTU_MENUPROXY=0" >> /usr/bin/idea
         echo "export IntelliJ_HOME=/opt/IntelliJ-IDEA" >> /usr/bin/idea
-        echo "\$IntelliJ_HOME/bin/idea.sh $*" >> /usr/bin/idea
+        echo "\"\$IntelliJ_HOME/bin/idea.sh\" %f" >> /usr/bin/idea
         ln -s /usr/bin/idea /bin/idea
 
         #Cria icone do desktop#
@@ -847,7 +797,7 @@
         echo "#!/bin/sh" >> /usr/bin/webstorm
         echo "export UBUNTU_MENUPROXY=0" >> /usr/bin/webstorm
         echo "export WEBSTORM_HOME=/opt/WebStorm" >> /usr/bin/webstorm
-        echo "\$WEBSTORM_HOME/bin/webstorm.sh $*" >> /usr/bin/webstorm
+        echo "\"\$WEBSTORM_HOME/bin/webstorm.sh\" %f" >> /usr/bin/webstorm
         ln -s /usr/bin/webstorm /bin/webstorm
 
         #Cria icone do desktop#
@@ -888,65 +838,6 @@
         fi
     }
 
-    # IDE de desenvolvimento C/C++ #
-    instalarClion(){
-        cd ~
-        clear
-        wget -c https://download.jetbrains.com/cpp/CLion-2016.1.3.tar.gz
-        tar -zxvf CLion-2016.1.3.tar.gz
-        rm -f CLion-2016.1.3.tar.gz
-        mv clion-* /opt/Clion
-        chmod +x /opt/Clion/bin/clion.sh
-        chmod -R 777 /opt/Clion
-
-        #Cria arquivo executavel#
-        touch /usr/bin/clion
-        chmod 755 /usr/bin/clion
-        echo "#!/bin/sh" >> /usr/bin/clion
-        echo "export UBUNTU_MENUPROXY=0" >> /usr/bin/clion
-        echo "export CLION_HOME=/opt/IntelliJ-IDEA" >> /usr/bin/clion
-        echo "\$CLION_HOME/bin/clion.sh $*" >> /usr/bin/clion
-        ln -s /usr/bin/clion /bin/clion
-
-        #Cria icone do desktop#
-        touch /usr/share/applications/clion.desktop
-        echo "[Desktop Entry]" >> /usr/share/applications/clion.desktop
-        echo "Encoding=UTF-8" >> /usr/share/applications/clion.desktop
-        echo "Name=Clion" >> /usr/share/applications/clion.desktop
-        echo "Comment=Clion IDE" >> /usr/share/applications/clion.desktop
-        echo "Exec=clion" >> /usr/share/applications/clion.desktop
-        echo "Icon=/opt/Clion/bin/clion.svg" >> /usr/share/applications/clion.desktop
-        echo "Terminal=false" >> /usr/share/applications/clion.desktop
-        echo "Type=Application" >> /usr/share/applications/clion.desktop
-        echo "Categories=GNOME;Application;Development;" >> /usr/share/applications/clion.desktop
-        echo "StartupNotify=true" >> /usr/share/applications/clion.desktop
-
-        rm -r clion-1.1.1.tar.gz
-
-        if [[ $1 == "op" ]]; then
-            mostrarMenuOpcoes
-        fi
-    }
-
-    removerClion(){
-        clear
-        echo "    Será removido a IDE de desenvolvimento Clion"
-        echo "    Deseja continuar? Sim[s], Não[n]"
-        read op
-
-        if [ ! $op == "s" ]; then
-            mostrarMenuOpcoes
-        fi
-
-        rm -r /usr/bin/clion
-        rm -r /bin/clion
-        rm -r /opt/Clion
-        rm -r /usr/share/applications/clion.desktop
-
-        if [[ $1 == "op" ]]; then
-            mostrarMenuOpcoes
-        fi
-    }
 
 
     #Converte o arquivo .rpm para .deb e instala no caminho padrão do oracle
@@ -1784,6 +1675,28 @@
         rm -rf /etc/sysctl.d/60-oracle.conf
         rm -rf /sbin/chkconfig
 
+    }
+
+    instalarComposer(){
+        capturaUsuario
+        #Baixa o composer
+        curl -s https://getcomposer.org/installer | php
+        #Move o Composer
+        sudo mv composer.phar /usr/local/bin/composer
+        #Instala o instalador do laravel
+        composer global require "laravel/installer=~1.1"
+        #Instala o guzzle
+        composer global require "guzzlehttp/guzzle:~5.0"
+        #Instala o instalador do lumen
+        composer global require "laravel/lumen-installer=~1.0"
+        #Adiciona os vendors do composer as variáveis de ambiente
+        echo "export PATH=$PATH:/home/$usuario/.composer/vendor/bin" >> /home/$usuario/.bashrc
+    }
+
+    removerComposer(){
+        capturaUsuario
+        sudo rm -rf /usr/local/bin/composer
+        rm -rm /home/$usuario/.composer
     }
 
     teste(){
