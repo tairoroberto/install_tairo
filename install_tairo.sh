@@ -1642,16 +1642,18 @@
         #Chama o configurador do oracle
         /etc/init.d/oracle-xe configure
 
-        export ORACLE_HOME=/u01/app/oracle/product/11.2.0/xe
-        export ORACLE_SID=XE
-        export NLS_LANG=`$ORACLE_HOME/bin/nls_lang.sh`
-        export ORACLE_BASE=/u01/app/oracle
-        export LD_LIBRARY_PATH=$ORACLE_HOME/lib:$LD_LIBRARY_PATH
-        export PATH=$ORACLE_HOME/bin:$PATH
-        export ORACLE_SID=asdb
+        export ORACLE_HOME=/u01/app/oracle/product/11.2.0/xe >> ~/.bashrc
+        export ORACLE_SID=XE >> ~/.bashrc
+        export NLS_LANG=\`\$ORACLE_HOME/bin/nls_lang.sh\` >> ~/.bashrc
+        export ORACLE_BASE=/u01/app/oracle >> ~/.bashrc
+        export LD_LIBRARY_PATH=$ORACLE_HOME/lib:$LD_LIBRARY_PATH >> ~/.bashrc
+        export PATH=$ORACLE_HOME/bin:$PATH >> ~/.bashrc
+        export ORACLE_SID=asdb >> ~/.bashrc
 
 #       /** Altera as permissões para o usuario e cria o TABLESPACE */
 #       create directory db_dumps  as '/u01/app/oracle/dbs_to_load';
+#       sudo mkdir /u01/app/oracle/dbs_to_load
+#       sudo chmod -R 777 /u01/app/oracle/dbs_to_load
 #       grant read,write on directory db_dumps to desenvolvimento;
 #       grant create any directory to desenvolvimento;
 #       grant imp_full_database to desenvolvimento;
@@ -1661,6 +1663,12 @@
 #       GRANT UNLIMITED TABLESPACE TO desenvolvimento;
 #       grant connect to desenvolvimento;
 #       grant resource to desenvolvimento;
+
+#       exportar base de dados
+#       expdp desenvolvimento DIRECTORY=db_dumps DUMPFILE=desenvolvimento.dmp SCHEMAS=desenvolvimento logfile=data_pump_dir:exportDB.log
+
+#       importar base de dados
+#       impdp desenvolvimento DIRECTORY=db_dumps DUMPFILE=desenvolvimento.dmp SCHEMAS=desenvolvimento logfile=data_pump_dir:exportDB.log
 
         rm -rf oracle-xe_11.2.0-2_amd64.deb
     }
