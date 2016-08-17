@@ -307,6 +307,12 @@
         #Instala O navegador GoogleChrome
         instalarGoogleChrome
 
+        #instala o banco oracle
+        instalarOracleDataBase11G
+
+        #Instala sudo dictionary no terminal
+        curl https://raw.githubusercontent.com/badarsh2/Sudocabulary/master/script.sh | bash
+
         mostrarMenuOpcoes
     }
 
