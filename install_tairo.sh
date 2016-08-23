@@ -1664,7 +1664,10 @@
 #       grant connect to desenvolvimento;
 #       grant resource to desenvolvimento;
 
-#       exportar base de dados
+#       exportar base de dados completos
+#       expdp system DIRECTORY=db_dumps DUMPFILE=desenvolvimento.dmp FULL=y logfile=data_pump_dir:export.log
+
+#       exportar base de dados de schema
 #       expdp desenvolvimento DIRECTORY=db_dumps DUMPFILE=desenvolvimento.dmp SCHEMAS=desenvolvimento logfile=data_pump_dir:exportDB.log
 
 #       importar base de dados
