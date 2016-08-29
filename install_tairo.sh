@@ -1555,6 +1555,12 @@
         sudo echo -e "default_charset = \"ISO-8859-1\"" >> /etc/php/5.6/cli/php.ini
         sudo echo -e "\n" >> /etc/php/7.0/cli/php.ini
 
+#       Compilando lib GD para imagens
+#       phpize
+#       ./configure --with-gd=shared --with-freetype-dir=/usr/include/freetype2/
+#       make clean
+#       make
+
         if [[ $1 == "op" ]]; then
             mostrarMenuOpcoes
         fi
