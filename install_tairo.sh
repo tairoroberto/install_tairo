@@ -1556,8 +1556,9 @@
         sudo echo -e "\n" >> /etc/php/7.0/cli/php.ini
 
 #       Compilando lib GD para imagens
+#       sudo apt-get install libjpeg62-dev
 #       phpize
-#       ./configure --with-gd=shared --with-freetype-dir=/usr/include/freetype2/
+#       ./configure --with-gd=shared --with-freetype-dir=/usr/include/freetype2/  --with-png-dir  --with-freetype-dir  --with-gd --with-jpeg-dir=/usr/lib64
 #       make clean
 #       make
 
