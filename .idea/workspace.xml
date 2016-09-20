@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="2e2a2cce-f256-40f0-b819-0e06e38bf8a7" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/install_tairo.sh" afterPath="$PROJECT_DIR$/install_tairo.sh" />
     </list>
     <ignored path="install_tairo.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -35,8 +34,8 @@
       <file leaf-file-name="install_tairo.sh" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/install_tairo.sh">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="12865">
-              <caret line="997" column="0" selection-start-line="997" selection-start-column="0" selection-end-line="997" selection-end-column="0" />
+            <state relative-caret-position="12685">
+              <caret line="993" column="0" selection-start-line="993" selection-start-column="0" selection-end-line="993" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -301,7 +300,7 @@
       <workItem from="1472512338297" duration="278000" />
       <workItem from="1472514488061" duration="325000" />
       <workItem from="1472853962149" duration="615000" />
-      <workItem from="1474384226805" duration="1134000" />
+      <workItem from="1474384226805" duration="1505000" />
     </task>
     <task id="LOCAL-00001" summary="Alterando versão do php e criando .deb">
       <created>1461714521494</created>
@@ -436,11 +435,18 @@
       <option name="project" value="LOCAL" />
       <updated>1472512454946</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="Ajustando sudo">
+      <created>1474385374954</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1474385374954</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="76772000" />
+    <option name="totallyTimeSpent" value="77143000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -534,7 +540,8 @@
     <MESSAGE value="Adicionando sudovocabulary" />
     <MESSAGE value="Adicinando comentario  DB" />
     <MESSAGE value="Adicinando comentario paar instalação de lib GD" />
-    <option name="LAST_COMMIT_MESSAGE" value="Adicinando comentario paar instalação de lib GD" />
+    <MESSAGE value="Ajustando sudo" />
+    <option name="LAST_COMMIT_MESSAGE" value="Ajustando sudo" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -775,8 +782,8 @@
     <entry file="file://$USER_HOME$/Desktop/FINANCEIRO11_TAB_PARAMETRO.sql" />
     <entry file="file://$PROJECT_DIR$/install_tairo.sh">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="12865">
-          <caret line="997" column="0" selection-start-line="997" selection-start-column="0" selection-end-line="997" selection-end-column="0" />
+        <state relative-caret-position="12685">
+          <caret line="993" column="0" selection-start-line="993" selection-start-column="0" selection-end-line="993" selection-end-column="0" />
           <folding />
         </state>
       </provider>
