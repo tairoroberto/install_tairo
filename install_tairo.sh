@@ -187,10 +187,10 @@
         capturarUsuarioFtp
         capturarSenhaFtp
 
-        sudo apt-get update
-        sudo apt-get install -y g++
-        sudo apt-get install -y gcc
-        sudo apt-get install -y make
+        apt-get update
+        apt-get install -y g++
+        apt-get install -y gcc
+        apt-get install -y make
 
         if [[ $phpVersion == 1 ]]; then
             instalarPHP56
@@ -200,62 +200,62 @@
             instalarPHP7
         fi
 
-        sudo apt-get install -y mysql-server
-        sudo apt-get install -y phpmyadmin
+        apt-get install -y mysql-server
+        apt-get install -y phpmyadmin
         instalarJava
         instalarWine
         instalarSteam
-        sudo apt-get install -y postgresql
-        sudo apt-get install -y subversion
-        sudo apt-get install -y memcached
-        sudo apt-get install -y sendmail
-        sudo apt-get install -y unetbootin
+        apt-get install -y postgresql
+        apt-get install -y subversion
+        apt-get install -y memcached
+        apt-get install -y sendmail
+        apt-get install -y unetbootin
         criarDebZanthus
         instalarAndroidStudio
 
         #Instala os pacotes e programas
 
         #Intala o skype primeiro por que ele baixa varias libs 32bits que programas com Wine usam
-        sudo apt-get -y install skype
+        apt-get -y install skype
         #Instala AcetoneIso programa para rodar isos
-        sudo apt-get -y install acetoneiso
+        apt-get -y install acetoneiso
         #Plugin para abrir o terminal no diretório
-        sudo apt-get -y install nautilus-open-terminal
+        apt-get -y install nautilus-open-terminal
         #Instala Gdebi Instalador de pacotes
-        sudo apt-get -y install gdebi
+        apt-get -y install gdebi
         #Instala Gerenciador de dependencias
-        sudo apt-get -y install synaptic
+        apt-get -y install synaptic
         #Instala treinamento de digitação
-        sudo apt-get -y install klavaro
+        apt-get -y install klavaro
         #Instala pacotes extras com flash e codecs mp4
-        sudo apt-get -y install ubuntu-restricted-extras
+        apt-get -y install ubuntu-restricted-extras
         #Instala descompactador
-        sudo apt-get -y install rar
+        apt-get -y install rar
         #Instala cliente ftp
-        sudo apt-get -y install filezilla
+        apt-get -y install filezilla
         #Instala gimp para edição de imagens
-        sudo apt-get -y install gimp
+        apt-get -y install gimp
         #Instala inkscape para edição de imagens
-        sudo apt-get -y install inkscape
+        apt-get -y install inkscape
         #Instala cliente de audio do spotify
         instalarSpotify
         #Instala lib Curl para uso com php
-        sudo apt-get -y install curl
+        apt-get -y install curl
         #Instala playonlinux gerenciaento de plataforma wine
-        sudo apt-get -y install playonlinux
+        apt-get -y install playonlinux
         #Instala controle de versionamento
-        sudo apt-get -y install git-core
+        apt-get -y install git-core
         instalarVirtualBox
         #Instala gerenciador de backup
-        sudo apt-get -y install luckybackup
+        apt-get -y install luckybackup
         #Instala  libs php para conexão com banco de dados MSSQL
-        sudo apt-get -y install freetds-common
+        apt-get -y install freetds-common
         #Atualiza os headers
-        sudo apt-get update
+        apt-get update
         # reinicializa Apache
-        sudo service apache2 restart
+        service apache2 restart
         #Da permição para a pasta do apache
-        sudo chmod -R 777 /var/www
+        chmod -R 777 /var/www
 
         #configura o git com meu email
         git config --global user.email "tairoroberto@hotmail.com"
@@ -263,55 +263,55 @@
         git config --global user.name "tairoroberto"
 
         #Habilita o modrewrite do apache
-        sudo a2enmod  rewrite
+        a2enmod  rewrite
         #Instala o Composer
         instalarComposer
 
         #Adiciona o NodeJs ao bash para ser instalado
-        sudo curl --silent --location https://deb.nodesource.com/setup_4.x |  bash -
+        curl --silent --location https://deb.nodesource.com/setup_4.x |  bash -
         #Atualiza os headers
-        sudo apt-get update
+        apt-get update
         #Instala o NodeJs
-        sudo apt-get install --yes nodejs
+        apt-get install --yes nodejs
         #Conversor de pacotes RPM
-        sudo apt-get -y install alien
+        apt-get -y install alien
         #Configurador de discos Ntfs
-        sudo apt-get -y install ntfs-config
+        apt-get -y install ntfs-config
         #Instala ruby
-        sudo apt-get -y install ruby
+        apt-get -y install ruby
 
         #verifica se é pra intalar PhpStorm
         if [[ $1 == "storm" ]]; then
-            sudo instalarPhpStorm
+            instalarPhpStorm
         fi
 
         #verifica se é pra intalar IntelliJ-IDEA
         if [[ $2 == "idea" ]]; then
-            sudo instalarIntelliJ
+            instalarIntelliJ
         fi
 
         #verifica se é pra intalar Clion
         if [[ $3 == "webstorm" ]]; then
-            sudo instalarWebStorm
+            instalarWebStorm
         fi
 
         #Instala Siblime-text 3 e Notepad++
-        sudo instalarSublime
+        instalarSublime
 
         #Instala Dropbox
-        sudo instalarDropbox
+        instalarDropbox
 
         #Instala a IDE Eclipse Java EE
-        sudo instalarEclipse
+        instalarEclipse
 
         #Instala O navegador GoogleChrome
-        sudo instalarGoogleChrome
+        instalarGoogleChrome
 
         #instala o banco oracle
-        sudo instalarOracleDataBase11G
+        instalarOracleDataBase11G
 
-        #Instala sudo dictionary no terminal
-        sudo curl https://raw.githubusercontent.com/badarsh2/Sudocabulary/master/script.sh | bash
+        #Instala dictionary no terminal
+        curl https://raw.githubusercontent.com/badarsh2/Sudocabulary/master/script.sh | bash
 
         mostrarMenuOpcoes
     }
@@ -373,14 +373,14 @@
 
         echo "    Excluindo pastas e arquivos..."
 
-        sudo pecl  uninstall oci8
-        sudo pecl  uninstall xdebug
-        sudo pecl  uninstall dbase
-        sudo apt-get -y purge php*
-        sudo apt-get -y purge apache2
-        sudo apt-get -y purge postgresql
-        sudo apt-get -y purge mysql-server
-        sudo apt-get -y purge subversion
+        pecl  uninstall oci8
+        pecl  uninstall xdebug
+        pecl  uninstall dbase
+        apt-get -y purge php*
+        apt-get -y purge apache2
+        apt-get -y purge postgresql
+        apt-get -y purge mysql-server
+        apt-get -y purge subversion
 
         removerOracleInstantClient
 
@@ -389,90 +389,90 @@
         #Desistala os pacotes e programas
 
         #Remove repositorio para php5-5.6
-        sudo add-apt-repository  -r ppa:ondrej/php5-5.6
-        sudo apt-get update
+        add-apt-repository  -r ppa:ondrej/php5-5.6
+        apt-get update
 
-        sudo removerJava
+        removerJava
 
-        sudo removerAndroidStudio
+        removerAndroidStudio
 
         #Desistala sendmail
-        sudo apt-get -y purge sendmail
+        apt-get -y purge sendmail
         #Desistala AcetoneIso programa para rodar isos
-        sudo apt-get -y purge acetoneiso
+        apt-get -y purge acetoneiso
         #Plugin para abrir o terminal no diretório
-        sudo apt-get -y purge nautilus-open-terminal
+        apt-get -y purge nautilus-open-terminal
         removerSteam
         #Desistala Gdebi Instalador de pacotes
-        sudo apt-get -y purge gdebi
+        apt-get -y purge gdebi
         #Desistala Gerenciador de dependencias
-        sudo apt-get -y purge synaptic
+        apt-get -y purge synaptic
         #Desistala treinamento de digitação
-        sudo apt-get -y purge klavaro
+        apt-get -y purge klavaro
         #Desistala pacotes extras com flash e codecs mp4
-        sudo apt-get -y purge ubuntu-restricted-extras
+        apt-get -y purge ubuntu-restricted-extras
         #Desistala descompactador
-        sudo apt-get -y purge rar
+        apt-get -y purge rar
         #Desistala cliente ftp
-        sudo apt-get -y purge filezilla
+        apt-get -y purge filezilla
         #Desistala wine para rodar programas do windows
-        sudo removerWine
+        removerWine
         #Desistala gimp para edição de imagens
-        sudo apt-get -y purge gimp
+        apt-get -y purge gimp
         #Desistala inkscape para edição de imagens
-        sudo apt-get -y purge inkscape
+        apt-get -y purge inkscape
         #Desistala lib Curl para uso com php
-        sudo apt-get -y purge curl
+        apt-get -y purge curl
         #Desistala playonlinux gerenciaento de plataforma wine
-        sudo apt-get -y purge playonlinux
+        apt-get -y purge playonlinux
         #Desistala controle de versionamento
-        sudo apt-get -y purge git-core
-        sudo removerVirtualBox
+        apt-get -y purge git-core
+        removerVirtualBox
         #Desistala gerenciador de backup
-        sudo apt-get -y purge luckybackup
+        apt-get -y purge luckybackup
         #Desistala  libs php para conexão com banco de dados MSSQL
-        sudo apt-get -y purge freetds-common
+        apt-get -y purge freetds-common
         #Desistala o Composer
-        sudo removerComposer
+        removerComposer
         #Desistala o NodeJs
-        sudo apt-get purge --yes nodejs
+        apt-get purge --yes nodejs
         #Desistala o skype por ultimo por que ele baixa varias libs 32bits que programas com Wine usam
-        sudo apt-get -y purge skype
+        apt-get -y purge skype
         #Desistala conversor de pacotes
-        sudo apt-get -y purge alien
+        apt-get -y purge alien
         #Desistala configurador de discos Ntfs
-        sudo apt-get -y purge ntfs-config
+        apt-get -y purge ntfs-config
         #Desistala Unetbootin
-        sudo apt-get -y purge unetbootin
+        apt-get -y purge unetbootin
         #Desistala ruby
-        sudo apt-get -y purge ruby
+        apt-get -y purge ruby
 
         #remove os pacotes não ultilizados
-        sudo apt-get -y autoremove
-        sudo apt-get clean
+        apt-get -y autoremove
+        apt-get clean
 
         #verifica se é pra remover PhpStorm
         if [[ $1 == "storm" ]]; then
-            sudo removerPhpStorm
+            removerPhpStorm
         fi
 
         #verifica se é pra remover IntelliJ-IDEA
         if [[ $2 == "idea" ]]; then
-            sudo removerIntelliJ
+            removerIntelliJ
         fi
 
         #verifica se é pra remover Clion
         if [[ $3 == "webstorm" ]]; then
-            sudo removerWebStorm
+            removerWebStorm
         fi
 
         #Desistala Eclipse Java EE
-        sudo removerEclipse
+        removerEclipse
 
         #Desistala Dropbox
-        sudo removerDropbox
+        removerDropbox
 
-        sudo removerLauchers $usuario
+        removerLauchers $usuario
 
         echo "    Ambiente Servidor Ubuntu removido"
 
@@ -484,66 +484,66 @@
 
         versao=$(uname -i)
         if [[  $versao == "i386" || $versao == "i486" || $versao == "i686" ]]; then
-            sudo wget -c "https://www.eclipse.org/downloads/download.php?file=/technology/epp/downloads/release/mars/1/eclipse-jee-mars-1-linux-gtk.tar.gz&r=1" -O eclipse-jee-mars-1-linux-gtk.tar.gz
-            sudo tar -zxvf eclipse-jee-mars-1-linux-gtk.tar.gz
-            sudo mv eclipse /opt/eclipse
-            sudo chmod +x /opt/eclipse/eclipse
-            sudo chmod -R 777 /opt/eclipse
+            wget -c "https://www.eclipse.org/downloads/download.php?file=/technology/epp/downloads/release/mars/1/eclipse-jee-mars-1-linux-gtk.tar.gz&r=1" -O eclipse-jee-mars-1-linux-gtk.tar.gz
+            tar -zxvf eclipse-jee-mars-1-linux-gtk.tar.gz
+            mv eclipse /opt/eclipse
+            chmod +x /opt/eclipse/eclipse
+            chmod -R 777 /opt/eclipse
 
             #Cria arquivo executavel#
-            sudo touch /usr/bin/eclipse
-            sudo chmod 755 /usr/bin/eclipse
-            sudo echo "#!/bin/sh" >> /usr/bin/eclipse
-            sudo echo "export UBUNTU_MENUPROXY=0" >> /usr/bin/eclipse
-            sudo echo "export ECLIPSE_HOME=/opt/eclipse" >> /usr/bin/eclipse
-            sudo echo "\$ECLIPSE_HOME/eclipse $*" >> /usr/bin/eclipse
-            sudo ln -s /usr/bin/eclipse /bin/eclipse
+            touch /usr/bin/eclipse
+            chmod 755 /usr/bin/eclipse
+            echo "#!/bin/sh" >> /usr/bin/eclipse
+            echo "export UBUNTU_MENUPROXY=0" >> /usr/bin/eclipse
+            echo "export ECLIPSE_HOME=/opt/eclipse" >> /usr/bin/eclipse
+            echo "\$ECLIPSE_HOME/eclipse $*" >> /usr/bin/eclipse
+            ln -s /usr/bin/eclipse /bin/eclipse
 
             #Cria icone do desktop#
-            sudo touch /usr/share/applications/eclipse.desktop
-            sudo echo "[Desktop Entry]" >> /usr/share/applications/eclipse.desktop
-            sudo echo "Encoding=UTF-8" >> /usr/share/applications/eclipse.desktop
-            sudo echo "Name=Eclipse" >> /usr/share/applications/eclipse.desktop
-            sudo echo "Comment=Eclipse IDE" >> /usr/share/applications/eclipse.desktop
-            sudo echo "Exec=eclipse" >> /usr/share/applications/eclipse.desktop
-            sudo echo "Icon=/opt/eclipse/icon.xpm" >> /usr/share/applications/eclipse.desktop
-            sudo echo "Terminal=false" >> /usr/share/applications/eclipse.desktop
-            sudo echo "Type=Application" >> /usr/share/applications/eclipse.desktop
-            sudo echo "Categories=GNOME;Application;Development;" >> /usr/share/applications/eclipse.desktop
-            sudo echo "StartupNotify=true" >> /usr/share/applications/eclipse.desktop
+            touch /usr/share/applications/eclipse.desktop
+            echo "[Desktop Entry]" >> /usr/share/applications/eclipse.desktop
+            echo "Encoding=UTF-8" >> /usr/share/applications/eclipse.desktop
+            echo "Name=Eclipse" >> /usr/share/applications/eclipse.desktop
+            echo "Comment=Eclipse IDE" >> /usr/share/applications/eclipse.desktop
+            echo "Exec=eclipse" >> /usr/share/applications/eclipse.desktop
+            echo "Icon=/opt/eclipse/icon.xpm" >> /usr/share/applications/eclipse.desktop
+            echo "Terminal=false" >> /usr/share/applications/eclipse.desktop
+            echo "Type=Application" >> /usr/share/applications/eclipse.desktop
+            echo "Categories=GNOME;Application;Development;" >> /usr/share/applications/eclipse.desktop
+            echo "StartupNotify=true" >> /usr/share/applications/eclipse.desktop
 
-            sudo rm -r eclipse-jee-mars-1-linux-gtk.tar.gz
+            rm -r eclipse-jee-mars-1-linux-gtk.tar.gz
 
         else
-            sudo wget -c "https://www.eclipse.org/downloads/download.php?file=/technology/epp/downloads/release/mars/1/eclipse-jee-mars-1-linux-gtk-x86_64.tar.gz&r=1" -O eclipse-jee-mars-1-linux-gtk-x86_64.tar.gz
-            sudo tar -zxvf eclipse-jee-mars-1-linux-gtk-x86_64.tar.gz
-            sudo mv eclipse /opt/eclipse
-            sudo chmod +x /opt/eclipse/eclipse
-            sudo chmod -R 777 /opt/eclipse
+            wget -c "https://www.eclipse.org/downloads/download.php?file=/technology/epp/downloads/release/mars/1/eclipse-jee-mars-1-linux-gtk-x86_64.tar.gz&r=1" -O eclipse-jee-mars-1-linux-gtk-x86_64.tar.gz
+            tar -zxvf eclipse-jee-mars-1-linux-gtk-x86_64.tar.gz
+            mv eclipse /opt/eclipse
+            chmod +x /opt/eclipse/eclipse
+            chmod -R 777 /opt/eclipse
 
             #Cria arquivo executavel#
-            sudo touch /usr/bin/eclipse
-            sudo chmod 755 /usr/bin/eclipse
+            touch /usr/bin/eclipse
+            chmod 755 /usr/bin/eclipse
             echo "#!/bin/sh" >> /usr/bin/eclipse
-            sudo echo "export UBUNTU_MENUPROXY=0" >> /usr/bin/eclipse
-            sudo echo "export ECLIPSE_HOME=/opt/eclipse" >> /usr/bin/eclipse
-            sudo echo "\$ECLIPSE_HOME/eclipse $*" >> /usr/bin/eclipse
-            sudo ln -s /usr/bin/eclipse /bin/eclipse
+            echo "export UBUNTU_MENUPROXY=0" >> /usr/bin/eclipse
+            echo "export ECLIPSE_HOME=/opt/eclipse" >> /usr/bin/eclipse
+            echo "\$ECLIPSE_HOME/eclipse $*" >> /usr/bin/eclipse
+            ln -s /usr/bin/eclipse /bin/eclipse
 
             #Cria icone do desktop#
-            sudo touch /usr/share/applications/eclipse.desktop
-            sudo echo "[Desktop Entry]" >> /usr/share/applications/eclipse.desktop
-            sudo echo "Encoding=UTF-8" >> /usr/share/applications/eclipse.desktop
-            sudo echo "Name=Eclipse" >> /usr/share/applications/eclipse.desktop
-            sudo echo "Comment=Eclipse IDE" >> /usr/share/applications/eclipse.desktop
-            sudo echo "Exec=eclipse" >> /usr/share/applications/eclipse.desktop
-            sudo echo "Icon=/opt/eclipse/icon.xpm" >> /usr/share/applications/eclipse.desktop
-            sudo echo "Terminal=false" >> /usr/share/applications/eclipse.desktop
-            sudo echo "Type=Application" >> /usr/share/applications/eclipse.desktop
-            sudo echo "Categories=GNOME;Application;Development;" >> /usr/share/applications/eclipse.desktop
-            sudo echo "StartupNotify=true" >> /usr/share/applications/eclipse.desktop
+            touch /usr/share/applications/eclipse.desktop
+            echo "[Desktop Entry]" >> /usr/share/applications/eclipse.desktop
+            echo "Encoding=UTF-8" >> /usr/share/applications/eclipse.desktop
+            echo "Name=Eclipse" >> /usr/share/applications/eclipse.desktop
+            echo "Comment=Eclipse IDE" >> /usr/share/applications/eclipse.desktop
+            echo "Exec=eclipse" >> /usr/share/applications/eclipse.desktop
+            echo "Icon=/opt/eclipse/icon.xpm" >> /usr/share/applications/eclipse.desktop
+            echo "Terminal=false" >> /usr/share/applications/eclipse.desktop
+            echo "Type=Application" >> /usr/share/applications/eclipse.desktop
+            echo "Categories=GNOME;Application;Development;" >> /usr/share/applications/eclipse.desktop
+            echo "StartupNotify=true" >> /usr/share/applications/eclipse.desktop
 
-            sudo rm -r eclipse-jee-mars-1-linux-gtk-x86_64.tar.gz
+            rm -r eclipse-jee-mars-1-linux-gtk-x86_64.tar.gz
         fi
 
         if [[ $1 == "op" ]]; then
@@ -553,10 +553,10 @@
 
     #Remove IDE Eclipse
     removerEclipse(){
-        sudo rm -r /usr/bin/eclipse
-        sudo rm -r /bin/eclipse
-        sudo rm -r /opt/eclipse
-        sudo rm -r /usr/share/applications/eclipse.desktop
+        rm -r /usr/bin/eclipse
+        rm -r /bin/eclipse
+        rm -r /opt/eclipse
+        rm -r /usr/share/applications/eclipse.desktop
 
         if [[ $1 == "op" ]]; then
             mostrarMenuOpcoes
@@ -568,20 +568,20 @@
         versao=$(uname -i)
         if [[  $versao == "i386" || $versao == "i486" || $versao == "i686" ]]; then
             cd ~
-            sudo wget -c "https://dl.google.com/linux/direct/google-chrome-stable_current_i386.deb"
-            sudo dpkg -i google-chrome-stable_current_i386.deb
-            sudo apt-get -y install libappindicator1
-            sudo apt-get -f install
-            sudo dpkg -i google-chrome-stable_current_i386.deb
-            sudo rm -r google-chrome-stable_current_i386.deb
+            wget -c "https://dl.google.com/linux/direct/google-chrome-stable_current_i386.deb"
+            dpkg -i google-chrome-stable_current_i386.deb
+            apt-get -y install libappindicator1
+            apt-get -f install
+            dpkg -i google-chrome-stable_current_i386.deb
+            rm -r google-chrome-stable_current_i386.deb
         else
             cd ~
-            sudo wget -c "https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb"
-            sudo dpkg -i google-chrome-stable_current_amd64.deb
-            sudo apt-get -y install libappindicator1
-            sudo apt-get -f install
-            sudo dpkg -i google-chrome-stable_current_amd64.deb
-            sudo rm -r google-chrome-stable_current_amd64.deb
+            wget -c "https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb"
+            dpkg -i google-chrome-stable_current_amd64.deb
+            apt-get -y install libappindicator1
+            apt-get -f install
+            dpkg -i google-chrome-stable_current_amd64.deb
+            rm -r google-chrome-stable_current_amd64.deb
         fi
 
         if [[ $1 == "op" ]]; then
@@ -591,7 +591,7 @@
 
     #Remove o navegador Google Chrome
     removerGoogleChrome(){
-        sudo apt-get -y purge google-chrome-stable
+        apt-get -y purge google-chrome-stable
 
         if [[ $1 == "op" ]]; then
             mostrarMenuOpcoes
@@ -602,14 +602,14 @@
     instalarSublime(){
         versao=$(uname -i)
         if [[  $versao == "i386" || $versao == "i486" || $versao == "i686" ]]; then
-            sudo wget -c http://c758482.r82.cf2.rackcdn.com/sublime-text_build-3083_i386.deb
-            sudo dpkg -i sublime-text_build-3083_i386.deb
-            sudo rm -r sublime-text_build-3083_i386.deb
+            wget -c http://c758482.r82.cf2.rackcdn.com/sublime-text_build-3083_i386.deb
+            dpkg -i sublime-text_build-3083_i386.deb
+            rm -r sublime-text_build-3083_i386.deb
 
         else
-            sudo wget -c http://c758482.r82.cf2.rackcdn.com/sublime-text_build-3083_amd64.deb
-            sudo dpkg -i sublime-text_build-3083_amd64.deb
-            sudo rm -r sublime-text_build-3083_amd64.deb
+            wget -c http://c758482.r82.cf2.rackcdn.com/sublime-text_build-3083_amd64.deb
+            dpkg -i sublime-text_build-3083_amd64.deb
+            rm -r sublime-text_build-3083_amd64.deb
         fi
 
         if [[ $1 == "op" ]]; then
@@ -620,13 +620,13 @@
     intalarNotePad(){
         versao=$(uname -i)
         if [[  $versao == "i386" || $versao == "i486" || $versao == "i686" ]]; then
-            sudo wget -c "https://notepad-plus-plus.org/repository/6.x/6.8.6/npp.6.8.6.Installer.exe"
-            sudo wine npp.6.8.6.Installer.exe
-            sudo rm -r npp.6.8.6.Installer.exe
+            wget -c "https://notepad-plus-plus.org/repository/6.x/6.8.6/npp.6.8.6.Installer.exe"
+            wine npp.6.8.6.Installer.exe
+            rm -r npp.6.8.6.Installer.exe
         else
-            sudo wget -c "https://notepad-plus-plus.org/repository/6.x/6.8.6/npp.6.8.6.Installer.exe"
-            sudo wine npp.6.8.6.Installer.exe
-            sudo rm -r npp.6.8.6.Installer.exe
+            wget -c "https://notepad-plus-plus.org/repository/6.x/6.8.6/npp.6.8.6.Installer.exe"
+            wine npp.6.8.6.Installer.exe
+            rm -r npp.6.8.6.Installer.exe
         fi
 
         if [[ $1 == "op" ]]; then
@@ -640,14 +640,14 @@
         #Instala Dropbox
         versao=$(uname -i)
         if [[  $versao == "i386" || $versao == "i486" || $versao == "i686" ]]; then
-            sudo wget -c "https://www.dropbox.com/download?dl=packages/ubuntu/dropbox_2015.10.28_i386.deb" -O dropbox.deb
-            sudo dpkg -i dropbox.deb
-            sudo rm -r dropbox.deb
+            wget -c "https://www.dropbox.com/download?dl=packages/ubuntu/dropbox_2015.10.28_i386.deb" -O dropbox.deb
+            dpkg -i dropbox.deb
+            rm -r dropbox.deb
 
         else
-            sudo wget -c "https://www.dropbox.com/download?dl=packages/ubuntu/dropbox_2015.10.28_amd64.deb" -O dropbox.deb
-            sudo dpkg -i dropbox.deb
-            sudo rm -r dropbox.deb
+            wget -c "https://www.dropbox.com/download?dl=packages/ubuntu/dropbox_2015.10.28_amd64.deb" -O dropbox.deb
+            dpkg -i dropbox.deb
+            rm -r dropbox.deb
         fi
 
         if [[ $1 == "op" ]]; then
@@ -657,7 +657,7 @@
 
     removerDropbox(){
         #Desistala Dropbox
-        sudo apt-get -y purge dropbox
+        apt-get -y purge dropbox
 
         if [[ $1 == "op" ]]; then
             mostrarMenuOpcoes
@@ -669,35 +669,35 @@
     instalarPhpStorm(){
         clear
         cd ~
-        sudo wget -c https://download.jetbrains.com/webide/PhpStorm-2016.1.2.tar.gz
-        sudo tar -zxvf PhpStorm-2016.1.2.tar.gz
-        sudo rm -f PhpStorm-2016.1.2.tar.gz
+        wget -c https://download.jetbrains.com/webide/PhpStorm-2016.1.2.tar.gz
+        tar -zxvf PhpStorm-2016.1.2.tar.gz
+        rm -f PhpStorm-2016.1.2.tar.gz
 
-        sudo mv PhpStorm-* /opt/PhpStorm
-        sudo chmod +x /opt/PhpStorm/bin/phpstorm.sh
-        sudo chmod -R 777 /opt/PhpStorm
+        mv PhpStorm-* /opt/PhpStorm
+        chmod +x /opt/PhpStorm/bin/phpstorm.sh
+        chmod -R 777 /opt/PhpStorm
 
         #Cria arquivo executavel#
-        sudo touch /usr/bin/phpstorm
-        sudo chmod 755 /usr/bin/phpstorm
-        sudo echo "#!/bin/sh" >> /usr/bin/phpstorm
-        sudo echo "export UBUNTU_MENUPROXY=0" >> /usr/bin/phpstorm
-        sudo echo "export PHPSTORM_HOME=/opt/PhpStorm" >> /usr/bin/phpstorm
-        sudo echo "\"\$PHPSTORM_HOME/bin/phpstorm.sh\" %f" >> /usr/bin/phpstorm
-        sudo ln -s /usr/bin/phpstorm /bin/phpstorm
+        touch /usr/bin/phpstorm
+        chmod 755 /usr/bin/phpstorm
+        echo "#!/bin/sh" >> /usr/bin/phpstorm
+        echo "export UBUNTU_MENUPROXY=0" >> /usr/bin/phpstorm
+        echo "export PHPSTORM_HOME=/opt/PhpStorm" >> /usr/bin/phpstorm
+        echo "\"\$PHPSTORM_HOME/bin/phpstorm.sh\" %f" >> /usr/bin/phpstorm
+        ln -s /usr/bin/phpstorm /bin/phpstorm
 
         #Cria icone do desktop#
-        sudo touch /usr/share/applications/phpstorm.desktop
-        sudo echo "[Desktop Entry]" >> /usr/share/applications/phpstorm.desktop
-        sudo echo "Encoding=UTF-8" >> /usr/share/applications/phpstorm.desktop
-        sudo echo "Name=PhpStorm" >> /usr/share/applications/phpstorm.desktop
-        sudo echo "Comment=PhpStorm IDE" >> /usr/share/applications/phpstorm.desktop
-        sudo echo "Exec=phpstorm" >> /usr/share/applications/phpstorm.desktop
-        sudo echo "Icon=/opt/PhpStorm/bin/webide.png" >> /usr/share/applications/phpstorm.desktop
-        sudo echo "Terminal=false" >> /usr/share/applications/phpstorm.desktop
-        sudo echo "Type=Application" >> /usr/share/applications/phpstorm.desktop
-        sudo echo "Categories=GNOME;Application;Development;" >> /usr/share/applications/phpstorm.desktop
-        sudo echo "StartupNotify=true" >> /usr/share/applications/phpstorm.desktop
+        touch /usr/share/applications/phpstorm.desktop
+        echo "[Desktop Entry]" >> /usr/share/applications/phpstorm.desktop
+        echo "Encoding=UTF-8" >> /usr/share/applications/phpstorm.desktop
+        echo "Name=PhpStorm" >> /usr/share/applications/phpstorm.desktop
+        echo "Comment=PhpStorm IDE" >> /usr/share/applications/phpstorm.desktop
+        echo "Exec=phpstorm" >> /usr/share/applications/phpstorm.desktop
+        echo "Icon=/opt/PhpStorm/bin/webide.png" >> /usr/share/applications/phpstorm.desktop
+        echo "Terminal=false" >> /usr/share/applications/phpstorm.desktop
+        echo "Type=Application" >> /usr/share/applications/phpstorm.desktop
+        echo "Categories=GNOME;Application;Development;" >> /usr/share/applications/phpstorm.desktop
+        echo "StartupNotify=true" >> /usr/share/applications/phpstorm.desktop
 
         if [[ $1 == "op" ]]; then
             mostrarMenuOpcoes
@@ -716,10 +716,10 @@
             mostrarMenuOpcoes
         fi
 
-        sudo rm -r /usr/bin/phpstorm
-        sudo rm -r /bin/phpstorm
-        sudo rm -r /usr/share/applications/phpstorm.desktop
-        sudo rm -r /opt/PhpStorm
+        rm -r /usr/bin/phpstorm
+        rm -r /bin/phpstorm
+        rm -r /usr/share/applications/phpstorm.desktop
+        rm -r /opt/PhpStorm
 
         if [[ $1 == "op" ]]; then
             mostrarMenuOpcoes
@@ -730,35 +730,35 @@
     # IDE de desenvolvimento JAVA #
     instalarIntelliJ(){
         cd ~
-        sudo wget -c https://download.jetbrains.com/idea/ideaIU-2016.1.3.tar.gz
-        sudo tar -zxvf ideaIU-2016.1.3.tar.gz
-        sudo rm -f ideaIU-2016.1.3.tar.gz
+        wget -c https://download.jetbrains.com/idea/ideaIU-2016.1.3.tar.gz
+        tar -zxvf ideaIU-2016.1.3.tar.gz
+        rm -f ideaIU-2016.1.3.tar.gz
 
-        sudo mv idea-IU-* /opt/IntelliJ-IDEA
-        sudo chmod +x /opt/IntelliJ-IDEA/bin/idea.sh
-        sudo chmod -R 777 /opt/IntelliJ-IDEA
+        mv idea-IU-* /opt/IntelliJ-IDEA
+        chmod +x /opt/IntelliJ-IDEA/bin/idea.sh
+        chmod -R 777 /opt/IntelliJ-IDEA
 
         #Cria arquivo executavel#
-        sudo touch /usr/bin/idea
-        sudo sudo chmod 755 /usr/bin/idea
-        sudo echo "#!/bin/sh" >> /usr/bin/idea
-        sudo echo "export UBUNTU_MENUPROXY=0" >> /usr/bin/idea
-        sudo echo "export IntelliJ_HOME=/opt/IntelliJ-IDEA" >> /usr/bin/idea
-        sudo echo "\"\$IntelliJ_HOME/bin/idea.sh\" %f" >> /usr/bin/idea
-        sudo ln -s /usr/bin/idea /bin/idea
+        touch /usr/bin/idea
+        chmod 755 /usr/bin/idea
+        echo "#!/bin/sh" >> /usr/bin/idea
+        echo "export UBUNTU_MENUPROXY=0" >> /usr/bin/idea
+        echo "export IntelliJ_HOME=/opt/IntelliJ-IDEA" >> /usr/bin/idea
+        echo "\"\$IntelliJ_HOME/bin/idea.sh\" %f" >> /usr/bin/idea
+        ln -s /usr/bin/idea /bin/idea
 
         #Cria icone do desktop#
-        sudo touch /usr/share/applications/idea.desktop
-        sudo echo "[Desktop Entry]" >> /usr/share/applications/idea.desktop
-        sudo echo "Encoding=UTF-8" >> /usr/share/applications/idea.desktop
-        sudo echo "Name=IntelliJ-IDEA" >> /usr/share/applications/idea.desktop
-        sudo echo "Comment=IntelliJ-IDEA IDE" >> /usr/share/applications/idea.desktop
-        sudo echo "Exec=idea" >> /usr/share/applications/idea.desktop
-        sudo echo "Icon=/opt/IntelliJ-IDEA/bin/idea.png" >> /usr/share/applications/idea.desktop
-        sudo echo "Terminal=false" >> /usr/share/applications/idea.desktop
-        sudo echo "Type=Application" >> /usr/share/applications/idea.desktop
-        sudo echo "Categories=GNOME;Application;Development;" >> /usr/share/applications/idea.desktop
-        sudo echo "StartupNotify=true" >> /usr/share/applications/idea.desktop
+        touch /usr/share/applications/idea.desktop
+        echo "[Desktop Entry]" >> /usr/share/applications/idea.desktop
+        echo "Encoding=UTF-8" >> /usr/share/applications/idea.desktop
+        echo "Name=IntelliJ-IDEA" >> /usr/share/applications/idea.desktop
+        echo "Comment=IntelliJ-IDEA IDE" >> /usr/share/applications/idea.desktop
+        echo "Exec=idea" >> /usr/share/applications/idea.desktop
+        echo "Icon=/opt/IntelliJ-IDEA/bin/idea.png" >> /usr/share/applications/idea.desktop
+        echo "Terminal=false" >> /usr/share/applications/idea.desktop
+        echo "Type=Application" >> /usr/share/applications/idea.desktop
+        echo "Categories=GNOME;Application;Development;" >> /usr/share/applications/idea.desktop
+        echo "StartupNotify=true" >> /usr/share/applications/idea.desktop
 
         if [[ $1 == "op" ]]; then
             mostrarMenuOpcoes
@@ -774,10 +774,10 @@
         if [ ! $op == "s" ]; then
             mostrarMenuOpcoes
         fi
-        sudo rm -r /usr/bin/idea
-        sudo rm -r /bin/idea
-        sudo rm -r /opt/IntelliJ-IDEA
-        sudo rm -r /usr/share/applications/idea.desktop
+        rm -r /usr/bin/idea
+        rm -r /bin/idea
+        rm -r /opt/IntelliJ-IDEA
+        rm -r /usr/share/applications/idea.desktop
 
         if [[ $1 == "op" ]]; then
             mostrarMenuOpcoes
@@ -789,35 +789,35 @@
     instalarWebStorm(){
         clear
         cd ~
-        sudo wget -c https://download.jetbrains.com/webstorm/WebStorm-2016.1.3.tar.gz
-        sudo tar -zxvf WebStorm-2016.1.3.tar.gz
-        sudo rm -f WebStorm-2016.1.3.tar.gz
+        wget -c https://download.jetbrains.com/webstorm/WebStorm-2016.1.3.tar.gz
+        tar -zxvf WebStorm-2016.1.3.tar.gz
+        rm -f WebStorm-2016.1.3.tar.gz
 
-        sudo mv WebStorm-* /opt/WebStorm
-        sudo chmod +x /opt/WebStorm/bin/webstorm.sh
-        sudo chmod -R 777 /opt/WebStorm
+        mv WebStorm-* /opt/WebStorm
+        chmod +x /opt/WebStorm/bin/webstorm.sh
+        chmod -R 777 /opt/WebStorm
 
         #Cria arquivo executavel#
-        sudo touch /usr/bin/webstorm
-        sudo chmod 755 /usr/bin/webstorm
-        sudo echo "#!/bin/sh" >> /usr/bin/webstorm
-        sudo echo "export UBUNTU_MENUPROXY=0" >> /usr/bin/webstorm
-        sudo echo "export WEBSTORM_HOME=/opt/WebStorm" >> /usr/bin/webstorm
-        sudo echo "\"\$WEBSTORM_HOME/bin/webstorm.sh\" %f" >> /usr/bin/webstorm
-        sudo ln -s /usr/bin/webstorm /bin/webstorm
+        touch /usr/bin/webstorm
+        chmod 755 /usr/bin/webstorm
+        echo "#!/bin/sh" >> /usr/bin/webstorm
+        echo "export UBUNTU_MENUPROXY=0" >> /usr/bin/webstorm
+        echo "export WEBSTORM_HOME=/opt/WebStorm" >> /usr/bin/webstorm
+        echo "\"\$WEBSTORM_HOME/bin/webstorm.sh\" %f" >> /usr/bin/webstorm
+        ln -s /usr/bin/webstorm /bin/webstorm
 
         #Cria icone do desktop#
-        sudo touch /usr/share/applications/webstorm.desktop
-        sudo echo "[Desktop Entry]" >> /usr/share/applications/webstorm.desktop
-        sudo echo "Encoding=UTF-8" >> /usr/share/applications/webstorm.desktop
-        sudo echo "Name=WebStorm" >> /usr/share/applications/webstorm.desktop
-        sudo echo "Comment=WebStorm IDE" >> /usr/share/applications/webstorm.desktop
-        sudo echo "Exec=webstorm" >> /usr/share/applications/webstorm.desktop
-        sudo echo "Icon=/opt/WebStorm/bin/webstorm.svg" >> /usr/share/applications/webstorm.desktop
-        sudo echo "Terminal=false" >> /usr/share/applications/webstorm.desktop
-        sudo echo "Type=Application" >> /usr/share/applications/webstorm.desktop
-        sudo echo "Categories=GNOME;Application;Development;" >> /usr/share/applications/webstorm.desktop
-        sudo echo "StartupNotify=true" >> /usr/share/applications/webstorm.desktop
+        touch /usr/share/applications/webstorm.desktop
+        echo "[Desktop Entry]" >> /usr/share/applications/webstorm.desktop
+        echo "Encoding=UTF-8" >> /usr/share/applications/webstorm.desktop
+        echo "Name=WebStorm" >> /usr/share/applications/webstorm.desktop
+        echo "Comment=WebStorm IDE" >> /usr/share/applications/webstorm.desktop
+        echo "Exec=webstorm" >> /usr/share/applications/webstorm.desktop
+        echo "Icon=/opt/WebStorm/bin/webstorm.svg" >> /usr/share/applications/webstorm.desktop
+        echo "Terminal=false" >> /usr/share/applications/webstorm.desktop
+        echo "Type=Application" >> /usr/share/applications/webstorm.desktop
+        echo "Categories=GNOME;Application;Development;" >> /usr/share/applications/webstorm.desktop
+        echo "StartupNotify=true" >> /usr/share/applications/webstorm.desktop
 
         if [[ $1 == "op" ]]; then
             mostrarMenuOpcoes
@@ -834,10 +834,10 @@
             mostrarMenuOpcoes
         fi
 
-        sudo rm -r /usr/bin/webstorm
-        sudo rm -r /bin/webstorm
-        sudo rm -r /usr/share/applications/webstorm.desktop
-        sudo rm -r /opt/WebStorm
+        rm -r /usr/bin/webstorm
+        rm -r /bin/webstorm
+        rm -r /usr/share/applications/webstorm.desktop
+        rm -r /opt/WebStorm
 
         if [[ $1 == "op" ]]; then
             mostrarMenuOpcoes
@@ -852,10 +852,10 @@
         cd ~
         versao=$(uname -i)
         if [[  $versao == "i386" || $versao == "i486" || $versao == "i686" ]]; then
-            sudo wget ftp://ftp.zanthus.com.br/interno/Tairo/intant_client_12.1_32bits/instant_client_12.1.tar.gz --ftp-user=$userFtp --ftp-password=$passwordFtp .
+            wget ftp://ftp.zanthus.com.br/interno/Tairo/intant_client_12.1_32bits/instant_client_12.1.tar.gz --ftp-user=$userFtp --ftp-password=$passwordFtp .
 
         else
-            sudo wget ftp://ftp.zanthus.com.br/interno/Tairo/intant_client_12.1_64bits/instant_client_12.1.tar.gz --ftp-user=$userFtp --ftp-password=$passwordFtp .
+            wget ftp://ftp.zanthus.com.br/interno/Tairo/intant_client_12.1_64bits/instant_client_12.1.tar.gz --ftp-user=$userFtp --ftp-password=$passwordFtp .
         fi
 
         #Verifica se ultima ação foi efetuada com sucesso
@@ -865,21 +865,21 @@
             tar -zxvf instant_client_12.1.tar.gz
 
             #Instala pacotes
-            sudo dpkg -i oracle-instantclient12.1-basic.deb
-            sudo dpkg -i oracle-instantclient12.1-devel.deb
-            sudo dpkg -i oracle-instantclient12.1-jdbc.deb
-            sudo dpkg -i oracle-instantclient12.1-odbc.deb
-            sudo dpkg -i oracle-instantclient12.1-sqlplus_.deb
-            sudo dpkg -i oracle-instantclient12.1-tools.deb
+            dpkg -i oracle-instantclient12.1-basic.deb
+            dpkg -i oracle-instantclient12.1-devel.deb
+            dpkg -i oracle-instantclient12.1-jdbc.deb
+            dpkg -i oracle-instantclient12.1-odbc.deb
+            dpkg -i oracle-instantclient12.1-sqlplus_.deb
+            dpkg -i oracle-instantclient12.1-tools.deb
 
             #Remove pacotes pacotes
-            sudo rm -r oracle-instantclient12.1-basic.deb
-            sudo rm -r oracle-instantclient12.1-devel.deb
-            sudo rm -r oracle-instantclient12.1-jdbc.deb
-            sudo rm -r oracle-instantclient12.1-odbc.deb
-            sudo rm -r oracle-instantclient12.1-sqlplus.deb
-            sudo rm -r oracle-instantclient12.1-tools.deb
-            sudo rm -r instant_client_12.1.tar.gz
+            rm -r oracle-instantclient12.1-basic.deb
+            rm -r oracle-instantclient12.1-devel.deb
+            rm -r oracle-instantclient12.1-jdbc.deb
+            rm -r oracle-instantclient12.1-odbc.deb
+            rm -r oracle-instantclient12.1-sqlplus.deb
+            rm -r oracle-instantclient12.1-tools.deb
+            rm -r instant_client_12.1.tar.gz
 
             clear
             echo -e " Oracle Instant Client instalado com sucesso.. \n"
@@ -906,13 +906,13 @@
             mostrarMenuOpcoes
         fi
 
-        sudo apt-get -y purge oracle-instantclient12.1-basic
-        sudo apt-get -y purge oracle-instantclient12.1-devel
-        sudo apt-get -y purge oracle-instantclient12.1-jdbc
-        sudo apt-get -y purge oracle-instantclient12.1-odbc
-        sudo apt-get -y purge oracle-instantclient12.1-sqlplus
-        sudo apt-get -y purge oracle-instantclient12.1-tools
-        sudo rm -r /usr/lib/oracle
+        apt-get -y purge oracle-instantclient12.1-basic
+        apt-get -y purge oracle-instantclient12.1-devel
+        apt-get -y purge oracle-instantclient12.1-jdbc
+        apt-get -y purge oracle-instantclient12.1-odbc
+        apt-get -y purge oracle-instantclient12.1-sqlplus
+        apt-get -y purge oracle-instantclient12.1-tools
+        rm -r /usr/lib/oracle
 
         if [[ $1 == "op" ]]; then
             mostrarMenuOpcoes
@@ -947,8 +947,8 @@
         capturaUsuarioSenha
         capturarUsuarioFtp
         capturarSenhaFtp
-        sudo rm -f -r /Zanthus
-        sudo rm -f -r /usr/share/applications/pdv.desktop
+        rm -f -r /Zanthus
+        rm -f -r /usr/share/applications/pdv.desktop
         clear
 
         cd /home/$usuario/
@@ -962,10 +962,10 @@
         echo    "    Criando e baixando bibliotecas..."
 
         #Baixo os arquivos e descompacto
-        sudo wget -c ftp://ftp.zanthus.com.br/interno/Tairo/Zanthus_pdv.tar.gz --ftp-user=$userFtp --ftp-password=$passwordFtp
-        sudo tar -zxvf Zanthus_pdv.tar.gz
-        sudo rm -f Zanthus_pdv.tar.gz
-        sudo mv Zanthus /Zanthus
+        wget -c ftp://ftp.zanthus.com.br/interno/Tairo/Zanthus_pdv.tar.gz --ftp-user=$userFtp --ftp-password=$passwordFtp
+        tar -zxvf Zanthus_pdv.tar.gz
+        rm -f Zanthus_pdv.tar.gz
+        mv Zanthus /Zanthus
 
         # Abre o diretório
         cd /Zanthus/Zeus/lib
@@ -973,96 +973,101 @@
         # baixa as Libs 32bits atualizadas do ftp
         cd /Zanthus/Zeus/lib
         #wget -c ftp://ftp.zanthus.com.br/interno/Tairo/lib_zanthus/* --ftp-user=$userFtp --ftp-password=$passwordFtp
-        sudo wget -c ftp://ftp.zanthus.com.br/pub/Zeus_Frente_de_Loja/_Complementares/so/*
-        sudo wget -c ftp://ftp.zanthus.com.br/pub/Zeus_Frente_de_Loja/_Complementares/ZANSINC/Linux/lib/*
+        wget -c ftp://ftp.zanthus.com.br/pub/Zeus_Frente_de_Loja/_Complementares/so/*
+        wget -c ftp://ftp.zanthus.com.br/pub/Zeus_Frente_de_Loja/_Complementares/ZANSINC/Linux/lib/*
 
         # Cria o diretório e baixa as libs 64bits
-        sudo criarDiretorio "/Zanthus/Zeus/lib_64"
+        criarDiretorio "/Zanthus/Zeus/lib_64"
         cd /Zanthus/Zeus/lib_64
-        sudo wget -c ftp://ftp.zanthus.com.br/pub/Zeus_Frente_de_Loja/_Complementares/so_r64/*
+        wget -c ftp://ftp.zanthus.com.br/pub/Zeus_Frente_de_Loja/_Complementares/so_r64/*
 
-        sudo criarDiretorio "/Zanthus/Zeus/lib_co5"
+        criarDiretorio "/Zanthus/Zeus/lib_co5"
         cd /Zanthus/Zeus/lib_co5
         wget -c ftp://ftp.zanthus.com.br/pub/Zeus_Frente_de_Loja/_Complementares/so_co5/*
 
-        sudo criarDiretorio "/Zanthus/Zeus/lib_ubu"
+        criarDiretorio "/Zanthus/Zeus/lib_ubu"
         cd /Zanthus/Zeus/lib_ubu
-        sudo wget -c ftp://ftp.zanthus.com.br/pub/Zeus_Frente_de_Loja/_Complementares/so_ubu/*
+        wget -c ftp://ftp.zanthus.com.br/pub/Zeus_Frente_de_Loja/_Complementares/so_ubu/*
 
         # Nomes das variáveis
-        KC_ZMAN_CZ_EXL="KC_ZMAN_1_X_102_263_CZ.EXL"
+        KC_ZMAN_CZ_EXL="KC_ZMAN_1_X_102_266_CZ.EXL"
         KC_ZMAN_CZ_TARGZ="KC_ZMAN_1_X_102_263_CZ.tar.gz"
 
-        KC_ZMAN_CW_EXL="KC_ZMAN_1_X_102_263_CW.EXL"
+        KC_ZMAN_CW_EXL="KC_ZMAN_1_X_102_266_CW.EXL"
         KC_ZMAN_CW_TARGZ="KC_ZMAN_1_X_102_263_CW.tar.gz"
 
         criarDiretorio "/Zanthus/Zeus/lib_kernz"
         cd /Zanthus/Zeus/lib_kernz
-        sudo wget -c ftp://ftp.zanthus.com.br/pub/Zeus_Frente_de_Loja/v_1_X_102/$KC_ZMAN_CZ_EXL
-        sudo wget -c ftp://ftp.zanthus.com.br/pub/Zeus_Frente_de_Loja/v_1_X_102/$KC_ZMAN_CW_EXL
-        sudo wget -c ftp://ftp.zanthus.com.br/pub/Zeus_Frente_de_Loja/_Complementares/KernD/v2_1/*.so
-        sudo wget -c ftp://ftp.zanthus.com.br/interno/Tairo/Kernz_php5.6/kernz.so --ftp-user=$userFtp --ftp-password=$passwordFtp
-        sudo wget -c ftp://ftp.zanthus.com.br/interno/Tairo/mssql/php5.6/mssql.so --ftp-user=$userFtp --ftp-password=$passwordFtp
-        sudo wget -c ftp://ftp.zanthus.com.br/interno/Tairo/Kernz_php5.6/ZendGuardLoader.so --ftp-user=$userFtp --ftp-password=$passwordFtp
+        wget -c ftp://ftp.zanthus.com.br/pub/Zeus_Frente_de_Loja/v_1_X_102/$KC_ZMAN_CZ_EXL
+        wget -c ftp://ftp.zanthus.com.br/pub/Zeus_Frente_de_Loja/v_1_X_102/$KC_ZMAN_CW_EXL
+        wget -c ftp://ftp.zanthus.com.br/pub/Zeus_Frente_de_Loja/_Complementares/KernD/v2_1/*.so
+        wget -c ftp://ftp.zanthus.com.br/interno/Tairo/Kernz_php5.6/kernz.so --ftp-user=$userFtp --ftp-password=$passwordFtp
+        wget -c ftp://ftp.zanthus.com.br/interno/Tairo/mssql/php5.6/mssql.so --ftp-user=$userFtp --ftp-password=$passwordFtp
+        wget -c ftp://ftp.zanthus.com.br/interno/Tairo/Kernz_php5.6/ZendGuardLoader.so --ftp-user=$userFtp --ftp-password=$passwordFtp
 
-        sudo mv $KC_ZMAN_CZ_EXL $KC_ZMAN_CZ_TARGZ
-        sudo mv $KC_ZMAN_CW_EXL $KC_ZMAN_CW_TARGZ
+        mv $KC_ZMAN_CZ_EXL $KC_ZMAN_CZ_TARGZ
+        mv $KC_ZMAN_CW_EXL $KC_ZMAN_CW_TARGZ
 
-        sudo tar vxf $KC_ZMAN_CZ_TARGZ  lib_rotkernC_CZ.so.rh9
-        sudo tar vxf $KC_ZMAN_CZ_TARGZ  lib_rotkernC_CZ.so.r64
+        tar vxf $KC_ZMAN_CZ_TARGZ  lib_rotkernC_CZ.so.rh9
+        tar vxf $KC_ZMAN_CZ_TARGZ  lib_rotkernC_CZ.so.r64
 
-        sudo tar vxf $KC_ZMAN_CW_TARGZ  lib_rotkernC_CW.so.rh9
-        sudo tar vxf $KC_ZMAN_CW_TARGZ  lib_rotkernC_CW.so.r64
+        tar vxf $KC_ZMAN_CW_TARGZ  lib_rotkernC_CW.so.rh9
+        tar vxf $KC_ZMAN_CW_TARGZ  lib_rotkernC_CW.so.r64
 
         #Remove o pacote baixado
-        sudo rm -f -r $KC_ZMAN_CZ_TARGZ
-        sudo rm -f -r $KC_ZMAN_CW_TARGZ
+        rm -f -r $KC_ZMAN_CZ_TARGZ
+        rm -f -r $KC_ZMAN_CW_TARGZ
 
-        sudo ln -s -f /lib/x86_64-linux-gnu/libcrypto.so.1.0.0 /lib/x86_64-linux-gnu/libcrypto.so.6
-        sudo ln -s -f /lib/x86_64-linux-gnu/libssl.so.1.0.0 /lib/x86_64-linux-gnu/libssl.so.6
+        ln -s -f /lib/x86_64-linux-gnu/libcrypto.so.1.0.0 /lib/x86_64-linux-gnu/libcrypto.so.6
+        ln -s -f /lib/x86_64-linux-gnu/libssl.so.1.0.0 /lib/x86_64-linux-gnu/libssl.so.6
 
-        sudo echo -e "\n" >> /etc/ld.so.conf
-        sudo echo -e "/Zanthus" >> /etc/ld.so.conf
-        sudo echo -e "/Zanthus/Zeus/lib" >> /etc/ld.so.conf
-        sudo echo -e "/Zanthus/Zeus/lib_64" >> /etc/ld.so.conf
-        sudo echo -e "/Zanthus/Zeus/lib_kernz" >> /etc/ld.so.conf
-        sudo echo -e "/Zanthus/Zeus/lib_co5" >> /etc/ld.so.conf
-        sudo echo -e "/Zanthus/Zeus/lib_ubu" >> /etc/ld.so.conf
-        sudo echo -e "/Zanthus/Zeus/pdvJava" >> /etc/ld.so.conf
+        echo -e "\n" >> /etc/ld.so.conf
+        echo -e "/Zanthus" >> /etc/ld.so.conf
+        echo -e "/Zanthus/Zeus/lib" >> /etc/ld.so.conf
+        echo -e "/Zanthus/Zeus/lib_64" >> /etc/ld.so.conf
+        echo -e "/Zanthus/Zeus/lib_kernz" >> /etc/ld.so.conf
+        echo -e "/Zanthus/Zeus/lib_co5" >> /etc/ld.so.conf
+        echo -e "/Zanthus/Zeus/lib_ubu" >> /etc/ld.so.conf
+        echo -e "/Zanthus/Zeus/pdvJava" >> /etc/ld.so.conf
 
-        sudo ldconfig
-        sudo chmod -R 777 /Zanthus/
+        ldconfig
+        chmod -R 777 /Zanthus/
 
         #Cria icone do desktop#
-        sudo chmod +x /Zanthus/Zeus/pdvJava/pdvJava2
-        sudo touch /usr/share/applications/pdv.desktop
-        sudo echo "[Desktop Entry]" >> /usr/share/applications/pdv.desktop
-        sudo echo "Encoding=UTF-8" >> /usr/share/applications/pdv.desktop
-        sudo echo "Name=PDV" >> /usr/share/applications/pdv.desktop
-        sudo echo "Comment=PDV Zanthus" >> /usr/share/applications/pdv.desktop
-        sudo echo -e "Exec=bash -c \"echo $usuarioSenha | sudo -S sh /Zanthus/Zeus/pdvJava/pdvJava2\"" >> /usr/share/applications/pdv.desktop
-        sudo echo "Icon=/Zanthus/Zeus/icons/logo_zanthus.png" >> /usr/share/applications/pdv.desktop
-        sudo echo "Terminal=false" >> /usr/share/applications/pdv.desktop
-        sudo echo "Type=Application" >> /usr/share/applications/pdv.desktop
-        sudo echo "Categories=GNOME;Application;Development;" >> /usr/share/applications/pdv.desktop
-        sudo echo "StartupNotify=true" >> /usr/share/applications/pdv.desktop
+        chmod +x /Zanthus/Zeus/pdvJava/pdvJava2
+        touch /usr/share/applications/pdv.desktop
+        echo "[Desktop Entry]" >> /usr/share/applications/pdv.desktop
+        echo "Encoding=UTF-8" >> /usr/share/applications/pdv.desktop
+        echo "Name=PDV" >> /usr/share/applications/pdv.desktop
+        echo "Comment=PDV Zanthus" >> /usr/share/applications/pdv.desktop
+        echo -e "Exec=gnome-terminal -x bash -c \"cd /Zanthus/Zeus/pdvJava_159/ && echo $usuarioSenha | sudo -S ./lnx_virt\"" >> /usr/share/applications/pdv.desktop
+        echo "Icon=/Zanthus/Zeus/icons/logo_zanthus.png" >> /usr/share/applications/pdv.desktop
+        echo "Terminal=false" >> /usr/share/applications/pdv.desktop
+        echo "Type=Application" >> /usr/share/applications/pdv.desktop
+        echo "Categories=GNOME;Application;Development;" >> /usr/share/applications/pdv.desktop
+        echo "StartupNotify=true" >> /usr/share/applications/pdv.desktop
 
         #Insere a Kernz no .ini do Php e Apache para php5.6
         if [[ $phpVersion == 1 ]]; then
             pathkernz="/Zanthus/Zeus/lib_kernz/kernz.so"
             if [[ -e $pathkernz && -e /etc/php/5.6/apache2/php.ini ]]; then
-                sudo echo "extension=$pathkernz" >> /etc/php/5.6/apache2/php.ini
-                sudo echo "extension=$pathkernz" >> /etc/php/5.6/cli/php.ini
+                echo "extension=$pathkernz" >> /etc/php/5.6/apache2/php.ini
+                echo "extension=$pathkernz" >> /etc/php/5.6/cli/php.ini
             fi
             pathZendGuardLoader="/Zanthus/Zeus/lib_kernz/ZendGuardLoader.so"
             if [[ -e $pathZendGuardLoader && -e /etc/php/5.6/apache2/php.ini ]]; then
-                sudo echo "zend_extension=$pathZendGuardLoader" >> /etc/php/5.6/apache2/php.ini
-                sudo echo "zend_extension=$pathZendGuardLoader" >> /etc/php/5.6/cli/php.ini
+                echo "zend_extension=$pathZendGuardLoader" >> /etc/php/5.6/apache2/php.ini
+                echo "zend_extension=$pathZendGuardLoader" >> /etc/php/5.6/cli/php.ini
+            fi
+            pathZendOPcache="/Zanthus/Zeus/lib_kernz/opcache.so"
+            if [[ -e $pathZendOPcache && -e /etc/php/5.6/apache2/php.ini ]]; then
+                echo "zend_extension=$pathZendOPcache" >> /etc/php/5.6/apache2/php.ini
+                echo "zend_extension=$pathZendOPcache" >> /etc/php/5.6/cli/php.ini
             fi
             pathMssql="/Zanthus/Zeus/lib_kernz/mssql.so"
             if [[ -e $pathMssql && -e /etc/php/5.6/apache2/php.ini ]]; then
-                sudo echo "extension=$pathMssql" >> /etc/php/5.6/apache2/php.ini
-                sudo echo "extension=$pathMssql" >> /etc/php/5.6/cli/php.ini
+                echo "extension=$pathMssql" >> /etc/php/5.6/apache2/php.ini
+                echo "extension=$pathMssql" >> /etc/php/5.6/cli/php.ini
             fi
         fi
 
@@ -1070,22 +1075,27 @@
         if [[ $phpVersion == 2 ]]; then
             pathkernz="/Zanthus/Zeus/lib_kernz/kernz.so"
             if [[ -e $pathkernz && -e /etc/php/7.0/apache2/php.ini ]]; then
-                sudo echo "extension=$pathkernz" >> /etc/php/7.0/apache2/php.ini
-                sudo echo "extension=$pathkernz" >> /etc/php/7.0/cli/php.ini
+                echo "extension=$pathkernz" >> /etc/php/7.0/apache2/php.ini
+                echo "extension=$pathkernz" >> /etc/php/7.0/cli/php.ini
             fi
             pathZendGuardLoader="/Zanthus/Zeus/lib_kernz/ZendGuardLoader.so"
             if [[ -e $pathZendGuardLoader && -e /etc/php/7.0/apache2/php.ini ]]; then
-                sudo echo "zend_extension=$pathZendGuardLoader" >> /etc/php/7.0/apache2/php.ini
-                sudo echo "zend_extension=$pathZendGuardLoader" >> /etc/php/7.0/cli/php.ini
+                echo "zend_extension=$pathZendGuardLoader" >> /etc/php/7.0/apache2/php.ini
+                echo "zend_extension=$pathZendGuardLoader" >> /etc/php/7.0/cli/php.ini
+            fi
+            pathZendOPcache="/Zanthus/Zeus/lib_kernz/opcache.so"
+            if [[ -e $pathZendOPcache && -e /etc/php/5.6/apache2/php.ini ]]; then
+                echo "zend_extension=$pathZendOPcache" >> /etc/php/5.6/apache2/php.ini
+                echo "zend_extension=$pathZendOPcache" >> /etc/php/5.6/cli/php.ini
             fi
             pathMssql="/Zanthus/Zeus/lib_kernz/mssql.so"
             if [[ -e $pathMssql && -e /etc/php/7.0/apache2/php.ini ]]; then
-                sudo echo "extension=$pathMssql" >> /etc/php/7.0/apache2/php.ini
-                sudo echo "extension=$pathMssql" >> /etc/php/7.0/cli/php.ini
+                echo "extension=$pathMssql" >> /etc/php/7.0/apache2/php.ini
+                echo "extension=$pathMssql" >> /etc/php/7.0/cli/php.ini
             fi
         fi
 
-        sudo service apache2 restart
+        service apache2 restart
 
         if [[ $1 == "op" ]]; then
             mostrarMenuOpcoes
@@ -1095,13 +1105,13 @@
 
     removerLibsZanthus(){
         ############### Libs ZAnthus #############
-        sudo apt-get -y purge zanthus-server-debian
-        sudo rm -f -r /Zanthus
-        sudo rm -f -r /usr/share/applications/pdv.desktop
+        apt-get -y purge zanthus-server-debian
+        rm -f -r /Zanthus
+        rm -f -r /usr/share/applications/pdv.desktop
         ############### Libs ZAnthus #############
 
         #Reconfigura carregamento de bibliotecas
-        sudo ldconfig
+        ldconfig
 
         if [[ $1 == "op" ]]; then
             mostrarMenuOpcoes
@@ -1113,13 +1123,13 @@
     #instala repositorio para Spotify - programador também gosta de música :)
     instalarSpotify(){
 
-        sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys BBEBDCB318AD50EC6865090613B00F1FD2C19886
-        sudo echo deb http://repository.spotify.com stable non-free | sudo tee /etc/apt/sources.list.d/spotify.list
-        sudo apt-get update
+        apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys BBEBDCB318AD50EC6865090613B00F1FD2C19886
+        echo deb http://repository.spotify.com stable non-free | tee /etc/apt/sources.list.d/spotify.list
+        apt-get update
 
-        sudo wget -c "https://launchpad.net/ubuntu/+archive/primary/+files/libgcrypt11_1.5.3-2ubuntu4.2_amd64.deb"
-        sudo dpkg -i libgcrypt11_1.5.3-2ubuntu4.2_amd64.deb
-        sudo sudo apt-get -y install spotify-client-0.9.17
+        wget -c "https://launchpad.net/ubuntu/+archive/primary/+files/libgcrypt11_1.5.3-2ubuntu4.2_amd64.deb"
+        dpkg -i libgcrypt11_1.5.3-2ubuntu4.2_amd64.deb
+        apt-get -y install spotify-client-0.9.17
 
         if [[ $1 == "op" ]]; then
             mostrarMenuOpcoes
@@ -1128,9 +1138,9 @@
 
     #Rmove cliente de audio do spotify
     removerSpotify(){
-        sudo apt-get -y purge spotify-client
-        sudo apt-get -y autoremove
-        sudo add-apt-repository  --remove 'deb http://repository.spotify.com stable non-free'
+        apt-get -y purge spotify-client
+        apt-get -y autoremove
+        add-apt-repository  --remove 'deb http://repository.spotify.com stable non-free'
 
         if [[ $1 == "op" ]]; then
             mostrarMenuOpcoes
@@ -1140,10 +1150,10 @@
 
     #Instala virtualbox para rodar maquinas virtuais
     instalarVirtualBox(){
-        sudo apt-get -y install virtualbox
-        sudo wget -c http://download.virtualbox.org/virtualbox/5.0.18/Oracle_VM_VirtualBox_Extension_Pack-5.0.18-106667.vbox-extpack
+        apt-get -y install virtualbox
+        wget -c http://download.virtualbox.org/virtualbox/5.0.18/Oracle_VM_VirtualBox_Extension_Pack-5.0.18-106667.vbox-extpack
         virtualbox Oracle_VM_VirtualBox_Extension_Pack-5.0.18-106667.vbox-extpack
-        sudo rm -f -r Oracle_VM_VirtualBox_Extension_Pack-5.0.18-106667.vbox-extpack
+        rm -f -r Oracle_VM_VirtualBox_Extension_Pack-5.0.18-106667.vbox-extpack
 
         if [[ $1 == "op" ]]; then
             mostrarMenuOpcoes
@@ -1152,7 +1162,7 @@
 
     #Desistala virtualbox para rodar maquinas virtuais
     removerVirtualBox(){
-        sudo apt-get -y purge virtualbox
+        apt-get -y purge virtualbox
 
         if [[ $1 == "op" ]]; then
             mostrarMenuOpcoes
@@ -1161,10 +1171,10 @@
 
     #instala repositorio para Java 8
     instalarJava(){
-        sudo add-apt-repository  -y ppa:webupd8team/java
-        sudo apt-get update
+        add-apt-repository  -y ppa:webupd8team/java
+        apt-get update
         #Instala java 8
-        sudo apt-get -y install oracle-java8-installer
+        apt-get -y install oracle-java8-installer
 
         if [[ $1 == "op" ]]; then
             mostrarMenuOpcoes
@@ -1173,10 +1183,10 @@
 
     #Remove repositorio para Java 8
     removerJava(){
-        sudo add-apt-repository  -r ppa:webupd8team/java
-        sudo apt-get update
+        add-apt-repository  -r ppa:webupd8team/java
+        apt-get update
         #Desistala java 8
-        sudo apt-get -y purge oracle-java8-installer
+        apt-get -y purge oracle-java8-installer
 
         if [[ $1 == "op" ]]; then
             mostrarMenuOpcoes
@@ -1185,7 +1195,7 @@
 
     #Instala wine para rodar programas do windows
     instalarWine(){
-        sudo apt-get -y install wine
+        apt-get -y install wine
 
         if [[ $1 == "op" ]]; then
             mostrarMenuOpcoes
@@ -1194,7 +1204,7 @@
 
     #Remove wine para rodar programas do windows
     removerWine(){
-        sudo apt-get -y purge wine
+        apt-get -y purge wine
 
         if [[ $1 == "op" ]]; then
             mostrarMenuOpcoes
@@ -1203,10 +1213,10 @@
 
     #instala repositorio para Android Studio
     instalarAndroidStudio(){
-        sudo apt-add-repository -y ppa:paolorotolo/android-studio
-        sudo apt-get update
+        apt-add-repository -y ppa:paolorotolo/android-studio
+        apt-get update
         #Instala Android Studio IDE Android
-        sudo apt-get -y install android-studio
+        apt-get -y install android-studio
 
         if [[ $1 == "op" ]]; then
             mostrarMenuOpcoes
@@ -1215,10 +1225,10 @@
 
     removerAndroidStudio(){
         #Remove repositorio para Android Studio
-        sudo apt-add-repository -r ppa:paolorotolo/android-studio
-        sudo apt-get update
+        apt-add-repository -r ppa:paolorotolo/android-studio
+        apt-get update
         #Desistala Android Studio IDE Android
-        sudo apt-get -y purge android-studio
+        apt-get -y purge android-studio
 
         if [[ $1 == "op" ]]; then
             mostrarMenuOpcoes
@@ -1227,7 +1237,7 @@
 
     #Instala Steam
     instalarSteam(){
-        sudo apt-get -y install steam
+        apt-get -y install steam
 
         if [[ $1 == "op" ]]; then
             mostrarMenuOpcoes
@@ -1236,7 +1246,7 @@
 
     #Desistala Steam
     removerSteam(){
-        sudo apt-get -y purge steam
+        apt-get -y purge steam
 
         if [[ $1 == "op" ]]; then
             mostrarMenuOpcoes
@@ -1246,8 +1256,8 @@
 
     #Monta uma partição de Swap de 8GB
     instalarSwap(){
-        sudo dd if=/dev/zero of=/swapfile bs=1024 count=8388608
-        sudo mkswap /swapfile
+        dd if=/dev/zero of=/swapfile bs=1024 count=8388608
+        mkswap /swapfile
         echo "/swapfile swap swap defaults 0 0 " >> /etc/fstab
 
         if [[ $1 == "op" ]]; then
@@ -1257,7 +1267,7 @@
 
     #Desabilita Swap
     desabilitarSwap(){
-        sudo swapoff /swapfile
+        swapoff /swapfile
     }
 
     configurarWebProxy(){
@@ -1372,100 +1382,112 @@
     }
 
     instalarPHP56(){
-        sudo add-apt-repository  -y ppa:ondrej/php
-        sudo apt-get update
-        sudo apt-get install -y apache2
-        sudo apt-get install -y php5.6
-        sudo apt-get install -y php5.6-dev
-        sudo apt-get install -y php5.6-curl
-        sudo apt-get install -y php5.6-json
-        sudo apt-get install -y php5.6-ldap
-        sudo apt-get install -y php5.6-odbc
-        sudo apt-get install -y php5.6-pgsql
-        sudo apt-get install -y php5.6-mcrypt
-        sudo apt-get install -y php5.6-sybase
-        sudo apt-get install -y php5.6-xml
-        sudo apt-get install -y php5.6-zip
-        sudo apt-get install -y php5.6-soap
-        sudo apt-get install -y php5.6-gd
-        sudo apt-get install -y php5.6-sqlite3
-        sudo apt-get install -y php-memcached
-        sudo apt-get install -y libapache2-mod-php5.6
-        sudo apt-get install -y php5.6-bcmath
+        add-apt-repository  -y ppa:ondrej/php
+        apt-get update
+        apt-get install -y apache2
+        apt-get install -y php5.6
+        apt-get install -y php5.6-dev
+        apt-get install -y php5.6-curl
+        apt-get install -y php5.6-json
+        apt-get install -y php5.6-ldap
+        apt-get install -y php5.6-odbc
+        apt-get install -y php5.6-pgsql
+        apt-get install -y php5.6-mcrypt
+        apt-get install -y php5.6-sybase
+        apt-get install -y php5.6-xml
+        apt-get install -y php5.6-zip
+        apt-get install -y php5.6-soap
+        apt-get install -y php5.6-gd
+        apt-get install -y php5.6-sqlite3
+        apt-get install -y php-memcached
+        apt-get install -y libapache2-mod-php5.6
+        apt-get install -y php5.6-bcmath
 
         instalarOracleInstantClient
 
         ###################  Instala a .so do oracle ######################
-        sudo pecl  uninstall oci8
-        sudo pecl  install oci8-2.0.11
+        pecl  uninstall oci8
+        pecl  install oci8-2.0.11
         #Verifica se o caminho padrão para a pasta oracle existe
         pathOci8="/usr/lib/php/20131226/oci8.so"
         if [ -e $pathOci8 ]; then
-            sudo echo "extension=$pathOci8 " >> /etc/php/5.6/apache2/php.ini
-            sudo echo -e "\n" >> /etc/php/5.6/apache2/php.ini
-            sudo echo "extension=$pathOci8" >> /etc/php/5.6/cli/php.ini
-            sudo echo -e "\n" >> /etc/php/5.6/cli/php.ini
+            echo "extension=$pathOci8 " >> /etc/php/5.6/apache2/php.ini
+            echo -e "\n" >> /etc/php/5.6/apache2/php.ini
+            echo "extension=$pathOci8" >> /etc/php/5.6/cli/php.ini
+            echo -e "\n" >> /etc/php/5.6/cli/php.ini
         fi
 
         ################### Instala a .so do Xdebug ########################
-        sudo pecl  uninstall xdebug
-        sudo pecl  install xdebug
+        pecl  uninstall xdebug
+        pecl  install xdebug
         pathxdebug="/usr/lib/php/20131226/xdebug.so"
 
         if [[ -e $pathxdebug && -e /etc/php/5.6/apache2/php.ini ]]; then
-            sudo echo "[XDebug]" >> /etc/php/5.6/apache2/php.ini
-            sudo echo "zend_extension=$pathxdebug" >> /etc/php/5.6/apache2/php.ini
-            sudo echo "xdebug.default_enable = 1" >> /etc/php/5.6/apache2/php.ini
-            sudo echo "xdebug.show_exception_trace = 1" >> /etc/php/5.6/apache2/php.ini
-            sudo echo "xdebug.show_local_vars = 1" >> /etc/php/5.6/apache2/php.ini
-            sudo echo "xdebug.remote_enable = 1" >> /etc/php/5.6/apache2/php.ini
-            sudo echo "xdebug.var_display_max_data   = 50000" >> /etc/php/5.6/apache2/php.ini
-            sudo echo "xdebug.max_nesting_level = 250" >> /etc/php/5.6/apache2/php.ini
-            sudo echo -e "\n" >> /etc/php/5.6/apache2/php.ini
+            echo "[XDebug]" >> /etc/php/5.6/apache2/php.ini
+            echo "zend_extension=$pathxdebug" >> /etc/php/5.6/apache2/php.ini
+            echo "xdebug.default_enable = 1" >> /etc/php/5.6/apache2/php.ini
+            echo "xdebug.show_exception_trace = 1" >> /etc/php/5.6/apache2/php.ini
+            echo "xdebug.show_local_vars = 1" >> /etc/php/5.6/apache2/php.ini
+            echo "xdebug.var_display_max_data   = -1" >> /etc/php/5.6/apache2/php.ini
+            echo "xdebug.max_nesting_level = 250" >> /etc/php/5.6/apache2/php.ini
+            echo "xdebug.remote_enable = 1" >> /etc/php/5.6/apache2/php.ini
+            echo "xdebug.remote_port = 9000" >> /etc/php/5.6/apache2/php.ini
+            echo "xdebug.remote_autostart = 1" >> /etc/php/5.6/apache2/php.ini
+            echo "xdebug.remote_handler=dbgp" >> /etc/php/5.6/apache2/php.ini
+            echo "xdebug.remote_connect_back = 1" >> /etc/php/5.6/apache2/php.ini
+            echo "xdebug.idekey=\"PHPSTORM\"" >> /etc/php/5.6/apache2/php.ini
+            echo "xdebug.remote_host=127.0.0.1" >> /etc/php/5.6/apache2/php.ini
+            echo -e "\n" >> /etc/php/5.6/apache2/php.ini
 
-            sudo echo "[XDebug]" >> /etc/php/5.6/cli/php.ini
-            sudo echo "zend_extension=$pathxdebug" >> /etc/php/5.6/cli/php.ini
-            sudo echo "xdebug.default_enable = 1" >> /etc/php/5.6/cli/php.ini
-            sudo echo "xdebug.show_exception_trace = 1" >> /etc/php/5.6/cli/php.ini
-            sudo echo "xdebug.show_local_vars = 1" >> /etc/php/5.6/cli/php.ini
-            sudo echo "xdebug.remote_enable = 1" >> /etc/php/5.6/cli/php.ini
-            sudo echo "xdebug.var_display_max_data   = 50000" >> /etc/php/5.6/cli/php.ini
-            sudo echo "xdebug.max_nesting_level = 250" >> /etc/php/5.6/cli/php.ini
-            sudo echo -e "\n" >> /etc/php/5.6/cli/php.ini
+            echo "[XDebug]" >> /etc/php/5.6/cli/php.ini
+            echo "zend_extension=$pathxdebug" >> /etc/php/5.6/cli/php.ini
+            echo "xdebug.default_enable = 1" >> /etc/php/5.6/cli/php.ini
+            echo "xdebug.show_exception_trace = 1" >> /etc/php/5.6/cli/php.ini
+            echo "xdebug.show_local_vars = 1" >> /etc/php/5.6/cli/php.ini
+            echo "xdebug.var_display_max_data   = -1" >> /etc/php/5.6/cli/php.ini
+            echo "xdebug.max_nesting_level = 250" >> /etc/php/5.6/cli/php.ini
+            echo "xdebug.remote_enable = 1" >> /etc/php/5.6/cli/php.ini
+            echo "xdebug.remote_port = 9000" >> /etc/php/5.6/cli/php.ini
+            echo "xdebug.remote_autostart = 1" >> /etc/php/5.6/cli/php.ini
+            echo "xdebug.remote_handler=dbgp" >> /etc/php/5.6/cli/php.ini
+            echo "xdebug.remote_connect_back = 1" >> /etc/php/5.6/cli/php.ini
+            echo "xdebug.idekey=\"PHPSTORM\"" >> /etc/php/5.6/cli/php.ini
+            echo "xdebug.remote_host=127.0.0.1" >> /etc/php/5.6/cli/php.ini
+            echo -e "\n" >> /etc/php/5.6/cli/php.ini
         fi
 
 
         ################### Instala a .so do dbase ########################
-        sudo pecl  uninstall dbase
-        sudo pecl  install dbase
+        pecl  uninstall dbase
+        pecl  install dbase
         pathdbase="/usr/lib/php/20131226/dbase.so"
         if [[ -e $pathdbase && -e /etc/php/5.6/apache2/php.ini ]]; then
-            sudo echo "extension=$pathdbase" >> /etc/php/5.6/apache2/php.ini
-            sudo echo -e "\n" >> /etc/php/5.6/apache2/php.ini
-            sudo echo "extension=$pathdbase" >> /etc/php/5.6/cli/php.ini
-            sudo echo -e "\n" >> /etc/php/5.6/cli/php.ini
+            echo "extension=$pathdbase" >> /etc/php/5.6/apache2/php.ini
+            echo -e "\n" >> /etc/php/5.6/apache2/php.ini
+            echo "extension=$pathdbase" >> /etc/php/5.6/cli/php.ini
+            echo -e "\n" >> /etc/php/5.6/cli/php.ini
         fi
 
         ################### Instala a mssql.so ########################
         pathMssql="/Zanthus/Zeus/lib/mssql.so"
         if [[ -e $pathMssql && -e /etc/php/5.6/apache2/php.ini ]]; then
-            sudo echo "extension=$pathMssql" >> /etc/php/5.6/apache2/php.ini
-            sudo echo -e "\n" >> /etc/php/5.6/apache2/php.ini
-            sudo echo "extension=$pathMssql" >> /etc/php/5.6/cli/php.ini
-            sudo echo -e "\n" >> /etc/php/5.6/cli/php.ini
+            echo "extension=$pathMssql" >> /etc/php/5.6/apache2/php.ini
+            echo -e "\n" >> /etc/php/5.6/apache2/php.ini
+            echo "extension=$pathMssql" >> /etc/php/5.6/cli/php.ini
+            echo -e "\n" >> /etc/php/5.6/cli/php.ini
         fi
 
         #Configura Timezone e charset
-        sudo echo "date.timezone = America/Sao_Paulo" >> /etc/php/5.6/apache2/php.ini
-        sudo echo -e "\n" >> /etc/php/5.6/apache2/php.ini
-        sudo echo -e "default_charset = \"ISO-8859-1\"" >> /etc/php/5.6/apache2/php.ini
-        sudo echo -e "\n" >> /etc/php/5.6/apache2/php.ini
+        echo "date.timezone = America/Sao_Paulo" >> /etc/php/5.6/apache2/php.ini
+        echo -e "\n" >> /etc/php/5.6/apache2/php.ini
+        echo -e "default_charset = \"ISO-8859-1\"" >> /etc/php/5.6/apache2/php.ini
+        echo -e "\n" >> /etc/php/5.6/apache2/php.ini
 
         #Configura Timezone e charset
-        sudo echo "date.timezone = America/Sao_Paulo" >> /etc/php/5.6/cli/php.ini
-        sudo echo -e "\n" >> /etc/php/5.6/cli/php.ini
-        sudo echo -e "default_charset = \"ISO-8859-1\"" >> /etc/php/5.6/cli/php.ini
-        sudo echo -e "\n" >> /etc/php/5.6/cli/php.ini
+        echo "date.timezone = America/Sao_Paulo" >> /etc/php/5.6/cli/php.ini
+        echo -e "\n" >> /etc/php/5.6/cli/php.ini
+        echo -e "default_charset = \"ISO-8859-1\"" >> /etc/php/5.6/cli/php.ini
+        echo -e "\n" >> /etc/php/5.6/cli/php.ini
 
         if [[ $1 == "op" ]]; then
             mostrarMenuOpcoes
@@ -1473,90 +1495,103 @@
     }
 
     instalarPHP7(){
-        sudo add-apt-repository  -y ppa:ondrej/php
-        sudo apt-get update
-        sudo apt-get install -y apache2
-        sudo apt-get install -y php
-        sudo apt-get install -y php-dev
-        sudo apt-get install -y php-curl
-        sudo apt-get install -y php-json
-        sudo apt-get install -y php-ldap
-        sudo apt-get install -y php-odbc
-        sudo apt-get install -y php-pgsql
-        sudo apt-get install -y php-mcrypt
-        sudo apt-get install -y php-sybase
-        sudo apt-get install -y php-xml
-        sudo apt-get install -y php-zip
-        sudo apt-get install -y php-soap
-        sudo apt-get install -y php-gd
-        sudo apt-get install -y php-sqlite3
-        sudo apt-get install -y php-memcached
-        sudo apt-get install -y libapache2-mod-php
+        add-apt-repository  -y ppa:ondrej/php
+        apt-get update
+        apt-get install -y apache2
+        apt-get install -y php
+        apt-get install -y php-dev
+        apt-get install -y php-curl
+        apt-get install -y php-json
+        apt-get install -y php-ldap
+        apt-get install -y php-odbc
+        apt-get install -y php-pgsql
+        apt-get install -y php-mcrypt
+        apt-get install -y php-sybase
+        apt-get install -y php-xml
+        apt-get install -y php-zip
+        apt-get install -y php-soap
+        apt-get install -y php-gd
+        apt-get install -y php-sqlite3
+        apt-get install -y php-memcached
+        apt-get install -y libapache2-mod-php
 
         instalarOracleInstantClient
 
         ###################  Instala a .so do oracle ######################
-        sudo pecl  install oci8
+        pecl  install oci8
         #Verifica se o caminho padrão para a pasta oracle existe
         pathOci8="/usr/lib/php/20151012/oci8.so"
         if [[ -e $pathOci8 && -e /etc/php/7.0/apache2/php.ini ]]; then
-            sudo echo "extension=$pathOci8" >> /etc/php/7.0/apache2/php.ini
-            sudo echo -e "\n" >> /etc/php/7.0/apache2/php.ini
-            sudo echo "extension=$pathOci8" >> /etc/php/7.0/cli/php.ini
-            sudo echo -e "\n" >> /etc/php/7.0/cli/php.ini
+            echo "extension=$pathOci8" >> /etc/php/7.0/apache2/php.ini
+            echo -e "\n" >> /etc/php/7.0/apache2/php.ini
+            echo "extension=$pathOci8" >> /etc/php/7.0/cli/php.ini
+            echo -e "\n" >> /etc/php/7.0/cli/php.ini
         fi
 
         ################### Instala a .so do Xdebug ########################
-        sudo pecl  install xdebug
+        pecl  install xdebug
         pathxdebug="/usr/lib/php/20151012/xdebug.so"
 
         if [[ -e $pathxdebug && -e /etc/php/7.0/apache2/php.ini ]]; then
-            sudo echo "[XDebug]" >> /etc/php/7.0/apache2/php.ini
-            sudo echo "zend_extension=$pathxdebug" >> /etc/php/7.0/apache2/php.ini
-            sudo echo "xdebug.default_enable = 1" >> /etc/php/7.0/apache2/php.ini
-            sudo echo "xdebug.show_exception_trace = 1" >> /etc/php/7.0/apache2/php.ini
-            sudo echo "xdebug.show_local_vars = 1" >> /etc/php/7.0/apache2/php.ini
-            sudo echo "xdebug.remote_enable = 1" >> /etc/php/7.0/apache2/php.ini
-            sudo echo "xdebug.var_display_max_data   = 50000" >> /etc/php/7.0/apache2/php.ini
-            sudo echo "xdebug.max_nesting_level = 250" >> /etc/php/7.0/apache2/php.ini
-            sudo echo -e "\n" >> /etc/php/7.0/apache2/php.ini
+            echo "[XDebug]" >> /etc/php/7.0/apache2/php.ini
+            echo "zend_extension=$pathxdebug" >> /etc/php/7.0/apache2/php.ini
+            echo "xdebug.default_enable = 1" >> /etc/php/7.0/apache2/php.ini
+            echo "xdebug.show_exception_trace = 1" >> /etc/php/7.0/apache2/php.ini
+            echo "xdebug.show_local_vars = 1" >> /etc/php/7.0/apache2/php.ini
+            echo "xdebug.var_display_max_data   = -1" >> /etc/php/7.0/apache2/php.ini
+            echo "xdebug.max_nesting_level = 250" >> /etc/php/7.0/apache2/php.ini
+            echo "xdebug.remote_enable = 1" >> /etc/php/7.0/apache2/php.ini
+            echo "xdebug.remote_port = 9000" >> /etc/php/7.0/apache2/php.ini
+            echo "xdebug.remote_autostart = 1" >> /etc/php/7.0/apache2/php.ini
+            echo "xdebug.remote_handler=dbgp" >> /etc/php/7.0/apache2/php.ini
+            echo "xdebug.remote_connect_back = 1" >> /etc/php/7.0/apache2/php.ini
+            echo "xdebug.idekey=\"PHPSTORM\"" >> /etc/php/7.0/apache2/php.ini
+            echo "xdebug.remote_host=127.0.0.1" >> /etc/php/7.0/apache2/php.ini
+            echo -e "\n" >> /etc/php/7.0/apache2/php.ini
 
-            sudo echo "[XDebug]" >> /etc/php/7.0/cli/php.ini
-            sudo echo "zend_extension=$pathxdebug" >> /etc/php/7.0/cli/php.ini
-            sudo echo "xdebug.default_enable = 1" >> /etc/php/7.0/cli/php.ini
-            sudo echo "xdebug.show_exception_trace = 1" >> /etc/php/7.0/cli/php.ini
-            sudo echo "xdebug.show_local_vars = 1" >> /etc/php/7.0/cli/php.ini
-            sudo echo "xdebug.remote_enable = 1" >> /etc/php/7.0/cli/php.ini
-            sudo echo "xdebug.var_display_max_data   = 50000" >> /etc/php/7.0/cli/php.ini
-            sudo echo "xdebug.max_nesting_level = 250" >> /etc/php/7.0/cli/php.ini
-            sudo echo -e "\n" >> /etc/php/7.0/cli/php.ini
+            echo "[XDebug]" >> /etc/php/7.0/cli/php.ini
+            echo "zend_extension=$pathxdebug" >> /etc/php/7.0/cli/php.ini
+            echo "xdebug.default_enable = 1" >> /etc/php/7.0/cli/php.ini
+            echo "xdebug.show_exception_trace = 1" >> /etc/php/7.0/cli/php.ini
+            echo "xdebug.show_local_vars = 1" >> /etc/php/7.0/cli/php.ini
+            echo "xdebug.var_display_max_data   = -1" >> /etc/php/7.0/cli/php.ini
+            echo "xdebug.max_nesting_level = 250" >> /etc/php/7.0/cli/php.ini
+            echo "xdebug.remote_enable = 1" >> /etc/php/7.0/cli/php.ini
+            echo "xdebug.remote_port = 9000" >> /etc/php/7.0/cli/php.ini
+            echo "xdebug.remote_autostart = 1" >> /etc/php/7.0/cli/php.ini
+            echo "xdebug.remote_handler=dbgp" >> /etc/php/7.0/cli/php.ini
+            echo "xdebug.remote_connect_back = 1" >> /etc/php/7.0/cli/php.ini
+            echo "xdebug.idekey=\"PHPSTORM\"" >> /etc/php/7.0/cli/php.ini
+            echo "xdebug.remote_host=127.0.0.1" >> /etc/php/7.0/cli/php.ini
+            echo -e "\n" >> /etc/php/7.0/cli/php.ini
+
         fi
 
 
         ################### Instala a .so do dbase ########################
-        sudo pecl  install dbase
+        pecl  install dbase
         pathdbase="/usr/lib/php/20151012/dbase.so"
         if [[ -e $pathdbase && -e /etc/php/7.0/apache2/php.ini ]]; then
-            sudo echo "extension=$pathdbase" >> /etc/php/7.0/apache2/php.ini
-            sudo echo -e "\n" >> /etc/php/7.0/apache2/php.ini
-            sudo echo "extension=$pathdbase" >> /etc/php/7.0/cli/php.ini
-            sudo echo -e "\n" >> /etc/php/7.0/cli/php.ini
+            echo "extension=$pathdbase" >> /etc/php/7.0/apache2/php.ini
+            echo -e "\n" >> /etc/php/7.0/apache2/php.ini
+            echo "extension=$pathdbase" >> /etc/php/7.0/cli/php.ini
+            echo -e "\n" >> /etc/php/7.0/cli/php.ini
         fi
 
         #Configura Timezone e charset
-        sudo echo "date.timezone = America/Sao_Paulo" >> /etc/php/7.0/apache2/php.ini
-        sudo echo -e "\n" >> /etc/php/7.0/apache2/php.ini
-        sudo echo -e "default_charset = \"ISO-8859-1\"" >> /etc/php/7.0/apache2/php.ini
-        sudo echo -e "\n" >> /etc/php/7.0/apache2/php.ini
+        echo "date.timezone = America/Sao_Paulo" >> /etc/php/7.0/apache2/php.ini
+        echo -e "\n" >> /etc/php/7.0/apache2/php.ini
+        echo -e "default_charset = \"ISO-8859-1\"" >> /etc/php/7.0/apache2/php.ini
+        echo -e "\n" >> /etc/php/7.0/apache2/php.ini
 
         #Configura Timezone e charset
-        sudo echo "date.timezone = America/Sao_Paulo" >> /etc/php/7.0/cli/php.ini
-        sudo echo -e "\n" >> /etc/php/7.0/cli/php.ini
-        sudo echo -e "default_charset = \"ISO-8859-1\"" >> /etc/php/5.6/cli/php.ini
-        sudo echo -e "\n" >> /etc/php/7.0/cli/php.ini
+        echo "date.timezone = America/Sao_Paulo" >> /etc/php/7.0/cli/php.ini
+        echo -e "\n" >> /etc/php/7.0/cli/php.ini
+        echo -e "default_charset = \"ISO-8859-1\"" >> /etc/php/5.6/cli/php.ini
+        echo -e "\n" >> /etc/php/7.0/cli/php.ini
 
 #       Compilando lib GD para imagens
-#       sudo apt-get install libjpeg62-dev
+#       apt-get install libjpeg62-dev
 #       phpize
 #       ./configure --with-gd=shared --with-freetype-dir=/usr/include/freetype2/  --with-png-dir  --with-freetype-dir  --with-gd --with-jpeg-dir=/usr/lib64
 #       make clean
@@ -1584,83 +1619,83 @@
         capturarSenhaFtp
 
         #Baoixa aslibs necessarias
-        sudo apt-get -y install libaio1
-        sudo apt-get -y install libaio1-dbg
-        sudo apt-get -y install unixodbc
+        apt-get -y install libaio1
+        apt-get -y install libaio1-dbg
+        apt-get -y install unixodbc
 
         #Baixo os arquivos e descompacto
         wget -c ftp://ftp.zanthus.com.br/interno/Tairo/oracle_11g_64bits/oracle-xe_11.2.0-2_amd64.deb --ftp-user=$userFtp --ftp-password=$passwordFtp
 
         #Cria arquivo de configuração do oracle
-        sudo touch /sbin/chkconfig
-        sudo echo -e "#!/bin/bash"  >> /sbin/chkconfig
-        sudo echo -e "# Oracle 11gR2 XE installer chkconfig hack for Ubuntu"  >> /sbin/chkconfig
-        sudo echo -e "file=/etc/init.d/oracle-xe"  >> /sbin/chkconfig
-        sudo echo -e "if [[ ! \`tail -n1 \$file | grep INIT\` ]]; then"  >> /sbin/chkconfig
-        sudo echo -e "echo >> \$file"  >> /sbin/chkconfig
-        sudo echo -e "echo '### BEGIN INIT INFO' >> \$file"  >> /sbin/chkconfig
-        sudo echo -e "echo '# Provides: OracleXE' >> \$file"  >> /sbin/chkconfig
-        sudo echo -e "echo '# Required-Start: \$remote_fs \$syslog' >> \$file"  >> /sbin/chkconfig
-        sudo echo -e "echo '# Required-Stop: \$remote_fs \$syslog' >> \$file"  >> /sbin/chkconfig
-        sudo echo -e "echo '# Default-Start: 2 3 4 5' >> \$file"  >> /sbin/chkconfig
-        sudo echo -e "echo '# Default-Stop: 0 1 6' >> \$file"  >> /sbin/chkconfig
-        sudo echo -e "echo '# Short-Description: Oracle 11g Express Edition' >> \$file"  >> /sbin/chkconfig
-        sudo echo -e "echo '### END INIT INFO' >> \$file"  >> /sbin/chkconfig
-        sudo echo -e "fi"  >> /sbin/chkconfig
-        sudo echo -e "update-rc.d oracle-xe defaults 80 01"  >> /sbin/chkconfig
+        touch /sbin/chkconfig
+        echo -e "#!/bin/bash"  >> /sbin/chkconfig
+        echo -e "# Oracle 11gR2 XE installer chkconfig hack for Ubuntu"  >> /sbin/chkconfig
+        echo -e "file=/etc/init.d/oracle-xe"  >> /sbin/chkconfig
+        echo -e "if [[ ! \`tail -n1 \$file | grep INIT\` ]]; then"  >> /sbin/chkconfig
+        echo -e "echo >> \$file"  >> /sbin/chkconfig
+        echo -e "echo '### BEGIN INIT INFO' >> \$file"  >> /sbin/chkconfig
+        echo -e "echo '# Provides: OracleXE' >> \$file"  >> /sbin/chkconfig
+        echo -e "echo '# Required-Start: \$remote_fs \$syslog' >> \$file"  >> /sbin/chkconfig
+        echo -e "echo '# Required-Stop: \$remote_fs \$syslog' >> \$file"  >> /sbin/chkconfig
+        echo -e "echo '# Default-Start: 2 3 4 5' >> \$file"  >> /sbin/chkconfig
+        echo -e "echo '# Default-Stop: 0 1 6' >> \$file"  >> /sbin/chkconfig
+        echo -e "echo '# Short-Description: Oracle 11g Express Edition' >> \$file"  >> /sbin/chkconfig
+        echo -e "echo '### END INIT INFO' >> \$file"  >> /sbin/chkconfig
+        echo -e "fi"  >> /sbin/chkconfig
+        echo -e "update-rc.d oracle-xe defaults 80 01"  >> /sbin/chkconfig
 
-        sudo chmod +x /sbin/chkconfig
-        sudo chmod 755 /sbin/chkconfig
+        chmod +x /sbin/chkconfig
+        chmod 755 /sbin/chkconfig
 
         # Adiciona parametros para o Kernel
-        sudo touch /etc/sysctl.d/60-oracle.conf
-        sudo echo -e "# Oracle 11g XE kernel parameters" >> /etc/sysctl.d/60-oracle.conf
-        sudo echo -e "fs.file-max=6815744" >> /etc/sysctl.d/60-oracle.conf
-        sudo echo -e "net.ipv4.ip_local_port_range=9000 65000" >> /etc/sysctl.d/60-oracle.conf
-        sudo echo -e "kernel.sem=250 32000 100 128" >> /etc/sysctl.d/60-oracle.conf
-        sudo echo -e "kernel.shmmax=536870912" >> /etc/sysctl.d/60-oracle.conf
+        touch /etc/sysctl.d/60-oracle.conf
+        echo -e "# Oracle 11g XE kernel parameters" >> /etc/sysctl.d/60-oracle.conf
+        echo -e "fs.file-max=6815744" >> /etc/sysctl.d/60-oracle.conf
+        echo -e "net.ipv4.ip_local_port_range=9000 65000" >> /etc/sysctl.d/60-oracle.conf
+        echo -e "kernel.sem=250 32000 100 128" >> /etc/sysctl.d/60-oracle.conf
+        echo -e "kernel.shmmax=536870912" >> /etc/sysctl.d/60-oracle.conf
 
-        sudo service procps start
+        service procps start
         sysctl -q fs.file-max
 
         #Cria script para evitar erro de memoria do oracle
-        sudo touch /etc/rc2.d/S01shm_load
-        sudo echo -e "#!/bin/sh" >> /etc/rc2.d/S01shm_load
-        sudo echo -e "case \"\$1\" in" >> /etc/rc2.d/S01shm_load
-        sudo echo -e "start) mkdir /var/lock/subsys 2>/dev/null" >> /etc/rc2.d/S01shm_load
-        sudo echo -e "       touch /var/lock/subsys/listener" >> /etc/rc2.d/S01shm_load
-        sudo echo -e "       rm /dev/shm 2>/dev/null" >> /etc/rc2.d/S01shm_load
-        sudo echo -e "       mkdir /dev/shm 2>/dev/null" >> /etc/rc2.d/S01shm_load
-        sudo echo -e "       mount -t tmpfs shmfs -o size=2048m /dev/shm ;;" >> /etc/rc2.d/S01shm_load
-        sudo echo -e "*) echo error" >> /etc/rc2.d/S01shm_load
-        sudo echo -e "     exit 1 ;;" >> /etc/rc2.d/S01shm_load
-        sudo echo -e "esac" >> /etc/rc2.d/S01shm_load
+        touch /etc/rc2.d/S01shm_load
+        echo -e "#!/bin/sh" >> /etc/rc2.d/S01shm_load
+        echo -e "case \"\$1\" in" >> /etc/rc2.d/S01shm_load
+        echo -e "start) mkdir /var/lock/subsys 2>/dev/null" >> /etc/rc2.d/S01shm_load
+        echo -e "       touch /var/lock/subsys/listener" >> /etc/rc2.d/S01shm_load
+        echo -e "       rm /dev/shm 2>/dev/null" >> /etc/rc2.d/S01shm_load
+        echo -e "       mkdir /dev/shm 2>/dev/null" >> /etc/rc2.d/S01shm_load
+        echo -e "       mount -t tmpfs shmfs -o size=2048m /dev/shm ;;" >> /etc/rc2.d/S01shm_load
+        echo -e "*) echo error" >> /etc/rc2.d/S01shm_load
+        echo -e "     exit 1 ;;" >> /etc/rc2.d/S01shm_load
+        echo -e "esac" >> /etc/rc2.d/S01shm_load
 
-        sudo chmod +x /etc/rc2.d/S01shm_load
-        sudo chmod 755 /etc/rc2.d/S01shm_load
+        chmod +x /etc/rc2.d/S01shm_load
+        chmod 755 /etc/rc2.d/S01shm_load
 
-        sudo ln -s /usr/bin/awk /bin/awk
-        sudo mkdir /var/lock/subsys
-        sudo touch /var/lock/subsys/listener
+        ln -s /usr/bin/awk /bin/awk
+        mkdir /var/lock/subsys
+        touch /var/lock/subsys/listener
 
         #Instala realmente o .deb
-        sudo dpkg --install oracle-xe_11.2.0-2_amd64.deb
+        dpkg --install oracle-xe_11.2.0-2_amd64.deb
 
         #Chama o configurador do oracle
-        sudo /etc/init.d/oracle-xe configure
+        /etc/init.d/oracle-xe configure
 
-        export ORACLE_HOME=/u01/app/oracle/product/11.2.0/xe >> ~/.bashrc
-        export ORACLE_SID=XE >> ~/.bashrc
-        export NLS_LANG=\`\$ORACLE_HOME/bin/nls_lang.sh\` >> ~/.bashrc
-        export ORACLE_BASE=/u01/app/oracle >> ~/.bashrc
-        export LD_LIBRARY_PATH=$ORACLE_HOME/lib:$LD_LIBRARY_PATH >> ~/.bashrc
-        export PATH=$ORACLE_HOME/bin:$PATH >> ~/.bashrc
-        export ORACLE_SID=asdb >> ~/.bashrc
+        echo -e "export ORACLE_HOME=/u01/app/oracle/product/11.2.0/xe" >> ~/.bashrc
+        echo -e "export ORACLE_SID=XE" >> ~/.bashrc
+        echo -e "export NLS_LANG=\`\$ORACLE_HOME/bin/nls_lang.sh\`" >> ~/.bashrc
+        echo -e "export ORACLE_BASE=/u01/app/oracle" >> ~/.bashrc
+        echo -e "export LD_LIBRARY_PATH=$ORACLE_HOME/lib:$LD_LIBRARY_PATH" >> ~/.bashrc
+        echo -e "export PATH=$ORACLE_HOME/bin:$PATH" >> ~/.bashrc
+        echo -e "export ORACLE_SID=asdb" >> ~/.bashrc
 
 #       /** Altera as permissões para o usuario e cria o TABLESPACE */
 #       create directory db_dumps  as '/u01/app/oracle/dbs_to_load';
-#       sudo mkdir /u01/app/oracle/dbs_to_load
-#       sudo sudo chmod -R 777 /u01/app/oracle/dbs_to_load
+#       mkdir /u01/app/oracle/dbs_to_load
+#       chmod -R 777 /u01/app/oracle/dbs_to_load
 #       grant read,write on directory db_dumps to desenvolvimento;
 #       grant create any directory to desenvolvimento;
 #       grant imp_full_database to desenvolvimento;
@@ -1685,28 +1720,28 @@
 
     removerOracleDataBase11G(){
 
-        sudo /etc/init.d/oracle-xe stop
-        sudo ps -ef | grep oracle | grep -v grep | awk '{print $2}' | xargs kill
-        sudo dpkg --purge oracle-xe
-        sudo rm -rf /u01
-        sudo rm -rf /etc/default/oracle-xe
-        sudo update-rc.d -f oracle-xe remove
-        sudo rm -rf /etc/oratab
-        sudo rm -rf /etc/init.d/oracle-xe
-        sudo rm -rf /var/lock/subsys
-        sudo rm -rf /bin/awk
-        sudo rm -rf /etc/rc2.d/S01shm_load
-        sudo rm -rf /etc/sysctl.d/60-oracle.conf
-        sudo rm -rf /sbin/chkconfig
+        /etc/init.d/oracle-xe stop
+        ps -ef | grep oracle | grep -v grep | awk '{print $2}' | xargs kill
+        dpkg --purge oracle-xe
+        rm -rf /u01
+        rm -rf /etc/default/oracle-xe
+        update-rc.d -f oracle-xe remove
+        rm -rf /etc/oratab
+        rm -rf /etc/init.d/oracle-xe
+        rm -rf /var/lock/subsys
+        rm -rf /bin/awk
+        rm -rf /etc/rc2.d/S01shm_load
+        rm -rf /etc/sysctl.d/60-oracle.conf
+        rm -rf /sbin/chkconfig
 
     }
 
     instalarComposer(){
         capturaUsuario
         #Baixa o composer
-        sudo curl -s https://getcomposer.org/installer | php
+        curl -s https://getcomposer.org/installer | php
         #Move o Composer
-        sudo mv composer.phar /usr/local/bin/composer
+        mv composer.phar /usr/local/bin/composer
         #Instala o instalador do laravel
         composer global require "laravel/installer=~1.1"
         #Instala o guzzle
@@ -1719,8 +1754,8 @@
 
     removerComposer(){
         capturaUsuario
-        sudo rm -rf /usr/local/bin/composer
-        sudo rm -rm /home/$usuario/.composer
+        rm -rf /usr/local/bin/composer
+        rm -rm /home/$usuario/.composer
     }
 
     teste(){
