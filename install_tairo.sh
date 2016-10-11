@@ -1706,6 +1706,22 @@
 #       grant connect to desenvolvimento;
 #       grant resource to desenvolvimento;
 
+#       Como saber o charset do banco
+#       SELECT * FROM NLS_database_parameters
+#
+#       Para alterar o charset do banco oracle .
+#       No servidor, entre no SqlPlus com o usuário sys as sysdba, depois derruba o banco, altera o charset e inicia o banco novamente. Segue os comandos a baixo
+#
+##      sqlplus /nolog
+#
+#       conn sys as sysdba;
+#
+#       SHUTDOWN IMMEDIATE;
+#       STARTUP RESTRICT;
+#       Alter database character set INTERNAL_USE WE8MSWIN1252;
+#       SHUTDOWN IMMEDIATE;
+#       STARTUP;
+
 #       exportar base de dados completos
 #       expdp system DIRECTORY=db_dumps DUMPFILE=desenvolvimento.dmp FULL=y logfile=data_pump_dir:export.log
 
