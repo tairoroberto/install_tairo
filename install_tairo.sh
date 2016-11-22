@@ -852,10 +852,10 @@
         cd ~
         versao=$(uname -i)
         if [[  $versao == "i386" || $versao == "i486" || $versao == "i686" ]]; then
-            wget ftp://ftp.zanthus.com.br/interno/Tairo/intant_client_12.1_32bits/instant_client_12.1.tar.gz --ftp-user=$userFtp --ftp-password=$passwordFtp .
+            wget ftp://ftp.zanthus.com.br:2142/interno/Tairo/intant_client_12.1_32bits/instant_client_12.1.tar.gz --ftp-user=$userFtp --ftp-password=$passwordFtp .
 
         else
-            wget ftp://ftp.zanthus.com.br/interno/Tairo/intant_client_12.1_64bits/instant_client_12.1.tar.gz --ftp-user=$userFtp --ftp-password=$passwordFtp .
+            wget ftp://ftp.zanthus.com.br:2142/interno/Tairo/intant_client_12.1_64bits/instant_client_12.1.tar.gz --ftp-user=$userFtp --ftp-password=$passwordFtp .
         fi
 
         #Verifica se ultima ação foi efetuada com sucesso
@@ -962,7 +962,7 @@
         echo    "    Criando e baixando bibliotecas..."
 
         #Baixo os arquivos e descompacto
-        wget -c ftp://ftp.zanthus.com.br/interno/Tairo/Zanthus_pdv.tar.gz --ftp-user=$userFtp --ftp-password=$passwordFtp
+        wget -c ftp://ftp.zanthus.com.br:2142/interno/Tairo/Zanthus_pdv.tar.gz --ftp-user=$userFtp --ftp-password=$passwordFtp
         tar -zxvf Zanthus_pdv.tar.gz
         rm -f Zanthus_pdv.tar.gz
         mv Zanthus /Zanthus
@@ -972,51 +972,42 @@
 
         # baixa as Libs 32bits atualizadas do ftp
         cd /Zanthus/Zeus/lib
-        #wget -c ftp://ftp.zanthus.com.br/interno/Tairo/lib_zanthus/* --ftp-user=$userFtp --ftp-password=$passwordFtp
-        wget -c ftp://ftp.zanthus.com.br/pub/Zeus_Frente_de_Loja/_Complementares/so/*
-        wget -c ftp://ftp.zanthus.com.br/pub/Zeus_Frente_de_Loja/_Complementares/ZANSINC/Linux/lib/*
+        wget -c ftp://ftp.zanthus.com.br:2142/pub/Zeus_Frente_de_Loja/_Complementares/so/*
+        wget -c ftp://ftp.zanthus.com.br:2142/pub/Zeus_Frente_de_Loja/_Complementares/ZANSINC/Linux/lib/*
 
         # Cria o diretório e baixa as libs 64bits
         criarDiretorio "/Zanthus/Zeus/lib_64"
         cd /Zanthus/Zeus/lib_64
-        wget -c ftp://ftp.zanthus.com.br/pub/Zeus_Frente_de_Loja/_Complementares/so_r64/*
+        wget -c ftp://ftp.zanthus.com.br:2142/pub/Zeus_Frente_de_Loja/_Complementares/so_r64/*
 
         criarDiretorio "/Zanthus/Zeus/lib_co5"
         cd /Zanthus/Zeus/lib_co5
-        wget -c ftp://ftp.zanthus.com.br/pub/Zeus_Frente_de_Loja/_Complementares/so_co5/*
+        wget -c ftp://ftp.zanthus.com.br:2142/pub/Zeus_Frente_de_Loja/_Complementares/so_co5/*
 
         criarDiretorio "/Zanthus/Zeus/lib_ubu"
         cd /Zanthus/Zeus/lib_ubu
-        wget -c ftp://ftp.zanthus.com.br/pub/Zeus_Frente_de_Loja/_Complementares/so_ubu/*
+        wget -c ftp://ftp.zanthus.com.br:2142/pub/Zeus_Frente_de_Loja/_Complementares/so_ubu/*
 
         # Nomes das variáveis
-        KC_ZMAN_CZ_EXL="KC_ZMAN_1_X_102_266_CZ.EXL"
-        KC_ZMAN_CZ_TARGZ="KC_ZMAN_1_X_102_263_CZ.tar.gz"
-
-        KC_ZMAN_CW_EXL="KC_ZMAN_1_X_102_266_CW.EXL"
-        KC_ZMAN_CW_TARGZ="KC_ZMAN_1_X_102_263_CW.tar.gz"
+        KC_ZMAN_CZ_EXL="KC_ZMAN_1_X_104_276_CZ.EXL"
+        KC_ZMAN_CZ_TARGZ="KC_ZMAN_1_X_104_276_CZ.tar.gz"
 
         criarDiretorio "/Zanthus/Zeus/lib_kernz"
         cd /Zanthus/Zeus/lib_kernz
-        wget -c ftp://ftp.zanthus.com.br/pub/Zeus_Frente_de_Loja/v_1_X_102/$KC_ZMAN_CZ_EXL
-        wget -c ftp://ftp.zanthus.com.br/pub/Zeus_Frente_de_Loja/v_1_X_102/$KC_ZMAN_CW_EXL
-        wget -c ftp://ftp.zanthus.com.br/pub/Zeus_Frente_de_Loja/_Complementares/KernD/v2_1/*.so
-        wget -c ftp://ftp.zanthus.com.br/interno/Tairo/Kernz_php5.6/kernz.so --ftp-user=$userFtp --ftp-password=$passwordFtp
-        wget -c ftp://ftp.zanthus.com.br/interno/Tairo/mssql/php5.6/mssql.so --ftp-user=$userFtp --ftp-password=$passwordFtp
-        wget -c ftp://ftp.zanthus.com.br/interno/Tairo/Kernz_php5.6/ZendGuardLoader.so --ftp-user=$userFtp --ftp-password=$passwordFtp
+        wget -c ftp://ftp.zanthus.com.br:2142/pub/Zeus_Frente_de_Loja/v_1_X_104/$KC_ZMAN_CZ_EXL
+        wget -c ftp://ftp.zanthus.com.br:2142/pub/Zeus_Frente_de_Loja/v_1_X_104/$KC_ZMAN_CW_EXL
+        wget -c ftp://ftp.zanthus.com.br:2142/pub/Zeus_Frente_de_Loja/_Complementares/KernD/v2_1/*.so
+        wget -c ftp://ftp.zanthus.com.br:2142/interno/Tairo/Kernz_php5.6/kernz.so --ftp-user=$userFtp --ftp-password=$passwordFtp
+        wget -c ftp://ftp.zanthus.com.br:2142/interno/Tairo/mssql/php5.6/mssql.so --ftp-user=$userFtp --ftp-password=$passwordFtp
+        wget -c ftp://ftp.zanthus.com.br:2142/interno/Tairo/Kernz_php5.6/ZendGuardLoader.so --ftp-user=$userFtp --ftp-password=$passwordFtp
 
         mv $KC_ZMAN_CZ_EXL $KC_ZMAN_CZ_TARGZ
         mv $KC_ZMAN_CW_EXL $KC_ZMAN_CW_TARGZ
 
-        tar vxf $KC_ZMAN_CZ_TARGZ  lib_rotkernC_CZ.so.rh9
-        tar vxf $KC_ZMAN_CZ_TARGZ  lib_rotkernC_CZ.so.r64
-
-        tar vxf $KC_ZMAN_CW_TARGZ  lib_rotkernC_CW.so.rh9
-        tar vxf $KC_ZMAN_CW_TARGZ  lib_rotkernC_CW.so.r64
+        tar -zxvf $KC_ZMAN_CZ_TARGZ
 
         #Remove o pacote baixado
         rm -f -r $KC_ZMAN_CZ_TARGZ
-        rm -f -r $KC_ZMAN_CW_TARGZ
 
         ln -s -f /lib/x86_64-linux-gnu/libcrypto.so.1.0.0 /lib/x86_64-linux-gnu/libcrypto.so.6
         ln -s -f /lib/x86_64-linux-gnu/libssl.so.1.0.0 /lib/x86_64-linux-gnu/libssl.so.6
@@ -1624,7 +1615,7 @@
         apt-get -y install unixodbc
 
         #Baixo os arquivos e descompacto
-        wget -c ftp://ftp.zanthus.com.br/interno/Tairo/oracle_11g_64bits/oracle-xe_11.2.0-2_amd64.deb --ftp-user=$userFtp --ftp-password=$passwordFtp
+        wget -c ftp://ftp.zanthus.com.br:2142:2142/interno/Tairo/oracle_11g_64bits/oracle-xe_11.2.0-2_amd64.deb --ftp-user=$userFtp --ftp-password=$passwordFtp
 
         #Cria arquivo de configuração do oracle
         touch /sbin/chkconfig
