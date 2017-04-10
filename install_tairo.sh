@@ -1615,7 +1615,7 @@
         apt-get -y install unixodbc
 
         #Baixo os arquivos e descompacto
-        wget -c ftp://ftp.zanthus.com.br:2142:2142/interno/Tairo/oracle_11g_64bits/oracle-xe_11.2.0-2_amd64.deb --ftp-user=$userFtp --ftp-password=$passwordFtp
+        wget -c ftp://ftp.zanthus.com.br:2142/interno/Tairo/oracle_11g_64bits/oracle-xe_11.2.0-2_amd64.deb --ftp-user=$userFtp --ftp-password=$passwordFtp
 
         #Cria arquivo de configuração do oracle
         touch /sbin/chkconfig
@@ -1653,11 +1653,11 @@
         touch /etc/rc2.d/S01shm_load
         echo -e "#!/bin/sh" >> /etc/rc2.d/S01shm_load
         echo -e "case \"\$1\" in" >> /etc/rc2.d/S01shm_load
-        echo -e "start) mkdir /var/lock/subsys 2>/dev/null" >> /etc/rc2.d/S01shm_load
-        echo -e "       touch /var/lock/subsys/listener" >> /etc/rc2.d/S01shm_load
+        echo -e "start) mkdir /var/lock 2>/dev/null" >> /etc/rc2.d/S01shm_load
+        echo -e "       touch /var/lock/listener" >> /etc/rc2.d/S01shm_load
         echo -e "       rm /dev/shm 2>/dev/null" >> /etc/rc2.d/S01shm_load
         echo -e "       mkdir /dev/shm 2>/dev/null" >> /etc/rc2.d/S01shm_load
-        echo -e "       mount -t tmpfs shmfs -o size=2048m /dev/shm ;;" >> /etc/rc2.d/S01shm_load
+        echo -e "       mount -t tmpfs shmfs -o size=4096m /dev/shm ;;" >> /etc/rc2.d/S01shm_load
         echo -e "*) echo error" >> /etc/rc2.d/S01shm_load
         echo -e "     exit 1 ;;" >> /etc/rc2.d/S01shm_load
         echo -e "esac" >> /etc/rc2.d/S01shm_load
@@ -1675,27 +1675,42 @@
         #Chama o configurador do oracle
         /etc/init.d/oracle-xe configure
 
-        echo -e "export ORACLE_HOME=/u01/app/oracle/product/11.2.0/xe" >> ~/.bashrc
-        echo -e "export ORACLE_SID=XE" >> ~/.bashrc
-        echo -e "export NLS_LANG=\`\$ORACLE_HOME/bin/nls_lang.sh\`" >> ~/.bashrc
-        echo -e "export ORACLE_BASE=/u01/app/oracle" >> ~/.bashrc
-        echo -e "export LD_LIBRARY_PATH=$ORACLE_HOME/lib:$LD_LIBRARY_PATH" >> ~/.bashrc
-        echo -e "export PATH=$ORACLE_HOME/bin:$PATH" >> ~/.bashrc
-        echo -e "export ORACLE_SID=asdb" >> ~/.bashrc
+        echo -e "export ORACLE_HOME=/u01/app/oracle/product/11.2.0/xe" >> /etc/bash.bashrc
+        echo -e "export ORACLE_SID=XE" >> /etc/bash.bashrc
+        echo -e "export NLS_LANG='BRAZILIAN PORTUGUESE_BRAZIL.WE8MSWIN1252'" >> /etc/bash.bashrc
+        echo -e "export ORACLE_BASE=/u01/app/oracle" >> /etc/bash.bashrc
+        echo -e "export LD_LIBRARY_PATH=\$ORACLE_HOME/lib:\$LD_LIBRARY_PATH" >> /etc/bash.bashrc
+        echo -e "export PATH=\$ORACLE_HOME/bin:\$PATH" >> /etc/bash.bashrc
+
+        source /etc/bash.bashrc
+
+        usermod -a -G dba oracle
+        usermod -a -G dba $usuario
+
+        service oracle-xe start
 
 #       /** Altera as permissões para o usuario e cria o TABLESPACE */
+#       mkdir /u01/app/oracle/dbs_to_load && chmod -R 777 /u01/app/oracle/dbs_to_load
 #       create directory db_dumps  as '/u01/app/oracle/dbs_to_load';
-#       mkdir /u01/app/oracle/dbs_to_load
-#       chmod -R 777 /u01/app/oracle/dbs_to_load
-#       grant read,write on directory db_dumps to desenvolvimento;
-#       grant create any directory to desenvolvimento;
-#       grant imp_full_database to desenvolvimento;
 #       ALTER SYSTEM SET DB_CREATE_FILE_DEST='/u01/app/oracle/oradata/XE' SCOPE=BOTH;
 #       create tablespace zeusretail;
-#       ALTER USER desenvolvimento QUOTA 100M ON zeusretail;
-#       GRANT UNLIMITED TABLESPACE TO desenvolvimento;
+#       Alter Session Set NLS_LANGUAGE = "PORTUGUESE";
+#       Alter Session Set NLS_TERRITORY = "BRAZIL";
+#       Alter System Set NLS_LANGUAGE='BRAZILIAN PORTUGUESE' scope=spfile;
+#       Alter System Set NLS_TERRITORY='BRAZIL' SCOPE=SPFILE;
+#       Update sys.props$ set value$ = 'WE8MSWIN1252' where name = 'NLS_NCHAR_CHARACTERSET';
+#       Update sys.props$ set value$ = 'WE8MSWIN1252' where name = 'NLS_CHARACTERSET';
+#       Update sys.props$ set value$ = 'BRAZILIAN PORTUGUESE' where name = 'NLS_LANGUAGE';
+#       Update sys.props$ set value$ = 'BRAZIL' where name = 'NLS_TERRITORY';
+
 #       grant connect to desenvolvimento;
 #       grant resource to desenvolvimento;
+#       ALTER USER desenvolvimento QUOTA 100M ON zeusretail;
+#       GRANT UNLIMITED TABLESPACE TO desenvolvimento;
+#       grant read,write on directory db_dumps to desenvolvimento;
+#       grant create any directory to desenvolvimento;
+#       grant restricted session to desenvolvimento;
+#       grant imp_full_database to desenvolvimento;
 
 #       Como saber o charset do banco
 #       SELECT * FROM NLS_database_parameters
