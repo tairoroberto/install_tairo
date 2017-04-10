@@ -1735,7 +1735,7 @@
 #       expdp desenvolvimento DIRECTORY=db_dumps DUMPFILE=desenvolvimento.dmp SCHEMAS=desenvolvimento logfile=data_pump_dir:exportDB.log
 
 #       importar base de dados
-#       impdp desenvolvimento DIRECTORY=db_dumps DUMPFILE=desenvolvimento.dmp SCHEMAS=desenvolvimento logfile=data_pump_dir:exportDB.log
+#       impdp desenvolvimento DIRECTORY=db_dumps DUMPFILE=desenvolvimento.dmp SCHEMAS=desenvolvimento sqlfile=data_pump_dir:sqlddl.sql logfile=data_pump_dir:exportDB.log
 
         rm -rf oracle-xe_11.2.0-2_amd64.deb
     }
