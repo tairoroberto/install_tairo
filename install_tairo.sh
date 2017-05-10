@@ -669,9 +669,9 @@
     instalarPhpStorm(){
         clear
         cd ~
-        wget -c https://download.jetbrains.com/webide/PhpStorm-2016.1.2.tar.gz
-        tar -zxvf PhpStorm-2016.1.2.tar.gz
-        rm -f PhpStorm-2016.1.2.tar.gz
+        wget -c https://download.jetbrains.com/webide/PhpStorm-2017.1.3.tar.gz
+        tar -zxvf PhpStorm-2017.1.3.tar.gz
+        rm -f PhpStorm-2017.1.3.tar.gz
 
         mv PhpStorm-* /opt/PhpStorm
         chmod +x /opt/PhpStorm/bin/phpstorm.sh
@@ -843,6 +843,68 @@
             mostrarMenuOpcoes
         fi
     }
+
+
+        # IDE de desenvolvimento C/C++ #
+        instalarClion(){
+            clear
+            cd ~
+            wget -c https://download.jetbrains.com/cpp/CLion-2017.1.1.tar.gz
+            tar -zxvf CLion-2017.1.1.tar.gz
+            rm -f CLion-2017.1.1.tar.gz
+
+            mv clion-* /opt/clion
+            chmod +x /opt/clion/bin/clion.sh
+            chmod -R 777 /opt/clion
+
+            #Cria arquivo executavel#
+            touch /usr/bin/clion
+            chmod 755 /usr/bin/clion
+            echo "#!/bin/sh" >> /usr/bin/clion
+            echo "export UBUNTU_MENUPROXY=0" >> /usr/bin/clion
+            echo "export CLION_HOME=/opt/clion" >> /usr/bin/clion
+            echo "\"\$CLION_HOME/bin/clion.sh\" %f" >> /usr/bin/clion
+            ln -s /usr/bin/clion /bin/clion
+
+            #Cria icone do desktop#
+            touch /usr/share/applications/clion.desktop
+            echo "[Desktop Entry]" >> /usr/share/applications/clion.desktop
+            echo "Encoding=UTF-8" >> /usr/share/applications/clion.desktop
+            echo "Name=Clion" >> /usr/share/applications/clion.desktop
+            echo "Comment=Clion IDE" >> /usr/share/applications/clion.desktop
+            echo "Exec=clion" >> /usr/share/applications/clion.desktop
+            echo "Icon=/opt/clion/bin/clion.svg" >> /usr/share/applications/clion.desktop
+            echo "Terminal=false" >> /usr/share/applications/clion.desktop
+            echo "Type=Application" >> /usr/share/applications/clion.desktop
+            echo "Categories=GNOME;Application;Development;" >> /usr/share/applications/clion.desktop
+            echo "StartupNotify=true" >> /usr/share/applications/clion.desktop
+
+            if [[ $1 == "op" ]]; then
+                mostrarMenuOpcoes
+            fi
+        }
+
+
+
+        removerClion(){
+            clear
+            echo "    Será removido a IDE de desenvolvimento PhpStorm-10"
+            echo "    Deseja continuar? Sim[s], Não[n]"
+            read op
+
+            if [ ! $op == "s" ]; then
+                mostrarMenuOpcoes
+            fi
+
+            rm -r /usr/bin/clion
+            rm -r /bin/clion
+            rm -r /usr/share/applications/clion.desktop
+            rm -r /opt/clion
+
+            if [[ $1 == "op" ]]; then
+                mostrarMenuOpcoes
+            fi
+        }
 
 
 
