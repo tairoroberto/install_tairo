@@ -1009,8 +1009,8 @@
         capturaUsuarioSenha
         capturarUsuarioFtp
         capturarSenhaFtp
-        rm -f -r /Zanthus
-        rm -f -r /usr/share/applications/pdv.desktop
+        rm -fr /Zanthus
+        rm -fr /usr/share/applications/pdv.desktop
         clear
 
         cd /home/$usuario/
@@ -1026,7 +1026,7 @@
         #Baixo os arquivos e descompacto
         wget -c ftp://ftp.zanthus.com.br:2142/interno/Tairo/Zanthus_pdv.tar.gz --ftp-user=$userFtp --ftp-password=$passwordFtp
         tar -zxvf Zanthus_pdv.tar.gz
-        rm -f Zanthus_pdv.tar.gz
+        rm -rf Zanthus_pdv.tar.gz
         mv Zanthus /Zanthus
 
         # Abre o diretório
@@ -1057,14 +1057,12 @@
         criarDiretorio "/Zanthus/Zeus/lib_kernz"
         cd /Zanthus/Zeus/lib_kernz
         wget -c ftp://ftp.zanthus.com.br:2142/pub/Zeus_Frente_de_Loja/v_1_X_104/$KC_ZMAN_CZ_EXL
-        wget -c ftp://ftp.zanthus.com.br:2142/pub/Zeus_Frente_de_Loja/v_1_X_104/$KC_ZMAN_CW_EXL
         wget -c ftp://ftp.zanthus.com.br:2142/pub/Zeus_Frente_de_Loja/_Complementares/KernD/v2_1/*.so
         wget -c ftp://ftp.zanthus.com.br:2142/interno/Tairo/Kernz_php5.6/kernz.so --ftp-user=$userFtp --ftp-password=$passwordFtp
         wget -c ftp://ftp.zanthus.com.br:2142/interno/Tairo/mssql/php5.6/mssql.so --ftp-user=$userFtp --ftp-password=$passwordFtp
         wget -c ftp://ftp.zanthus.com.br:2142/interno/Tairo/Kernz_php5.6/ZendGuardLoader.so --ftp-user=$userFtp --ftp-password=$passwordFtp
 
         mv $KC_ZMAN_CZ_EXL $KC_ZMAN_CZ_TARGZ
-        mv $KC_ZMAN_CW_EXL $KC_ZMAN_CW_TARGZ
 
         tar -zxvf $KC_ZMAN_CZ_TARGZ
 

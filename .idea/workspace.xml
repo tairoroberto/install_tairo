@@ -2,9 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2e2a2cce-f256-40f0-b819-0e06e38bf8a7" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/charset.sql" afterPath="$PROJECT_DIR$/charset.sql" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/install_tairo.sh" afterPath="$PROJECT_DIR$/install_tairo.sh" />
     </list>
     <ignored path="install_tairo.iws" />
@@ -28,28 +26,29 @@
     <option name="SHOW_TABLE_DETAILS" value="true" />
     <option name="SHOW_EMPTY_GROUPS" value="false" />
     <option name="AUTO_SCROLL_FROM_SOURCE" value="false" />
+    <expand />
+    <select />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FavoritesManager">
     <favorites_list name="install_tairo" />
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="install_tairo.sh" pinned="false" current-in-tab="false">
+      <file leaf-file-name="install_tairo.sh" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/install_tairo.sh">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="436">
-              <caret line="695" column="60" lean-forward="false" selection-start-line="695" selection-start-column="60" selection-end-line="695" selection-end-column="60" />
+            <state relative-caret-position="310">
+              <caret line="1068" column="32" lean-forward="true" selection-start-line="1068" selection-start-column="32" selection-end-line="1068" selection-end-column="32" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="console.sql" pinned="false" current-in-tab="true">
+      <file leaf-file-name="console.sql" pinned="false" current-in-tab="false">
         <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/5ce6aae7-11d3-4d1d-b411-a7a9d05ad8a7/console.sql">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="372">
-              <caret line="144" column="73" lean-forward="false" selection-start-line="144" selection-start-column="73" selection-end-line="144" selection-end-column="73" />
+            <state relative-caret-position="2592">
+              <caret line="144" column="31" lean-forward="false" selection-start-line="144" selection-start-column="31" selection-end-line="144" selection-end-column="31" />
               <folding />
             </state>
           </provider>
@@ -68,7 +67,7 @@
       <file leaf-file-name="charset.sql" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/charset.sql">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1240">
+            <state relative-caret-position="1116">
               <caret line="62" column="8423" lean-forward="false" selection-start-line="62" selection-start-column="8423" selection-end-line="62" selection-end-column="8423" />
               <caret line="62" column="8405" lean-forward="false" selection-start-line="62" selection-start-column="8405" selection-end-line="62" selection-end-column="8405" />
               <caret line="62" column="8381" lean-forward="false" selection-start-line="62" selection-start-column="8381" selection-end-line="62" selection-end-column="8381" />
@@ -575,9 +574,9 @@
         <option value="$APPLICATION_CONFIG_DIR$/consoles/db/9d60ec45-267a-449a-9dd1-164ec853b72e/console.sql" />
         <option value="$PROJECT_DIR$/sql" />
         <option value="$PROJECT_DIR$/charset.sql" />
-        <option value="$PROJECT_DIR$/install_tairo.sh" />
         <option value="$APPLICATION_CONFIG_DIR$/consoles/db/5ce6aae7-11d3-4d1d-b411-a7a9d05ad8a7/console.sql" />
         <option value="$APPLICATION_CONFIG_DIR$/consoles/db/9e10a354-76f4-4b82-a98c-f3e3893c2b24/console.sql" />
+        <option value="$PROJECT_DIR$/install_tairo.sh" />
       </list>
     </option>
   </component>
@@ -592,10 +591,10 @@
   </component>
   <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" />
   <component name="ProjectFrameBounds">
-    <option name="x" value="1365" />
-    <option name="y" value="-11" />
-    <option name="width" value="1922" />
-    <option name="height" value="1092" />
+    <option name="x" value="71" />
+    <option name="y" value="24" />
+    <option name="width" value="1849" />
+    <option name="height" value="1032" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -613,26 +612,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope">
-        <subPane subId="Project Files">
-          <PATH>
-            <PATH_ELEMENT USER_OBJECT="Root">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
-      </pane>
-      <pane id="ProjectPane">
-        <subPane>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="install_tairo" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
-      </pane>
+      <pane id="Scope" />
+      <pane id="ProjectPane" />
       <pane id="Scratches" />
       <pane id="PackagesPane" />
       <pane id="AndroidView" />
@@ -667,6 +648,14 @@
     </option>
   </component>
   <component name="RunManager">
+    <configuration default="true" type="js.build_tools.gulp" factoryName="Gulp.js">
+      <node-interpreter>project</node-interpreter>
+      <node-options />
+      <gulpfile />
+      <tasks />
+      <arguments />
+      <envs />
+    </configuration>
     <configuration default="true" type="BashConfigurationType" factoryName="Bash">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="INTERPRETER_PATH" value="/bin/bash" />
@@ -716,9 +705,6 @@
       <PhpTestRunnerSettings />
       <method />
     </configuration>
-    <configuration default="true" type="js.build_tools.gulp" factoryName="Gulp.js">
-      <method />
-    </configuration>
     <configuration default="true" type="js.build_tools.npm" factoryName="npm">
       <command value="run" />
       <scripts />
@@ -739,7 +725,7 @@
       <recursive>false</recursive>
       <method />
     </configuration>
-    <configuration default="false" name="install_tairo.sh" type="BashConfigurationType" factoryName="Bash">
+    <configuration name="install_tairo.sh" type="BashConfigurationType" factoryName="Bash">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="INTERPRETER_PATH" value="/bin/bash" />
       <option name="WORKING_DIRECTORY" value="" />
@@ -748,11 +734,7 @@
       <option name="PARAMETERS" value="" />
       <module name="" />
       <envs />
-      <method />
     </configuration>
-    <list size="1">
-      <item index="0" class="java.lang.String" itemvalue="Bash.install_tairo.sh" />
-    </list>
   </component>
   <component name="ShelveChangesManager" show_recycled="false">
     <option name="remove_strategy" value="false" />
@@ -813,7 +795,12 @@
       <workItem from="1491786599368" duration="66000" />
       <workItem from="1491787769354" duration="4875000" />
       <workItem from="1493945241770" duration="31000" />
-      <workItem from="1494380469246" duration="1442000" />
+      <workItem from="1494380469246" duration="1460000" />
+      <workItem from="1494382356746" duration="168000" />
+      <workItem from="1495757211891" duration="4425000" />
+      <workItem from="1495842944759" duration="62000" />
+      <workItem from="1498331677549" duration="13000" />
+      <workItem from="1502029294386" duration="79000" />
     </task>
     <task id="LOCAL-00001" summary="Alterando versão do php e criando .deb">
       <created>1461714521494</created>
@@ -976,11 +963,18 @@
       <option name="project" value="LOCAL" />
       <updated>1491786650080</updated>
     </task>
-    <option name="localTasksCounter" value="24" />
+    <task id="LOCAL-00024" summary="Ajustando sudo">
+      <created>1494382215548</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1494382215548</updated>
+    </task>
+    <option name="localTasksCounter" value="25" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="109293000" />
+    <option name="totallyTimeSpent" value="114058000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -992,13 +986,12 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="1365" y="-11" width="1922" height="1092" extended-state="6" />
+    <frame x="71" y="24" width="1849" height="1032" extended-state="0" />
     <layout>
-      <window_info id="Database Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.30575916" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.103521876" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.10870771" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32868218" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.14781217" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1475319" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.7129987" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.20942408" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -1027,6 +1020,7 @@
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="REST Client" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33719432" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Database Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.30575916" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32868218" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
     </layout>
@@ -1053,7 +1047,7 @@
     </layout-to-restore>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
-    <option name="processedProjectFiles" value="true" />
+    <option name="version" value="1" />
   </component>
   <component name="Vcs.Log.UiProperties">
     <option name="RECENTLY_FILTERED_USER_GROUPS">
@@ -1222,9 +1216,33 @@
     <entry file="file://$PROJECT_DIR$/sql" />
     <entry file="dbDummy://dbtable:/39546f06/be2b9396-3ec2-48f4-8603-eb1bea977295/DESENVOLVIMENTO.FAVORITOS" />
     <entry file="dbDummy://dbtable:/39546f06/be2b9396-3ec2-48f4-8603-eb1bea977295/DESENVOLVIMENTO.TAB_GRUPO_PARAMETRO" />
+    <entry file="dbDummy://dbtable:/39546f06/be2b9396-3ec2-48f4-8603-eb1bea977295/DESENVOLVIMENTO.TAB_ASSUNTO" />
+    <entry file="file:///u01/app/oracle/admin/XE/dpdump/sqlddl.sql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2765540">
+          <caret line="138277" column="0" lean-forward="false" selection-start-line="138277" selection-start-column="0" selection-end-line="138277" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/5ce6aae7-11d3-4d1d-b411-a7a9d05ad8a7/console.sql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2592">
+          <caret line="144" column="31" lean-forward="false" selection-start-line="144" selection-start-column="31" selection-end-line="144" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/install_tairo.sh">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="310">
+          <caret line="1068" column="32" lean-forward="true" selection-start-line="1068" selection-start-column="32" selection-end-line="1068" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/charset.sql">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1240">
+        <state relative-caret-position="1116">
           <caret line="62" column="8423" lean-forward="false" selection-start-line="62" selection-start-column="8423" selection-end-line="62" selection-end-column="8423" />
           <caret line="62" column="8405" lean-forward="false" selection-start-line="62" selection-start-column="8405" selection-end-line="62" selection-end-column="8405" />
           <caret line="62" column="8381" lean-forward="false" selection-start-line="62" selection-start-column="8381" selection-end-line="62" selection-end-column="8381" />
@@ -1694,34 +1712,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="dbDummy://dbtable:/39546f06/be2b9396-3ec2-48f4-8603-eb1bea977295/DESENVOLVIMENTO.TAB_ASSUNTO" />
-    <entry file="file:///u01/app/oracle/admin/XE/dpdump/sqlddl.sql">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2765540">
-          <caret line="138277" column="0" lean-forward="false" selection-start-line="138277" selection-start-column="0" selection-end-line="138277" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/install_tairo.sh">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="436">
-          <caret line="695" column="60" lean-forward="false" selection-start-line="695" selection-start-column="60" selection-end-line="695" selection-end-column="60" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/9e10a354-76f4-4b82-a98c-f3e3893c2b24/console.sql">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="63" lean-forward="false" selection-start-line="0" selection-start-column="63" selection-end-line="0" selection-end-column="63" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/5ce6aae7-11d3-4d1d-b411-a7a9d05ad8a7/console.sql">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="372">
-          <caret line="144" column="73" lean-forward="false" selection-start-line="144" selection-start-column="73" selection-end-line="144" selection-end-column="73" />
           <folding />
         </state>
       </provider>
