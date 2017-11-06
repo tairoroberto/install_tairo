@@ -1840,6 +1840,26 @@
         rm -rm /home/$usuario/.composer
     }
 
+    instalarAndroidRomDevelopment(){
+        sudo apt-get install bc bison build-essential curl flex g++-multilib gcc-multilib git gnupg gperf imagemagick lib32ncurses5-dev lib32readline6-dev lib32z1-dev libesd0-dev liblz4-tool libncurses5-dev libsdl1.2-dev libwxgtk3.0-dev libxml2 libxml2-utils lzop pngcrush schedtool squashfs-tools xsltproc zip zlib1g-dev
+        sudo mkdir -p ~/bin
+        mkdir -p ~/AndroidROMs
+        curl https://storage.googleapis.com/git-repo-downloads/repo > ~/bin/repo
+        chmod a+x ~/bin/repo
+
+        echo "export PATH=~/bin:\$PATH" >> ~/.bashrc
+        echo "export USE_CCACHE=1" >> ~/.bashrc
+        echo "prebuilts/misc/linux-x86/ccache/ccache -M 50G" >> ~/.bashrc
+        echo "export JACK_SERVER_VM_ARGUMENTS=\"-Dfile.encoding=UTF-8 -XX:+TieredCompilation -Xmx4096m\"" >> ~/.bashrc
+        source ~/.bashrc
+    }
+
+    removerAndroidRomDevelopment(){
+        sudo apt-get autoremove bc bison flex g++-multilib gcc-multilib gnupg gperf imagemagick lib32ncurses5-dev lib32readline6-dev lib32z1-dev libesd0-dev liblz4-tool libncurses5-dev libsdl1.2-dev libwxgtk3.0-dev libxml2 libxml2-utils lzop pngcrush schedtool squashfs-tools xsltproc zlib1g-dev
+        rm -rf ~/bin
+        rm -rm ~/AndroidROMs
+    }
+
     teste(){
         clear
         echo "    Teste..."
