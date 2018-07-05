@@ -1880,6 +1880,16 @@
         apt-get install oracle-java8-installer
     }
 
+       installMinimumEnvironment(){
+        add-apt-repository "deb http://archive.canonical.com/ubuntu $(lsb_release -sc) partner"
+        apt-get update
+        apt-get install libc6:i386 libncurses5:i386 libstdc++6:i386 lib32z1 libbz2-1.0:i386
+        apt-get install git-core
+        mkdir -p ~/workspace/
+        unzip /isodevice/Tairo/android-studio-ide-173.4819257-linux.zip -d ~/workspace/android-studio
+        unzip /isodevice/Tairo//isodevice/Tairo/ideaIU-2018.1.5.tar.gz -d ~/workspace/idea
+    }
+
     mostrarAjuda(){
         clear
         echo    "    ########################################################################################"
