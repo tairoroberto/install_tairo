@@ -50,17 +50,11 @@
     }
 
     #-------------------------------------------------------------------------
-    # Captura usuario e senha
+    # Captura senha
     #-------------------------------------------------------------------------
-    capturaUsuario(){
-        clear
-        echo "    ########################### Insira seu usuario Linux ##################################"
-        read usuario
-    }
-
     capturaUsuarioSenha(){
         clear
-        echo "    ########################### Insira a senha do usuario Linux ##################################"
+        echo "    ########################### Insira a senha do usuario $($USER) no Linux ##################################"
         read usuarioSenha
     }
 
@@ -182,7 +176,6 @@
         read op
 
         cd ~
-        capturaUsuario
         capturarVersaoPhp
         capturarUsuarioFtp
         capturarSenhaFtp
@@ -369,8 +362,6 @@
             mostrarMenuOpcoes
         fi
 
-        capturaUsuario
-
         echo "    Excluindo pastas e arquivos..."
 
         pecl  uninstall oci8
@@ -472,7 +463,7 @@
         #Desistala Dropbox
         removerDropbox
 
-        removerLauchers $usuario
+        removerLauchers $USER
 
         echo "    Ambiente Servidor Ubuntu removido"
 
@@ -943,6 +934,33 @@
             rm -r oracle-instantclient12.1-tools.deb
             rm -r instant_client_12.1.tar.gz
 
+            if [[ $phpVersion == 1 ]]; then
+
+             ###################  Instala a .so do oracle ######################
+                pecl  uninstall oci8
+                pecl  install oci8-2.0.11
+                #Verifica se o caminho padrão para a pasta oracle existe
+                pathOci8="/usr/lib/php/20131226/oci8.so"
+                if [ -e $pathOci8 ]; then
+                    echo "extension=$pathOci8 " >> /etc/php/5.6/apache2/php.ini
+                    echo -e "\n" >> /etc/php/5.6/apache2/php.ini
+                    echo "extension=$pathOci8" >> /etc/php/5.6/cli/php.ini
+                    echo -e "\n" >> /etc/php/5.6/cli/php.ini
+                fi
+           else
+            ###################  Instala a .so do oracle ######################
+                pecl  install oci8
+                #Verifica se o caminho padrão para a pasta oracle existe
+                pathOci8="/usr/lib/php/20151012/oci8.so"
+                if [[ -e $pathOci8 && -e /etc/php/7.0/apache2/php.ini ]]; then
+                    echo "extension=$pathOci8" >> /etc/php/7.0/apache2/php.ini
+                    echo -e "\n" >> /etc/php/7.0/apache2/php.ini
+                    echo "extension=$pathOci8" >> /etc/php/7.0/cli/php.ini
+                    echo -e "\n" >> /etc/php/7.0/cli/php.ini
+                fi
+            fi
+
+
             clear
             echo -e " Oracle Instant Client instalado com sucesso.. \n"
             if [[ $1 == "op" ]]; then
@@ -1005,7 +1023,6 @@
     criarDebZanthus(){
     ########################### Libs da Zanthus #################################
         capturarVersaoPhp
-        capturaUsuario
         capturaUsuarioSenha
         capturarUsuarioFtp
         capturarSenhaFtp
@@ -1013,7 +1030,7 @@
         rm -fr /usr/share/applications/pdv.desktop
         clear
 
-        cd /home/$usuario/
+        cd /home/$USER/
 
         #Crio o diretório para criar os .deb
         echo    "    ########################################################################################"
@@ -1091,7 +1108,7 @@
         echo "Encoding=UTF-8" >> /usr/share/applications/pdv.desktop
         echo "Name=PDV" >> /usr/share/applications/pdv.desktop
         echo "Comment=PDV Zanthus" >> /usr/share/applications/pdv.desktop
-        echo -e "Exec=gnome-terminal -x bash -c \"cd /Zanthus/Zeus/pdvJava_159/ && echo $usuarioSenha | sudo -S ./lnx_virt\"" >> /usr/share/applications/pdv.desktop
+        echo -e "Exec=gnome-terminal -x bash -c \"cd /Zanthus/Zeus/pdvJava_159/ && echo $USERSenha | sudo -S ./lnx_virt\"" >> /usr/share/applications/pdv.desktop
         echo "Icon=/Zanthus/Zeus/icons/logo_zanthus.png" >> /usr/share/applications/pdv.desktop
         echo "Terminal=false" >> /usr/share/applications/pdv.desktop
         echo "Type=Application" >> /usr/share/applications/pdv.desktop
@@ -1322,14 +1339,14 @@
     }
 
     configurarWebProxy(){
-        gsettings set org.gnome.system.proxy autoconfig-url http://$usuario:$senha@$ipServidor:$porta
+        gsettings set org.gnome.system.proxy autoconfig-url http://$USER:$senha@$ipServidor:$porta
         gsettings set org.gnome.system.proxy ignore-hosts [ 'localhost', '127.0.0.0/8' ]
         gsettings set org.gnome.system.proxy mode 'none'
         gsettings set org.gnome.system.proxy use-same-proxy false
         gsettings set org.gnome.system.proxy.ftp host $ipServidor
         gsettings set org.gnome.system.proxy.ftp port $porta
         gsettings set org.gnome.system.proxy.http authentication-password $senha
-        gsettings set org.gnome.system.proxy.http authentication-user $usuario
+        gsettings set org.gnome.system.proxy.http authentication-user $USER
         gsettings set org.gnome.system.proxy.http enabled false
         gsettings set org.gnome.system.proxy.http host $ipServidor
         gsettings set org.gnome.system.proxy.http port $porta
@@ -1358,7 +1375,7 @@
         echo -e "\n" >> /etc/basch.bashrc
         echo -e "\n" >> /etc/basch.bashrc
         echo -e "\n" >> /etc/basch.bashrc
-        echo -e "PROXY_URL=http://$usuario:$senha@$ipServidor:$porta" >> /etc/basch.bashrc
+        echo -e "PROXY_URL=http://$USER:$senha@$ipServidor:$porta" >> /etc/basch.bashrc
         echo -e "export HTTP_PROXY=$PROXY_URL" >> /etc/basch.bashrc
         echo -e "export http_proxy=$PROXY_URL" >> /etc/basch.bashrc
         echo -e "export HTTPS_PROXY=$PROXY_URL" >> /etc/basch.bashrc
@@ -1454,24 +1471,12 @@
         apt-get install -y libapache2-mod-php5.6
         apt-get install -y php5.6-bcmath
 
-        instalarOracleInstantClient
-
-        ###################  Instala a .so do oracle ######################
-        pecl  uninstall oci8
-        pecl  install oci8-2.0.11
-        #Verifica se o caminho padrão para a pasta oracle existe
-        pathOci8="/usr/lib/php/20131226/oci8.so"
-        if [ -e $pathOci8 ]; then
-            echo "extension=$pathOci8 " >> /etc/php/5.6/apache2/php.ini
-            echo -e "\n" >> /etc/php/5.6/apache2/php.ini
-            echo "extension=$pathOci8" >> /etc/php/5.6/cli/php.ini
-            echo -e "\n" >> /etc/php/5.6/cli/php.ini
-        fi
+        #instalarOracleInstantClient
 
         ################### Instala a .so do Xdebug ########################
         pecl  uninstall xdebug
         pecl  install xdebug
-        pathxdebug="/usr/lib/php/20131226/xdebug.so"
+        pathxdebug="/usr/lib/php/20170718/xdebug.so"
 
         if [[ -e $pathxdebug && -e /etc/php/5.6/apache2/php.ini ]]; then
             echo "[XDebug]" >> /etc/php/5.6/apache2/php.ini
@@ -1507,43 +1512,14 @@
             echo -e "\n" >> /etc/php/5.6/cli/php.ini
         fi
 
-
-        ################### Instala a .so do dbase ########################
-        pecl  uninstall dbase
-        pecl  install dbase
-        pathdbase="/usr/lib/php/20131226/dbase.so"
-        if [[ -e $pathdbase && -e /etc/php/5.6/apache2/php.ini ]]; then
-            echo "extension=$pathdbase" >> /etc/php/5.6/apache2/php.ini
-            echo -e "\n" >> /etc/php/5.6/apache2/php.ini
-            echo "extension=$pathdbase" >> /etc/php/5.6/cli/php.ini
-            echo -e "\n" >> /etc/php/5.6/cli/php.ini
-        fi
-
-        ################### Instala a mssql.so ########################
-        pathMssql="/Zanthus/Zeus/lib/mssql.so"
-        if [[ -e $pathMssql && -e /etc/php/5.6/apache2/php.ini ]]; then
-            echo "extension=$pathMssql" >> /etc/php/5.6/apache2/php.ini
-            echo -e "\n" >> /etc/php/5.6/apache2/php.ini
-            echo "extension=$pathMssql" >> /etc/php/5.6/cli/php.ini
-            echo -e "\n" >> /etc/php/5.6/cli/php.ini
-        fi
-
-        #Configura Timezone e charset
-        echo "date.timezone = America/Sao_Paulo" >> /etc/php/5.6/apache2/php.ini
-        echo -e "\n" >> /etc/php/5.6/apache2/php.ini
-        echo -e "default_charset = \"ISO-8859-1\"" >> /etc/php/5.6/apache2/php.ini
-        echo -e "\n" >> /etc/php/5.6/apache2/php.ini
-
-        #Configura Timezone e charset
-        echo "date.timezone = America/Sao_Paulo" >> /etc/php/5.6/cli/php.ini
-        echo -e "\n" >> /etc/php/5.6/cli/php.ini
-        echo -e "default_charset = \"ISO-8859-1\"" >> /etc/php/5.6/cli/php.ini
-        echo -e "\n" >> /etc/php/5.6/cli/php.ini
+        #setTimeZoneIso88591
 
         if [[ $1 == "op" ]]; then
             mostrarMenuOpcoes
         fi
     }
+
+
 
     instalarPHP7(){
         add-apt-repository  -y ppa:ondrej/php
@@ -1557,6 +1533,7 @@
         apt-get install -y php-odbc
         apt-get install -y php-pgsql
         apt-get install -y php-mcrypt
+        apt-get install -y php-mbstring
         apt-get install -y php-sybase
         apt-get install -y php-xml
         apt-get install -y php-zip
@@ -1566,80 +1543,48 @@
         apt-get install -y php-memcached
         apt-get install -y libapache2-mod-php
 
-        instalarOracleInstantClient
-
-        ###################  Instala a .so do oracle ######################
-        pecl  install oci8
-        #Verifica se o caminho padrão para a pasta oracle existe
-        pathOci8="/usr/lib/php/20151012/oci8.so"
-        if [[ -e $pathOci8 && -e /etc/php/7.0/apache2/php.ini ]]; then
-            echo "extension=$pathOci8" >> /etc/php/7.0/apache2/php.ini
-            echo -e "\n" >> /etc/php/7.0/apache2/php.ini
-            echo "extension=$pathOci8" >> /etc/php/7.0/cli/php.ini
-            echo -e "\n" >> /etc/php/7.0/cli/php.ini
-        fi
+        #instalarOracleInstantClient
 
         ################### Instala a .so do Xdebug ########################
         pecl  install xdebug
-        pathxdebug="/usr/lib/php/20151012/xdebug.so"
+        pathxdebug="/usr/lib/php/20170718/xdebug.so"
 
-        if [[ -e $pathxdebug && -e /etc/php/7.0/apache2/php.ini ]]; then
-            echo "[XDebug]" >> /etc/php/7.0/apache2/php.ini
-            echo "zend_extension=$pathxdebug" >> /etc/php/7.0/apache2/php.ini
-            echo "xdebug.default_enable = 1" >> /etc/php/7.0/apache2/php.ini
-            echo "xdebug.show_exception_trace = 1" >> /etc/php/7.0/apache2/php.ini
-            echo "xdebug.show_local_vars = 1" >> /etc/php/7.0/apache2/php.ini
-            echo "xdebug.var_display_max_data   = -1" >> /etc/php/7.0/apache2/php.ini
-            echo "xdebug.max_nesting_level = 250" >> /etc/php/7.0/apache2/php.ini
-            echo "xdebug.remote_enable = 1" >> /etc/php/7.0/apache2/php.ini
-            echo "xdebug.remote_port = 9000" >> /etc/php/7.0/apache2/php.ini
-            echo "xdebug.remote_autostart = 1" >> /etc/php/7.0/apache2/php.ini
-            echo "xdebug.remote_handler=dbgp" >> /etc/php/7.0/apache2/php.ini
-            echo "xdebug.remote_connect_back = 1" >> /etc/php/7.0/apache2/php.ini
-            echo "xdebug.idekey=\"PHPSTORM\"" >> /etc/php/7.0/apache2/php.ini
-            echo "xdebug.remote_host=127.0.0.1" >> /etc/php/7.0/apache2/php.ini
-            echo -e "\n" >> /etc/php/7.0/apache2/php.ini
+        if [[ -e $pathxdebug && -e /etc/php/7.2/apache2/php.ini ]]; then
+            echo "[XDebug]" >> /etc/php/7.2/apache2/php.ini
+            echo "zend_extension=$pathxdebug" >> /etc/php/7.2/apache2/php.ini
+            echo "xdebug.default_enable = 1" >> /etc/php/7.2/apache2/php.ini
+            echo "xdebug.show_exception_trace = 1" >> /etc/php/7.2/apache2/php.ini
+            echo "xdebug.show_local_vars = 1" >> /etc/php/7.2/apache2/php.ini
+            echo "xdebug.var_display_max_data   = -1" >> /etc/php/7.2/apache2/php.ini
+            echo "xdebug.max_nesting_level = 250" >> /etc/php/7.2/apache2/php.ini
+            echo "xdebug.remote_enable = 1" >> /etc/php/7.2/apache2/php.ini
+            echo "xdebug.remote_port = 9000" >> /etc/php/7.2/apache2/php.ini
+            echo "xdebug.remote_autostart = 1" >> /etc/php/7.2/apache2/php.ini
+            echo "xdebug.remote_handler=dbgp" >> /etc/php/7.2/apache2/php.ini
+            echo "xdebug.remote_connect_back = 1" >> /etc/php/7.2/apache2/php.ini
+            echo "xdebug.idekey=\"PHPSTORM\"" >> /etc/php/7.2/apache2/php.ini
+            echo "xdebug.remote_host=127.0.0.1" >> /etc/php/7.2/apache2/php.ini
+            echo -e "\n" >> /etc/php/7.2/apache2/php.ini
 
-            echo "[XDebug]" >> /etc/php/7.0/cli/php.ini
-            echo "zend_extension=$pathxdebug" >> /etc/php/7.0/cli/php.ini
-            echo "xdebug.default_enable = 1" >> /etc/php/7.0/cli/php.ini
-            echo "xdebug.show_exception_trace = 1" >> /etc/php/7.0/cli/php.ini
-            echo "xdebug.show_local_vars = 1" >> /etc/php/7.0/cli/php.ini
-            echo "xdebug.var_display_max_data   = -1" >> /etc/php/7.0/cli/php.ini
-            echo "xdebug.max_nesting_level = 250" >> /etc/php/7.0/cli/php.ini
-            echo "xdebug.remote_enable = 1" >> /etc/php/7.0/cli/php.ini
-            echo "xdebug.remote_port = 9000" >> /etc/php/7.0/cli/php.ini
-            echo "xdebug.remote_autostart = 1" >> /etc/php/7.0/cli/php.ini
-            echo "xdebug.remote_handler=dbgp" >> /etc/php/7.0/cli/php.ini
-            echo "xdebug.remote_connect_back = 1" >> /etc/php/7.0/cli/php.ini
-            echo "xdebug.idekey=\"PHPSTORM\"" >> /etc/php/7.0/cli/php.ini
-            echo "xdebug.remote_host=127.0.0.1" >> /etc/php/7.0/cli/php.ini
-            echo -e "\n" >> /etc/php/7.0/cli/php.ini
+            echo "[XDebug]" >> /etc/php/7.2/cli/php.ini
+            echo "zend_extension=$pathxdebug" >> /etc/php/7.2/cli/php.ini
+            echo "xdebug.default_enable = 1" >> /etc/php/7.2/cli/php.ini
+            echo "xdebug.show_exception_trace = 1" >> /etc/php/7.2/cli/php.ini
+            echo "xdebug.show_local_vars = 1" >> /etc/php/7.2/cli/php.ini
+            echo "xdebug.var_display_max_data   = -1" >> /etc/php/7.2/cli/php.ini
+            echo "xdebug.max_nesting_level = 250" >> /etc/php/7.2/cli/php.ini
+            echo "xdebug.remote_enable = 1" >> /etc/php/7.2/cli/php.ini
+            echo "xdebug.remote_port = 9000" >> /etc/php/7.2/cli/php.ini
+            echo "xdebug.remote_autostart = 1" >> /etc/php/7.2/cli/php.ini
+            echo "xdebug.remote_handler=dbgp" >> /etc/php/7.2/cli/php.ini
+            echo "xdebug.remote_connect_back = 1" >> /etc/php/7.2/cli/php.ini
+            echo "xdebug.idekey=\"PHPSTORM\"" >> /etc/php/7.2/cli/php.ini
+            echo "xdebug.remote_host=127.0.0.1" >> /etc/php/7.2/cli/php.ini
+            echo -e "\n" >> /etc/php/7.2/cli/php.ini
 
         fi
 
-
-        ################### Instala a .so do dbase ########################
-        pecl  install dbase
-        pathdbase="/usr/lib/php/20151012/dbase.so"
-        if [[ -e $pathdbase && -e /etc/php/7.0/apache2/php.ini ]]; then
-            echo "extension=$pathdbase" >> /etc/php/7.0/apache2/php.ini
-            echo -e "\n" >> /etc/php/7.0/apache2/php.ini
-            echo "extension=$pathdbase" >> /etc/php/7.0/cli/php.ini
-            echo -e "\n" >> /etc/php/7.0/cli/php.ini
-        fi
-
-        #Configura Timezone e charset
-        echo "date.timezone = America/Sao_Paulo" >> /etc/php/7.0/apache2/php.ini
-        echo -e "\n" >> /etc/php/7.0/apache2/php.ini
-        echo -e "default_charset = \"ISO-8859-1\"" >> /etc/php/7.0/apache2/php.ini
-        echo -e "\n" >> /etc/php/7.0/apache2/php.ini
-
-        #Configura Timezone e charset
-        echo "date.timezone = America/Sao_Paulo" >> /etc/php/7.0/cli/php.ini
-        echo -e "\n" >> /etc/php/7.0/cli/php.ini
-        echo -e "default_charset = \"ISO-8859-1\"" >> /etc/php/5.6/cli/php.ini
-        echo -e "\n" >> /etc/php/7.0/cli/php.ini
+        #setTimeZoneIso88591
 
 #       Compilando lib GD para imagens
 #       apt-get install libjpeg62-dev
@@ -1650,6 +1595,38 @@
 
         if [[ $1 == "op" ]]; then
             mostrarMenuOpcoes
+        fi
+    }
+
+
+    setTimeZoneIso88591(){
+
+        if [[ $phpVersion == 1 ]]; then
+            #Configura Timezone e charset
+            echo "date.timezone = America/Sao_Paulo" >> /etc/php/5.6/apache2/php.ini
+            echo -e "\n" >> /etc/php/5.6/apache2/php.ini
+            echo -e "default_charset = \"ISO-8859-1\"" >> /etc/php/5.6/apache2/php.ini
+            echo -e "\n" >> /etc/php/5.6/apache2/php.ini
+
+            #Configura Timezone e charset
+            echo "date.timezone = America/Sao_Paulo" >> /etc/php/5.6/cli/php.ini
+            echo -e "\n" >> /etc/php/5.6/cli/php.ini
+            echo -e "default_charset = \"ISO-8859-1\"" >> /etc/php/5.6/cli/php.ini
+            echo -e "\n" >> /etc/php/5.6/cli/php.ini
+        fi
+
+        if [[ $phpVersion == 2 ]]; then
+            #Configura Timezone e charset
+            echo "date.timezone = America/Sao_Paulo" >> /etc/php/7.0/apache2/php.ini
+            echo -e "\n" >> /etc/php/7.0/apache2/php.ini
+            echo -e "default_charset = \"ISO-8859-1\"" >> /etc/php/7.0/apache2/php.ini
+            echo -e "\n" >> /etc/php/7.0/apache2/php.ini
+
+            #Configura Timezone e charset
+            echo "date.timezone = America/Sao_Paulo" >> /etc/php/7.0/cli/php.ini
+            echo -e "\n" >> /etc/php/7.0/cli/php.ini
+            echo -e "default_charset = \"ISO-8859-1\"" >> /etc/php/5.6/cli/php.ini
+            echo -e "\n" >> /etc/php/7.0/cli/php.ini
         fi
     }
 
@@ -1664,7 +1641,6 @@
         echo    "    Criando e baixando arquivos..."
 
         #Captura as senha para baixar as libs
-        capturaUsuario
         capturaUsuarioSenha
         capturarUsuarioFtp
         capturarSenhaFtp
@@ -1745,7 +1721,7 @@
         source /etc/bash.bashrc
 
         usermod -a -G dba oracle
-        usermod -a -G dba $usuario
+        usermod -a -G dba $USER
 
         service oracle-xe start
 
@@ -1819,25 +1795,20 @@
     }
 
     instalarComposer(){
-        capturaUsuario
         #Baixa o composer
         curl -s https://getcomposer.org/installer | php
         #Move o Composer
         mv composer.phar /usr/local/bin/composer
         #Instala o instalador do laravel
-        composer global require "laravel/installer=~1.1"
-        #Instala o guzzle
-        composer global require "guzzlehttp/guzzle:~5.0"
-        #Instala o instalador do lumen
-        composer global require "laravel/lumen-installer=~1.0"
+        composer global require "laravel/installer"
         #Adiciona os vendors do composer as variáveis de ambiente
-        echo "export PATH=$PATH:/home/$usuario/.composer/vendor/bin" >> /home/$usuario/.bashrc
+        echo "export PATH=$PATH:/home/$USER/.config/composer/vendor/bin" >> /home/$USER/.bashrc
+        source /home/$USER/.bashrc
     }
 
     removerComposer(){
-        capturaUsuario
         rm -rf /usr/local/bin/composer
-        rm -rm /home/$usuario/.composer
+        rm -rm /home/$USER/.composer
     }
 
     instalarAndroidRomDevelopment(){
@@ -1851,7 +1822,7 @@
         echo "export USE_CCACHE=1" >> ~/.bashrc
         echo "prebuilts/misc/linux-x86/ccache/ccache -M 50G" >> ~/.bashrc
         echo "export JACK_SERVER_VM_ARGUMENTS=\"-Dfile.encoding=UTF-8 -XX:+TieredCompilation -Xmx4096m\"" >> ~/.bashrc
-        source ~/.bashrc
+        source /home/$USER/.bashrc
     }
 
     removerAndroidRomDevelopment(){
@@ -1881,13 +1852,48 @@
     }
 
        installMinimumEnvironment(){
+        capturaUsuarioSenha
+        capturarVersaoPhp
+
+        cd ~
         add-apt-repository "deb http://archive.canonical.com/ubuntu $(lsb_release -sc) partner"
         apt-get update
         apt-get install libc6:i386 libncurses5:i386 libstdc++6:i386 lib32z1 libbz2-1.0:i386
-        apt-get install git-core
         mkdir -p ~/workspace/
-        unzip /isodevice/Tairo/android-studio-ide-173.4819257-linux.zip -d ~/workspace/android-studio
-        unzip /isodevice/Tairo//isodevice/Tairo/ideaIU-2018.1.5.tar.gz -d ~/workspace/idea
+
+        if [[ -e /isodevice/Tairo/ && -e /isodevice/Tairo/Downloads/android-studio-ide-*-linux.zip ]]; then
+            unzip /isodevice/Tairo/Downloads/android-studio-ide-*-linux.zip -d ~/android-studio
+            chmod +x ~/android-studio*/bin.studio.sh
+        fi
+
+        if [[ -e /isodevice/Tairo/ && -e /isodevice/Tairo/Downloads/ideaIU-*.tar.gz ]]; then
+            cp /isodevice/Tairo/Downloads/ideaIU-*.tar.gz -r .
+            tar -zxvf ideaIU-*.tar.gz -d ~/idea
+            chmod +x ~/idea*/bin.idea.sh
+        fi
+
+        if [[ -e /isodevice/Tairo/Android && -e /isodevice/Tairo/Android/Sdk.tar.gz ]]; then
+            mkdir -p Android
+            cd ~/Android
+            cp /isodevice/Tairo/Android/Sdk.tar.gz -r .
+            tar -zxvf Sdk.tar.gz
+        fi
+
+        instalarPHP7
+        apt-get install -y mysql-server
+        apt-get install -y phpmyadmin
+        apt-get -y install curl
+        apt-get -y install git-core
+        apt-get update
+        service apache2 restart
+        chmod -R 777 /var/www
+        git config --global user.email "tairoroberto@hotmail.com"
+        git config --global user.name "tairoroberto"
+        a2enmod  rewrite
+        instalarComposer
+        curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
+        apt-get update
+        apt-get install -y nodejs
     }
 
     mostrarAjuda(){
@@ -1925,7 +1931,7 @@
         echo -e "    #    removerAmbienteServidorCentOs                     instalarPHP7                    #"
         echo -e "    #    configurarWebProxy                                instalarOracleDataBase11G       #"
         echo -e "    #    configurarAptProxy                                removerOracleDataBase11G        #"
-        echo -e "    #    mostarProxy                                                                       #"
+        echo -e "    #    mostarProxy                                       installMinimumEnvironment       #"
         echo -e "    #    resetarProxy                                                                      #"
         echo -e "    #                                                                                      #"
         echo -e "    #    teste                                                                             #"
