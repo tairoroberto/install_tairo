@@ -9,7 +9,6 @@
     <ignored path=".idea/workspace.xml" />
     <ignored path=".idea/dataSources.local.xml" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
-    <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -32,21 +31,41 @@
     <expand />
     <select />
   </component>
+  <component name="FUSProjectUsageTrigger">
+    <session id="-2056766239">
+      <usages-collector id="statistics.lifecycle.project">
+        <counts>
+          <entry key="project.open.time.1" value="1" />
+          <entry key="project.opened" value="1" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.edit">
+        <counts>
+          <entry key="sh" value="122" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.edit">
+        <counts>
+          <entry key="Bash" value="122" />
+        </counts>
+      </usages-collector>
+    </session>
+  </component>
   <component name="FavoritesManager">
     <favorites_list name="install_tairo" />
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="install_tairo.sh" pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/install_tairo.sh">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="275">
-              <caret line="1861" column="23" selection-start-line="1861" selection-start-column="23" selection-end-line="1861" selection-end-column="23" />
+            <state relative-caret-position="378">
+              <caret line="1904" column="22" selection-start-line="1904" selection-start-column="22" selection-end-line="1904" selection-end-column="22" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name=".gitignore" pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/.gitignore">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="15">
@@ -94,9 +113,9 @@
         <option value="$APPLICATION_CONFIG_DIR$/consoles/db/5ce6aae7-11d3-4d1d-b411-a7a9d05ad8a7/console.sql" />
         <option value="$APPLICATION_CONFIG_DIR$/consoles/db/9e10a354-76f4-4b82-a98c-f3e3893c2b24/console.sql" />
         <option value="$PROJECT_DIR$/.gitignore" />
-        <option value="$PROJECT_DIR$/install_tairo.sh" />
         <option value="/var/www/index.html" />
         <option value="/var/www/index.php" />
+        <option value="$PROJECT_DIR$/install_tairo.sh" />
       </list>
     </option>
   </component>
@@ -106,9 +125,6 @@
     <detection-done>true</detection-done>
     <sorting>DEFINITION_ORDER</sorting>
   </component>
-  <component name="NodePackageJsonFileManager">
-    <packageJsonPaths />
-  </component>
   <component name="PhpServers">
     <servers>
       <server host="127.0.0.1" id="7d869314-2398-4aaa-bbae-227b10342824" name="127.0.0.1" use_path_mappings="true" />
@@ -117,10 +133,10 @@
   <component name="PhpWorkspaceProjectConfiguration" interpreter_name="PHP 7.2" />
   <component name="PhpXdebugProxy" ide_key="PHPSTORM" host="127.0.0.1" />
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="65" />
-    <option name="y" value="24" />
-    <option name="width" value="1853" />
-    <option name="height" value="1048" />
+    <option name="x" value="1394" />
+    <option name="y" value="-4" />
+    <option name="width" value="1280" />
+    <option name="height" value="1028" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -128,6 +144,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="AndroidView" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -139,7 +156,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="AndroidView" />
       <pane id="PackagesPane" />
       <pane id="Scope" />
     </panes>
@@ -178,15 +194,6 @@
     </option>
   </component>
   <component name="RunManager">
-    <configuration name="install_tairo.sh" type="BashConfigurationType" factoryName="Bash">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="INTERPRETER_PATH" value="/bin/bash" />
-      <option name="WORKING_DIRECTORY" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/install_tairo.sh" />
-      <option name="PARAMETERS" value="" />
-      <module name="" />
-    </configuration>
     <configuration default="true" type="CodeceptionConfigurationType" factoryName="Codeception">
       <PhpTestRunnerSettings />
       <method />
@@ -199,6 +206,16 @@
       <PhpTestRunnerSettings />
       <method />
     </configuration>
+    <configuration name="install_tairo.sh" type="BashConfigurationType" factoryName="Bash">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="INTERPRETER_PATH" value="/bin/bash" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/install_tairo.sh" />
+      <option name="PARAMETERS" value="" />
+      <module name="" />
+      <method v="2" />
+    </configuration>
     <configuration default="true" type="js.build_tools.gulp" factoryName="Gulp.js">
       <node-interpreter>project</node-interpreter>
       <node-options />
@@ -206,6 +223,7 @@
       <tasks />
       <arguments />
       <envs />
+      <method v="2" />
     </configuration>
   </component>
   <component name="SvnConfiguration">
@@ -273,7 +291,8 @@
       <workItem from="1509923567875" duration="1983000" />
       <workItem from="1530800562007" duration="5229000" />
       <workItem from="1530809101074" duration="325000" />
-      <workItem from="1530809442345" duration="1708000" />
+      <workItem from="1530809442345" duration="1781000" />
+      <workItem from="1536166226703" duration="311000" />
     </task>
     <task id="LOCAL-00001" summary="Alterando versão do php e criando .deb">
       <created>1461714521494</created>
@@ -450,11 +469,18 @@
       <option name="project" value="LOCAL" />
       <updated>1502029387812</updated>
     </task>
-    <option name="localTasksCounter" value="26" />
+    <task id="LOCAL-00026" summary="Ajustando criação de ambiente minimo">
+      <created>1530812856401</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1530812856401</updated>
+    </task>
+    <option name="localTasksCounter" value="27" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="123356000" />
+    <option name="totallyTimeSpent" value="123740000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -466,65 +492,66 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-1" y="-11" width="1282" height="1036" extended-state="6" />
+    <frame x="1280" y="-4" width="1280" height="1028" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info anchor="right" id="Palette" order="3" />
-      <window_info anchor="bottom" id="TODO" order="6" weight="0.32868218" />
-      <window_info id="Palette&#9;" order="2" />
-      <window_info id="Image Layers" order="2" />
-      <window_info anchor="right" id="Capture Analysis" order="3" />
-      <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
-      <window_info anchor="right" id="Maven Projects" order="3" />
-      <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
-      <window_info active="true" anchor="bottom" id="Version Control" order="10" visible="true" weight="0.20735785" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.7129987" />
-      <window_info anchor="bottom" id="Terminal" order="9" weight="0.34362933" />
-      <window_info id="Capture Tool" order="2" />
-      <window_info anchor="right" id="Designer" order="3" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.26094005" />
-      <window_info anchor="right" id="Database" order="4" weight="0.14667746" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.21312805" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info id="UI Designer" order="2" />
-      <window_info anchor="right" id="Theme Preview" order="3" />
-      <window_info id="Favorites" order="2" side_tool="true" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="bottom" id="DB Execution Console" order="7" />
-      <window_info id="Captures" order="2" weight="0.25" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
-      <window_info anchor="bottom" id="Database Console" order="13" visible="true" weight="0.30575916" />
-      <window_info anchor="bottom" id="REST Client" order="11" weight="0.33719432" />
-      <window_info anchor="bottom" id="Breakpoints Manager" order="8" weight="0.32947233" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="right" id="Remote Host" order="3" weight="0.17862266" />
-      <window_info anchor="bottom" id="Messages" order="7" />
+      <window_info id="Image Layers" order="2" />
+      <window_info id="DB Browser" order="3" />
+      <window_info id="UI Designer" order="4" />
+      <window_info id="Favorites" order="5" side_tool="true" />
+      <window_info id="Captures" order="6" weight="0.25" />
+      <window_info id="Capture Tool" order="7" />
+      <window_info id="Palette&#9;" order="8" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info id="DB Browser" order="2" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32868218" />
-      <window_info anchor="bottom" id="Application Servers" order="8" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.7129987" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" weight="0.32868218" />
+      <window_info anchor="bottom" id="DB Execution Console" order="7" />
+      <window_info anchor="bottom" id="Event Log" order="8" side_tool="true" />
+      <window_info anchor="bottom" id="Messages" order="9" />
+      <window_info anchor="bottom" id="Application Servers" order="10" />
+      <window_info anchor="bottom" id="Breakpoints Manager" order="11" weight="0.32947233" />
+      <window_info anchor="bottom" id="Database Changes" order="12" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Terminal" order="13" weight="0.3543578" />
+      <window_info anchor="bottom" id="Version Control" order="14" weight="0.20735785" />
+      <window_info anchor="bottom" id="REST Client" order="15" weight="0.33719432" />
+      <window_info anchor="bottom" id="Database Console" order="16" visible="true" weight="0.30575916" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Designer" order="3" />
+      <window_info anchor="right" id="Palette" order="4" />
+      <window_info anchor="right" id="Remote Host" order="5" weight="0.17862266" />
+      <window_info anchor="right" id="Capture Analysis" order="6" />
+      <window_info anchor="right" id="Maven Projects" order="7" />
+      <window_info anchor="right" id="Theme Preview" order="8" />
+      <window_info anchor="right" id="Database" order="9" weight="0.14667746" />
     </layout>
     <layout-to-restore>
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="right" id="Remote Host" order="3" weight="0.17862266" />
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.15997131" />
       <window_info id="Structure" order="1" weight="0.25" />
-      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
-      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Version Control" order="10" weight="0.32713178" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.7129987" />
+      <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="right" id="Database" order="4" weight="0.32998565" />
-      <window_info anchor="bottom" id="Terminal" order="9" weight="0.44015443" />
-      <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.7129987" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
       <window_info anchor="bottom" id="Application Servers" order="8" />
-      <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Terminal" order="9" weight="0.44015443" />
+      <window_info anchor="bottom" id="Version Control" order="10" weight="0.32713178" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Remote Host" order="3" weight="0.17862266" />
+      <window_info anchor="right" id="Database" order="4" weight="0.32998565" />
     </layout-to-restore>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -557,7 +584,8 @@
     <MESSAGE value="Adicinando comentario  DB" />
     <MESSAGE value="Adicinando comentario paar instalação de lib GD" />
     <MESSAGE value="Ajustando sudo" />
-    <option name="LAST_COMMIT_MESSAGE" value="Ajustando sudo" />
+    <MESSAGE value="Ajustando criação de ambiente minimo" />
+    <option name="LAST_COMMIT_MESSAGE" value="Ajustando criação de ambiente minimo" />
   </component>
   <component name="antWorkspaceConfiguration">
     <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />
@@ -653,13 +681,6 @@
     <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/9e10a354-76f4-4b82-a98c-f3e3893c2b24/console.sql" />
     <entry file="file://$PROJECT_DIR$/sql" />
     <entry file="file://$PROJECT_DIR$/charset.sql" />
-    <entry file="file://$PROJECT_DIR$/.gitignore">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="1" column="7" selection-start-line="1" selection-start-column="7" selection-end-line="1" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file:///var/www/index.html" />
     <entry file="file:///var/www/index.php">
       <provider selected="true" editor-type-id="text-editor">
@@ -670,8 +691,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/install_tairo.sh">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="275">
-          <caret line="1861" column="23" selection-start-line="1861" selection-start-column="23" selection-end-line="1861" selection-end-column="23" />
+        <state relative-caret-position="378">
+          <caret line="1904" column="22" selection-start-line="1904" selection-start-column="22" selection-end-line="1904" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="1" column="7" selection-start-line="1" selection-start-column="7" selection-end-line="1" selection-end-column="7" />
         </state>
       </provider>
     </entry>

@@ -1894,6 +1894,17 @@
         curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
         apt-get update
         apt-get install -y nodejs
+        installFlutter
+    }
+
+    installFlutter(){
+        cd ~
+        git clone -b master https://github.com/flutter/flutter.git
+        echo "export FLUTTER_ROOT=~/flutter/bin" >> ~/.bashrc
+        echo "export PATH=\$PATH:\$FLUTTER_ROOT" >> ~/.bashrc
+        source ~/.bashrc
+        flutter
+        flutter doctor
     }
 
     mostrarAjuda(){
@@ -1932,7 +1943,7 @@
         echo -e "    #    configurarWebProxy                                instalarOracleDataBase11G       #"
         echo -e "    #    configurarAptProxy                                removerOracleDataBase11G        #"
         echo -e "    #    mostarProxy                                       installMinimumEnvironment       #"
-        echo -e "    #    resetarProxy                                                                      #"
+        echo -e "    #    resetarProxy                                      installFlutter                  #"
         echo -e "    #                                                                                      #"
         echo -e "    #    teste                                                                             #"
         echo -e "    ########################################################################################"
